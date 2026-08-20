@@ -8,8 +8,6 @@
   <title>THANOSIFY</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -20,22 +18,11 @@
       min-height: 100vh;
       background: #080808;
       color: #f2f2f2;
-      font-family: Inter, Arial, sans-serif;
-    }
-
-    /* subtle noise */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      z-index: 999;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     nav {
-      width: min(1100px, 92%);
+      width: min(1000px, 92%);
       margin: auto;
       padding: 25px 0;
 
@@ -43,21 +30,21 @@
       justify-content: space-between;
       align-items: center;
 
-      border-bottom: 1px solid #1c1c1c;
+      border-bottom: 1px solid #1d1d1d;
     }
 
     .logo {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 900;
       letter-spacing: -0.5px;
     }
 
     .logo span {
-      color: #9b4dff;
+      color: #9848e8;
     }
 
     .nav-right {
-      color: #777;
+      color: #555;
       font-size: 12px;
     }
 
@@ -66,47 +53,40 @@
       margin: auto;
     }
 
-    /* HERO */
-
     .hero {
-      padding: 120px 0 90px;
+      padding: 110px 0 80px;
       text-align: center;
     }
 
     .tiny {
-      display: inline-block;
       margin-bottom: 25px;
 
-      color: #8c8c8c;
+      color: #777;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: bold;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
     h1 {
-      font-size: clamp(70px, 12vw, 145px);
-      font-weight: 900;
-      letter-spacing: -9px;
+      font-size: clamp(70px, 12vw, 140px);
       line-height: .8;
-
-      color: #f5f5f5;
+      letter-spacing: -9px;
+      font-weight: 900;
     }
 
     h1 span {
-      color: #9346e8;
+      color: #9848e8;
     }
 
     .hero p {
-      max-width: 570px;
+      max-width: 580px;
       margin: 35px auto 0;
 
-      color: #858585;
+      color: #777;
       font-size: 16px;
       line-height: 1.7;
     }
-
-    /* GENERATOR */
 
     .generator {
       max-width: 760px;
@@ -118,14 +98,14 @@
 
       color: #777;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: bold;
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
 
     textarea {
       width: 100%;
-      min-height: 170px;
+      min-height: 160px;
 
       padding: 20px;
 
@@ -137,17 +117,15 @@
       outline: none;
 
       background: #101010;
-      color: #f5f5f5;
+      color: white;
 
-      font-family: inherit;
+      font-family: Arial, Helvetica, sans-serif;
       font-size: 16px;
       line-height: 1.6;
-
-      transition: border .15s;
     }
 
     textarea::placeholder {
-      color: #555;
+      color: #505050;
     }
 
     textarea:focus {
@@ -163,38 +141,36 @@
     .thanify {
       flex: 1;
 
-      padding: 14px 18px;
+      padding: 15px;
 
       border: none;
       border-radius: 7px;
 
-      background: #9346e8;
+      background: #9848e8;
       color: white;
 
-      font-family: inherit;
       font-size: 13px;
       font-weight: 800;
 
       cursor: pointer;
 
-      transition: background .15s, transform .15s;
+      transition: .15s;
     }
 
     .thanify:hover {
-      background: #a85df4;
+      background: #a95cf1;
       transform: translateY(-1px);
     }
 
     .copy {
-      padding: 14px 20px;
+      padding: 15px 22px;
 
       border: 1px solid #292929;
       border-radius: 7px;
 
       background: #101010;
-      color: #aaa;
+      color: #999;
 
-      font-family: inherit;
       font-size: 13px;
 
       cursor: pointer;
@@ -205,21 +181,19 @@
       border-color: #444;
     }
 
-    /* OUTPUT */
-
     .output {
       display: none;
 
       margin-top: 35px;
-      padding-top: 35px;
+      padding-top: 30px;
 
       border-top: 1px solid #242424;
     }
 
     .output-label {
-      margin-bottom: 15px;
+      margin-bottom: 14px;
 
-      color: #9346e8;
+      color: #9848e8;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 2px;
@@ -228,45 +202,52 @@
 
     .output-text {
       color: #ddd;
-      font-size: 18px;
-      line-height: 1.8;
+      font-size: 19px;
+      line-height: 1.7;
       white-space: pre-line;
     }
 
-    /* DIVIDER */
+    .examples {
+      margin-top: 25px;
 
-    .divider {
-      width: 100%;
-      height: 1px;
-      margin: 120px 0 70px;
-      background: #1d1d1d;
+      color: #555;
+      font-size: 12px;
+      line-height: 2;
     }
 
-    /* FEATURES */
+    .examples span {
+      color: #777;
+    }
+
+    .divider {
+      height: 1px;
+      margin: 110px 0 70px;
+
+      background: #1d1d1d;
+    }
 
     .features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 45px;
 
-      margin-bottom: 120px;
+      margin-bottom: 110px;
     }
 
     .feature-number {
-      color: #555;
-      font-size: 11px;
       margin-bottom: 18px;
+
+      color: #444;
+      font-size: 11px;
     }
 
     .feature h3 {
       margin-bottom: 10px;
-
       font-size: 15px;
-      font-weight: 700;
     }
 
     .feature p {
-      color: #6d6d6d;
+      color: #666;
       font-size: 13px;
       line-height: 1.7;
     }
@@ -279,14 +260,12 @@
 
       border-top: 1px solid #1c1c1c;
 
-      color: #444;
-      font-size: 11px;
-
       display: flex;
       justify-content: space-between;
-    }
 
-    /* MOBILE */
+      color: #444;
+      font-size: 11px;
+    }
 
     @media (max-width: 700px) {
 
@@ -299,7 +278,7 @@
       }
 
       .hero {
-        padding: 90px 0 70px;
+        padding: 85px 0 65px;
       }
 
       h1 {
@@ -328,7 +307,6 @@
   </style>
 </head>
 
-
 <body>
 
   <nav>
@@ -338,7 +316,7 @@
     </div>
 
     <div class="nav-right">
-      because normal texting is boring
+      unnecessary seriousness
     </div>
 
   </nav>
@@ -349,7 +327,7 @@
     <section class="hero">
 
       <div class="tiny">
-        turn normal words into something unnecessarily serious
+        say it normally. say it better.
       </div>
 
       <h1>
@@ -357,8 +335,9 @@
       </h1>
 
       <p>
-        Say something normal. We'll make it sound like
-        the fate of the universe depends on it.
+        Take a normal sentence and reshape it into
+        something calm, serious, philosophical, and
+        unnecessarily powerful.
       </p>
 
     </section>
@@ -367,12 +346,12 @@
     <section class="generator">
 
       <div class="label">
-        Your message
+        Your sentence
       </div>
 
       <textarea
         id="input"
-        placeholder="I'm going to get some food..."
+        placeholder="I'm hungry..."
       ></textarea>
 
 
@@ -396,12 +375,23 @@
 
 
       <div
+        class="examples"
+      >
+        Try:
+        <span>I'm hungry</span> ·
+        <span>I'm tired</span> ·
+        <span>This is stupid</span> ·
+        <span>I need to go</span>
+      </div>
+
+
+      <div
         class="output"
         id="output"
       >
 
         <div class="output-label">
-          Your fate
+          THANOSIFIED
         </div>
 
         <div
@@ -426,12 +416,12 @@
         </div>
 
         <h3>
-          Say anything
+          Same meaning
         </h3>
 
         <p>
-          Type literally whatever you want.
-          The more boring, the better.
+          Your sentence stays the same at its core.
+          THANOSIFY just changes how it sounds.
         </p>
 
       </div>
@@ -444,12 +434,12 @@
         </div>
 
         <h3>
-          Make it dramatic
+          No speeches
         </h3>
 
         <p>
-          Turn everyday problems into matters
-          worthy of the entire universe.
+          No giant paragraphs about destiny.
+          Just the sentence. Reshaped.
         </p>
 
       </div>
@@ -462,12 +452,12 @@
         </div>
 
         <h3>
-          Steal the result
+          Completely free
         </h3>
 
         <p>
-          Copy it. Send it to your friends.
-          Pretend you actually talk like this.
+          No AI API. No account. No backend.
+          Just a little JavaScript doing its thing.
         </p>
 
       </div>
@@ -492,6 +482,17 @@
 
   <script>
 
+    /*
+      THANOSIFY
+      ----------
+      This is intentionally NOT AI.
+
+      It uses simple phrase replacements to keep
+      the original meaning while making the wording
+      more serious and dramatic.
+    */
+
+
     function thanify() {
 
       const input =
@@ -500,9 +501,11 @@
           .value
           .trim();
 
+
       const output =
         document
           .getElementById("output");
+
 
       const outputText =
         document
@@ -514,111 +517,15 @@
         output.style.display = "block";
 
         outputText.textContent =
-          "You expect power without first giving me something to work with.";
+          "There is nothing to reshape.";
 
         return;
 
       }
 
 
-      /*
-        A collection of different structures.
-        This keeps the results from feeling identical.
-      */
-
-      const responses = [
-
-        `You say "${input}" as though it were insignificant.
-
-Perhaps to you, it is.
-
-But I have learned that even the smallest choices shape what comes next.
-
-So be it.`,
-
-        `"${input}"
-
-You ask this of me without understanding what it means.
-
-There are consequences to every choice.
-
-I have accepted mine.
-
-Now you must accept yours.`,
-
-        `I have heard your request.
-
-"${input}"
-
-You think the universe bends to your wishes.
-
-It does not.
-
-But for this...
-
-I will make an exception.`,
-
-        `"${input}"
-
-Very well.
-
-If this is what you have chosen, then I will not stand in your way.
-
-Do what you must.
-
-The consequences will come.`,
-
-        `You believe "${input}" to be a simple matter.
-
-You have much to learn.
-
-Nothing is without a price.
-
-Nothing is without consequence.
-
-Remember that.`,
-
-        `"${input}"
-
-Interesting.
-
-You ask for what you want.
-
-I have spent my entire existence doing the same.
-
-The difference is...
-
-I was willing to sacrifice everything for it.`,
-
-        `I understand.
-
-"${input}"
-
-Perhaps you do not yet see the importance of this moment.
-
-But you will.
-
-In time, you will understand why this had to happen.`,
-
-        `"${input}"
-
-Then it is decided.
-
-No argument.
-No hesitation.
-
-Only what must be done.
-
-And I will see it done.`
-      ];
-
-
       const result =
-        responses[
-          Math.floor(
-            Math.random() * responses.length
-          )
-        ];
+        reshapeSentence(input);
 
 
       outputText.textContent =
@@ -627,11 +534,540 @@ And I will see it done.`
       output.style.display =
         "block";
 
+    }
 
-      output.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest"
-      });
+
+    function reshapeSentence(text) {
+
+      const original =
+        text.trim();
+
+
+      const lower =
+        original.toLowerCase();
+
+
+      /*
+        EXACT PHRASES
+        These are your strongest transformations.
+      */
+
+      const exact = {
+
+        "i'm hungry":
+          "I find myself in need of sustenance.",
+
+        "im hungry":
+          "I find myself in need of sustenance.",
+
+        "i am hungry":
+          "I find myself in need of sustenance.",
+
+        "i'm tired":
+          "I have grown weary.",
+
+        "im tired":
+          "I have grown weary.",
+
+        "i am tired":
+          "I have grown weary.",
+
+        "this is stupid":
+          "This is foolish.",
+
+        "this is dumb":
+          "This is foolish.",
+
+        "i don't want to do this":
+          "I have no desire to do this.",
+
+        "i dont want to do this":
+          "I have no desire to do this.",
+
+        "i need to go to the store":
+          "I must make my way to the store.",
+
+        "i need to go":
+          "I must make my way.",
+
+        "i gotta go":
+          "I must go.",
+
+        "i have to go":
+          "I must go.",
+
+        "let's go":
+          "We shall go.",
+
+        "lets go":
+          "We shall go.",
+
+        "i don't know":
+          "I do not know.",
+
+        "i dont know":
+          "I do not know.",
+
+        "i can't do it":
+          "I am unable to do it.",
+
+        "i cant do it":
+          "I am unable to do it.",
+
+        "i can do it":
+          "I am capable of doing it.",
+
+        "i want this":
+          "I desire this.",
+
+        "i don't want this":
+          "I have no desire for this.",
+
+        "i dont want this":
+          "I have no desire for this.",
+
+        "i'm scared":
+          "I am afraid.",
+
+        "im scared":
+          "I am afraid.",
+
+        "i am scared":
+          "I am afraid.",
+
+        "i'm happy":
+          "I am pleased.",
+
+        "im happy":
+          "I am pleased.",
+
+        "i am happy":
+          "I am pleased.",
+
+        "i'm sad":
+          "I am troubled.",
+
+        "im sad":
+          "I am troubled.",
+
+        "i am sad":
+          "I am troubled.",
+
+        "i'm angry":
+          "I am displeased.",
+
+        "im angry":
+          "I am displeased.",
+
+        "i am angry":
+          "I am displeased.",
+
+        "that's crazy":
+          "That is... unexpected.",
+
+        "thats crazy":
+          "That is... unexpected.",
+
+        "that's insane":
+          "That is... extraordinary.",
+
+        "thats insane":
+          "That is... extraordinary.",
+
+        "this is crazy":
+          "This is... unexpected.",
+
+        "this is insane":
+          "This is... extraordinary.",
+
+        "thank you":
+          "You have my gratitude.",
+
+        "thanks":
+          "You have my gratitude.",
+
+        "sorry":
+          "You have my apology.",
+
+        "i'm sorry":
+          "You have my apology.",
+
+        "im sorry":
+          "You have my apology.",
+
+        "please help me":
+          "I require your assistance.",
+
+        "help me":
+          "I require your assistance.",
+
+        "i need help":
+          "I require assistance.",
+
+        "what are you doing":
+          "What is it that you are doing?",
+
+        "where are you":
+          "Where are you?",
+
+        "what happened":
+          "What has happened?",
+
+        "why are you doing this":
+          "Why do you do this?",
+
+        "are you serious":
+          "Are you serious?",
+
+        "really":
+          "Is that truly so?",
+
+        "no way":
+          "That cannot be.",
+
+        "of course":
+          "Of course.",
+
+        "maybe":
+          "Perhaps.",
+
+        "yes":
+          "Indeed.",
+
+        "no":
+          "No.",
+
+        "okay":
+          "Very well.",
+
+        "ok":
+          "Very well.",
+
+        "fine":
+          "Very well.",
+
+        "i'm ready":
+          "I am prepared.",
+
+        "im ready":
+          "I am prepared.",
+
+        "i am ready":
+          "I am prepared.",
+
+        "i'm done":
+          "It is finished.",
+
+        "im done":
+          "It is finished.",
+
+        "i am done":
+          "It is finished.",
+
+        "it's over":
+          "It is over.",
+
+        "its over":
+          "It is over.",
+
+        "i won":
+          "I have prevailed.",
+
+        "we won":
+          "We have prevailed.",
+
+        "i lost":
+          "I have been defeated.",
+
+        "we lost":
+          "We have been defeated."
+
+      };
+
+
+      /*
+        If the exact sentence exists,
+        return the custom transformation.
+      */
+
+      if (exact[lower]) {
+
+        return exact[lower];
+
+      }
+
+
+      /*
+        KEYBOARD SMASH / RANDOM TEXT
+
+        Examples:
+        Rgfd
+        asdfgh
+        jskd
+      */
+
+      if (
+        looksLikeKeyboardSmash(original)
+      ) {
+
+        return "This... means nothing.";
+
+      }
+
+
+      /*
+        GENERAL REPLACEMENTS
+
+        These work inside longer sentences.
+      */
+
+      let result =
+        original;
+
+
+      const replacements = [
+
+        [/\bI'm\b/gi, "I am"],
+        [/\bIm\b/gi, "I am"],
+
+        [/\bI've\b/gi, "I have"],
+        [/\bIve\b/gi, "I have"],
+
+        [/\bI'd\b/gi, "I would"],
+        [/\bId\b/gi, "I would"],
+
+        [/\bcan't\b/gi, "cannot"],
+        [/\bcant\b/gi, "cannot"],
+
+        [/\bwon't\b/gi, "will not"],
+        [/\bwont\b/gi, "will not"],
+
+        [/\bdon't\b/gi, "do not"],
+        [/\bdont\b/gi, "do not"],
+
+        [/\bdoesn't\b/gi, "does not"],
+        [/\bdoesnt\b/gi, "does not"],
+
+        [/\bdidn't\b/gi, "did not"],
+        [/\bdidnt\b/gi, "did not"],
+
+        [/\bgonna\b/gi, "going to"],
+        [/\bwanna\b/gi, "want to"],
+        [/\bgotta\b/gi, "have to"],
+
+        [/\bneed to\b/gi, "must"],
+        [/\bhave to\b/gi, "must"],
+
+        [/\bkind of\b/gi, "somewhat"],
+        [/\bkinda\b/gi, "somewhat"],
+
+        [/\bpretty\b/gi, "rather"],
+
+        [/\bstupid\b/gi, "foolish"],
+        [/\bdumb\b/gi, "foolish"],
+        [/\bannoying\b/gi, "troublesome"],
+        [/\bweird\b/gi, "peculiar"],
+        [/\bweird\b/gi, "strange"],
+
+        [/\bscared\b/gi, "afraid"],
+        [/\bmad\b/gi, "angry"],
+        [/\bhungry\b/gi, "in need of sustenance"],
+        [/\btired\b/gi, "weary"],
+
+        [/\bget\b/gi, "obtain"],
+        [/\bgot\b/gi, "obtained"],
+
+        [/\bhelp\b/gi, "assist"],
+        [/\bstart\b/gi, "begin"],
+        [/\bend\b/gi, "finish"],
+
+        [/\bthing\b/gi, "matter"],
+        [/\bstuff\b/gi, "matters"],
+
+        [/\bguys\b/gi, "all of you"],
+        [/\bbro\b/gi, "friend"],
+
+        [/\byeah\b/gi, "yes"],
+        [/\byep\b/gi, "yes"],
+        [/\bnope\b/gi, "no"],
+
+        [/\bmaybe\b/gi, "perhaps"]
+
+      ];
+
+
+      for (
+        let i = 0;
+        i < replacements.length;
+        i++
+      ) {
+
+        result =
+          result.replace(
+            replacements[i][0],
+            replacements[i][1]
+          );
+
+      }
+
+
+      /*
+        Clean up casual punctuation.
+      */
+
+      result =
+        result
+          .replace(/\.\.\.+/g, "...")
+          .replace(/\?+/g, "?")
+          .replace(/!+/g, ".")
+          .replace(/\s+/g, " ")
+          .trim();
+
+
+      /*
+        Give some common sentence structures
+        a little more weight.
+      */
+
+      if (
+        /^I am going to /i.test(result)
+      ) {
+
+        result =
+          result.replace(
+            /^I am going to /i,
+            "I shall "
+          );
+
+      }
+
+
+      if (
+        /^I want to /i.test(result)
+      ) {
+
+        result =
+          result.replace(
+            /^I want to /i,
+            "I desire to "
+          );
+
+      }
+
+
+      if (
+        /^I think /i.test(result)
+      ) {
+
+        result =
+          result.replace(
+            /^I think /i,
+            "I believe "
+          );
+
+      }
+
+
+      /*
+        Capitalize the first letter.
+      */
+
+      result =
+        result.charAt(0).toUpperCase() +
+        result.slice(1);
+
+
+      /*
+        Make sure the result ends properly.
+      */
+
+      if (
+        !/[.!?]$/.test(result)
+      ) {
+
+        result += ".";
+
+      }
+
+
+      return result;
+
+    }
+
+
+    function looksLikeKeyboardSmash(text) {
+
+      const clean =
+        text
+          .toLowerCase()
+          .replace(/[^a-z]/g, "");
+
+
+      if (
+        clean.length < 3
+      ) {
+
+        return true;
+
+      }
+
+
+      const vowels =
+        (clean.match(/[aeiou]/g) || []).length;
+
+
+      /*
+        Random strings usually contain
+        very few vowels.
+      */
+
+      if (
+        clean.length >= 4 &&
+        vowels === 0
+      ) {
+
+        return true;
+
+      }
+
+
+      /*
+        Detect common keyboard smashing.
+      */
+
+      const smashPatterns = [
+        "asdf",
+        "fdsa",
+        "qwer",
+        "rewq",
+        "zxcv",
+        "hjkl",
+        "jkl",
+        "sdfgh",
+        "asdfgh"
+      ];
+
+
+      for (
+        let i = 0;
+        i < smashPatterns.length;
+        i++
+      ) {
+
+        if (
+          clean.includes(
+            smashPatterns[i]
+          )
+        ) {
+
+          return true;
+
+        }
+
+      }
+
+
+      return false;
 
     }
 
@@ -645,7 +1081,9 @@ And I will see it done.`
 
 
       if (!text) {
+
         return;
+
       }
 
 
@@ -661,9 +1099,11 @@ And I will see it done.`
 
 
       setTimeout(
-        () => {
+        function() {
+
           button.textContent =
             "COPY";
+
         },
         1500
       );
@@ -672,8 +1112,7 @@ And I will see it done.`
 
 
     /*
-      Pressing Ctrl + Enter
-      also THANOSIFIES the message.
+      Ctrl + Enter also runs THANOSIFY.
     */
 
     document
