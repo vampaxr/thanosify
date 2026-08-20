@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>VOID — Portfolio</title>
+  <title>VOID — Home</title>
 
   <style>
     * {
@@ -13,26 +12,18 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       background: #fff;
       color: #111;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    /* NAVBAR */
-
     nav {
       height: 115px;
       border-bottom: 2px solid #111;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       padding: 0 5%;
     }
 
@@ -46,12 +37,10 @@
       width: 65px;
       height: 65px;
       border: 3px solid #111;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
-      font-size: 24px;
+      font-size: 25px;
       font-weight: 900;
     }
 
@@ -69,8 +58,7 @@
     .nav-links a {
       color: #888;
       text-decoration: none;
-
-      font-size: 27px;
+      font-size: 25px;
       font-weight: 900;
     }
 
@@ -81,10 +69,8 @@
     .commission {
       border: 2px solid #111;
       padding: 14px 20px;
-
       font-size: 16px;
       font-weight: 900;
-
       box-shadow: 5px 5px 0 #111;
     }
 
@@ -92,246 +78,47 @@
       color: #159447;
     }
 
-
-    /* HERO */
-
     .hero {
-      min-height: 700px;
-
+      min-height: calc(100vh - 115px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
       text-align: center;
-
-      padding: 100px 20px;
+      padding: 50px 20px;
     }
 
     .hero h1 {
-      font-size: clamp(90px, 15vw, 190px);
+      font-size: clamp(100px, 17vw, 210px);
       font-weight: 1000;
-
-      letter-spacing: -12px;
+      letter-spacing: -14px;
       line-height: .8;
-
       margin-bottom: 60px;
     }
 
     .hero p {
-      max-width: 900px;
-
-      font-size: 30px;
+      max-width: 850px;
+      font-size: 28px;
       font-weight: 800;
-      line-height: 1.45;
+      line-height: 1.4;
     }
 
     .hero .sub {
       margin-top: 25px;
-
-      font-size: 18px;
       color: #777;
-      font-weight: 700;
-    }
-
-    .scroll {
-      position: absolute;
-      bottom: 25px;
-
-      color: #777;
-
-      font-size: 15px;
-      font-weight: 800;
-
-      text-align: center;
+      font-size: 17px;
     }
 
     .arrow {
-      font-size: 22px;
+      margin-top: 35px;
+      font-size: 30px;
+      color: #777;
     }
-
-
-    /* SECTION TITLE */
-
-    .section-title {
-      background: #111;
-      color: white;
-
-      padding: 25px 5%;
-
-      font-size: 38px;
-      font-weight: 1000;
-
-      letter-spacing: -1px;
-    }
-
-
-    /* PORTFOLIO */
-
-    .portfolio {
-      padding: 70px 5%;
-    }
-
-    .intro {
-      max-width: 700px;
-      margin-bottom: 60px;
-    }
-
-    .intro h2 {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
-
-    .intro p {
-      color: #666;
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-    }
-
-    .project {
-      border: 2px solid #111;
-
-      min-height: 350px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      padding: 30px;
-
-      transition: .2s;
-    }
-
-    .project:hover {
-      transform: translate(-6px, -6px);
-      box-shadow: 8px 8px 0 #111;
-    }
-
-    .project-number {
-      color: #888;
-      font-weight: 900;
-      font-size: 14px;
-    }
-
-    .project h3 {
-      font-size: 42px;
-      letter-spacing: -2px;
-    }
-
-    .project p {
-      color: #666;
-      line-height: 1.5;
-      max-width: 500px;
-    }
-
-    .project-link {
-      margin-top: 25px;
-
-      display: inline-block;
-
-      color: #111;
-      text-decoration: none;
-
-      font-weight: 900;
-      font-size: 15px;
-    }
-
-
-    /* ABOUT */
-
-    .about {
-      background: #111;
-      color: white;
-
-      padding: 100px 5%;
-    }
-
-    .about-container {
-      max-width: 1000px;
-    }
-
-    .about h2 {
-      font-size: 70px;
-      letter-spacing: -4px;
-      margin-bottom: 30px;
-    }
-
-    .about p {
-      font-size: 23px;
-      line-height: 1.7;
-      color: #ccc;
-    }
-
-
-    /* CONTACT */
-
-    .contact {
-      padding: 100px 5%;
-      text-align: center;
-    }
-
-    .contact h2 {
-      font-size: 80px;
-      letter-spacing: -5px;
-      margin-bottom: 25px;
-    }
-
-    .contact p {
-      color: #666;
-      font-size: 18px;
-      margin-bottom: 35px;
-    }
-
-    .contact-button {
-      display: inline-block;
-
-      background: #111;
-      color: white;
-
-      text-decoration: none;
-
-      padding: 18px 30px;
-
-      font-weight: 900;
-
-      box-shadow: 6px 6px 0 #999;
-    }
-
-    .contact-button:hover {
-      transform: translate(3px, 3px);
-      box-shadow: 3px 3px 0 #999;
-    }
-
-
-    /* FOOTER */
-
-    footer {
-      border-top: 2px solid #111;
-
-      padding: 25px 5%;
-
-      display: flex;
-      justify-content: space-between;
-
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-
-    /* MOBILE */
 
     @media (max-width: 800px) {
-
       nav {
         height: auto;
         padding: 20px;
-
         flex-wrap: wrap;
         gap: 20px;
       }
@@ -339,21 +126,16 @@
       .nav-links {
         order: 3;
         width: 100%;
-
         justify-content: center;
         gap: 20px;
       }
 
       .nav-links a {
-        font-size: 19px;
+        font-size: 18px;
       }
 
       .commission {
         font-size: 12px;
-      }
-
-      .hero {
-        min-height: 600px;
       }
 
       .hero h1 {
@@ -363,261 +145,48 @@
       .hero p {
         font-size: 20px;
       }
-
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      .project h3 {
-        font-size: 32px;
-      }
-
-      .about h2,
-      .contact h2 {
-        font-size: 55px;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 10px;
-      }
     }
   </style>
 </head>
 
-
 <body>
-
-  <!-- NAV -->
 
   <nav>
 
     <div class="brand">
-
-      <div class="brand-box">
-        V
-      </div>
-
-      <div class="brand-name">
-        VOID
-      </div>
-
+      <div class="brand-box">V</div>
+      <div class="brand-name">VOID</div>
     </div>
-
 
     <div class="nav-links">
-
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
-
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="contact.html">Contact</a>
     </div>
 
-
     <div class="commission">
-      Commissions:
-      <span class="open">Open!</span>
+      Commissions: <span class="open">Open!</span>
     </div>
 
   </nav>
 
-
-  <!-- HERO -->
-
-  <section class="hero" id="home">
+  <main class="hero">
 
     <h1>VOID</h1>
 
     <p>
-      Developer, creator, and professional
-      maker of things that probably shouldn't exist.
+      Developer, creator, and builder of
+      websites, Minecraft plugins, and other things.
     </p>
 
     <p class="sub">
-      Explore my work below.
+      Take a look around.
     </p>
 
-    <div class="scroll">
-      scroll<br>
-      <span class="arrow">↓</span>
-    </div>
+    <div class="arrow">↓</div>
 
-  </section>
-
-
-  <!-- PORTFOLIO HEADER -->
-
-  <div class="section-title" id="portfolio">
-    PORTFOLIO
-  </div>
-
-
-  <!-- PROJECTS -->
-
-  <section class="portfolio">
-
-    <div class="intro">
-
-      <h2>Stuff I've made.</h2>
-
-      <p>
-        A collection of projects, plugins, websites,
-        experiments, and other things I've worked on.
-      </p>
-
-    </div>
-
-
-    <div class="projects">
-
-
-      <div class="project">
-
-        <div class="project-number">
-          01 / WEBSITE
-        </div>
-
-        <h3>
-          Project One
-        </h3>
-
-        <p>
-          A description of your first project goes here.
-          Explain what it does and what you built.
-        </p>
-
-        <a href="#" class="project-link">
-          VIEW PROJECT →
-        </a>
-
-      </div>
-
-
-      <div class="project">
-
-        <div class="project-number">
-          02 / MINECRAFT
-        </div>
-
-        <h3>
-          Minecraft Plugin
-        </h3>
-
-        <p>
-          A Minecraft plugin or server project you've
-          worked on.
-        </p>
-
-        <a href="#" class="project-link">
-          VIEW PROJECT →
-        </a>
-
-      </div>
-
-
-      <div class="project">
-
-        <div class="project-number">
-          03 / CODE
-        </div>
-
-        <h3>
-          Project Three
-        </h3>
-
-        <p>
-          Another project. You can replace this with
-          whatever you want.
-        </p>
-
-        <a href="#" class="project-link">
-          VIEW PROJECT →
-        </a>
-
-      </div>
-
-
-      <div class="project">
-
-        <div class="project-number">
-          04 / EXPERIMENT
-        </div>
-
-        <h3>
-          Project Four
-        </h3>
-
-        <p>
-          Something weird, experimental, or just
-          something you're proud of.
-        </p>
-
-        <a href="#" class="project-link">
-          VIEW PROJECT →
-        </a>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- ABOUT -->
-
-  <section class="about" id="about">
-
-    <div class="about-container">
-
-      <h2>ABOUT VOID</h2>
-
-      <p>
-        I'm Void. I make Minecraft plugins, websites,
-        scripts, and whatever else I feel like building.
-        I like making things that are clean, useful,
-        and occasionally completely unnecessary.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- CONTACT -->
-
-  <section class="contact" id="contact">
-
-    <h2>LET'S MAKE SOMETHING.</h2>
-
-    <p>
-      Want to work together? Get in touch.
-    </p>
-
-    <a
-      class="contact-button"
-      href="mailto:YOUR_EMAIL_HERE"
-    >
-      CONTACT ME →
-    </a>
-
-  </section>
-
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <span>
-      VOID © 2026
-    </span>
-
-    <span>
-      Built by Void.
-    </span>
-
-  </footer>
+  </main>
 
 </body>
 </html>
