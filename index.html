@@ -1,1338 +1,623 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>THANOSIFY</title>
+  <title>VOID — Portfolio</title>
 
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  min-height: 100vh;
-  background: #080808;
-  color: #eee;
-  font-family: Arial, Helvetica, sans-serif;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-nav {
-  width: min(1000px, 92%);
-  margin: auto;
-  padding: 25px 0;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #202020;
-}
+    body {
+      background: #fff;
+      color: #111;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-.logo {
-  font-weight: 900;
-  font-size: 19px;
-}
+    /* NAVBAR */
 
-.logo span {
-  color: #9848e8;
-}
+    nav {
+      height: 115px;
+      border-bottom: 2px solid #111;
 
-.nav-right {
-  color: #555;
-  font-size: 12px;
-}
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-main {
-  width: min(1000px, 92%);
-  margin: auto;
-}
+      padding: 0 5%;
+    }
 
-.hero {
-  text-align: center;
-  padding: 110px 0 80px;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-.tiny {
-  color: #777;
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 25px;
-}
+    .brand-box {
+      width: 65px;
+      height: 65px;
+      border: 3px solid #111;
 
-h1 {
-  font-size: clamp(70px, 12vw, 140px);
-  line-height: .8;
-  letter-spacing: -9px;
-  font-weight: 900;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-h1 span {
-  color: #9848e8;
-}
+      font-size: 24px;
+      font-weight: 900;
+    }
 
-.hero p {
-  max-width: 600px;
-  margin: 35px auto 0;
-  color: #777;
-  line-height: 1.7;
-}
+    .brand-name {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
 
-.generator {
-  max-width: 760px;
-  margin: auto;
-}
+    .nav-links {
+      display: flex;
+      gap: 38px;
+    }
 
-.label {
-  color: #777;
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
+    .nav-links a {
+      color: #888;
+      text-decoration: none;
 
-textarea {
-  width: 100%;
-  min-height: 160px;
-  padding: 20px;
+      font-size: 27px;
+      font-weight: 900;
+    }
 
-  resize: vertical;
+    .nav-links a:hover {
+      color: #111;
+    }
 
-  background: #101010;
-  color: white;
+    .commission {
+      border: 2px solid #111;
+      padding: 14px 20px;
 
-  border: 1px solid #292929;
-  border-radius: 8px;
-  outline: none;
+      font-size: 16px;
+      font-weight: 900;
 
-  font-family: inherit;
-  font-size: 16px;
-  line-height: 1.6;
-}
+      box-shadow: 5px 5px 0 #111;
+    }
 
-textarea:focus {
-  border-color: #555;
-}
+    .open {
+      color: #159447;
+    }
 
-textarea::placeholder {
-  color: #505050;
-}
 
-.controls {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
+    /* HERO */
 
-.thanify {
-  flex: 1;
-  padding: 15px;
+    .hero {
+      min-height: 700px;
 
-  border: none;
-  border-radius: 7px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-  background: #9848e8;
-  color: white;
+      text-align: center;
 
-  font-weight: 800;
-  cursor: pointer;
-}
+      padding: 100px 20px;
+    }
 
-.thanify:hover {
-  background: #a95cf1;
-}
+    .hero h1 {
+      font-size: clamp(90px, 15vw, 190px);
+      font-weight: 1000;
 
-.copy {
-  padding: 15px 22px;
+      letter-spacing: -12px;
+      line-height: .8;
 
-  border: 1px solid #292929;
-  border-radius: 7px;
+      margin-bottom: 60px;
+    }
 
-  background: #101010;
-  color: #999;
+    .hero p {
+      max-width: 900px;
 
-  cursor: pointer;
-}
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
 
-.copy:hover {
-  color: white;
-}
+    .hero .sub {
+      margin-top: 25px;
 
-.output {
-  display: none;
-  margin-top: 35px;
-  padding-top: 30px;
-  border-top: 1px solid #242424;
-}
+      font-size: 18px;
+      color: #777;
+      font-weight: 700;
+    }
 
-.output-label {
-  color: #9848e8;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  margin-bottom: 14px;
-}
+    .scroll {
+      position: absolute;
+      bottom: 25px;
 
-.output-text {
-  color: #ddd;
-  font-size: 19px;
-  line-height: 1.8;
-}
+      color: #777;
 
-.divider {
-  height: 1px;
-  margin: 110px 0 70px;
-  background: #1d1d1d;
-}
+      font-size: 15px;
+      font-weight: 800;
 
-.features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 45px;
-  margin-bottom: 110px;
-}
+      text-align: center;
+    }
 
-.feature-number {
-  color: #444;
-  font-size: 11px;
-  margin-bottom: 18px;
-}
+    .arrow {
+      font-size: 22px;
+    }
 
-.feature h3 {
-  font-size: 15px;
-  margin-bottom: 10px;
-}
 
-.feature p {
-  color: #666;
-  font-size: 13px;
-  line-height: 1.7;
-}
+    /* SECTION TITLE */
 
-footer {
-  width: min(1000px, 92%);
-  margin: auto;
-  padding: 25px 0;
+    .section-title {
+      background: #111;
+      color: white;
 
-  border-top: 1px solid #1c1c1c;
+      padding: 25px 5%;
 
-  display: flex;
-  justify-content: space-between;
+      font-size: 38px;
+      font-weight: 1000;
 
-  color: #444;
-  font-size: 11px;
-}
+      letter-spacing: -1px;
+    }
 
-@media (max-width: 700px) {
 
-  .nav-right {
-    display: none;
-  }
+    /* PORTFOLIO */
 
-  h1 {
-    font-size: 75px;
-    letter-spacing: -5px;
-  }
+    .portfolio {
+      padding: 70px 5%;
+    }
 
-  .controls {
-    flex-direction: column;
-  }
+    .intro {
+      max-width: 700px;
+      margin-bottom: 60px;
+    }
 
-  .copy {
-    width: 100%;
-  }
+    .intro h2 {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
 
-  .features {
-    grid-template-columns: 1fr;
-  }
+    .intro p {
+      color: #666;
+      font-size: 18px;
+      line-height: 1.6;
+    }
 
-  footer {
-    flex-direction: column;
-    gap: 8px;
-  }
-}
-</style>
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .project {
+      border: 2px solid #111;
+
+      min-height: 350px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      padding: 30px;
+
+      transition: .2s;
+    }
+
+    .project:hover {
+      transform: translate(-6px, -6px);
+      box-shadow: 8px 8px 0 #111;
+    }
+
+    .project-number {
+      color: #888;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .project h3 {
+      font-size: 42px;
+      letter-spacing: -2px;
+    }
+
+    .project p {
+      color: #666;
+      line-height: 1.5;
+      max-width: 500px;
+    }
+
+    .project-link {
+      margin-top: 25px;
+
+      display: inline-block;
+
+      color: #111;
+      text-decoration: none;
+
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+
+    /* ABOUT */
+
+    .about {
+      background: #111;
+      color: white;
+
+      padding: 100px 5%;
+    }
+
+    .about-container {
+      max-width: 1000px;
+    }
+
+    .about h2 {
+      font-size: 70px;
+      letter-spacing: -4px;
+      margin-bottom: 30px;
+    }
+
+    .about p {
+      font-size: 23px;
+      line-height: 1.7;
+      color: #ccc;
+    }
+
+
+    /* CONTACT */
+
+    .contact {
+      padding: 100px 5%;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 80px;
+      letter-spacing: -5px;
+      margin-bottom: 25px;
+    }
+
+    .contact p {
+      color: #666;
+      font-size: 18px;
+      margin-bottom: 35px;
+    }
+
+    .contact-button {
+      display: inline-block;
+
+      background: #111;
+      color: white;
+
+      text-decoration: none;
+
+      padding: 18px 30px;
+
+      font-weight: 900;
+
+      box-shadow: 6px 6px 0 #999;
+    }
+
+    .contact-button:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 #999;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+      border-top: 2px solid #111;
+
+      padding: 25px 5%;
+
+      display: flex;
+      justify-content: space-between;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      nav {
+        height: auto;
+        padding: 20px;
+
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        font-size: 19px;
+      }
+
+      .commission {
+        font-size: 12px;
+      }
+
+      .hero {
+        min-height: 600px;
+      }
+
+      .hero h1 {
+        letter-spacing: -7px;
+      }
+
+      .hero p {
+        font-size: 20px;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .project h3 {
+        font-size: 32px;
+      }
+
+      .about h2,
+      .contact h2 {
+        font-size: 55px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
 
 
 <body>
 
-<nav>
-  <div class="logo">
-    THANOS<span>IFY</span>
-  </div>
+  <!-- NAV -->
 
-  <div class="nav-right">
-    unnecessary seriousness
-  </div>
-</nav>
+  <nav>
 
+    <div class="brand">
 
-<main>
+      <div class="brand-box">
+        V
+      </div>
 
-<section class="hero">
+      <div class="brand-name">
+        VOID
+      </div>
 
-  <div class="tiny">
-    say it normally. say it better.
-  </div>
-
-  <h1>
-    THANOS<span>IFY</span>
-  </h1>
-
-  <p>
-    Take something normal and give it the calm,
-    serious, unnecessarily powerful wording it deserves.
-  </p>
-
-</section>
-
-
-<section class="generator">
-
-  <div class="label">
-    Your sentence
-  </div>
-
-  <textarea
-    id="input"
-    placeholder="I forgot my phone at home and now I have to walk all the way back..."
-  ></textarea>
-
-
-  <div class="controls">
-
-    <button
-      class="thanify"
-      onclick="thanify()"
-    >
-      THANOSIFY →
-    </button>
-
-    <button
-      class="copy"
-      onclick="copyText()"
-    >
-      COPY
-    </button>
-
-  </div>
-
-
-  <div
-    class="output"
-    id="output"
-  >
-
-    <div class="output-label">
-      THANOSIFIED
     </div>
 
-    <div
-      class="output-text"
-      id="outputText"
-    ></div>
 
-  </div>
+    <div class="nav-links">
 
-</section>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
 
-
-<div class="divider"></div>
+    </div>
 
 
-<section class="features">
+    <div class="commission">
+      Commissions:
+      <span class="open">Open!</span>
+    </div>
 
-  <div class="feature">
-    <div class="feature-number">01</div>
-
-    <h3>Same meaning</h3>
-
-    <p>
-      The original idea stays intact.
-      Only the wording changes.
-    </p>
-  </div>
+  </nav>
 
 
-  <div class="feature">
-    <div class="feature-number">02</div>
+  <!-- HERO -->
 
-    <h3>No giant speeches</h3>
+  <section class="hero" id="home">
+
+    <h1>VOID</h1>
 
     <p>
-      Short, serious, and straight to the point.
+      Developer, creator, and professional
+      maker of things that probably shouldn't exist.
     </p>
+
+    <p class="sub">
+      Explore my work below.
+    </p>
+
+    <div class="scroll">
+      scroll<br>
+      <span class="arrow">↓</span>
+    </div>
+
+  </section>
+
+
+  <!-- PORTFOLIO HEADER -->
+
+  <div class="section-title" id="portfolio">
+    PORTFOLIO
   </div>
 
 
-  <div class="feature">
-    <div class="feature-number">03</div>
+  <!-- PROJECTS -->
 
-    <h3>No AI required</h3>
+  <section class="portfolio">
+
+    <div class="intro">
+
+      <h2>Stuff I've made.</h2>
+
+      <p>
+        A collection of projects, plugins, websites,
+        experiments, and other things I've worked on.
+      </p>
+
+    </div>
+
+
+    <div class="projects">
+
+
+      <div class="project">
+
+        <div class="project-number">
+          01 / WEBSITE
+        </div>
+
+        <h3>
+          Project One
+        </h3>
+
+        <p>
+          A description of your first project goes here.
+          Explain what it does and what you built.
+        </p>
+
+        <a href="#" class="project-link">
+          VIEW PROJECT →
+        </a>
+
+      </div>
+
+
+      <div class="project">
+
+        <div class="project-number">
+          02 / MINECRAFT
+        </div>
+
+        <h3>
+          Minecraft Plugin
+        </h3>
+
+        <p>
+          A Minecraft plugin or server project you've
+          worked on.
+        </p>
+
+        <a href="#" class="project-link">
+          VIEW PROJECT →
+        </a>
+
+      </div>
+
+
+      <div class="project">
+
+        <div class="project-number">
+          03 / CODE
+        </div>
+
+        <h3>
+          Project Three
+        </h3>
+
+        <p>
+          Another project. You can replace this with
+          whatever you want.
+        </p>
+
+        <a href="#" class="project-link">
+          VIEW PROJECT →
+        </a>
+
+      </div>
+
+
+      <div class="project">
+
+        <div class="project-number">
+          04 / EXPERIMENT
+        </div>
+
+        <h3>
+          Project Four
+        </h3>
+
+        <p>
+          Something weird, experimental, or just
+          something you're proud of.
+        </p>
+
+        <a href="#" class="project-link">
+          VIEW PROJECT →
+        </a>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section class="about" id="about">
+
+    <div class="about-container">
+
+      <h2>ABOUT VOID</h2>
+
+      <p>
+        I'm Void. I make Minecraft plugins, websites,
+        scripts, and whatever else I feel like building.
+        I like making things that are clean, useful,
+        and occasionally completely unnecessary.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+
+  <section class="contact" id="contact">
+
+    <h2>LET'S MAKE SOMETHING.</h2>
 
     <p>
-      Everything runs directly in your browser.
+      Want to work together? Get in touch.
     </p>
-  </div>
 
-</section>
+    <a
+      class="contact-button"
+      href="mailto:YOUR_EMAIL_HERE"
+    >
+      CONTACT ME →
+    </a>
 
-</main>
+  </section>
 
 
-<footer>
-  <span>THANOSIFY © 2026</span>
-  <span>balance must be maintained</span>
-</footer>
+  <!-- FOOTER -->
 
+  <footer>
 
-<script>
+    <span>
+      VOID © 2026
+    </span>
 
-/*
-==================================================
-THANOSIFY
-==================================================
+    <span>
+      Built by Void.
+    </span>
 
-This version uses:
-
-1. Exact phrases
-2. Sentence patterns
-3. Phrase replacements
-4. Sentence restructuring
-5. A fallback for random nonsense
-
-It does NOT use an AI API.
-*/
-
-
-function thanify() {
-
-  const input =
-    document.getElementById("input").value.trim();
-
-  const output =
-    document.getElementById("output");
-
-  const outputText =
-    document.getElementById("outputText");
-
-
-  if (!input) {
-
-    output.style.display = "block";
-
-    outputText.textContent =
-      "There is nothing to reshape.";
-
-    return;
-  }
-
-
-  outputText.textContent =
-    reshape(input);
-
-  output.style.display =
-    "block";
-}
-
-
-/*
-==================================================
-MAIN REWRITER
-==================================================
-*/
-
-function reshape(text) {
-
-  let clean = text
-    .trim()
-    .replace(/\s+/g, " ");
-
-
-  let lower = clean.toLowerCase();
-
-
-  /*
-  ----------------------------------------------
-  EXACT PHRASES
-  ----------------------------------------------
-  */
-
-  const exact = {
-
-    "i'm hungry":
-      "I find myself in need of sustenance.",
-
-    "im hungry":
-      "I find myself in need of sustenance.",
-
-    "i am hungry":
-      "I find myself in need of sustenance.",
-
-    "i'm tired":
-      "I have grown weary.",
-
-    "im tired":
-      "I have grown weary.",
-
-    "i am tired":
-      "I have grown weary.",
-
-    "this is stupid":
-      "This is foolish.",
-
-    "this is dumb":
-      "This is foolish.",
-
-    "this sucks":
-      "This is most unfortunate.",
-
-    "i don't want to do this":
-      "I have no desire to do this.",
-
-    "i dont want to do this":
-      "I have no desire to do this.",
-
-    "i need to go":
-      "I must make my way.",
-
-    "i gotta go":
-      "I must make my way.",
-
-    "i have to go":
-      "I must make my way.",
-
-    "i need to go to the store":
-      "I must make my way to the store.",
-
-    "i don't know":
-      "I do not know.",
-
-    "i dont know":
-      "I do not know.",
-
-    "i can't do it":
-      "I am unable to do it.",
-
-    "i cant do it":
-      "I am unable to do it.",
-
-    "i want this":
-      "I desire this.",
-
-    "i don't want this":
-      "I have no desire for this.",
-
-    "i dont want this":
-      "I have no desire for this.",
-
-    "i'm scared":
-      "I am afraid.",
-
-    "im scared":
-      "I am afraid.",
-
-    "i am scared":
-      "I am afraid.",
-
-    "i'm angry":
-      "I am displeased.",
-
-    "im angry":
-      "I am displeased.",
-
-    "i am angry":
-      "I am displeased.",
-
-    "i'm happy":
-      "I am pleased.",
-
-    "im happy":
-      "I am pleased.",
-
-    "i am happy":
-      "I am pleased.",
-
-    "i'm sad":
-      "I am troubled.",
-
-    "im sad":
-      "I am troubled.",
-
-    "i am sad":
-      "I am troubled.",
-
-    "that's crazy":
-      "That is... unexpected.",
-
-    "thats crazy":
-      "That is... unexpected.",
-
-    "that's insane":
-      "That is... extraordinary.",
-
-    "thats insane":
-      "That is... extraordinary.",
-
-    "thank you":
-      "You have my gratitude.",
-
-    "thanks":
-      "You have my gratitude.",
-
-    "sorry":
-      "You have my apology.",
-
-    "i'm sorry":
-      "You have my apology.",
-
-    "im sorry":
-      "You have my apology.",
-
-    "help me":
-      "I require your assistance.",
-
-    "please help me":
-      "I require your assistance.",
-
-    "i need help":
-      "I require assistance.",
-
-    "let's go":
-      "We shall go.",
-
-    "lets go":
-      "We shall go.",
-
-    "i'm ready":
-      "I am prepared.",
-
-    "im ready":
-      "I am prepared.",
-
-    "i am ready":
-      "I am prepared.",
-
-    "i'm done":
-      "It is finished.",
-
-    "im done":
-      "It is finished.",
-
-    "i am done":
-      "It is finished.",
-
-    "it's over":
-      "It is over.",
-
-    "its over":
-      "It is over.",
-
-    "i won":
-      "I have prevailed.",
-
-    "we won":
-      "We have prevailed.",
-
-    "i lost":
-      "I have been defeated.",
-
-    "we lost":
-      "We have been defeated.",
-
-    "no way":
-      "That cannot be.",
-
-    "of course":
-      "Indeed.",
-
-    "maybe":
-      "Perhaps.",
-
-    "okay":
-      "Very well.",
-
-    "ok":
-      "Very well.",
-
-    "fine":
-      "Very well."
-
-  };
-
-
-  if (exact[lower]) {
-    return exact[lower];
-  }
-
-
-  /*
-  ----------------------------------------------
-  RANDOM TEXT
-  ----------------------------------------------
-  */
-
-  if (isNonsense(clean)) {
-    return "This... means nothing.";
-  }
-
-
-  /*
-  ----------------------------------------------
-  SPECIAL SENTENCE PATTERNS
-  ----------------------------------------------
-  */
-
-
-  /*
-  "I forgot X at Y and now I have to Z"
-  */
-
-  let match = clean.match(
-    /^I (?:forgot|left) (.+?) (?:at|in) (.+?) and now I (?:have to|need to|gotta) (.+)$/i
-  );
-
-  if (match) {
-
-    const object = match[1];
-    const place = match[2];
-    const action = match[3];
-
-    return (
-      "I left " +
-      object +
-      " behind at " +
-      place +
-      ". Now I must " +
-      action +
-      "."
-    );
-  }
-
-
-  /*
-  "I forgot X"
-  */
-
-  match = clean.match(
-    /^I forgot (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I failed to remember " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I need to X"
-  */
-
-  match = clean.match(
-    /^I need to (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I must " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I have to X"
-  */
-
-  match = clean.match(
-    /^I have to (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I must " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I want to X"
-  */
-
-  match = clean.match(
-    /^I want to (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I desire to " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I don't want to X"
-  */
-
-  match = clean.match(
-    /^I don't want to (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I have no desire to " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I'm going to X"
-  */
-
-  match = clean.match(
-    /^I'm going to (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I shall " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I am going to X"
-  */
-
-  match = clean.match(
-    /^I am going to (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I shall " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I can't X"
-  */
-
-  match = clean.match(
-    /^I can't (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I am unable to " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I don't like X"
-  */
-
-  match = clean.match(
-    /^I don't like (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I find no appreciation for " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I like X"
-  */
-
-  match = clean.match(
-    /^I like (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I find myself fond of " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I think X"
-  */
-
-  match = clean.match(
-    /^I think (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I believe " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "I feel X"
-  */
-
-  match = clean.match(
-    /^I feel (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "I find myself " +
-      match[1] +
-      "."
-    );
-  }
-
-
-  /*
-  "This is X"
-  */
-
-  match = clean.match(
-    /^This is (.+)$/i
-  );
-
-  if (match) {
-
-    let word = match[1]
-      .replace(/[.!?]+$/, "");
-
-    const replacements = {
-
-      stupid: "foolish",
-      dumb: "foolish",
-      bad: "unfortunate",
-      good: "acceptable",
-      crazy: "unexpected",
-      insane: "extraordinary",
-      weird: "peculiar",
-      annoying: "troublesome",
-      easy: "simple",
-      hard: "difficult",
-      funny: "amusing",
-      scary: "disturbing",
-      boring: "tedious",
-      pointless: "without purpose",
-      useless: "without value"
-
-    };
-
-    if (replacements[word.toLowerCase()]) {
-
-      word =
-        replacements[word.toLowerCase()];
-
-    }
-
-    return "This is " + word + ".";
-
-  }
-
-
-  /*
-  "Are you X?"
-  */
-
-  match = clean.match(
-    /^Are you (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "Are you truly " +
-      match[1] +
-      "?"
-    );
-  }
-
-
-  /*
-  "Why are you X?"
-  */
-
-  match = clean.match(
-    /^Why are you (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "Why do you " +
-      match[1] +
-      "?"
-    );
-  }
-
-
-  /*
-  "What are you doing?"
-  */
-
-  if (
-    /^what are you doing/i.test(clean)
-  ) {
-
-    return "What is it that you are doing?";
-
-  }
-
-
-  /*
-  "Where are you?"
-  */
-
-  if (
-    /^where are you/i.test(clean)
-  ) {
-
-    return "Where are you?";
-
-  }
-
-
-  /*
-  "Can you X?"
-  */
-
-  match = clean.match(
-    /^Can you (.+)$/i
-  );
-
-  if (match) {
-
-    return (
-      "Are you capable of " +
-      match[1] +
-      "?"
-    );
-  }
-
-
-  /*
-  ----------------------------------------------
-  GENERAL WORD TRANSFORMATIONS
-  ----------------------------------------------
-  */
-
-  let result = clean;
-
-
-  const replacements = [
-
-    [/\bI'm\b/gi, "I am"],
-    [/\bIm\b/gi, "I am"],
-
-    [/\bI've\b/gi, "I have"],
-    [/\bIve\b/gi, "I have"],
-
-    [/\bcan't\b/gi, "cannot"],
-    [/\bcant\b/gi, "cannot"],
-
-    [/\bdon't\b/gi, "do not"],
-    [/\bdont\b/gi, "do not"],
-
-    [/\bdoesn't\b/gi, "does not"],
-    [/\bdoesnt\b/gi, "does not"],
-
-    [/\bdidn't\b/gi, "did not"],
-    [/\bdidnt\b/gi, "did not"],
-
-    [/\bgonna\b/gi, "going to"],
-    [/\bwanna\b/gi, "want to"],
-    [/\bgotta\b/gi, "have to"],
-
-    [/\bstupid\b/gi, "foolish"],
-    [/\bdumb\b/gi, "foolish"],
-
-    [/\bhungry\b/gi, "in need of sustenance"],
-    [/\btired\b/gi, "weary"],
-
-    [/\bscared\b/gi, "afraid"],
-    [/\bmad\b/gi, "angry"],
-
-    [/\bweird\b/gi, "peculiar"],
-    [/\bcrazy\b/gi, "unexpected"],
-    [/\binsane\b/gi, "extraordinary"],
-
-    [/\bhelp\b/gi, "assistance"],
-    [/\bthing\b/gi, "matter"],
-    [/\bstuff\b/gi, "matters"],
-
-    [/\bguys\b/gi, "all of you"],
-    [/\bbro\b/gi, "friend"],
-
-    [/\byeah\b/gi, "yes"],
-    [/\byep\b/gi, "yes"],
-    [/\bnope\b/gi, "no"],
-
-    [/\bmaybe\b/gi, "perhaps"],
-
-    [/\bget\b/gi, "obtain"],
-    [/\bgot\b/gi, "obtained"],
-
-    [/\bstart\b/gi, "begin"],
-    [/\bend\b/gi, "finish"]
-
-  ];
-
-
-  for (
-    let i = 0;
-    i < replacements.length;
-    i++
-  ) {
-
-    result =
-      result.replace(
-        replacements[i][0],
-        replacements[i][1]
-      );
-
-  }
-
-
-  /*
-  ----------------------------------------------
-  CLEANUP
-  ----------------------------------------------
-  */
-
-  result =
-    result
-      .replace(/\s+/g, " ")
-      .replace(/!+/g, ".")
-      .trim();
-
-
-  result =
-    result.charAt(0).toUpperCase() +
-    result.slice(1);
-
-
-  if (!/[.!?]$/.test(result)) {
-    result += ".";
-  }
-
-
-  /*
-  ----------------------------------------------
-  ADD A LITTLE WEIGHT TO RANDOM SENTENCES
-  ----------------------------------------------
-  */
-
-  const endings = [
-    "Such is the matter.",
-    "So it shall be.",
-    "That is the reality.",
-    "There is no changing it.",
-    "And so it is.",
-    "The matter is settled."
-  ];
-
-
-  /*
-  Don't add an ending every time.
-  Only occasionally, so it doesn't become
-  another annoying repeated speech.
-  */
-
-  if (
-    Math.random() < 0.18 &&
-    result.length > 35
-  ) {
-
-    result +=
-      " " +
-      endings[
-        Math.floor(
-          Math.random() * endings.length
-        )
-      ];
-
-  }
-
-
-  return result;
-}
-
-
-/*
-==================================================
-RANDOM / KEYBOARD SMASH DETECTOR
-==================================================
-*/
-
-function isNonsense(text) {
-
-  const clean =
-    text
-      .toLowerCase()
-      .replace(/[^a-z]/g, "");
-
-
-  if (clean.length <= 2) {
-    return true;
-  }
-
-
-  const vowels =
-    (clean.match(/[aeiou]/g) || []).length;
-
-
-  /*
-  Words with zero vowels are usually
-  keyboard smashing.
-  */
-
-  if (
-    clean.length >= 4 &&
-    vowels === 0
-  ) {
-
-    return true;
-
-  }
-
-
-  const patterns = [
-    "asdf",
-    "fdsa",
-    "qwer",
-    "rewq",
-    "zxcv",
-    "hjkl",
-    "jkl",
-    "sdfgh",
-    "asdfgh",
-    "qwerty"
-  ];
-
-
-  for (const pattern of patterns) {
-
-    if (clean.includes(pattern)) {
-      return true;
-    }
-
-  }
-
-
-  return false;
-}
-
-
-/*
-==================================================
-COPY BUTTON
-==================================================
-*/
-
-function copyText() {
-
-  const text =
-    document
-      .getElementById("outputText")
-      .innerText;
-
-
-  if (!text) {
-    return;
-  }
-
-
-  navigator.clipboard.writeText(text);
-
-
-  const button =
-    document.querySelector(".copy");
-
-
-  button.textContent =
-    "COPIED ✓";
-
-
-  setTimeout(() => {
-
-    button.textContent =
-      "COPY";
-
-  }, 1500);
-
-}
-
-
-/*
-==================================================
-CTRL + ENTER
-==================================================
-*/
-
-document
-  .getElementById("input")
-  .addEventListener(
-    "keydown",
-    function(event) {
-
-      if (
-        event.ctrlKey &&
-        event.key === "Enter"
-      ) {
-
-        thanify();
-
-      }
-
-    }
-  );
-
-</script>
+  </footer>
 
 </body>
 </html>
