@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THANOSIFY</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: white;
+      background:
+        radial-gradient(circle at 50% 15%, #4b176d 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, #210638 0%, transparent 40%),
+        #050308;
+    }
+
+    nav {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    .logo span {
+      color: #b967ff;
+    }
+
+    .badge {
+      padding: 8px 14px;
+      border: 1px solid #7139a4;
+      border-radius: 50px;
+      color: #d7b5ff;
+      font-size: 12px;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .hero {
+      min-height: 65vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #bd82ff;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(70px, 13vw, 150px);
+      line-height: .85;
+      letter-spacing: -8px;
+      background: linear-gradient(135deg, white, #dcb8ff, #8e38d8);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 40px rgba(160, 60, 255, .3);
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin-top: 35px;
+      color: #b8aebe;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .subtitle strong {
+      color: white;
+    }
+
+    .cta {
+      margin-top: 35px;
+      padding: 16px 28px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #a943ff, #6520a9);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 35px rgba(151, 51, 255, .35);
+    }
+
+    .cta:hover {
+      transform: translateY(-3px);
+    }
+
+    .demo {
+      max-width: 900px;
+      margin: 20px auto 100px;
+      padding: 28px;
+      border: 1px solid #2d1b3d;
+      border-radius: 24px;
+      background: rgba(17, 10, 24, .85);
+      box-shadow: 0 25px 80px rgba(0,0,0,.4);
+    }
+
+    .window {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #6b5579;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 140px;
+      resize: vertical;
+      padding: 18px;
+      border: 1px solid #30213b;
+      border-radius: 14px;
+      outline: none;
+      background: #0b0710;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    textarea:focus {
+      border-color: #9b45df;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .thanify {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: white;
+      color: #09050d;
+      font-weight: 900;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .copy {
+      padding: 15px 25px;
+      border: 1px solid #44304f;
+      border-radius: 12px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+    }
+
+    .output {
+      display: none;
+      margin-top: 20px;
+      padding: 22px;
+      border: 1px solid #5b2d7c;
+      border-radius: 14px;
+      background: rgba(102, 35, 150, .12);
+      color: #dfc9ed;
+      line-height: 1.7;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 100px;
+    }
+
+    .feature {
+      padding: 25px;
+      border: 1px solid #25172e;
+      border-radius: 18px;
+      background: rgba(15, 9, 20, .7);
+    }
+
+    .feature-icon {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #918698;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      color: #645a69;
+      border-top: 1px solid #18111d;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .badge {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">THANOS<span>IFY</span></div>
+    <div class="badge">THE UNIVERSE IS YOURS</div>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+
+      <div class="eyebrow">
+        Your words. Infinite power.
+      </div>
+
+      <h1>THANOSIFY.</h1>
+
+      <p class="subtitle">
+        Turn ordinary sentences into
+        <strong>absurd cosmic-villain dialogue.</strong>
+        Because your group chat deserves a little more
+        drama.
+      </p>
+
+      <button class="cta" onclick="scrollToDemo()">
+        ⚡ Enter the Universe
+      </button>
+
+    </section>
+
+    <section class="demo" id="demo">
+
+      <div class="window">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+
+      <textarea id="input" placeholder="Type something painfully normal...
+
+Example:
+I'm going to the store to buy milk."></textarea>
+
+      <div class="buttons">
+
+        <button class="thanify" onclick="thanify()">
+          ⚡ THANOSIFY
+        </button>
+
+        <button class="copy" onclick="copyText()">
+          Copy
+        </button>
+
+      </div>
+
+      <div class="output" id="output"></div>
+
+    </section>
+
+    <section class="features">
+
+      <div class="feature">
+        <div class="feature-icon">💀</div>
+        <h3>Cosmic Transformation</h3>
+        <p>
+          Turn normal sentences into ridiculously
+          dramatic villain dialogue.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">✨</div>
+        <h3>Maximum Drama</h3>
+        <p>
+          Make even the most boring message sound
+          like the fate of the universe depends on it.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📋</div>
+        <h3>Copy & Conquer</h3>
+        <p>
+          Copy your masterpiece and unleash it
+          upon your unsuspecting group chat.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    THANOSIFY © 2026 · With great power comes extremely dramatic texting.
+  </footer>
+
+  <script>
+
+    function scrollToDemo() {
+      document.getElementById("demo").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function thanify() {
+
+      const input = document.getElementById("input").value.trim();
+      const output = document.getElementById("output");
+
+      if (!input) {
+        output.style.display = "block";
+        output.textContent =
+          "You must first provide words... before I may reshape them.";
+        return;
+      }
+
+      output.style.display = "block";
+
+      output.textContent =
+        "The universe has heard your request. " +
+        "\"" + input + "\" " +
+        "You believe this to be a simple matter. " +
+        "But nothing is simple when destiny itself bends before your will. " +
+        "So it shall be done.";
+    }
+
+    function copyText() {
+
+      const output = document.getElementById("output");
+
+      if (!output.textContent) return;
+
+      navigator.clipboard.writeText(output.textContent);
+
+      const button = document.querySelector(".copy");
+
+      button.textContent = "Copied ✓";
+
+      setTimeout(function() {
+        button.textContent = "Copy";
+      }, 1500);
+    }
+
+  </script>
+
+</body>
+</html>
