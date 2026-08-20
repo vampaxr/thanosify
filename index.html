@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,8 @@
   <title>THANOSIFY</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -15,366 +18,316 @@
 
     body {
       min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      color: white;
-      background:
-        radial-gradient(circle at 50% 15%, #4b176d 0%, transparent 35%),
-        radial-gradient(circle at 80% 80%, #210638 0%, transparent 40%),
-        #050308;
-      overflow-x: hidden;
+      background: #080808;
+      color: #f2f2f2;
+      font-family: Inter, Arial, sans-serif;
     }
 
-    body::before {
+    /* subtle noise */
+    body::after {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.25;
-      background-image: radial-gradient(#ffffff 1px, transparent 1px);
-      background-size: 45px 45px;
-      mask-image: linear-gradient(to bottom, black, transparent);
+      opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 999;
     }
 
     nav {
-      width: 90%;
-      max-width: 1100px;
+      width: min(1100px, 92%);
       margin: auto;
-      padding: 28px 0;
+      padding: 25px 0;
+
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      border-bottom: 1px solid #1c1c1c;
     }
 
     .logo {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 900;
-      letter-spacing: 4px;
+      letter-spacing: -0.5px;
     }
 
     .logo span {
-      color: #b967ff;
+      color: #9b4dff;
     }
 
-    .badge {
-      padding: 8px 14px;
-      border: 1px solid #7139a4;
-      border-radius: 50px;
-      color: #d7b5ff;
-      background: rgba(130, 60, 200, 0.1);
+    .nav-right {
+      color: #777;
       font-size: 12px;
-      letter-spacing: 1px;
     }
 
     main {
-      width: 90%;
-      max-width: 1100px;
+      width: min(1000px, 92%);
       margin: auto;
     }
 
+    /* HERO */
+
     .hero {
-      min-height: 65vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 120px 0 90px;
       text-align: center;
-      padding: 60px 0;
     }
 
-    .eyebrow {
-      color: #bd82ff;
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 4px;
-      text-transform: uppercase;
+    .tiny {
+      display: inline-block;
       margin-bottom: 25px;
+
+      color: #8c8c8c;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     h1 {
-      font-size: clamp(70px, 13vw, 150px);
-      line-height: 0.85;
-      letter-spacing: -8px;
+      font-size: clamp(70px, 12vw, 145px);
       font-weight: 900;
+      letter-spacing: -9px;
+      line-height: .8;
 
-      background: linear-gradient(
-        135deg,
-        #ffffff,
-        #dcb8ff,
-        #8e38d8
-      );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-
-      filter: drop-shadow(
-        0 0 35px rgba(155, 65, 255, 0.3)
-      );
+      color: #f5f5f5;
     }
 
-    .subtitle {
-      max-width: 650px;
-      margin-top: 35px;
-      color: #b8aebe;
-      font-size: 18px;
+    h1 span {
+      color: #9346e8;
+    }
+
+    .hero p {
+      max-width: 570px;
+      margin: 35px auto 0;
+
+      color: #858585;
+      font-size: 16px;
       line-height: 1.7;
     }
 
-    .subtitle strong {
-      color: white;
+    /* GENERATOR */
+
+    .generator {
+      max-width: 760px;
+      margin: auto;
     }
 
-    .cta {
-      margin-top: 35px;
-      padding: 16px 28px;
-      border: none;
-      border-radius: 12px;
+    .label {
+      margin-bottom: 10px;
 
-      background: linear-gradient(
-        135deg,
-        #a943ff,
-        #6520a9
-      );
-
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-
-      box-shadow:
-        0 0 35px rgba(151, 51, 255, 0.35);
-
-      transition: 0.2s;
-    }
-
-    .cta:hover {
-      transform: translateY(-3px);
-      box-shadow:
-        0 0 55px rgba(151, 51, 255, 0.55);
-    }
-
-    .demo {
-      max-width: 900px;
-      margin: 20px auto 100px;
-      padding: 28px;
-
-      border: 1px solid #2d1b3d;
-      border-radius: 24px;
-
-      background: rgba(17, 10, 24, 0.85);
-
-      backdrop-filter: blur(20px);
-
-      box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.4);
-    }
-
-    .window {
-      display: flex;
-      gap: 7px;
-      margin-bottom: 20px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #6b5579;
+      color: #777;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
     textarea {
       width: 100%;
-      min-height: 140px;
+      min-height: 170px;
+
+      padding: 20px;
+
       resize: vertical;
 
-      padding: 18px;
-
-      border: 1px solid #30213b;
-      border-radius: 14px;
+      border: 1px solid #292929;
+      border-radius: 8px;
 
       outline: none;
 
-      background: #0b0710;
-      color: white;
+      background: #101010;
+      color: #f5f5f5;
 
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: inherit;
       font-size: 16px;
       line-height: 1.6;
 
-      transition: 0.2s;
+      transition: border .15s;
+    }
+
+    textarea::placeholder {
+      color: #555;
     }
 
     textarea:focus {
-      border-color: #9b45df;
-
-      box-shadow:
-        0 0 20px rgba(155, 65, 255, 0.15);
+      border-color: #555;
     }
 
-    .buttons {
+    .controls {
       display: flex;
-      gap: 12px;
-      margin-top: 15px;
+      gap: 10px;
+      margin-top: 10px;
     }
 
     .thanify {
       flex: 1;
 
-      padding: 15px;
+      padding: 14px 18px;
 
       border: none;
-      border-radius: 12px;
+      border-radius: 7px;
 
-      background: white;
-      color: #09050d;
+      background: #9346e8;
+      color: white;
 
-      font-size: 15px;
-      font-weight: 900;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
 
       cursor: pointer;
 
-      transition: 0.2s;
+      transition: background .15s, transform .15s;
     }
 
     .thanify:hover {
-      transform: translateY(-2px);
-
-      box-shadow:
-        0 0 30px rgba(255, 255, 255, 0.2);
+      background: #a85df4;
+      transform: translateY(-1px);
     }
 
     .copy {
-      padding: 15px 25px;
+      padding: 14px 20px;
 
-      border: 1px solid #44304f;
-      border-radius: 12px;
+      border: 1px solid #292929;
+      border-radius: 7px;
 
-      background: transparent;
-      color: white;
+      background: #101010;
+      color: #aaa;
+
+      font-family: inherit;
+      font-size: 13px;
 
       cursor: pointer;
-
-      transition: 0.2s;
     }
 
     .copy:hover {
-      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      border-color: #444;
     }
+
+    /* OUTPUT */
 
     .output {
       display: none;
 
-      margin-top: 20px;
-      padding: 24px;
+      margin-top: 35px;
+      padding-top: 35px;
 
-      border: 1px solid #5b2d7c;
-      border-radius: 14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(102, 35, 150, 0.16),
-          rgba(40, 10, 60, 0.12)
-        );
-
-      color: #eadcf3;
-
-      line-height: 1.8;
-      font-size: 16px;
-
-      white-space: pre-line;
-
-      box-shadow:
-        inset 0 0 30px rgba(120, 40, 180, 0.05);
+      border-top: 1px solid #242424;
     }
 
-    .output-title {
-      color: #b967ff;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 3px;
+    .output-label {
+      margin-bottom: 15px;
+
+      color: #9346e8;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
       text-transform: uppercase;
-
-      margin-bottom: 12px;
     }
+
+    .output-text {
+      color: #ddd;
+      font-size: 18px;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    /* DIVIDER */
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      margin: 120px 0 70px;
+      background: #1d1d1d;
+    }
+
+    /* FEATURES */
 
     .features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      gap: 45px;
 
-      gap: 18px;
-
-      margin-bottom: 100px;
+      margin-bottom: 120px;
     }
 
-    .feature {
-      padding: 25px;
-
-      border: 1px solid #25172e;
-      border-radius: 18px;
-
-      background: rgba(15, 9, 20, 0.7);
-
-      transition: 0.2s;
-    }
-
-    .feature:hover {
-      transform: translateY(-4px);
-
-      border-color: #4b2462;
-    }
-
-    .feature-icon {
-      font-size: 30px;
-      margin-bottom: 15px;
+    .feature-number {
+      color: #555;
+      font-size: 11px;
+      margin-bottom: 18px;
     }
 
     .feature h3 {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+
+      font-size: 15px;
+      font-weight: 700;
     }
 
     .feature p {
-      color: #918698;
-      line-height: 1.6;
-      font-size: 14px;
+      color: #6d6d6d;
+      font-size: 13px;
+      line-height: 1.7;
     }
 
     footer {
-      padding: 30px;
+      width: min(1000px, 92%);
+      margin: auto;
 
-      text-align: center;
+      padding: 25px 0;
 
-      color: #645a69;
+      border-top: 1px solid #1c1c1c;
 
-      border-top: 1px solid #18111d;
+      color: #444;
+      font-size: 11px;
 
-      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
     }
+
+    /* MOBILE */
 
     @media (max-width: 700px) {
 
-      .features {
-        grid-template-columns: 1fr;
+      nav {
+        padding: 20px 0;
       }
 
-      .buttons {
-        flex-direction: column;
-      }
-
-      .badge {
+      .nav-right {
         display: none;
       }
 
-      h1 {
-        letter-spacing: -4px;
+      .hero {
+        padding: 90px 0 70px;
       }
 
-      .hero {
-        min-height: 60vh;
+      h1 {
+        font-size: 75px;
+        letter-spacing: -5px;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+
+      .copy {
+        width: 100%;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 8px;
       }
     }
   </style>
 </head>
+
 
 <body>
 
@@ -384,8 +337,8 @@
       THANOS<span>IFY</span>
     </div>
 
-    <div class="badge">
-      THE UNIVERSE IS YOURS
+    <div class="nav-right">
+      because normal texting is boring
     </div>
 
   </nav>
@@ -395,68 +348,48 @@
 
     <section class="hero">
 
-      <div class="eyebrow">
-        Your words. Infinite power.
+      <div class="tiny">
+        turn normal words into something unnecessarily serious
       </div>
 
       <h1>
-        THANOSIFY.
+        THANOS<span>IFY</span>
       </h1>
 
-      <p class="subtitle">
-        Turn ordinary sentences into
-        <strong>absurd cosmic-villain dialogue.</strong>
-        Because your group chat deserves a little more
-        drama.
+      <p>
+        Say something normal. We'll make it sound like
+        the fate of the universe depends on it.
       </p>
-
-      <button
-        class="cta"
-        onclick="scrollToDemo()"
-      >
-        ⚡ Enter the Universe
-      </button>
 
     </section>
 
 
-    <section
-      class="demo"
-      id="demo"
-    >
+    <section class="generator">
 
-      <div class="window">
-
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-
+      <div class="label">
+        Your message
       </div>
-
 
       <textarea
         id="input"
-        placeholder="Type something painfully normal...
-
-Example:
-I'm going to the store to buy milk."
+        placeholder="I'm going to get some food..."
       ></textarea>
 
 
-      <div class="buttons">
+      <div class="controls">
 
         <button
           class="thanify"
           onclick="thanify()"
         >
-          ⚡ THANOSIFY
+          THANOSIFY →
         </button>
 
         <button
           class="copy"
           onclick="copyText()"
         >
-          Copy
+          COPY
         </button>
 
       </div>
@@ -465,26 +398,40 @@ I'm going to the store to buy milk."
       <div
         class="output"
         id="output"
-      ></div>
+      >
+
+        <div class="output-label">
+          Your fate
+        </div>
+
+        <div
+          class="output-text"
+          id="outputText"
+        ></div>
+
+      </div>
 
     </section>
+
+
+    <div class="divider"></div>
 
 
     <section class="features">
 
       <div class="feature">
 
-        <div class="feature-icon">
-          💀
+        <div class="feature-number">
+          01
         </div>
 
         <h3>
-          Cosmic Transformation
+          Say anything
         </h3>
 
         <p>
-          Turn normal sentences into
-          ridiculously dramatic villain dialogue.
+          Type literally whatever you want.
+          The more boring, the better.
         </p>
 
       </div>
@@ -492,17 +439,17 @@ I'm going to the store to buy milk."
 
       <div class="feature">
 
-        <div class="feature-icon">
-          ✨
+        <div class="feature-number">
+          02
         </div>
 
         <h3>
-          Maximum Drama
+          Make it dramatic
         </h3>
 
         <p>
-          Make even the most boring message sound
-          like the fate of the universe depends on it.
+          Turn everyday problems into matters
+          worthy of the entire universe.
         </p>
 
       </div>
@@ -510,17 +457,17 @@ I'm going to the store to buy milk."
 
       <div class="feature">
 
-        <div class="feature-icon">
-          📋
+        <div class="feature-number">
+          03
         </div>
 
         <h3>
-          Copy & Conquer
+          Steal the result
         </h3>
 
         <p>
-          Copy your masterpiece and unleash it
-          upon your unsuspecting group chat.
+          Copy it. Send it to your friends.
+          Pretend you actually talk like this.
         </p>
 
       </div>
@@ -531,22 +478,19 @@ I'm going to the store to buy milk."
 
 
   <footer>
-    THANOSIFY © 2026 · With great power comes extremely dramatic texting.
+
+    <span>
+      THANOSIFY © 2026
+    </span>
+
+    <span>
+      balance must be maintained
+    </span>
+
   </footer>
 
 
   <script>
-
-    function scrollToDemo() {
-
-      document
-        .getElementById("demo")
-        .scrollIntoView({
-          behavior: "smooth"
-        });
-
-    }
-
 
     function thanify() {
 
@@ -560,114 +504,116 @@ I'm going to the store to buy milk."
         document
           .getElementById("output");
 
+      const outputText =
+        document
+          .getElementById("outputText");
+
 
       if (!input) {
 
         output.style.display = "block";
 
-        output.innerHTML =
-          '<div class="output-title">THANOSIFY</div>' +
-          'You cannot reshape what you refuse to give me.';
+        outputText.textContent =
+          "You expect power without first giving me something to work with.";
 
         return;
 
       }
 
 
+      /*
+        A collection of different structures.
+        This keeps the results from feeling identical.
+      */
+
       const responses = [
 
-        `"${input}"
+        `You say "${input}" as though it were insignificant.
 
-You speak of this as though it were a matter of consequence.
+Perhaps to you, it is.
 
-Perhaps it is.
-
-But I have witnessed civilizations rise and fall. I have made sacrifices you could never comprehend.
-
-And now you ask this of me.
-
-Very well.
-
-It shall be done.`,
-
-
-        `"${input}"
-
-You believe this is important.
-
-I understand.
-
-But when you have seen the universe as I have, you learn that all things have their place.
-
-All things have their cost.
-
-If this is your wish...
+But I have learned that even the smallest choices shape what comes next.
 
 So be it.`,
 
+        `"${input}"
+
+You ask this of me without understanding what it means.
+
+There are consequences to every choice.
+
+I have accepted mine.
+
+Now you must accept yours.`,
+
+        `I have heard your request.
+
+"${input}"
+
+You think the universe bends to your wishes.
+
+It does not.
+
+But for this...
+
+I will make an exception.`,
 
         `"${input}"
 
-You cling to this desire as though it can change your fate.
+Very well.
 
-But fate does not negotiate.
+If this is what you have chosen, then I will not stand in your way.
 
-I have made the difficult choices.
+Do what you must.
 
-I have endured the sacrifice.
+The consequences will come.`,
 
-And I will make this choice as well.`,
+        `You believe "${input}" to be a simple matter.
 
+You have much to learn.
+
+Nothing is without a price.
+
+Nothing is without consequence.
+
+Remember that.`,
 
         `"${input}"
 
 Interesting.
 
-You ask for what you desire without considering what must be sacrificed to obtain it.
+You ask for what you want.
 
-That is the difference between you and me.
+I have spent my entire existence doing the same.
 
-You ask.
+The difference is...
 
-I decide.`,
+I was willing to sacrifice everything for it.`,
 
+        `I understand.
 
-        `"${input}"
+"${input}"
 
-The universe is not governed by what we want.
+Perhaps you do not yet see the importance of this moment.
 
-You may resist what is coming.
+But you will.
 
-You may deny it.
-
-But in the end, destiny arrives all the same.
-
-And when it does...
-
-You will know I was right.`,
-
+In time, you will understand why this had to happen.`,
 
         `"${input}"
 
-You think this is a simple request.
+Then it is decided.
 
-There are no simple requests.
+No argument.
+No hesitation.
 
-Every action carries consequence.
+Only what must be done.
 
-Every choice carries a price.
-
-I have paid that price.
-
-Now...
-
-It is your turn.`
-
-
+And I will see it done.`
       ];
 
 
-      const randomResponse =
+      const result =
         responses[
           Math.floor(
             Math.random() * responses.length
@@ -675,12 +621,11 @@ It is your turn.`
         ];
 
 
-      output.style.display = "block";
+      outputText.textContent =
+        result;
 
-
-      output.innerHTML =
-        '<div class="output-title">THANOSIFIED</div>' +
-        escapeHTML(randomResponse);
+      output.style.display =
+        "block";
 
 
       output.scrollIntoView({
@@ -691,35 +636,20 @@ It is your turn.`
     }
 
 
-    function escapeHTML(text) {
-
-      return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
-
-
     function copyText() {
 
-      const output =
+      const text =
         document
-          .getElementById("output");
+          .getElementById("outputText")
+          .innerText;
 
 
-      if (!output.innerText) {
+      if (!text) {
         return;
       }
 
 
-      navigator.clipboard.writeText(
-        output.innerText
-          .replace("THANOSIFIED", "")
-          .trim()
-      );
+      navigator.clipboard.writeText(text);
 
 
       const button =
@@ -727,22 +657,45 @@ It is your turn.`
 
 
       button.textContent =
-        "Copied ✓";
+        "COPIED ✓";
 
 
       setTimeout(
-        function() {
-
+        () => {
           button.textContent =
-            "Copy";
-
+            "COPY";
         },
         1500
       );
 
     }
 
+
+    /*
+      Pressing Ctrl + Enter
+      also THANOSIFIES the message.
+    */
+
+    document
+      .getElementById("input")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (
+            event.ctrlKey &&
+            event.key === "Enter"
+          ) {
+
+            thanify();
+
+          }
+
+        }
+      );
+
   </script>
 
 </body>
 </html>
+```
