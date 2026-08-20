@@ -1,1140 +1,1338 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>THANOSIFY</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      background: #080808;
-      color: #f2f2f2;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    nav {
-      width: min(1000px, 92%);
-      margin: auto;
-      padding: 25px 0;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      border-bottom: 1px solid #1d1d1d;
-    }
-
-    .logo {
-      font-size: 19px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-    }
-
-    .logo span {
-      color: #9848e8;
-    }
-
-    .nav-right {
-      color: #555;
-      font-size: 12px;
-    }
-
-    main {
-      width: min(1000px, 92%);
-      margin: auto;
-    }
-
-    .hero {
-      padding: 110px 0 80px;
-      text-align: center;
-    }
-
-    .tiny {
-      margin-bottom: 25px;
-
-      color: #777;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: clamp(70px, 12vw, 140px);
-      line-height: .8;
-      letter-spacing: -9px;
-      font-weight: 900;
-    }
-
-    h1 span {
-      color: #9848e8;
-    }
-
-    .hero p {
-      max-width: 580px;
-      margin: 35px auto 0;
-
-      color: #777;
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    .generator {
-      max-width: 760px;
-      margin: auto;
-    }
-
-    .label {
-      margin-bottom: 10px;
-
-      color: #777;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 160px;
-
-      padding: 20px;
-
-      resize: vertical;
-
-      border: 1px solid #292929;
-      border-radius: 8px;
-
-      outline: none;
-
-      background: #101010;
-      color: white;
-
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    textarea::placeholder {
-      color: #505050;
-    }
-
-    textarea:focus {
-      border-color: #555;
-    }
-
-    .controls {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .thanify {
-      flex: 1;
-
-      padding: 15px;
-
-      border: none;
-      border-radius: 7px;
-
-      background: #9848e8;
-      color: white;
-
-      font-size: 13px;
-      font-weight: 800;
-
-      cursor: pointer;
-
-      transition: .15s;
-    }
-
-    .thanify:hover {
-      background: #a95cf1;
-      transform: translateY(-1px);
-    }
-
-    .copy {
-      padding: 15px 22px;
-
-      border: 1px solid #292929;
-      border-radius: 7px;
-
-      background: #101010;
-      color: #999;
-
-      font-size: 13px;
-
-      cursor: pointer;
-    }
-
-    .copy:hover {
-      color: white;
-      border-color: #444;
-    }
-
-    .output {
-      display: none;
-
-      margin-top: 35px;
-      padding-top: 30px;
-
-      border-top: 1px solid #242424;
-    }
-
-    .output-label {
-      margin-bottom: 14px;
-
-      color: #9848e8;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .output-text {
-      color: #ddd;
-      font-size: 19px;
-      line-height: 1.7;
-      white-space: pre-line;
-    }
-
-    .examples {
-      margin-top: 25px;
-
-      color: #555;
-      font-size: 12px;
-      line-height: 2;
-    }
-
-    .examples span {
-      color: #777;
-    }
-
-    .divider {
-      height: 1px;
-      margin: 110px 0 70px;
-
-      background: #1d1d1d;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 45px;
-
-      margin-bottom: 110px;
-    }
-
-    .feature-number {
-      margin-bottom: 18px;
-
-      color: #444;
-      font-size: 11px;
-    }
-
-    .feature h3 {
-      margin-bottom: 10px;
-      font-size: 15px;
-    }
-
-    .feature p {
-      color: #666;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    footer {
-      width: min(1000px, 92%);
-      margin: auto;
-
-      padding: 25px 0;
-
-      border-top: 1px solid #1c1c1c;
-
-      display: flex;
-      justify-content: space-between;
-
-      color: #444;
-      font-size: 11px;
-    }
-
-    @media (max-width: 700px) {
-
-      nav {
-        padding: 20px 0;
-      }
-
-      .nav-right {
-        display: none;
-      }
-
-      .hero {
-        padding: 85px 0 65px;
-      }
-
-      h1 {
-        font-size: 75px;
-        letter-spacing: -5px;
-      }
-
-      .controls {
-        flex-direction: column;
-      }
-
-      .copy {
-        width: 100%;
-      }
-
-      .features {
-        grid-template-columns: 1fr;
-        gap: 35px;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 8px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>THANOSIFY</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #080808;
+  color: #eee;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+  width: min(1000px, 92%);
+  margin: auto;
+  padding: 25px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #202020;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 19px;
+}
+
+.logo span {
+  color: #9848e8;
+}
+
+.nav-right {
+  color: #555;
+  font-size: 12px;
+}
+
+main {
+  width: min(1000px, 92%);
+  margin: auto;
+}
+
+.hero {
+  text-align: center;
+  padding: 110px 0 80px;
+}
+
+.tiny {
+  color: #777;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+h1 {
+  font-size: clamp(70px, 12vw, 140px);
+  line-height: .8;
+  letter-spacing: -9px;
+  font-weight: 900;
+}
+
+h1 span {
+  color: #9848e8;
+}
+
+.hero p {
+  max-width: 600px;
+  margin: 35px auto 0;
+  color: #777;
+  line-height: 1.7;
+}
+
+.generator {
+  max-width: 760px;
+  margin: auto;
+}
+
+.label {
+  color: #777;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 20px;
+
+  resize: vertical;
+
+  background: #101010;
+  color: white;
+
+  border: 1px solid #292929;
+  border-radius: 8px;
+  outline: none;
+
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+textarea:focus {
+  border-color: #555;
+}
+
+textarea::placeholder {
+  color: #505050;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.thanify {
+  flex: 1;
+  padding: 15px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: #9848e8;
+  color: white;
+
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.thanify:hover {
+  background: #a95cf1;
+}
+
+.copy {
+  padding: 15px 22px;
+
+  border: 1px solid #292929;
+  border-radius: 7px;
+
+  background: #101010;
+  color: #999;
+
+  cursor: pointer;
+}
+
+.copy:hover {
+  color: white;
+}
+
+.output {
+  display: none;
+  margin-top: 35px;
+  padding-top: 30px;
+  border-top: 1px solid #242424;
+}
+
+.output-label {
+  color: #9848e8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+.output-text {
+  color: #ddd;
+  font-size: 19px;
+  line-height: 1.8;
+}
+
+.divider {
+  height: 1px;
+  margin: 110px 0 70px;
+  background: #1d1d1d;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 45px;
+  margin-bottom: 110px;
+}
+
+.feature-number {
+  color: #444;
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+
+.feature h3 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  color: #666;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+footer {
+  width: min(1000px, 92%);
+  margin: auto;
+  padding: 25px 0;
+
+  border-top: 1px solid #1c1c1c;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: #444;
+  font-size: 11px;
+}
+
+@media (max-width: 700px) {
+
+  .nav-right {
+    display: none;
+  }
+
+  h1 {
+    font-size: 75px;
+    letter-spacing: -5px;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .copy {
+    width: 100%;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+</style>
 </head>
+
 
 <body>
 
-  <nav>
+<nav>
+  <div class="logo">
+    THANOS<span>IFY</span>
+  </div>
 
-    <div class="logo">
-      THANOS<span>IFY</span>
+  <div class="nav-right">
+    unnecessary seriousness
+  </div>
+</nav>
+
+
+<main>
+
+<section class="hero">
+
+  <div class="tiny">
+    say it normally. say it better.
+  </div>
+
+  <h1>
+    THANOS<span>IFY</span>
+  </h1>
+
+  <p>
+    Take something normal and give it the calm,
+    serious, unnecessarily powerful wording it deserves.
+  </p>
+
+</section>
+
+
+<section class="generator">
+
+  <div class="label">
+    Your sentence
+  </div>
+
+  <textarea
+    id="input"
+    placeholder="I forgot my phone at home and now I have to walk all the way back..."
+  ></textarea>
+
+
+  <div class="controls">
+
+    <button
+      class="thanify"
+      onclick="thanify()"
+    >
+      THANOSIFY →
+    </button>
+
+    <button
+      class="copy"
+      onclick="copyText()"
+    >
+      COPY
+    </button>
+
+  </div>
+
+
+  <div
+    class="output"
+    id="output"
+  >
+
+    <div class="output-label">
+      THANOSIFIED
     </div>
 
-    <div class="nav-right">
-      unnecessary seriousness
-    </div>
+    <div
+      class="output-text"
+      id="outputText"
+    ></div>
 
-  </nav>
+  </div>
 
+</section>
 
-  <main>
 
-    <section class="hero">
+<div class="divider"></div>
 
-      <div class="tiny">
-        say it normally. say it better.
-      </div>
 
-      <h1>
-        THANOS<span>IFY</span>
-      </h1>
+<section class="features">
 
-      <p>
-        Take a normal sentence and reshape it into
-        something calm, serious, philosophical, and
-        unnecessarily powerful.
-      </p>
+  <div class="feature">
+    <div class="feature-number">01</div>
 
-    </section>
+    <h3>Same meaning</h3>
 
+    <p>
+      The original idea stays intact.
+      Only the wording changes.
+    </p>
+  </div>
 
-    <section class="generator">
 
-      <div class="label">
-        Your sentence
-      </div>
+  <div class="feature">
+    <div class="feature-number">02</div>
 
-      <textarea
-        id="input"
-        placeholder="I'm hungry..."
-      ></textarea>
+    <h3>No giant speeches</h3>
 
+    <p>
+      Short, serious, and straight to the point.
+    </p>
+  </div>
 
-      <div class="controls">
 
-        <button
-          class="thanify"
-          onclick="thanify()"
-        >
-          THANOSIFY →
-        </button>
+  <div class="feature">
+    <div class="feature-number">03</div>
 
-        <button
-          class="copy"
-          onclick="copyText()"
-        >
-          COPY
-        </button>
+    <h3>No AI required</h3>
 
-      </div>
+    <p>
+      Everything runs directly in your browser.
+    </p>
+  </div>
 
+</section>
 
-      <div
-        class="examples"
-      >
-        Try:
-        <span>I'm hungry</span> ·
-        <span>I'm tired</span> ·
-        <span>This is stupid</span> ·
-        <span>I need to go</span>
-      </div>
+</main>
 
 
-      <div
-        class="output"
-        id="output"
-      >
+<footer>
+  <span>THANOSIFY © 2026</span>
+  <span>balance must be maintained</span>
+</footer>
 
-        <div class="output-label">
-          THANOSIFIED
-        </div>
 
-        <div
-          class="output-text"
-          id="outputText"
-        ></div>
+<script>
 
-      </div>
+/*
+==================================================
+THANOSIFY
+==================================================
 
-    </section>
+This version uses:
 
+1. Exact phrases
+2. Sentence patterns
+3. Phrase replacements
+4. Sentence restructuring
+5. A fallback for random nonsense
 
-    <div class="divider"></div>
+It does NOT use an AI API.
+*/
 
 
-    <section class="features">
+function thanify() {
 
-      <div class="feature">
+  const input =
+    document.getElementById("input").value.trim();
 
-        <div class="feature-number">
-          01
-        </div>
+  const output =
+    document.getElementById("output");
 
-        <h3>
-          Same meaning
-        </h3>
+  const outputText =
+    document.getElementById("outputText");
 
-        <p>
-          Your sentence stays the same at its core.
-          THANOSIFY just changes how it sounds.
-        </p>
 
-      </div>
+  if (!input) {
 
+    output.style.display = "block";
 
-      <div class="feature">
+    outputText.textContent =
+      "There is nothing to reshape.";
 
-        <div class="feature-number">
-          02
-        </div>
+    return;
+  }
 
-        <h3>
-          No speeches
-        </h3>
 
-        <p>
-          No giant paragraphs about destiny.
-          Just the sentence. Reshaped.
-        </p>
+  outputText.textContent =
+    reshape(input);
 
-      </div>
+  output.style.display =
+    "block";
+}
 
 
-      <div class="feature">
+/*
+==================================================
+MAIN REWRITER
+==================================================
+*/
 
-        <div class="feature-number">
-          03
-        </div>
+function reshape(text) {
 
-        <h3>
-          Completely free
-        </h3>
+  let clean = text
+    .trim()
+    .replace(/\s+/g, " ");
 
-        <p>
-          No AI API. No account. No backend.
-          Just a little JavaScript doing its thing.
-        </p>
 
-      </div>
+  let lower = clean.toLowerCase();
 
-    </section>
 
-  </main>
+  /*
+  ----------------------------------------------
+  EXACT PHRASES
+  ----------------------------------------------
+  */
 
+  const exact = {
 
-  <footer>
+    "i'm hungry":
+      "I find myself in need of sustenance.",
 
-    <span>
-      THANOSIFY © 2026
-    </span>
+    "im hungry":
+      "I find myself in need of sustenance.",
 
-    <span>
-      balance must be maintained
-    </span>
+    "i am hungry":
+      "I find myself in need of sustenance.",
 
-  </footer>
+    "i'm tired":
+      "I have grown weary.",
 
+    "im tired":
+      "I have grown weary.",
 
-  <script>
+    "i am tired":
+      "I have grown weary.",
 
-    /*
-      THANOSIFY
-      ----------
-      This is intentionally NOT AI.
+    "this is stupid":
+      "This is foolish.",
 
-      It uses simple phrase replacements to keep
-      the original meaning while making the wording
-      more serious and dramatic.
-    */
+    "this is dumb":
+      "This is foolish.",
 
+    "this sucks":
+      "This is most unfortunate.",
 
-    function thanify() {
+    "i don't want to do this":
+      "I have no desire to do this.",
 
-      const input =
-        document
-          .getElementById("input")
-          .value
-          .trim();
+    "i dont want to do this":
+      "I have no desire to do this.",
 
+    "i need to go":
+      "I must make my way.",
 
-      const output =
-        document
-          .getElementById("output");
+    "i gotta go":
+      "I must make my way.",
 
+    "i have to go":
+      "I must make my way.",
 
-      const outputText =
-        document
-          .getElementById("outputText");
+    "i need to go to the store":
+      "I must make my way to the store.",
 
+    "i don't know":
+      "I do not know.",
 
-      if (!input) {
+    "i dont know":
+      "I do not know.",
 
-        output.style.display = "block";
+    "i can't do it":
+      "I am unable to do it.",
 
-        outputText.textContent =
-          "There is nothing to reshape.";
+    "i cant do it":
+      "I am unable to do it.",
 
-        return;
+    "i want this":
+      "I desire this.",
 
-      }
+    "i don't want this":
+      "I have no desire for this.",
 
+    "i dont want this":
+      "I have no desire for this.",
 
-      const result =
-        reshapeSentence(input);
+    "i'm scared":
+      "I am afraid.",
 
+    "im scared":
+      "I am afraid.",
 
-      outputText.textContent =
-        result;
+    "i am scared":
+      "I am afraid.",
 
-      output.style.display =
-        "block";
+    "i'm angry":
+      "I am displeased.",
+
+    "im angry":
+      "I am displeased.",
+
+    "i am angry":
+      "I am displeased.",
+
+    "i'm happy":
+      "I am pleased.",
+
+    "im happy":
+      "I am pleased.",
+
+    "i am happy":
+      "I am pleased.",
+
+    "i'm sad":
+      "I am troubled.",
+
+    "im sad":
+      "I am troubled.",
+
+    "i am sad":
+      "I am troubled.",
+
+    "that's crazy":
+      "That is... unexpected.",
+
+    "thats crazy":
+      "That is... unexpected.",
+
+    "that's insane":
+      "That is... extraordinary.",
+
+    "thats insane":
+      "That is... extraordinary.",
+
+    "thank you":
+      "You have my gratitude.",
+
+    "thanks":
+      "You have my gratitude.",
+
+    "sorry":
+      "You have my apology.",
+
+    "i'm sorry":
+      "You have my apology.",
+
+    "im sorry":
+      "You have my apology.",
+
+    "help me":
+      "I require your assistance.",
+
+    "please help me":
+      "I require your assistance.",
+
+    "i need help":
+      "I require assistance.",
+
+    "let's go":
+      "We shall go.",
+
+    "lets go":
+      "We shall go.",
+
+    "i'm ready":
+      "I am prepared.",
+
+    "im ready":
+      "I am prepared.",
+
+    "i am ready":
+      "I am prepared.",
+
+    "i'm done":
+      "It is finished.",
+
+    "im done":
+      "It is finished.",
+
+    "i am done":
+      "It is finished.",
+
+    "it's over":
+      "It is over.",
+
+    "its over":
+      "It is over.",
+
+    "i won":
+      "I have prevailed.",
+
+    "we won":
+      "We have prevailed.",
+
+    "i lost":
+      "I have been defeated.",
+
+    "we lost":
+      "We have been defeated.",
+
+    "no way":
+      "That cannot be.",
+
+    "of course":
+      "Indeed.",
+
+    "maybe":
+      "Perhaps.",
+
+    "okay":
+      "Very well.",
+
+    "ok":
+      "Very well.",
+
+    "fine":
+      "Very well."
+
+  };
+
+
+  if (exact[lower]) {
+    return exact[lower];
+  }
+
+
+  /*
+  ----------------------------------------------
+  RANDOM TEXT
+  ----------------------------------------------
+  */
+
+  if (isNonsense(clean)) {
+    return "This... means nothing.";
+  }
+
+
+  /*
+  ----------------------------------------------
+  SPECIAL SENTENCE PATTERNS
+  ----------------------------------------------
+  */
+
+
+  /*
+  "I forgot X at Y and now I have to Z"
+  */
+
+  let match = clean.match(
+    /^I (?:forgot|left) (.+?) (?:at|in) (.+?) and now I (?:have to|need to|gotta) (.+)$/i
+  );
+
+  if (match) {
+
+    const object = match[1];
+    const place = match[2];
+    const action = match[3];
+
+    return (
+      "I left " +
+      object +
+      " behind at " +
+      place +
+      ". Now I must " +
+      action +
+      "."
+    );
+  }
+
+
+  /*
+  "I forgot X"
+  */
+
+  match = clean.match(
+    /^I forgot (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I failed to remember " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I need to X"
+  */
+
+  match = clean.match(
+    /^I need to (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I must " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I have to X"
+  */
+
+  match = clean.match(
+    /^I have to (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I must " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I want to X"
+  */
+
+  match = clean.match(
+    /^I want to (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I desire to " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I don't want to X"
+  */
+
+  match = clean.match(
+    /^I don't want to (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I have no desire to " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I'm going to X"
+  */
+
+  match = clean.match(
+    /^I'm going to (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I shall " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I am going to X"
+  */
+
+  match = clean.match(
+    /^I am going to (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I shall " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I can't X"
+  */
+
+  match = clean.match(
+    /^I can't (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I am unable to " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I don't like X"
+  */
+
+  match = clean.match(
+    /^I don't like (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I find no appreciation for " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I like X"
+  */
+
+  match = clean.match(
+    /^I like (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I find myself fond of " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I think X"
+  */
+
+  match = clean.match(
+    /^I think (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I believe " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "I feel X"
+  */
+
+  match = clean.match(
+    /^I feel (.+)$/i
+  );
+
+  if (match) {
+
+    return (
+      "I find myself " +
+      match[1] +
+      "."
+    );
+  }
+
+
+  /*
+  "This is X"
+  */
+
+  match = clean.match(
+    /^This is (.+)$/i
+  );
+
+  if (match) {
+
+    let word = match[1]
+      .replace(/[.!?]+$/, "");
+
+    const replacements = {
+
+      stupid: "foolish",
+      dumb: "foolish",
+      bad: "unfortunate",
+      good: "acceptable",
+      crazy: "unexpected",
+      insane: "extraordinary",
+      weird: "peculiar",
+      annoying: "troublesome",
+      easy: "simple",
+      hard: "difficult",
+      funny: "amusing",
+      scary: "disturbing",
+      boring: "tedious",
+      pointless: "without purpose",
+      useless: "without value"
+
+    };
+
+    if (replacements[word.toLowerCase()]) {
+
+      word =
+        replacements[word.toLowerCase()];
 
     }
 
+    return "This is " + word + ".";
 
-    function reshapeSentence(text) {
+  }
 
-      const original =
-        text.trim();
 
+  /*
+  "Are you X?"
+  */
 
-      const lower =
-        original.toLowerCase();
+  match = clean.match(
+    /^Are you (.+)$/i
+  );
 
+  if (match) {
 
-      /*
-        EXACT PHRASES
-        These are your strongest transformations.
-      */
+    return (
+      "Are you truly " +
+      match[1] +
+      "?"
+    );
+  }
 
-      const exact = {
 
-        "i'm hungry":
-          "I find myself in need of sustenance.",
+  /*
+  "Why are you X?"
+  */
 
-        "im hungry":
-          "I find myself in need of sustenance.",
+  match = clean.match(
+    /^Why are you (.+)$/i
+  );
 
-        "i am hungry":
-          "I find myself in need of sustenance.",
+  if (match) {
 
-        "i'm tired":
-          "I have grown weary.",
+    return (
+      "Why do you " +
+      match[1] +
+      "?"
+    );
+  }
 
-        "im tired":
-          "I have grown weary.",
 
-        "i am tired":
-          "I have grown weary.",
+  /*
+  "What are you doing?"
+  */
 
-        "this is stupid":
-          "This is foolish.",
+  if (
+    /^what are you doing/i.test(clean)
+  ) {
 
-        "this is dumb":
-          "This is foolish.",
+    return "What is it that you are doing?";
 
-        "i don't want to do this":
-          "I have no desire to do this.",
+  }
 
-        "i dont want to do this":
-          "I have no desire to do this.",
 
-        "i need to go to the store":
-          "I must make my way to the store.",
+  /*
+  "Where are you?"
+  */
 
-        "i need to go":
-          "I must make my way.",
+  if (
+    /^where are you/i.test(clean)
+  ) {
 
-        "i gotta go":
-          "I must go.",
+    return "Where are you?";
 
-        "i have to go":
-          "I must go.",
+  }
 
-        "let's go":
-          "We shall go.",
 
-        "lets go":
-          "We shall go.",
+  /*
+  "Can you X?"
+  */
 
-        "i don't know":
-          "I do not know.",
+  match = clean.match(
+    /^Can you (.+)$/i
+  );
 
-        "i dont know":
-          "I do not know.",
+  if (match) {
 
-        "i can't do it":
-          "I am unable to do it.",
+    return (
+      "Are you capable of " +
+      match[1] +
+      "?"
+    );
+  }
 
-        "i cant do it":
-          "I am unable to do it.",
 
-        "i can do it":
-          "I am capable of doing it.",
+  /*
+  ----------------------------------------------
+  GENERAL WORD TRANSFORMATIONS
+  ----------------------------------------------
+  */
 
-        "i want this":
-          "I desire this.",
+  let result = clean;
 
-        "i don't want this":
-          "I have no desire for this.",
 
-        "i dont want this":
-          "I have no desire for this.",
+  const replacements = [
 
-        "i'm scared":
-          "I am afraid.",
+    [/\bI'm\b/gi, "I am"],
+    [/\bIm\b/gi, "I am"],
 
-        "im scared":
-          "I am afraid.",
+    [/\bI've\b/gi, "I have"],
+    [/\bIve\b/gi, "I have"],
 
-        "i am scared":
-          "I am afraid.",
+    [/\bcan't\b/gi, "cannot"],
+    [/\bcant\b/gi, "cannot"],
 
-        "i'm happy":
-          "I am pleased.",
+    [/\bdon't\b/gi, "do not"],
+    [/\bdont\b/gi, "do not"],
 
-        "im happy":
-          "I am pleased.",
+    [/\bdoesn't\b/gi, "does not"],
+    [/\bdoesnt\b/gi, "does not"],
 
-        "i am happy":
-          "I am pleased.",
+    [/\bdidn't\b/gi, "did not"],
+    [/\bdidnt\b/gi, "did not"],
 
-        "i'm sad":
-          "I am troubled.",
+    [/\bgonna\b/gi, "going to"],
+    [/\bwanna\b/gi, "want to"],
+    [/\bgotta\b/gi, "have to"],
 
-        "im sad":
-          "I am troubled.",
+    [/\bstupid\b/gi, "foolish"],
+    [/\bdumb\b/gi, "foolish"],
 
-        "i am sad":
-          "I am troubled.",
+    [/\bhungry\b/gi, "in need of sustenance"],
+    [/\btired\b/gi, "weary"],
 
-        "i'm angry":
-          "I am displeased.",
+    [/\bscared\b/gi, "afraid"],
+    [/\bmad\b/gi, "angry"],
 
-        "im angry":
-          "I am displeased.",
+    [/\bweird\b/gi, "peculiar"],
+    [/\bcrazy\b/gi, "unexpected"],
+    [/\binsane\b/gi, "extraordinary"],
 
-        "i am angry":
-          "I am displeased.",
+    [/\bhelp\b/gi, "assistance"],
+    [/\bthing\b/gi, "matter"],
+    [/\bstuff\b/gi, "matters"],
 
-        "that's crazy":
-          "That is... unexpected.",
+    [/\bguys\b/gi, "all of you"],
+    [/\bbro\b/gi, "friend"],
 
-        "thats crazy":
-          "That is... unexpected.",
+    [/\byeah\b/gi, "yes"],
+    [/\byep\b/gi, "yes"],
+    [/\bnope\b/gi, "no"],
 
-        "that's insane":
-          "That is... extraordinary.",
+    [/\bmaybe\b/gi, "perhaps"],
 
-        "thats insane":
-          "That is... extraordinary.",
+    [/\bget\b/gi, "obtain"],
+    [/\bgot\b/gi, "obtained"],
 
-        "this is crazy":
-          "This is... unexpected.",
+    [/\bstart\b/gi, "begin"],
+    [/\bend\b/gi, "finish"]
 
-        "this is insane":
-          "This is... extraordinary.",
+  ];
 
-        "thank you":
-          "You have my gratitude.",
 
-        "thanks":
-          "You have my gratitude.",
+  for (
+    let i = 0;
+    i < replacements.length;
+    i++
+  ) {
 
-        "sorry":
-          "You have my apology.",
-
-        "i'm sorry":
-          "You have my apology.",
-
-        "im sorry":
-          "You have my apology.",
-
-        "please help me":
-          "I require your assistance.",
-
-        "help me":
-          "I require your assistance.",
-
-        "i need help":
-          "I require assistance.",
-
-        "what are you doing":
-          "What is it that you are doing?",
-
-        "where are you":
-          "Where are you?",
-
-        "what happened":
-          "What has happened?",
-
-        "why are you doing this":
-          "Why do you do this?",
-
-        "are you serious":
-          "Are you serious?",
-
-        "really":
-          "Is that truly so?",
-
-        "no way":
-          "That cannot be.",
-
-        "of course":
-          "Of course.",
-
-        "maybe":
-          "Perhaps.",
-
-        "yes":
-          "Indeed.",
-
-        "no":
-          "No.",
-
-        "okay":
-          "Very well.",
-
-        "ok":
-          "Very well.",
-
-        "fine":
-          "Very well.",
-
-        "i'm ready":
-          "I am prepared.",
-
-        "im ready":
-          "I am prepared.",
-
-        "i am ready":
-          "I am prepared.",
-
-        "i'm done":
-          "It is finished.",
-
-        "im done":
-          "It is finished.",
-
-        "i am done":
-          "It is finished.",
-
-        "it's over":
-          "It is over.",
-
-        "its over":
-          "It is over.",
-
-        "i won":
-          "I have prevailed.",
-
-        "we won":
-          "We have prevailed.",
-
-        "i lost":
-          "I have been defeated.",
-
-        "we lost":
-          "We have been defeated."
-
-      };
-
-
-      /*
-        If the exact sentence exists,
-        return the custom transformation.
-      */
-
-      if (exact[lower]) {
-
-        return exact[lower];
-
-      }
-
-
-      /*
-        KEYBOARD SMASH / RANDOM TEXT
-
-        Examples:
-        Rgfd
-        asdfgh
-        jskd
-      */
-
-      if (
-        looksLikeKeyboardSmash(original)
-      ) {
-
-        return "This... means nothing.";
-
-      }
-
-
-      /*
-        GENERAL REPLACEMENTS
-
-        These work inside longer sentences.
-      */
-
-      let result =
-        original;
-
-
-      const replacements = [
-
-        [/\bI'm\b/gi, "I am"],
-        [/\bIm\b/gi, "I am"],
-
-        [/\bI've\b/gi, "I have"],
-        [/\bIve\b/gi, "I have"],
-
-        [/\bI'd\b/gi, "I would"],
-        [/\bId\b/gi, "I would"],
-
-        [/\bcan't\b/gi, "cannot"],
-        [/\bcant\b/gi, "cannot"],
-
-        [/\bwon't\b/gi, "will not"],
-        [/\bwont\b/gi, "will not"],
-
-        [/\bdon't\b/gi, "do not"],
-        [/\bdont\b/gi, "do not"],
-
-        [/\bdoesn't\b/gi, "does not"],
-        [/\bdoesnt\b/gi, "does not"],
-
-        [/\bdidn't\b/gi, "did not"],
-        [/\bdidnt\b/gi, "did not"],
-
-        [/\bgonna\b/gi, "going to"],
-        [/\bwanna\b/gi, "want to"],
-        [/\bgotta\b/gi, "have to"],
-
-        [/\bneed to\b/gi, "must"],
-        [/\bhave to\b/gi, "must"],
-
-        [/\bkind of\b/gi, "somewhat"],
-        [/\bkinda\b/gi, "somewhat"],
-
-        [/\bpretty\b/gi, "rather"],
-
-        [/\bstupid\b/gi, "foolish"],
-        [/\bdumb\b/gi, "foolish"],
-        [/\bannoying\b/gi, "troublesome"],
-        [/\bweird\b/gi, "peculiar"],
-        [/\bweird\b/gi, "strange"],
-
-        [/\bscared\b/gi, "afraid"],
-        [/\bmad\b/gi, "angry"],
-        [/\bhungry\b/gi, "in need of sustenance"],
-        [/\btired\b/gi, "weary"],
-
-        [/\bget\b/gi, "obtain"],
-        [/\bgot\b/gi, "obtained"],
-
-        [/\bhelp\b/gi, "assist"],
-        [/\bstart\b/gi, "begin"],
-        [/\bend\b/gi, "finish"],
-
-        [/\bthing\b/gi, "matter"],
-        [/\bstuff\b/gi, "matters"],
-
-        [/\bguys\b/gi, "all of you"],
-        [/\bbro\b/gi, "friend"],
-
-        [/\byeah\b/gi, "yes"],
-        [/\byep\b/gi, "yes"],
-        [/\bnope\b/gi, "no"],
-
-        [/\bmaybe\b/gi, "perhaps"]
-
-      ];
-
-
-      for (
-        let i = 0;
-        i < replacements.length;
-        i++
-      ) {
-
-        result =
-          result.replace(
-            replacements[i][0],
-            replacements[i][1]
-          );
-
-      }
-
-
-      /*
-        Clean up casual punctuation.
-      */
-
-      result =
-        result
-          .replace(/\.\.\.+/g, "...")
-          .replace(/\?+/g, "?")
-          .replace(/!+/g, ".")
-          .replace(/\s+/g, " ")
-          .trim();
-
-
-      /*
-        Give some common sentence structures
-        a little more weight.
-      */
-
-      if (
-        /^I am going to /i.test(result)
-      ) {
-
-        result =
-          result.replace(
-            /^I am going to /i,
-            "I shall "
-          );
-
-      }
-
-
-      if (
-        /^I want to /i.test(result)
-      ) {
-
-        result =
-          result.replace(
-            /^I want to /i,
-            "I desire to "
-          );
-
-      }
-
-
-      if (
-        /^I think /i.test(result)
-      ) {
-
-        result =
-          result.replace(
-            /^I think /i,
-            "I believe "
-          );
-
-      }
-
-
-      /*
-        Capitalize the first letter.
-      */
-
-      result =
-        result.charAt(0).toUpperCase() +
-        result.slice(1);
-
-
-      /*
-        Make sure the result ends properly.
-      */
-
-      if (
-        !/[.!?]$/.test(result)
-      ) {
-
-        result += ".";
-
-      }
-
-
-      return result;
-
-    }
-
-
-    function looksLikeKeyboardSmash(text) {
-
-      const clean =
-        text
-          .toLowerCase()
-          .replace(/[^a-z]/g, "");
-
-
-      if (
-        clean.length < 3
-      ) {
-
-        return true;
-
-      }
-
-
-      const vowels =
-        (clean.match(/[aeiou]/g) || []).length;
-
-
-      /*
-        Random strings usually contain
-        very few vowels.
-      */
-
-      if (
-        clean.length >= 4 &&
-        vowels === 0
-      ) {
-
-        return true;
-
-      }
-
-
-      /*
-        Detect common keyboard smashing.
-      */
-
-      const smashPatterns = [
-        "asdf",
-        "fdsa",
-        "qwer",
-        "rewq",
-        "zxcv",
-        "hjkl",
-        "jkl",
-        "sdfgh",
-        "asdfgh"
-      ];
-
-
-      for (
-        let i = 0;
-        i < smashPatterns.length;
-        i++
-      ) {
-
-        if (
-          clean.includes(
-            smashPatterns[i]
-          )
-        ) {
-
-          return true;
-
-        }
-
-      }
-
-
-      return false;
-
-    }
-
-
-    function copyText() {
-
-      const text =
-        document
-          .getElementById("outputText")
-          .innerText;
-
-
-      if (!text) {
-
-        return;
-
-      }
-
-
-      navigator.clipboard.writeText(text);
-
-
-      const button =
-        document.querySelector(".copy");
-
-
-      button.textContent =
-        "COPIED ✓";
-
-
-      setTimeout(
-        function() {
-
-          button.textContent =
-            "COPY";
-
-        },
-        1500
+    result =
+      result.replace(
+        replacements[i][0],
+        replacements[i][1]
       );
 
+  }
+
+
+  /*
+  ----------------------------------------------
+  CLEANUP
+  ----------------------------------------------
+  */
+
+  result =
+    result
+      .replace(/\s+/g, " ")
+      .replace(/!+/g, ".")
+      .trim();
+
+
+  result =
+    result.charAt(0).toUpperCase() +
+    result.slice(1);
+
+
+  if (!/[.!?]$/.test(result)) {
+    result += ".";
+  }
+
+
+  /*
+  ----------------------------------------------
+  ADD A LITTLE WEIGHT TO RANDOM SENTENCES
+  ----------------------------------------------
+  */
+
+  const endings = [
+    "Such is the matter.",
+    "So it shall be.",
+    "That is the reality.",
+    "There is no changing it.",
+    "And so it is.",
+    "The matter is settled."
+  ];
+
+
+  /*
+  Don't add an ending every time.
+  Only occasionally, so it doesn't become
+  another annoying repeated speech.
+  */
+
+  if (
+    Math.random() < 0.18 &&
+    result.length > 35
+  ) {
+
+    result +=
+      " " +
+      endings[
+        Math.floor(
+          Math.random() * endings.length
+        )
+      ];
+
+  }
+
+
+  return result;
+}
+
+
+/*
+==================================================
+RANDOM / KEYBOARD SMASH DETECTOR
+==================================================
+*/
+
+function isNonsense(text) {
+
+  const clean =
+    text
+      .toLowerCase()
+      .replace(/[^a-z]/g, "");
+
+
+  if (clean.length <= 2) {
+    return true;
+  }
+
+
+  const vowels =
+    (clean.match(/[aeiou]/g) || []).length;
+
+
+  /*
+  Words with zero vowels are usually
+  keyboard smashing.
+  */
+
+  if (
+    clean.length >= 4 &&
+    vowels === 0
+  ) {
+
+    return true;
+
+  }
+
+
+  const patterns = [
+    "asdf",
+    "fdsa",
+    "qwer",
+    "rewq",
+    "zxcv",
+    "hjkl",
+    "jkl",
+    "sdfgh",
+    "asdfgh",
+    "qwerty"
+  ];
+
+
+  for (const pattern of patterns) {
+
+    if (clean.includes(pattern)) {
+      return true;
     }
 
+  }
 
-    /*
-      Ctrl + Enter also runs THANOSIFY.
-    */
 
+  return false;
+}
+
+
+/*
+==================================================
+COPY BUTTON
+==================================================
+*/
+
+function copyText() {
+
+  const text =
     document
-      .getElementById("input")
-      .addEventListener(
-        "keydown",
-        function(event) {
+      .getElementById("outputText")
+      .innerText;
 
-          if (
-            event.ctrlKey &&
-            event.key === "Enter"
-          ) {
 
-            thanify();
+  if (!text) {
+    return;
+  }
 
-          }
 
-        }
-      );
+  navigator.clipboard.writeText(text);
 
-  </script>
+
+  const button =
+    document.querySelector(".copy");
+
+
+  button.textContent =
+    "COPIED ✓";
+
+
+  setTimeout(() => {
+
+    button.textContent =
+      "COPY";
+
+  }, 1500);
+
+}
+
+
+/*
+==================================================
+CTRL + ENTER
+==================================================
+*/
+
+document
+  .getElementById("input")
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.ctrlKey &&
+        event.key === "Enter"
+      ) {
+
+        thanify();
+
+      }
+
+    }
+  );
+
+</script>
 
 </body>
 </html>
-```
