@@ -1,1165 +1,1039 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Void</title>
-    <link rel="icon" type="image/png" href="title.png">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        body {
-            background: #080808;
-            color: #f4f4f4;
-            font-family: "DM Mono", monospace;
-            transition: background 0.5s ease, color 0.5s ease;
-        }
-
-        body.light {
-            background: #f4f4f4;
-            color: #080808;
-        }
-
-        .scroll-wrapper {
-            width: 100vw;
-            height: 100vh;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scrollbar-width: none;
-        }
-
-        .scroll-wrapper::-webkit-scrollbar {
-            display: none;
-        }
-
-        .scroll-container {
-            width: max-content;
-            min-width: 100vw;
-            height: 100vh;
-            display: flex;
-        }
-
-        .page {
-            width: 100vw;
-            min-width: 100vw;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .quotes {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .quote {
-            position: absolute;
-            max-width: 320px;
-            color: rgba(255,255,255,0.25);
-            font-family: "Playfair Display", serif;
-            font-size: clamp(13px, 1.25vw, 20px);
-            font-style: italic;
-            line-height: 1.45;
-            animation: quoteFloat 7s ease-in-out infinite alternate;
-            transition: color 0.35s ease, opacity 0.35s ease;
-        }
-
-        body.light .quote {
-            color: rgba(0,0,0,0.25);
-        }
-
-        .quote:hover {
-            color: rgba(255,255,255,0.75);
-        }
-
-        body.light .quote:hover {
-            color: rgba(0,0,0,0.75);
-        }
-
-        .quote.spin {
-            animation: quoteSpin 0.75s cubic-bezier(.22,1,.36,1);
-        }
-
-        @keyframes quoteFloat {
-            0% {
-                transform: translate3d(0, 0, 0) rotate(-1deg);
-            }
-
-            50% {
-                transform: translate3d(18px, -14px, 0) rotate(1deg);
-            }
-
-            100% {
-                transform: translate3d(-15px, 13px, 0) rotate(-1deg);
-            }
-        }
-
-        @keyframes quoteSpin {
-            0% {
-                transform: rotate(0deg) scale(1);
-            }
-
-            45% {
-                transform: rotate(8deg) scale(1.05);
-            }
-
-            100% {
-                transform: rotate(0deg) scale(1);
-            }
-        }
-
-        .q1 {
-            top: 7%;
-            left: 11%;
-            animation-delay: -1s;
-        }
-
-        .q2 {
-            top: 11%;
-            right: 8%;
-            animation-delay: -3s;
-        }
-
-        .q3 {
-            top: 28%;
-            left: 5%;
-            animation-delay: -5s;
-        }
-
-        .q4 {
-            top: 25%;
-            right: 17%;
-            animation-delay: -2s;
-        }
-
-        .q5 {
-            bottom: 31%;
-            left: 10%;
-            animation-delay: -4s;
-        }
-
-        .q6 {
-            bottom: 27%;
-            right: 8%;
-            animation-delay: -6s;
-        }
-
-        .q7 {
-            bottom: 10%;
-            left: 43%;
-            animation-delay: -2.5s;
-        }
-
-        .q8 {
-            top: 48%;
-            left: 26%;
-            animation-delay: -5s;
-        }
-
-        .q9 {
-            top: 55%;
-            right: 27%;
-            animation-delay: -1.5s;
-        }
-
-        .name-wrapper {
-            position: relative;
-            z-index: 20;
-            padding: 55px 75px;
-            cursor: pointer;
-        }
-
-        .name {
-            position: relative;
-            z-index: 4;
-            margin: 0;
-            font-family: "Playfair Display", serif;
-            font-size: clamp(8rem, 18vw, 18rem);
-            font-weight: 500;
-            letter-spacing: -0.09em;
-            line-height: 0.72;
-            color: #f4f4f4;
-            transition:
-                color 0.3s cubic-bezier(.22,1,.36,1),
-                transform 0.45s cubic-bezier(.22,1,.36,1);
-        }
-
-        .name-overlay {
-            position: absolute;
-            z-index: 3;
-            left: 0;
-            top: 50%;
-            width: 0;
-            height: 0;
-            background: #fff;
-            transform: translateY(-50%) rotate(-2deg);
-            transition:
-                width 0.42s cubic-bezier(.22,1,.36,1),
-                height 0.42s cubic-bezier(.22,1,.36,1);
-        }
-
-        .name-age {
-            position: absolute;
-            z-index: 10;
-            top: 0;
-            right: 8px;
-            padding: 7px 13px;
-            border: 1px solid #777;
-            border-radius: 20px;
-            background: #080808;
-            color: #fff;
-            font-family: "DM Mono", monospace;
-            font-size: 10px;
-            letter-spacing: 1px;
-            opacity: 0;
-            transform: translateY(12px) scale(0.9);
-            transition:
-                opacity 0.25s ease,
-                transform 0.4s cubic-bezier(.22,1,.36,1);
-        }
-
-        .name-wrapper:hover .name-overlay {
-            width: 100%;
-            height: 88%;
-        }
-
-        .name-wrapper:hover .name {
-            color: #080808;
-            transform: scale(1.025);
-        }
-
-        .name-wrapper:hover .name-age {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .name.bounce {
-            animation: nameBounce 0.8s cubic-bezier(.22,1,.36,1);
-        }
-
-        .name.stretch {
-            animation: nameStretch 0.65s cubic-bezier(.22,1,.36,1);
-        }
-
-        @keyframes nameBounce {
-            0% {
-                transform: scale(1);
-            }
-
-            35% {
-                transform: scale(1.07, 0.94);
-            }
-
-            60% {
-                transform: scale(0.97, 1.035);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes nameStretch {
-            0% {
-                transform: scaleX(1);
-            }
-
-            35% {
-                transform: scaleX(1.08);
-            }
-
-            65% {
-                transform: scaleX(0.97);
-            }
-
-            100% {
-                transform: scaleX(1);
-            }
-        }
-
-        .scroll-hint {
-            position: absolute;
-            bottom: 28px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 30;
-            font-size: 9px;
-            letter-spacing: 4px;
-            opacity: 0.4;
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 32px;
-            background: currentColor;
-            margin: 10px auto 0;
-            animation: scrollPulse 1.7s ease-in-out infinite;
-        }
-
-        @keyframes scrollPulse {
-            0%,
-            100% {
-                opacity: 0.2;
-                transform: scaleY(0.5);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scaleY(1);
-            }
-        }
-
-        .page-content {
-            height: 100%;
-            padding: 100px 7vw;
-            overflow-y: auto;
-            scrollbar-width: none;
-        }
-
-        .page-content::-webkit-scrollbar {
-            display: none;
-        }
-
-        .section-label {
-            font-size: 9px;
-            letter-spacing: 5px;
-            opacity: 0.4;
-            margin-bottom: 70px;
-        }
-
-        .about {
-            width: min(850px, 80vw);
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .about h2,
-        .contact h2 {
-            margin: 0 0 30px;
-            font-family: "Playfair Display", serif;
-            font-size: clamp(55px, 8vw, 100px);
-            font-weight: 400;
-            letter-spacing: -0.06em;
-        }
-
-        .about p {
-            max-width: 650px;
-            margin: 0;
-            font-family: "Playfair Display", serif;
-            font-size: clamp(17px, 1.5vw, 23px);
-            line-height: 1.8;
-            opacity: 0.62;
-        }
-
-        .about p + p {
-            margin-top: 22px;
-        }
-
-        .work-page {
-            width: 100vw;
-            min-width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .work-content {
-            height: 100%;
-            padding: 85px 7vw;
-            overflow-y: auto;
-            scrollbar-width: none;
-        }
-
-        .work-content::-webkit-scrollbar {
-            display: none;
-        }
-
-        .work-title {
-            margin: 0 0 45px;
-            font-family: "Playfair Display", serif;
-            font-size: clamp(55px, 8vw, 100px);
-            font-weight: 400;
-            letter-spacing: -0.07em;
-        }
-
-        .project-grid {
-            width: min(1100px, 86vw);
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 28px;
-            padding-bottom: 80px;
-        }
-
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: #050505;
-            transition:
-                transform 0.45s cubic-bezier(.22,1,.36,1),
-                border-color 0.35s ease;
-        }
-
-        body.light .project-card {
-            background: #fafafa;
-            border-color: rgba(0,0,0,0.13);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255,255,255,0.35);
-        }
-
-        body.light .project-card:hover {
-            border-color: rgba(0,0,0,0.35);
-        }
-
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-            background: #0a0a0a;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-            opacity: 0;
-            transform: scale(1.02);
-            pointer-events: none;
-            transition:
-                opacity 0.5s ease,
-                transform 0.7s cubic-bezier(.22,1,.36,1);
-        }
-
-        .video-wrapper.active iframe {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-
-        .video-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 5;
-            cursor: pointer;
-            background:
-                radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 45%),
-                #080808;
-            background-size: cover;
-            background-position: center;
-            transition:
-                opacity 0.45s ease,
-                transform 0.6s cubic-bezier(.22,1,.36,1);
-        }
-
-        .video-overlay.has-thumb {
-            background-image:
-                linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.4)),
-                var(--thumb-image);
-        }
-
-        .video-wrapper.active .video-overlay {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(1.05);
-        }
-
-        .play-icon {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 64px;
-            height: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: translate(-50%, -50%);
-            border-radius: 13px;
-            background: #ff0033;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            font-size: 18px;
-            padding-left: 3px;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
-            transition:
-                transform 0.35s cubic-bezier(.22,1,.36,1),
-                box-shadow 0.35s ease;
-        }
-
-        .video-overlay:hover .play-icon {
-            transform: translate(-50%, -50%) scale(1.12);
-            box-shadow: 0 16px 45px rgba(0,0,0,0.55);
-        }
-
-        .project-info {
-            padding: 20px 22px 24px;
-        }
-
-        .project-title {
-            font-family: "Playfair Display", serif;
-            font-size: 24px;
-            margin-bottom: 9px;
-        }
-
-        .project-description {
-            font-size: 10px;
-            line-height: 1.7;
-            opacity: 0.45;
-        }
-
-        .contact-page {
-            width: 100vw;
-            min-width: 100vw;
-            height: 100vh;
-            position: relative;
-        }
-
-        .contact-content {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .contact h2 {
-            font-size: clamp(70px, 11vw, 150px);
-        }
-
-        .contact-text {
-            margin: 0 0 30px;
-            font-family: "Playfair Display", serif;
-            font-size: 19px;
-            opacity: 0.5;
-        }
-
-        .contact-link {
-            display: inline-block;
-            padding: 13px 24px;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 30px;
-            color: inherit;
-            text-decoration: none;
-            font-size: 11px;
-            transition:
-                transform 0.35s ease,
-                background 0.35s ease,
-                color 0.35s ease;
-        }
-
-        .contact-link:hover {
-            transform: translateY(-4px);
-            background: #fff;
-            color: #080808;
-        }
-
-        body.light .contact-link {
-            border-color: rgba(0,0,0,0.2);
-        }
-
-        body.light .contact-link:hover {
-            background: #080808;
-            color: #fff;
-        }
-
-        .options {
-            position: fixed;
-            z-index: 100;
-            top: 22px;
-            left: 22px;
-        }
-
-        .options-toggle {
-            width: 42px;
-            height: 42px;
-            border: 1px solid rgba(255,255,255,0.18);
-            border-radius: 50%;
-            background: rgba(10,10,10,0.82);
-            color: #fff;
-            cursor: pointer;
-            backdrop-filter: blur(12px);
-            transition:
-                transform 0.4s cubic-bezier(.22,1,.36,1),
-                background 0.3s ease;
-        }
-
-        .options:hover .options-toggle {
-            transform: rotate(45deg);
-        }
-
-        .options-panel {
-            position: absolute;
-            top: 52px;
-            left: 0;
-            width: 235px;
-            padding: 18px;
-            border: 1px solid rgba(255,255,255,0.13);
-            background: rgba(10,10,10,0.94);
-            backdrop-filter: blur(18px);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition:
-                opacity 0.3s ease,
-                transform 0.3s ease,
-                visibility 0.3s ease;
-        }
-
-        .options:hover .options-panel {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .options-title {
-            margin-bottom: 16px;
-            font-size: 9px;
-            letter-spacing: 4px;
-            opacity: 0.4;
-        }
-
-        .option {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            font-size: 10px;
-        }
-
-        .option:last-child {
-            border-bottom: 0;
-        }
-
-        .option button {
-            min-width: 48px;
-            border: 0;
-            border-radius: 20px;
-            padding: 6px 10px;
-            background: #282828;
-            color: #fff;
-            font-family: inherit;
-            font-size: 9px;
-            cursor: pointer;
-            transition:
-                background 0.25s ease,
-                transform 0.25s ease;
-        }
-
-        .option button:hover {
-            transform: scale(1.05);
-        }
-
-        .option button.active {
-            background: #49a96b;
-        }
-
-        body.light .options-toggle {
-            background: rgba(245,245,245,0.9);
-            color: #080808;
-            border-color: rgba(0,0,0,0.15);
-        }
-
-        body.light .options-panel {
-            background: rgba(245,245,245,0.94);
-            border-color: rgba(0,0,0,0.13);
-        }
-
-        body.light .option {
-            border-color: rgba(0,0,0,0.08);
-        }
-
-        body.light .option button {
-            background: #ddd;
-            color: #080808;
-        }
-
-        body.light .option button.active {
-            background: #49a96b;
-            color: #fff;
-        }
-
-        .progress {
-            position: fixed;
-            z-index: 90;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
-            background: transparent;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .progress.visible {
-            opacity: 1;
-        }
-
-        .progress-bar {
-            width: 0;
-            height: 100%;
-            background: currentColor;
-            transition: width 0.1s linear;
-        }
-
-        @media (max-width: 768px) {
-            html,
-            body {
-                overflow: auto;
-            }
-
-            .scroll-wrapper {
-                overflow-x: hidden;
-                overflow-y: auto;
-                height: auto;
-            }
-
-            .scroll-container {
-                width: 100%;
-                height: auto;
-                display: block;
-            }
-
-            .page,
-            .work-page,
-            .contact-page {
-                width: 100%;
-                min-width: 0;
-                height: auto;
-                min-height: 100vh;
-            }
-
-            .page-content,
-            .work-content {
-                overflow: visible;
-                height: auto;
-            }
-
-            .hero {
-                min-height: 100vh;
-            }
-
-            .project-grid {
-                grid-template-columns: 1fr;
-                width: 100%;
-            }
-
-            .quote {
-                max-width: 190px;
-                font-size: 11px;
-            }
-
-            .q8,
-            .q9 {
-                display: none;
-            }
-
-            .options {
-                top: 15px;
-                left: 15px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Void</title>
+<link rel="icon" href="title.png">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+
+:root {
+    --bg: #080808;
+    --surface: #101010;
+    --surface-2: #151515;
+    --text: #f2f2f2;
+    --muted: #6d6d6d;
+    --faint: #292929;
+    --border: rgba(255,255,255,.1);
+    --panel: #f3f3f3;
+    --panel-text: #050505;
+    --ease: cubic-bezier(.16,1,.3,1);
+}
+
+[data-theme="light"] {
+    --bg: #eeeeeb;
+    --surface: #e5e5e1;
+    --surface-2: #dadad6;
+    --text: #080808;
+    --muted: #686868;
+    --faint: #c9c9c5;
+    --border: rgba(0,0,0,.12);
+    --panel: #080808;
+    --panel-text: #f5f5f5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "DM Mono", monospace;
+    overflow-x: hidden;
+    transition: background .6s var(--ease), color .6s var(--ease);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: .035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+.cursor {
+    position: fixed;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--text);
+    pointer-events: none;
+    z-index: 999;
+    transform: translate(-50%,-50%);
+    mix-blend-mode: difference;
+    transition: width .25s var(--ease), height .25s var(--ease);
+}
+
+.cursor-ring {
+    position: fixed;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 998;
+    transform: translate(-50%,-50%);
+    transition: width .35s var(--ease), height .35s var(--ease), border-color .3s;
+}
+
+body.cursor-hover .cursor {
+    width: 5px;
+    height: 5px;
+}
+
+body.cursor-hover .cursor-ring {
+    width: 58px;
+    height: 58px;
+    border-color: rgba(255,255,255,.7);
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 82px;
+    padding: 0 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.topbar > * {
+    pointer-events: auto;
+}
+
+.mini-logo {
+    font-family: "Playfair Display", serif;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -1px;
+}
+
+.nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav a,
+.settings-button {
+    border: 1px solid transparent;
+    color: var(--muted);
+    background: transparent;
+    padding: 9px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: .35s var(--ease);
+}
+
+.nav a:hover,
+.settings-button:hover {
+    color: var(--text);
+    border-color: var(--border);
+    background: var(--surface);
+}
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.hero-meta {
+    position: absolute;
+    left: 42px;
+    top: 145px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+.hero-meta span {
+    color: var(--text);
+}
+
+.hero-index {
+    position: absolute;
+    right: 42px;
+    bottom: 42px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.quote-field {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-quote {
+    position: absolute;
+    max-width: 260px;
+    color: var(--muted);
+    opacity: .42;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(13px, 1.1vw, 18px);
+    font-style: italic;
+    line-height: 1.45;
+    transition: opacity .45s var(--ease), transform .45s var(--ease), color .45s;
+    animation: drift 12s ease-in-out infinite alternate;
+}
+
+.floating-quote:hover {
+    opacity: 1;
+    color: var(--text);
+}
+
+.q1 { top: 13%; left: 8%; animation-duration: 13s; }
+.q2 { top: 24%; right: 8%; animation-duration: 17s; }
+.q3 { bottom: 23%; left: 10%; animation-duration: 15s; }
+.q4 { bottom: 13%; right: 12%; animation-duration: 19s; }
+.q5 { top: 40%; left: 5%; animation-duration: 16s; }
+.q6 { top: 48%; right: 6%; animation-duration: 14s; }
+.q7 { bottom: 8%; left: 43%; animation-duration: 18s; }
+
+@keyframes drift {
+    0% {
+        transform: translate3d(0,0,0) rotate(-1deg);
+    }
+    50% {
+        transform: translate3d(13px,-9px,0) rotate(.5deg);
+    }
+    100% {
+        transform: translate3d(-10px,12px,0) rotate(1deg);
+    }
+}
+
+.hero-center {
+    position: relative;
+    width: min(680px, 82vw);
+    height: 390px;
+    display: grid;
+    place-items: center;
+    perspective: 1000px;
+}
+
+.name-hitbox {
+    position: relative;
+    width: min(620px, 82vw);
+    height: 310px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.name {
+    position: relative;
+    z-index: 3;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(130px, 20vw, 245px);
+    font-weight: 600;
+    line-height: .65;
+    letter-spacing: -14px;
+    user-select: none;
+    transform: translate3d(var(--mx,0px), var(--my,0px), 0) rotate(var(--rot,0deg)) scaleX(var(--sx,1));
+    transition: color .25s, transform .18s var(--ease);
+}
+
+.name-hitbox::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    background: var(--panel);
+    opacity: 0;
+    transform: translate3d(0,30px,0) rotate(-1.5deg);
+    transition:
+        width .5s var(--ease),
+        height .5s var(--ease),
+        opacity .22s ease,
+        transform .55s var(--ease);
+    clip-path: polygon(1% 5%, 99% 0, 100% 94%, 3% 100%);
+}
+
+.age {
+    position: absolute;
+    z-index: 5;
+    top: 2px;
+    right: 17%;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 999px;
+    padding: 7px 13px;
+    color: var(--text);
+    font-size: 9px;
+    letter-spacing: 1px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .3s var(--ease), transform .45s var(--ease);
+}
+
+.name-hitbox:hover::before {
+    width: 100%;
+    height: 290px;
+    opacity: 1;
+    transform: translate3d(0,0,0) rotate(-1.5deg);
+}
+
+.name-hitbox:hover .name {
+    color: var(--panel-text);
+}
+
+.name-hitbox:hover .age {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.name-sub {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: opacity .3s;
+}
+
+.name-hitbox:hover .name-sub {
+    opacity: 0;
+}
+
+.status {
+    position: absolute;
+    bottom: 10px;
+    left: 42px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: #62d68b;
+    border-radius: 50%;
+    box-shadow: 0 0 14px rgba(98,214,139,.45);
+}
+
+.scroll-hint {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,100% { opacity: .35; transform: translate(-50%,0); }
+    50% { opacity: .9; transform: translate(-50%,6px); }
+}
+
+.section {
+    min-height: 100vh;
+    padding: 150px 6vw 100px;
+    position: relative;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 70px;
+}
+
+.eyebrow {
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.section-title {
+    margin: 9px 0 0;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(45px, 7vw, 95px);
+    font-weight: 500;
+    letter-spacing: -4px;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    max-width: 1100px;
+}
+
+.about-copy {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(25px, 3vw, 43px);
+    line-height: 1.12;
+}
+
+.about-copy span {
+    color: var(--muted);
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+}
+
+.stat {
+    background: var(--bg);
+    padding: 30px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stat-value {
+    font-family: "Playfair Display", serif;
+    font-size: 45px;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.work-section {
+    min-height: auto;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 22px;
+}
+
+.project {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    min-height: 390px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .5s var(--ease), border-color .5s;
+}
+
+.project:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255,255,255,.25);
+}
+
+.project-preview {
+    height: 270px;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.1), transparent 32%),
+        linear-gradient(135deg, #111, #050505);
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-preview::after {
+    content: "▶";
+    width: 54px;
+    height: 54px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 13px;
+    transition: transform .5s var(--ease), background .5s;
+}
+
+.project:hover .project-preview::after {
+    transform: scale(1.25);
+    background: rgba(255,255,255,.1);
+}
+
+.project-info {
+    padding: 23px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-name {
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
+}
+
+.project-type {
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.contact-section {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(60px, 12vw, 170px);
+    line-height: .8;
+    letter-spacing: -8px;
+    max-width: 1000px;
+}
+
+.contact-title span {
+    color: var(--muted);
+}
+
+.contact-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 70px;
+    flex-wrap: wrap;
+}
+
+.contact-link {
+    border: 1px solid var(--border);
+    padding: 14px 19px;
+    border-radius: 999px;
+    color: var(--muted);
+    transition: .4s var(--ease);
+}
+
+.contact-link:hover {
+    color: var(--text);
+    background: var(--surface);
+    transform: translateY(-4px);
+}
+
+.footer {
+    padding: 35px 42px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.settings-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 290px;
+    padding: 22px;
+    background: rgba(15,15,15,.92);
+    border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(20px);
+    z-index: 200;
+    transform: translateX(calc(100% + 30px));
+    opacity: 0;
+    transition: transform .55s var(--ease), opacity .4s;
+}
+
+[data-theme="light"] .settings-panel {
+    background: rgba(235,235,231,.92);
+}
+
+.settings-panel.open {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.settings-title {
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.setting {
+    padding: 17px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.setting-label {
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.toggle {
+    width: 45px;
+    height: 24px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    padding: 3px;
+    cursor: pointer;
+}
+
+.toggle::after {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--muted);
+    transition: transform .35s var(--ease), background .35s;
+}
+
+.toggle.active::after {
+    transform: translateX(19px);
+    background: #67d88e;
+}
+
+.close-settings {
+    position: absolute;
+    right: 17px;
+    top: 15px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.reduced-motion * {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+}
+
+@media (max-width: 768px) {
+    .topbar {
+        height: 70px;
+        padding: 0 20px;
+    }
+
+    .nav a:not(:last-child) {
+        display: none;
+    }
+
+    .hero-meta {
+        left: 20px;
+        top: 105px;
+    }
+
+    .hero-index {
+        right: 20px;
+        bottom: 25px;
+    }
+
+    .hero-center {
+        height: 330px;
+    }
+
+    .name-hitbox {
+        height: 250px;
+    }
+
+    .name {
+        font-size: clamp(100px, 27vw, 180px);
+    }
+
+    .name-hitbox:hover::before {
+        height: 230px;
+    }
+
+    .floating-quote {
+        max-width: 180px;
+        font-size: 12px;
+    }
+
+    .q5,
+    .q6 {
+        display: none;
+    }
+
+    .section {
+        padding: 110px 20px 70px;
+    }
+
+    .about-grid,
+    .work-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .about-copy {
+        font-size: 29px;
+    }
+
+    .contact-title {
+        font-size: 65px;
+        letter-spacing: -4px;
+    }
+
+    .cursor,
+    .cursor-ring {
+        display: none;
+    }
+
+    .footer {
+        padding: 25px 20px;
+    }
+}
+</style>
 </head>
 
 <body>
-    <div class="options">
-        <button class="options-toggle">☼</button>
 
-        <div class="options-panel">
-            <div class="options-title">OPTIONS</div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
 
-            <div class="option">
-                <span>Background music</span>
-                <button id="musicButton">OFF</button>
-            </div>
+<header class="topbar">
+    <div class="mini-logo">V</div>
+    <nav class="nav">
+        <a href="#about">about</a>
+        <a href="#work">work</a>
+        <a href="#contact">contact</a>
+        <button class="settings-button" id="settingsButton">settings</button>
+    </nav>
+</header>
 
-            <div class="option">
-                <span>Light mode</span>
-                <button id="themeButton">OFF</button>
-            </div>
+<main>
+
+<section class="hero">
+    <div class="hero-meta">independent skripter · <span>online</span></div>
+
+    <div class="quote-field">
+        <div class="floating-quote q1">"Power belongs to those willing to carry its weight."</div>
+        <div class="floating-quote q2">"A perfect world is still a cage if someone else built it."</div>
+        <div class="floating-quote q3">"Fear is simply another form of control."</div>
+        <div class="floating-quote q4">"The strongest hand is the one that never hesitates."</div>
+        <div class="floating-quote q5">"Peace without strength is only temporary."</div>
+        <div class="floating-quote q6">"Creation without purpose becomes destruction."</div>
+        <div class="floating-quote q7">"You cannot escape the consequences of your choices."</div>
+    </div>
+
+    <div class="hero-center">
+        <div class="name-hitbox" id="nameHitbox">
+            <div class="age">15 years old</div>
+            <div class="name" id="name">Void</div>
+            <div class="name-sub">move closer</div>
         </div>
     </div>
 
-    <div class="progress">
-        <div class="progress-bar"></div>
+    <div class="status">
+        <span class="status-dot"></span>
+        currently scripting
     </div>
 
-    <audio id="backgroundMusic" loop>
-        <source src="background.mp3" type="audio/mpeg">
-    </audio>
+    <div class="hero-index">scroll to explore ↓</div>
+</section>
 
-    <div class="scroll-wrapper">
-        <div class="scroll-container">
-
-            <section class="page hero">
-                <div class="quotes">
-                    <div class="quote q1">"I am inevitable."</div>
-                    <div class="quote q2">"I had strings, but now I'm free."</div>
-                    <div class="quote q3">"Doom does not bargain."</div>
-                    <div class="quote q4">"The hardest choices require the strongest wills."</div>
-                    <div class="quote q5">"There are things far worse than death."</div>
-                    <div class="quote q6">"Peace in our time."</div>
-                    <div class="quote q7">"Reality is often disappointing."</div>
-                    <div class="quote q8">"The world will know my name."</div>
-                    <div class="quote q9">"Perfection is the only path forward."</div>
-                </div>
-
-                <div class="name-wrapper">
-                    <div class="name-overlay"></div>
-                    <div class="name-age">15 years old</div>
-                    <h1 class="name">Void</h1>
-                </div>
-
-                <div class="scroll-hint">
-                    SCROLL
-                    <div class="scroll-line"></div>
-                </div>
-            </section>
-
-            <section class="page">
-                <div class="page-content">
-                    <div class="about">
-                        <div class="section-label">ABOUT</div>
-
-                        <h2>Void.</h2>
-
-                        <p>
-                            Minecraft Skript developer focused on custom mechanics,
-                            clean systems and polished visuals.
-                        </p>
-
-                        <p>
-                            Building things that look good, feel smooth and actually
-                            make people stop scrolling.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="work-page">
-                <div class="work-content">
-                    <div class="section-label">WORK</div>
-
-                    <h2 class="work-title">Projects.</h2>
-
-                    <div class="project-grid">
-
-                        <div class="project-card">
-                            <div class="video-wrapper">
-                                <div
-                                    class="video-overlay has-thumb"
-                                    style="--thumb-image: url('https://i.ytimg.com/vi/-n_-S01rpMI/hqdefault.jpg')"
-                                >
-                                    <span class="play-icon">▶</span>
-                                </div>
-
-                                <iframe
-                                    data-src="https://www.youtube.com/embed/-n_-S01rpMI"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-
-                            <div class="project-info">
-                                <div class="project-title">Storm Ability</div>
-                                <div class="project-description">
-                                    Minecraft Skript ability showcase.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="project-card">
-                            <div class="video-wrapper">
-                                <div class="video-overlay">
-                                    <span class="play-icon">▶</span>
-                                </div>
-
-                                <iframe
-                                    data-src=""
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-
-                            <div class="project-info">
-                                <div class="project-title">More Soon</div>
-                                <div class="project-description">
-                                    Another project will appear here.
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <section class="contact-page">
-                <div class="contact-content">
-                    <div class="section-label">CONTACT</div>
-
-                    <h2>Let's work.</h2>
-
-                    <p class="contact-text">
-                        Have something worth building?
-                    </p>
-
-                    <a
-                        class="contact-link"
-                        href="https://discord.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Discord
-                    </a>
-                </div>
-            </section>
-
+<section class="section" id="about">
+    <div class="section-header">
+        <div>
+            <div class="eyebrow">01 / about</div>
+            <h2 class="section-title">Behind the void.</h2>
         </div>
     </div>
 
-    <script>
-        const scrollWrapper = document.querySelector(".scroll-wrapper");
-        const scrollContainer = document.querySelector(".scroll-container");
-        const progress = document.querySelector(".progress");
-        const progressBar = document.querySelector(".progress-bar");
-        const nameWrapper = document.querySelector(".name-wrapper");
-        const nameEl = document.querySelector(".name");
-        const quotes = Array.from(document.querySelectorAll(".quote"));
-        const music = document.getElementById("backgroundMusic");
-        const musicButton = document.getElementById("musicButton");
-        const themeButton = document.getElementById("themeButton");
+    <div class="about-grid">
+        <div class="about-copy">
+            I build things that are
+            <span>fast, strange, and actually useful.</span>
+            Mostly Skript, systems, abilities and whatever sounds fun enough to break.
+        </div>
 
-        let scrollTarget = 0;
-        let isScrolling = false;
-        let musicEnabled = false;
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">15</div>
+                <div class="stat-label">years old</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">ideas</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">S+</div>
+                <div class="stat-label">current ambition</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">probably coding</div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        function smoothScroll() {
-            const current = scrollWrapper.scrollLeft;
-            const difference = scrollTarget - current;
+<section class="section work-section" id="work">
+    <div class="section-header">
+        <div>
+            <div class="eyebrow">02 / work</div>
+            <h2 class="section-title">Things I made.</h2>
+        </div>
+    </div>
 
-            if (Math.abs(difference) > 0.5) {
-                scrollWrapper.scrollLeft = current + difference * 0.12;
-                requestAnimationFrame(smoothScroll);
-            } else {
-                scrollWrapper.scrollLeft = scrollTarget;
-                isScrolling = false;
-            }
+    <div class="work-grid">
+        <a class="project" href="https://www.youtube.com/watch?v=-n_-S01rpMI" target="_blank">
+            <div class="project-preview"></div>
+            <div class="project-info">
+                <div>
+                    <div class="project-name">Storm Ability</div>
+                    <div class="project-type">Skript · ability</div>
+                </div>
+                <div class="project-type">01</div>
+            </div>
+        </a>
+
+        <a class="project" href="https://www.youtube.com/" target="_blank">
+            <div class="project-preview"></div>
+            <div class="project-info">
+                <div>
+                    <div class="project-name">Coming Soon</div>
+                    <div class="project-type">system · project</div>
+                </div>
+                <div class="project-type">02</div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<section class="section contact-section" id="contact">
+    <div class="eyebrow">03 / contact</div>
+    <div class="contact-title">
+        let's make<br>
+        <span>something.</span>
+    </div>
+
+    <div class="contact-links">
+        <a class="contact-link" href="https://discord.com/" target="_blank">discord</a>
+        <a class="contact-link" href="mailto:you@example.com">email</a>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <span>VOID © 2026</span>
+    <span>website inspired by zin.i</span>
+</footer>
+
+<aside class="settings-panel" id="settingsPanel">
+    <button class="close-settings" id="closeSettings">×</button>
+    <div class="settings-title">Settings</div>
+
+    <div class="setting">
+        <div class="setting-label">Background music</div>
+        <button class="toggle" id="musicToggle"></button>
+    </div>
+
+    <div class="setting">
+        <div class="setting-label">Light mode</div>
+        <button class="toggle" id="themeToggle"></button>
+    </div>
+
+    <div class="setting">
+        <div class="setting-label">Reduced motion</div>
+        <button class="toggle" id="motionToggle"></button>
+    </div>
+
+    <div class="setting">
+        <div class="setting-label">Quote field</div>
+        <button class="toggle active" id="quoteToggle"></button>
+    </div>
+</aside>
+
+<audio id="backgroundMusic" src="background.mp3" loop preload="auto"></audio>
+
+<script>
+const body = document.body;
+const cursor = document.querySelector(".cursor");
+const cursorRing = document.querySelector(".cursor-ring");
+const nameHitbox = document.getElementById("nameHitbox");
+const name = document.getElementById("name");
+const settingsButton = document.getElementById("settingsButton");
+const settingsPanel = document.getElementById("settingsPanel");
+const closeSettings = document.getElementById("closeSettings");
+const musicToggle = document.getElementById("musicToggle");
+const themeToggle = document.getElementById("themeToggle");
+const motionToggle = document.getElementById("motionToggle");
+const quoteToggle = document.getElementById("quoteToggle");
+const music = document.getElementById("backgroundMusic");
+const quotes = document.querySelectorAll(".floating-quote");
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let ringX = mouseX;
+let ringY = mouseY;
+let musicEnabled = false;
+
+document.addEventListener("mousemove", e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    cursor.style.left = `${mouseX}px`;
+    cursor.style.top = `${mouseY}px`;
+
+    if (nameHitbox) {
+        const rect = nameHitbox.getBoundingClientRect();
+        const x = (mouseX - (rect.left + rect.width / 2)) / rect.width;
+        const y = (mouseY - (rect.top + rect.height / 2)) / rect.height;
+
+        if (nameHitbox.matches(":hover")) {
+            name.style.setProperty("--mx", `${x * 14}px`);
+            name.style.setProperty("--my", `${y * 10}px`);
+            name.style.setProperty("--rot", `${x * 2}deg`);
+            name.style.setProperty("--sx", `${1 + Math.abs(x) * .025}`);
+        } else {
+            name.style.setProperty("--mx", "0px");
+            name.style.setProperty("--my", "0px");
+            name.style.setProperty("--rot", "0deg");
+            name.style.setProperty("--sx", "1");
         }
+    }
+});
 
-        function startSmoothScroll() {
-            if (!isScrolling) {
-                isScrolling = true;
-                requestAnimationFrame(smoothScroll);
-            }
+function animateCursor() {
+    ringX += (mouseX - ringX) * .14;
+    ringY += (mouseY - ringY) * .14;
+
+    cursorRing.style.left = `${ringX}px`;
+    cursorRing.style.top = `${ringY}px`;
+
+    requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+document.querySelectorAll("a, button, .name-hitbox, .project, .floating-quote").forEach(el => {
+    el.addEventListener("mouseenter", () => body.classList.add("cursor-hover"));
+    el.addEventListener("mouseleave", () => body.classList.remove("cursor-hover"));
+});
+
+settingsButton.addEventListener("click", () => {
+    settingsPanel.classList.add("open");
+});
+
+closeSettings.addEventListener("click", () => {
+    settingsPanel.classList.remove("open");
+});
+
+themeToggle.addEventListener("click", () => {
+    const light = document.documentElement.getAttribute("data-theme") === "light";
+
+    if (light) {
+        document.documentElement.setAttribute("data-theme", "dark");
+        themeToggle.classList.remove("active");
+    } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        themeToggle.classList.add("active");
+    }
+});
+
+musicToggle.addEventListener("click", async () => {
+    if (musicEnabled) {
+        music.pause();
+        musicEnabled = false;
+        musicToggle.classList.remove("active");
+        return;
+    }
+
+    try {
+        await music.play();
+        musicEnabled = true;
+        musicToggle.classList.add("active");
+    } catch {
+        musicEnabled = false;
+        musicToggle.classList.remove("active");
+    }
+});
+
+motionToggle.addEventListener("click", () => {
+    const reduced = body.classList.toggle("reduced-motion");
+    motionToggle.classList.toggle("active", reduced);
+});
+
+quoteToggle.addEventListener("click", () => {
+    const enabled = quoteToggle.classList.toggle("active");
+
+    quotes.forEach(quote => {
+        quote.style.opacity = enabled ? "" : "0";
+    });
+});
+
+nameHitbox.addEventListener("mouseenter", () => {
+    name.animate(
+        [
+            { transform: "translate3d(0,0,0) scaleX(1)" },
+            { transform: "translate3d(0,-4px,0) scaleX(1.035)" },
+            { transform: "translate3d(0,0,0) scaleX(1)" }
+        ],
+        {
+            duration: 500,
+            easing: "cubic-bezier(.16,1,.3,1)"
         }
+    );
+});
 
-        function handleWheel(event) {
-            if (window.innerWidth <= 768) {
-                return;
-            }
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+        settingsPanel.classList.remove("open");
+    }
+});
 
-            const target = event.target.closest(".work-content");
+document.querySelectorAll(".floating-quote").forEach(quote => {
+    quote.addEventListener("mouseenter", () => {
+        quote.style.animationPlayState = "paused";
+    });
 
-            if (target) {
-                return;
-            }
+    quote.addEventListener("mouseleave", () => {
+        quote.style.animationPlayState = "running";
+    });
+});
+</script>
 
-            event.preventDefault();
-
-            const maxScroll = scrollWrapper.scrollWidth - scrollWrapper.clientWidth;
-
-            scrollTarget = Math.max(
-                0,
-                Math.min(
-                    maxScroll,
-                    scrollTarget + event.deltaY
-                )
-            );
-
-            startSmoothScroll();
-        }
-
-        scrollWrapper.addEventListener("wheel", handleWheel, {
-            passive: false
-        });
-
-        scrollWrapper.addEventListener("scroll", () => {
-            const maxScroll = scrollWrapper.scrollWidth - scrollWrapper.clientWidth;
-
-            if (maxScroll <= 0) {
-                return;
-            }
-
-            const percent = (scrollWrapper.scrollLeft / maxScroll) * 100;
-
-            progressBar.style.width = `${percent}%`;
-
-            progress.classList.add("visible");
-
-            clearTimeout(progress.hideTimer);
-
-            progress.hideTimer = setTimeout(() => {
-                progress.classList.remove("visible");
-            }, 1000);
-        });
-
-        document.addEventListener("keydown", event => {
-            if (window.innerWidth <= 768) {
-                return;
-            }
-
-            if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
-                return;
-            }
-
-            event.preventDefault();
-
-            const amount = window.innerWidth * 0.72;
-            const direction = event.key === "ArrowRight" ? 1 : -1;
-            const maxScroll = scrollWrapper.scrollWidth - scrollWrapper.clientWidth;
-
-            scrollTarget = Math.max(
-                0,
-                Math.min(
-                    maxScroll,
-                    scrollTarget + amount * direction
-                )
-            );
-
-            startSmoothScroll();
-        });
-
-        nameWrapper.addEventListener("mouseenter", () => {
-            if (Math.random() < 0.5) {
-                nameEl.classList.remove("stretch");
-
-                void nameEl.offsetWidth;
-
-                nameEl.classList.add("stretch");
-            }
-
-            setTimeout(() => {
-                if (nameWrapper.matches(":hover")) {
-                    nameEl.classList.remove("bounce");
-
-                    void nameEl.offsetWidth;
-
-                    nameEl.classList.add("bounce");
-                }
-            }, 900);
-        });
-
-        nameEl.addEventListener("animationend", event => {
-            if (
-                event.animationName === "nameBounce" ||
-                event.animationName === "nameStretch"
-            ) {
-                nameEl.classList.remove("bounce", "stretch");
-            }
-        });
-
-        quotes.forEach(quote => {
-            quote.addEventListener("mouseenter", () => {
-                if (Math.random() > 0.2) {
-                    return;
-                }
-
-                quote.classList.remove("spin");
-
-                void quote.offsetWidth;
-
-                quote.classList.add("spin");
-            });
-
-            quote.addEventListener("animationend", event => {
-                if (event.animationName === "quoteSpin") {
-                    quote.classList.remove("spin");
-                }
-            });
-        });
-
-        document.querySelectorAll(".video-overlay").forEach(overlay => {
-            overlay.addEventListener("click", () => {
-                const wrapper = overlay.closest(".video-wrapper");
-                const iframe = wrapper.querySelector("iframe");
-                const source = iframe.dataset.src;
-
-                if (!source) {
-                    return;
-                }
-
-                iframe.src = `${source}?autoplay=1&rel=0`;
-                wrapper.classList.add("active");
-            });
-        });
-
-        musicButton.addEventListener("click", () => {
-            if (!musicEnabled) {
-                music.volume = 0.3;
-
-                music.play()
-                    .then(() => {
-                        musicEnabled = true;
-                        musicButton.textContent = "ON";
-                        musicButton.classList.add("active");
-                    })
-                    .catch(() => {});
-            } else {
-                music.pause();
-                musicEnabled = false;
-                musicButton.textContent = "OFF";
-                musicButton.classList.remove("active");
-            }
-        });
-
-        themeButton.addEventListener("click", () => {
-            const light = document.body.classList.toggle("light");
-
-            themeButton.textContent = light ? "ON" : "OFF";
-            themeButton.classList.toggle("active", light);
-        });
-
-        scrollTarget = scrollWrapper.scrollLeft || 0;
-
-        setTimeout(() => {
-            const maxScroll = scrollWrapper.scrollWidth - scrollWrapper.clientWidth;
-
-            if (maxScroll > 0) {
-                progress.classList.add("visible");
-
-                setTimeout(() => {
-                    progress.classList.remove("visible");
-                }, 1800);
-            }
-        }, 1000);
-    </script>
 </body>
 </html>
