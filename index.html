@@ -1,192 +1,689 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VOID — Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <title>Void — Minecraft Developer</title>
 
-    body {
-      background: #fff;
-      color: #111;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
-    nav {
-      height: 115px;
-      border-bottom: 2px solid #111;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5%;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #080808;
+            color: #e8e8e8;
+        }
 
-    .brand-box {
-      width: 65px;
-      height: 65px;
-      border: 3px solid #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 25px;
-      font-weight: 900;
-    }
+        body {
+            font-family: "DM Mono", monospace;
+            cursor: default;
+        }
 
-    .brand-name {
-      font-size: 34px;
-      font-weight: 900;
-      letter-spacing: -2px;
-    }
+        /* -----------------------------
+           MAIN HORIZONTAL CONTAINER
+        ----------------------------- */
 
-    .nav-links {
-      display: flex;
-      gap: 38px;
-    }
+        .page {
+            width: max-content;
+            height: 100vh;
+            display: flex;
+            align-items: stretch;
+            transform: translateX(0);
+            will-change: transform;
+        }
 
-    .nav-links a {
-      color: #888;
-      text-decoration: none;
-      font-size: 25px;
-      font-weight: 900;
-    }
+        .section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            overflow: hidden;
+            border-right: 1px solid #171717;
+        }
 
-    .nav-links a:hover {
-      color: #111;
-    }
+        /* -----------------------------
+           TOP BAR
+        ----------------------------- */
 
-    .commission {
-      border: 2px solid #111;
-      padding: 14px 20px;
-      font-size: 16px;
-      font-weight: 900;
-      box-shadow: 5px 5px 0 #111;
-    }
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 42px;
+            border-bottom: 1px solid #1b1b1b;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 50;
+            background: rgba(8, 8, 8, 0.85);
+        }
 
-    .open {
-      color: #159447;
-    }
+        .ticker {
+            animation: ticker 30s linear infinite;
+            font-size: 10px;
+            color: #777;
+            letter-spacing: 1px;
+        }
 
-    .hero {
-      min-height: calc(100vh - 115px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 50px 20px;
-    }
+        .ticker span {
+            margin-right: 40px;
+        }
 
-    .hero h1 {
-      font-size: clamp(100px, 17vw, 210px);
-      font-weight: 1000;
-      letter-spacing: -14px;
-      line-height: .8;
-      margin-bottom: 60px;
-    }
+        .stars {
+            color: #ddd;
+        }
 
-    .hero p {
-      max-width: 850px;
-      font-size: 28px;
-      font-weight: 800;
-      line-height: 1.4;
-    }
+        @keyframes ticker {
+            from {
+                transform: translateX(0);
+            }
 
-    .hero .sub {
-      margin-top: 25px;
-      color: #777;
-      font-size: 17px;
-    }
+            to {
+                transform: translateX(-50%);
+            }
+        }
 
-    .arrow {
-      margin-top: 35px;
-      font-size: 30px;
-      color: #777;
-    }
+        /* -----------------------------
+           HERO
+        ----------------------------- */
 
-    @media (max-width: 800px) {
-      nav {
-        height: auto;
-        padding: 20px;
-        flex-wrap: wrap;
-        gap: 20px;
-      }
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-      .nav-links {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        gap: 20px;
-      }
+        .hero-name {
+            position: relative;
+            z-index: 5;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(110px, 16vw, 260px);
+            font-weight: 400;
+            letter-spacing: -12px;
+            color: #f2f2f2;
+            user-select: none;
+        }
 
-      .nav-links a {
-        font-size: 18px;
-      }
+        .hero-subtitle {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #777;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
-      .commission {
-        font-size: 12px;
-      }
+        .scroll-hint {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #444;
+            font-size: 10px;
+        }
 
-      .hero h1 {
-        letter-spacing: -7px;
-      }
+        /* -----------------------------
+           BACKGROUND QUOTES
+        ----------------------------- */
 
-      .hero p {
-        font-size: 20px;
-      }
-    }
-  </style>
+        .quote {
+            position: absolute;
+            color: #343434;
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            font-size: 17px;
+            max-width: 300px;
+            line-height: 1.4;
+            user-select: none;
+        }
+
+        .q1 {
+            top: 17%;
+            left: 10%;
+        }
+
+        .q2 {
+            top: 27%;
+            right: 10%;
+        }
+
+        .q3 {
+            bottom: 30%;
+            left: 16%;
+        }
+
+        .q4 {
+            bottom: 19%;
+            right: 14%;
+        }
+
+        .q5 {
+            top: 8%;
+            left: 50%;
+        }
+
+        /* -----------------------------
+           ABOUT
+        ----------------------------- */
+
+        .about {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-content {
+            width: 360px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .about-text {
+            color: #777;
+            font-family: "Playfair Display", serif;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .about-box {
+            margin-top: 40px;
+            padding: 25px;
+            border: 1px solid #1c1c1c;
+            border-radius: 10px;
+        }
+
+        .about-box-title {
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #aaa;
+        }
+
+        .about-box-text {
+            font-family: "Playfair Display", serif;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* -----------------------------
+           WORK
+        ----------------------------- */
+
+        .work {
+            padding: 100px 8vw;
+        }
+
+        .work-title {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 35px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 320px);
+            gap: 45px 40px;
+        }
+
+        .project {
+            width: 320px;
+        }
+
+        .project-image {
+            width: 320px;
+            height: 180px;
+            border-radius: 7px;
+            border: 1px solid #202020;
+            background: #111;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project:hover .project-image img {
+            transform: scale(1.04);
+        }
+
+        .project-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        .project-name {
+            margin-top: 13px;
+            font-family: "Playfair Display", serif;
+            font-size: 17px;
+        }
+
+        .project-description {
+            margin-top: 10px;
+            color: #666;
+            font-family: "Playfair Display", serif;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* -----------------------------
+           CONTACT
+        ----------------------------- */
+
+        .contact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: "Playfair Display", serif;
+            font-size: 34px;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+
+        .contact-text {
+            font-family: "Playfair Display", serif;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 14px 25px;
+            border: 1px solid #282828;
+            border-radius: 30px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .contact-button:hover {
+            background: #eee;
+            color: #080808;
+        }
+
+        .contact-credit {
+            margin-top: 50px;
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            color: #444;
+        }
+
+        /* -----------------------------
+           PROGRESS BAR
+        ----------------------------- */
+
+        .progress {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 2px;
+            background: #181818;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #777;
+        }
+
+        /* -----------------------------
+           RESPONSIVE
+        ----------------------------- */
+
+        @media (max-width: 800px) {
+            .hero-name {
+                font-size: 90px;
+                letter-spacing: -5px;
+            }
+
+            .projects {
+                grid-template-columns: 280px;
+            }
+
+            .project,
+            .project-image {
+                width: 280px;
+            }
+
+            .quote {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <nav>
+    <!-- TOP TESTIMONIAL TICKER -->
 
-    <div class="brand">
-      <div class="brand-box">V</div>
-      <div class="brand-name">VOID</div>
+    <div class="topbar">
+        <div class="ticker">
+            <span>VOID <b class="stars">★★★★★</b> "ABSOLUTE GOAT TO WORK WITH"</span>
+            <span>RIZEN <b class="stars">★★★★★</b> "DID EVERYTHING I ASKED"</span>
+            <span>PROZAC <b class="stars">★★★★★</b> "PARTICLES WERE FIRE"</span>
+            <span>ITZYP <b class="stars">★★★★★</b> "WELL WORTH THE WAIT"</span>
+
+            <span>VOID <b class="stars">★★★★★</b> "ABSOLUTE GOAT TO WORK WITH"</span>
+            <span>RIZEN <b class="stars">★★★★★</b> "DID EVERYTHING I ASKED"</span>
+            <span>PROZAC <b class="stars">★★★★★</b> "PARTICLES WERE FIRE"</span>
+            <span>ITZYP <b class="stars">★★★★★</b> "WELL WORTH THE WAIT"</span>
+        </div>
     </div>
 
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="contact.html">Contact</a>
+
+    <!-- EVERYTHING INSIDE THIS MOVES HORIZONTALLY -->
+
+    <main class="page" id="page">
+
+        <!-- HERO -->
+
+        <section class="section hero">
+
+            <div class="quote q1">
+                "We're all evil in someone's story."
+            </div>
+
+            <div class="quote q2">
+                "The eyes are useless when the mind is blind."
+            </div>
+
+            <div class="quote q3">
+                "A second of fear can take away millions of memories."
+            </div>
+
+            <div class="quote q4">
+                "Pressure isn't something put on you. It's something you forgot to prepare for."
+            </div>
+
+            <div class="quote q5">
+                "Why seek validation in a world that crucified a perfect man?"
+            </div>
+
+            <div class="hero-name">
+                Void
+            </div>
+
+            <div class="hero-subtitle">
+                Minecraft Developer · Skript · Plugins · Systems
+            </div>
+
+            <div class="scroll-hint">
+                scroll ↓
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <section class="section about">
+
+            <div class="about-content">
+
+                <h2 class="section-title">
+                    About
+                </h2>
+
+                <p class="about-text">
+                    I build Minecraft systems, mechanics and plugins
+                    focused on making servers feel unique.
+                </p>
+
+                <p class="about-text">
+                    Clean code. Custom mechanics. Smooth experiences.
+                </p>
+
+                <div class="about-box">
+
+                    <div class="about-box-title">
+                        NOW
+                    </div>
+
+                    <div class="about-box-text">
+                        Skript. Plugins. Fullstack. Whatever needs building.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- WORK -->
+
+        <section class="section work">
+
+            <h2 class="work-title">
+                Work
+            </h2>
+
+            <div class="projects">
+
+                <article class="project">
+
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            PROJECT IMAGE
+                        </div>
+                    </div>
+
+                    <div class="project-name">
+                        Project One
+                    </div>
+
+                    <div class="project-description">
+                        Custom Minecraft systems, mechanics and server
+                        development.
+                    </div>
+
+                </article>
+
+
+                <article class="project">
+
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            PROJECT IMAGE
+                        </div>
+                    </div>
+
+                    <div class="project-name">
+                        Project Two
+                    </div>
+
+                    <div class="project-description">
+                        Advanced Skript development with custom effects,
+                        interfaces and mechanics.
+                    </div>
+
+                </article>
+
+
+                <article class="project">
+
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            PROJECT IMAGE
+                        </div>
+                    </div>
+
+                    <div class="project-name">
+                        Project Three
+                    </div>
+
+                    <div class="project-description">
+                        Server systems designed around performance,
+                        gameplay and clean visuals.
+                    </div>
+
+                </article>
+
+
+                <article class="project">
+
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            PROJECT IMAGE
+                        </div>
+                    </div>
+
+                    <div class="project-name">
+                        Project Four
+                    </div>
+
+                    <div class="project-description">
+                        Custom mechanics built specifically for
+                        SMP and server projects.
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+
+        <section class="section contact">
+
+            <div class="contact-content">
+
+                <h2 class="contact-title">
+                    Let's build something.
+                </h2>
+
+                <p class="contact-text">
+                    Have a project in mind?
+                </p>
+
+                <a class="contact-button" href="#">
+                    Discord
+                </a>
+
+                <div class="contact-credit">
+                    made with spite and curiosity.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- SCROLL PROGRESS -->
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <div class="commission">
-      Commissions: <span class="open">Open!</span>
-    </div>
 
-  </nav>
+    <script>
 
-  <main class="hero">
+        const page = document.getElementById("page");
+        const progressBar = document.getElementById("progressBar");
 
-    <h1>VOID</h1>
+        let currentX = 0;
+        let targetX = 0;
 
-    <p>
-      Developer, creator, and builder of
-      websites, Minecraft plugins, and other things.
-    </p>
+        function getMaxScroll() {
+            return page.scrollWidth - window.innerWidth;
+        }
 
-    <p class="sub">
-      Take a look around.
-    </p>
+        window.addEventListener("wheel", function(event) {
 
-    <div class="arrow">↓</div>
+            event.preventDefault();
 
-  </main>
+            targetX += event.deltaY;
+
+            const maxScroll = getMaxScroll();
+
+            if (targetX < 0) {
+                targetX = 0;
+            }
+
+            if (targetX > maxScroll) {
+                targetX = maxScroll;
+            }
+
+        }, { passive: false });
+
+
+        function animate() {
+
+            currentX += (targetX - currentX) * 0.08;
+
+            page.style.transform = `translateX(${-currentX}px)`;
+
+            const maxScroll = getMaxScroll();
+
+            if (maxScroll > 0) {
+                const percentage = (currentX / maxScroll) * 100;
+                progressBar.style.width = `${percentage}%`;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+
+        window.addEventListener("resize", function() {
+
+            const maxScroll = getMaxScroll();
+
+            if (targetX > maxScroll) {
+                targetX = maxScroll;
+            }
+
+        });
+
+    </script>
 
 </body>
 </html>
