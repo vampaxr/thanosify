@@ -26,10 +26,10 @@
         }
 
         .site {
-            width: 400vw;
+            width: 500vw;
             height: 100vh;
             display: flex;
-            transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
         .page {
@@ -40,220 +40,14 @@
             overflow: hidden;
         }
 
-        /* =========================
-           NAME
-        ========================= */
-
-        .name-page {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .void-wrapper {
-            position: relative;
-            display: inline-block;
-            padding: 25px 35px;
-            cursor: pointer;
-        }
-
-        .void-name {
-            position: relative;
-            z-index: 2;
-            font-size: clamp(110px, 16vw, 300px);
-            font-weight: 400;
-            line-height: 0.8;
-            letter-spacing: -12px;
-            transition:
-                color 0.45s ease,
-                transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        /* White card behind VOID */
-
-        .void-overlay {
-            position: absolute;
-            z-index: 1;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: #f5f5f5;
-            transform: translate(-50%, -50%) rotate(-2deg);
-            transition:
-                width 0.6s cubic-bezier(0.77, 0, 0.175, 1),
-                height 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        .void-wrapper:hover .void-overlay {
-            width: 430px;
-            height: 170px;
-        }
-
-        .void-wrapper:hover .void-name {
-            color: #080808;
-            transform: translateY(-4px);
-        }
-
-        .version {
-            position: absolute;
-            z-index: 3;
-            right: -8px;
-            top: -5px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            background: #080808;
-            border: 1px solid #555;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            letter-spacing: 1px;
-        }
 
         /* =========================
-           QUOTES
-        ========================= */
-
-        .quote {
-            position: absolute;
-            max-width: 340px;
-            color: #555;
-            font-size: 19px;
-            font-style: italic;
-            line-height: 1.4;
-            transition: color 0.3s ease;
-        }
-
-        .quote:hover {
-            color: #aaa;
-        }
-
-        .quote-1 {
-            top: 10%;
-            left: 12%;
-        }
-
-        .quote-2 {
-            top: 24%;
-            right: 12%;
-        }
-
-        .quote-3 {
-            bottom: 28%;
-            left: 10%;
-        }
-
-        .quote-4 {
-            bottom: 15%;
-            right: 15%;
-        }
-
-        .quote-5 {
-            top: 55%;
-            left: 45%;
-        }
-
-        .quote-6 {
-            top: 7%;
-            right: 35%;
-        }
-
-        /* =========================
-           ABOUT
-        ========================= */
-
-        .about-page {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .about-content {
-            width: 430px;
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 400;
-            margin-bottom: 35px;
-        }
-
-        .about-text {
-            color: #777;
-            font-size: 17px;
-            line-height: 1.8;
-        }
-
-        .about-box {
-            margin-top: 40px;
-            padding: 30px;
-            border: 1px solid #222;
-            border-radius: 12px;
-        }
-
-        .about-box-title {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
-
-        .about-box p {
-            color: #666;
-            font-size: 15px;
-        }
-
-        /* =========================
-           CONTACT
-        ========================= */
-
-        .contact-page {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .contact-content {
-            text-align: center;
-        }
-
-        .contact-title {
-            font-size: 30px;
-            font-weight: 400;
-            margin-bottom: 35px;
-        }
-
-        .contact-button {
-            display: inline-block;
-            padding: 14px 28px;
-            border: 1px solid #333;
-            border-radius: 30px;
-            color: #eee;
-            text-decoration: none;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-button:hover {
-            background: #f5f5f5;
-            color: #080808;
-            border-color: #f5f5f5;
-        }
-
-        .contact-subtitle {
-            margin-top: 35px;
-            color: #555;
-            font-style: italic;
-            font-size: 17px;
-        }
-
-        /* =========================
-           TOP TEXT
+           TOP TICKER
         ========================= */
 
         .ticker {
             position: fixed;
-            z-index: 50;
+            z-index: 100;
             top: 0;
             left: 0;
             width: 100%;
@@ -288,6 +82,407 @@
             }
         }
 
+
+        /* =========================
+           HOME / VOID
+        ========================= */
+
+        .name-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .void-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 35px;
+            cursor: pointer;
+        }
+
+        .void-name {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(100px, 16vw, 260px);
+            font-weight: 400;
+            line-height: 0.8;
+            letter-spacing: -12px;
+            color: #f5f5f5;
+            transition:
+                color 0.45s ease,
+                transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .void-overlay {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+
+            width: calc(100% - 10px);
+            height: 78%;
+
+            background: #f5f5f5;
+
+            transform: translate(-50%, -50%) rotate(-2deg);
+
+            transition:
+                width 0.55s cubic-bezier(0.77, 0, 0.175, 1),
+                height 0.55s cubic-bezier(0.77, 0, 0.175, 1),
+                transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .void-wrapper:hover .void-overlay {
+            width: calc(100% + 25px);
+            height: 86%;
+            transform: translate(-50%, -50%) rotate(-2deg);
+        }
+
+        .void-wrapper:hover .void-name {
+            color: #080808;
+            transform: translateY(-3px);
+        }
+
+        .age {
+            position: absolute;
+            z-index: 4;
+            top: 2px;
+            right: 0;
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+            border: 1px solid #444;
+
+            background: #080808;
+            color: #eee;
+
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+
+            transition:
+                background 0.4s ease,
+                color 0.4s ease,
+                border-color 0.4s ease;
+        }
+
+        .void-wrapper:hover .age {
+            background: #080808;
+            color: #fff;
+            border-color: #111;
+        }
+
+        .age::after {
+            content: "15 YEARS OLD";
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: max-content;
+
+            transform:
+                translate(-50%, -50%)
+                scale(0);
+
+            opacity: 0;
+
+            transition:
+                transform 0.45s cubic-bezier(0.77, 0, 0.175, 1),
+                opacity 0.3s ease;
+        }
+
+        .void-wrapper:hover .age::after {
+            transform:
+                translate(-50%, -50%)
+                scale(1);
+
+            opacity: 1;
+        }
+
+        .void-wrapper:hover .age {
+            color: transparent;
+        }
+
+
+        /* =========================
+           QUOTES
+        ========================= */
+
+        .quote {
+            position: absolute;
+            max-width: 350px;
+
+            color: #4d4d4d;
+
+            font-size: 19px;
+            font-style: italic;
+            line-height: 1.45;
+
+            transition: color 0.3s ease;
+        }
+
+        .quote:hover {
+            color: #999;
+        }
+
+        .quote-1 {
+            top: 12%;
+            left: 12%;
+        }
+
+        .quote-2 {
+            top: 25%;
+            right: 12%;
+        }
+
+        .quote-3 {
+            bottom: 28%;
+            left: 10%;
+        }
+
+        .quote-4 {
+            bottom: 15%;
+            right: 15%;
+        }
+
+        .quote-5 {
+            top: 53%;
+            left: 43%;
+        }
+
+        .quote-6 {
+            top: 8%;
+            right: 35%;
+        }
+
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-content {
+            width: 430px;
+            text-align: center;
+        }
+
+        .section-title {
+            margin-bottom: 35px;
+
+            font-size: 29px;
+            font-weight: 400;
+        }
+
+        .about-text {
+            margin-bottom: 12px;
+
+            color: #777;
+
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .about-box {
+            margin-top: 40px;
+
+            padding: 30px;
+
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .about-box-title {
+            margin-bottom: 20px;
+
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+        }
+
+        .about-box p {
+            color: #666;
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-title {
+            margin-bottom: 35px;
+
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        .contact-button {
+            display: inline-block;
+
+            padding: 14px 28px;
+
+            border: 1px solid #333;
+            border-radius: 30px;
+
+            color: #eee;
+            text-decoration: none;
+
+            font-size: 16px;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background: #f5f5f5;
+            color: #080808;
+            border-color: #f5f5f5;
+        }
+
+        .contact-subtitle {
+            margin-top: 35px;
+
+            color: #555;
+
+            font-size: 17px;
+            font-style: italic;
+        }
+
+
+        /* =========================
+           WORK / SHOWCASE
+        ========================= */
+
+        .work-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .work-container {
+            width: 900px;
+            max-width: 90vw;
+        }
+
+        .work-title {
+            margin-bottom: 35px;
+
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px 35px;
+        }
+
+        .project {
+            display: block;
+            color: #eee;
+            text-decoration: none;
+        }
+
+        .project-video {
+            position: relative;
+
+            width: 100%;
+            aspect-ratio: 16 / 9;
+
+            overflow: hidden;
+
+            border-radius: 8px;
+            background: #151515;
+
+            border: 1px solid #1d1d1d;
+        }
+
+        .project-video iframe {
+            width: 100%;
+            height: 100%;
+
+            border: 0;
+        }
+
+        .project-placeholder {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #444;
+
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .project-name {
+            margin-top: 15px;
+
+            font-size: 18px;
+        }
+
+        .project-description {
+            margin-top: 8px;
+
+            color: #666;
+
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .dev-diary {
+            display: block;
+
+            width: fit-content;
+
+            margin: 45px auto 0;
+            padding: 10px 35px;
+
+            border: 1px solid #222;
+            border-radius: 20px;
+
+            color: #666;
+            text-decoration: none;
+
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+
+            transition:
+                color 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .dev-diary:hover {
+            color: #eee;
+            border-color: #555;
+        }
+
+
         /* =========================
            PAGE INDICATOR
         ========================= */
@@ -295,9 +490,12 @@
         .indicator {
             position: fixed;
             z-index: 100;
+
             bottom: 25px;
             left: 50%;
+
             transform: translateX(-50%);
+
             display: flex;
             gap: 8px;
         }
@@ -305,8 +503,11 @@
         .dot {
             width: 5px;
             height: 5px;
+
             border-radius: 50%;
+
             background: #333;
+
             transition: background 0.3s ease;
         }
 
@@ -314,55 +515,75 @@
             background: #eee;
         }
 
+
         /* =========================
-           SMALL SCREEN
+           MOBILE
         ========================= */
 
         @media (max-width: 700px) {
+
             .void-name {
-                font-size: 100px;
-                letter-spacing: -6px;
+                font-size: 90px;
+                letter-spacing: -7px;
             }
 
-            .void-wrapper:hover .void-overlay {
-                width: 300px;
-                height: 120px;
+            .void-wrapper {
+                padding: 20px 25px;
             }
 
             .quote {
-                font-size: 15px;
                 max-width: 230px;
+                font-size: 15px;
             }
 
             .about-content {
                 width: 80%;
             }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+                max-height: 75vh;
+                overflow-y: auto;
+            }
+
+            .work-container {
+                max-height: 85vh;
+                overflow-y: auto;
+            }
         }
     </style>
 </head>
 
+
 <body>
+
+    <!-- TOP REVIEWS -->
 
     <div class="ticker">
         <div class="ticker-inner">
+
             <span>★★★★★ PROZAC "ABSOLUTELY COOKED"</span>
             <span>★★★★★ RIZEN "GOAT TO WORK WITH"</span>
-            <span>★★★★★ DEC0Y "BEST DEVELOPER I'VE SEEN"</span>
+            <span>★★★★★ DECOY "BEST DEVELOPER I'VE SEEN"</span>
             <span>★★★★★ MARYG "ABSOLUTE GOAT"</span>
             <span>★★★★★ SADSIM "DID EVERYTHING I ASKED"</span>
 
             <span>★★★★★ PROZAC "ABSOLUTELY COOKED"</span>
             <span>★★★★★ RIZEN "GOAT TO WORK WITH"</span>
-            <span>★★★★★ DEC0Y "BEST DEVELOPER I'VE SEEN"</span>
+            <span>★★★★★ DECOY "BEST DEVELOPER I'VE SEEN"</span>
             <span>★★★★★ MARYG "ABSOLUTE GOAT"</span>
             <span>★★★★★ SADSIM "DID EVERYTHING I ASKED"</span>
+
         </div>
     </div>
 
 
     <main class="site" id="site">
 
-        <!-- NAME -->
+
+        <!-- =========================
+             1. VOID
+        ========================= -->
 
         <section class="page name-page">
 
@@ -374,7 +595,7 @@
                     Void
                 </div>
 
-                <div class="version">
+                <div class="age">
                     UK 15
                 </div>
 
@@ -383,7 +604,9 @@
         </section>
 
 
-        <!-- QUOTES -->
+        <!-- =========================
+             2. QUOTES
+        ========================= -->
 
         <section class="page quotes-page">
 
@@ -404,7 +627,7 @@
             </div>
 
             <div class="quote quote-5">
-                "A single line can rewrite the entire world."
+                "A single line can rewrite the truth."
             </div>
 
             <div class="quote quote-6">
@@ -414,7 +637,9 @@
         </section>
 
 
-        <!-- ABOUT -->
+        <!-- =========================
+             3. ABOUT
+        ========================= -->
 
         <section class="page about-page">
 
@@ -451,7 +676,9 @@
         </section>
 
 
-        <!-- CONTACT -->
+        <!-- =========================
+             4. CONTACT
+        ========================= -->
 
         <section class="page contact-page">
 
@@ -477,73 +704,280 @@
 
         </section>
 
+
+        <!-- =========================
+             5. WORK
+        ========================= -->
+
+        <section class="page work-page">
+
+            <div class="work-container">
+
+                <h2 class="work-title">
+                    Work
+                </h2>
+
+                <div class="work-grid">
+
+
+                    <!-- PROJECT 1 -->
+
+                    <a
+                        class="project"
+                        href="#"
+                    >
+
+                        <div class="project-video">
+
+                            <!-- Replace VIDEO_ID_1 with your YouTube video ID -->
+
+                            <iframe
+                                src="https://www.youtube.com/embed/VIDEO_ID_1"
+                                title="Project 1"
+                                allowfullscreen>
+                            </iframe>
+
+                        </div>
+
+                        <div class="project-name">
+                            'Spell SMP' 2
+                        </div>
+
+                        <div class="project-description">
+                            Advanced spells, wands, models,
+                            particles and custom mechanics.
+                        </div>
+
+                    </a>
+
+
+                    <!-- PROJECT 2 -->
+
+                    <a
+                        class="project"
+                        href="#"
+                    >
+
+                        <div class="project-video">
+
+                            <!-- Replace VIDEO_ID_2 with your YouTube video ID -->
+
+                            <iframe
+                                src="https://www.youtube.com/embed/VIDEO_ID_2"
+                                title="Project 2"
+                                allowfullscreen>
+                            </iframe>
+
+                        </div>
+
+                        <div class="project-name">
+                            Outliers Blessing
+                        </div>
+
+                        <div class="project-description">
+                            Simple ideas with advanced
+                            internals and clean pacing.
+                        </div>
+
+                    </a>
+
+
+                    <!-- PROJECT 3 -->
+
+                    <a
+                        class="project"
+                        href="#"
+                    >
+
+                        <div class="project-video">
+
+                            <!-- Replace VIDEO_ID_3 with your YouTube video ID -->
+
+                            <iframe
+                                src="https://www.youtube.com/embed/VIDEO_ID_3"
+                                title="Project 3"
+                                allowfullscreen>
+                            </iframe>
+
+                        </div>
+
+                        <div class="project-name">
+                            Enchant SMP
+                        </div>
+
+                        <div class="project-description">
+                            Custom Minecraft mechanics,
+                            visuals and gameplay systems.
+                        </div>
+
+                    </a>
+
+
+                    <!-- PROJECT 4 -->
+
+                    <a
+                        class="project"
+                        href="#"
+                    >
+
+                        <div class="project-video">
+
+                            <!-- Replace VIDEO_ID_4 with your YouTube video ID -->
+
+                            <iframe
+                                src="https://www.youtube.com/embed/VIDEO_ID_4"
+                                title="Project 4"
+                                allowfullscreen>
+                            </iframe>
+
+                        </div>
+
+                        <div class="project-name">
+                            'Spell SMP' 1
+                        </div>
+
+                        <div class="project-description">
+                            Custom abilities, effects and
+                            scripted gameplay.
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <a
+                    class="dev-diary"
+                    href="#"
+                >
+                    dev diary
+                </a>
+
+            </div>
+
+        </section>
+
     </main>
 
 
+    <!-- PAGE DOTS -->
+
     <div class="indicator">
+
         <div class="dot active"></div>
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
+        <div class="dot"></div>
+
     </div>
 
 
     <script>
+
         const site = document.getElementById("site");
         const dots = document.querySelectorAll(".dot");
 
         let currentPage = 0;
         let scrolling = false;
 
+
         function moveToPage(page) {
-            page = Math.max(0, Math.min(3, page));
+
+            page = Math.max(0, Math.min(4, page));
 
             currentPage = page;
 
-            site.style.transform = `translateX(-${page * 100}vw)`;
+            site.style.transform =
+                `translateX(-${page * 100}vw)`;
+
 
             dots.forEach((dot, index) => {
-                dot.classList.toggle("active", index === page);
+
+                dot.classList.toggle(
+                    "active",
+                    index === page
+                );
+
             });
+
         }
 
-        window.addEventListener("wheel", function(event) {
 
-            if (scrolling) {
-                return;
+        window.addEventListener(
+            "wheel",
+            function(event) {
+
+                if (scrolling) {
+                    return;
+                }
+
+                if (Math.abs(event.deltaY) < 5) {
+                    return;
+                }
+
+                scrolling = true;
+
+
+                if (event.deltaY > 0) {
+
+                    moveToPage(
+                        currentPage + 1
+                    );
+
+                } else {
+
+                    moveToPage(
+                        currentPage - 1
+                    );
+
+                }
+
+
+                setTimeout(
+                    () => {
+                        scrolling = false;
+                    },
+                    900
+                );
+
+            },
+            {
+                passive: true
             }
+        );
 
-            if (Math.abs(event.deltaY) < 5) {
-                return;
+
+        window.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "ArrowRight" ||
+                    event.key === "ArrowDown"
+                ) {
+
+                    moveToPage(
+                        currentPage + 1
+                    );
+
+                }
+
+
+                if (
+                    event.key === "ArrowLeft" ||
+                    event.key === "ArrowUp"
+                ) {
+
+                    moveToPage(
+                        currentPage - 1
+                    );
+
+                }
+
             }
+        );
 
-            scrolling = true;
-
-            if (event.deltaY > 0) {
-                moveToPage(currentPage + 1);
-            } else {
-                moveToPage(currentPage - 1);
-            }
-
-            setTimeout(() => {
-                scrolling = false;
-            }, 900);
-
-        }, { passive: true });
-
-        /* Allow arrow keys too */
-
-        window.addEventListener("keydown", function(event) {
-
-            if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-                moveToPage(currentPage + 1);
-            }
-
-            if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-                moveToPage(currentPage - 1);
-            }
-
-        });
     </script>
 
 </body>
