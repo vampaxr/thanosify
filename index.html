@@ -19,9 +19,14 @@
 
         body {
             background: #080808;
-            color: #f4f4f4;
+            color: #f5f5f5;
             font-family: Georgia, "Times New Roman", serif;
             overflow-x: hidden;
+        }
+
+        body::selection {
+            background: #ffffff;
+            color: #000000;
         }
 
         a {
@@ -29,14 +34,8 @@
             text-decoration: none;
         }
 
-        ::selection {
-            background: #fff;
-            color: #000;
-        }
-
-
         /* =========================
-           NAVIGATION
+           NAV
         ========================= */
 
         nav {
@@ -45,48 +44,50 @@
             left: 0;
 
             width: 100%;
-            height: 75px;
-
-            padding: 0 5vw;
+            height: 78px;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            padding: 0 5vw;
 
             z-index: 100;
 
             background: rgba(8, 8, 8, 0.55);
             backdrop-filter: blur(18px);
 
-            border-bottom: 1px solid rgba(255,255,255,0.045);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.045);
         }
 
         .nav-logo {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
-            letter-spacing: 0.22em;
+            letter-spacing: 0.25em;
 
-            transition: opacity 0.3s ease;
+            transition:
+                opacity 0.35s ease,
+                transform 0.5s cubic-bezier(.2,.8,.2,1);
         }
 
         .nav-logo:hover {
             opacity: 0.55;
+            transform: translateX(4px);
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 34px;
         }
 
         .nav-links a {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 10px;
-
             text-transform: uppercase;
             letter-spacing: 0.18em;
 
-            color: #666;
+            color: #555;
 
             transition:
                 color 0.35s ease,
@@ -98,14 +99,12 @@
             transform: translateY(-2px);
         }
 
-
         /* =========================
-           HOME
+           HERO
         ========================= */
 
         .hero {
-            height: 100vh;
-            min-height: 650px;
+            min-height: 100vh;
 
             position: relative;
 
@@ -116,6 +115,17 @@
             overflow: hidden;
         }
 
+        .hero-content {
+            position: relative;
+            z-index: 5;
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         /* =========================
            SCATTERED QUOTES
@@ -124,191 +134,183 @@
         .floating-quote {
             position: absolute;
 
-            max-width: 330px;
+            max-width: 360px;
 
-            color: rgba(255,255,255,0.22);
+            color: #2d2d2d;
 
-            font-size: clamp(14px, 1.25vw, 20px);
-            line-height: 1.35;
+            font-size: clamp(14px, 1.3vw, 20px);
+            line-height: 1.45;
 
             font-style: italic;
 
             pointer-events: none;
 
-            user-select: none;
-
             transition:
-                opacity 0.8s ease,
-                transform 1s cubic-bezier(.2,.8,.2,1);
+                color 1s ease,
+                transform 1.2s cubic-bezier(.2,.8,.2,1);
         }
 
-        .floating-quote span {
-            display: block;
+        .floating-quote:hover {
+            color: #444;
         }
 
-        .q1 {
-            top: 10%;
-            left: 10%;
+        .quote-1 {
+            top: 8%;
+            left: 11%;
+
+            transform: rotate(-2deg);
         }
 
-        .q2 {
-            top: 19%;
-            right: 7%;
-        }
-
-        .q3 {
-            top: 35%;
-            left: 7%;
-        }
-
-        .q4 {
-            top: 28%;
-            right: 18%;
-        }
-
-        .q5 {
-            bottom: 28%;
-            left: 10%;
-        }
-
-        .q6 {
-            bottom: 24%;
+        .quote-2 {
+            top: 18%;
             right: 8%;
+
+            transform: rotate(2deg);
         }
 
-        .q7 {
-            bottom: 10%;
-            left: 45%;
+        .quote-3 {
+            bottom: 17%;
+            left: 10%;
+
+            transform: rotate(-1deg);
         }
 
-        .q8 {
-            top: 7%;
-            right: 42%;
+        .quote-4 {
+            bottom: 20%;
+            right: 8%;
+
+            transform: rotate(2deg);
         }
 
+        .quote-5 {
+            bottom: 7%;
+            left: 47%;
+
+            transform: rotate(-1deg);
+        }
 
         /* =========================
-           HERO CENTER
+           VOID
         ========================= */
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
 
         .void-wrap {
             position: relative;
 
             display: inline-block;
 
-            padding: 35px 55px;
+            padding: 55px 70px;
 
-            cursor: default;
+            cursor: pointer;
 
-            isolation: isolate;
+            z-index: 10;
         }
 
         .void {
             position: relative;
             z-index: 3;
 
-            font-size: clamp(130px, 20vw, 330px);
+            font-size: clamp(130px, 19vw, 330px);
+
             line-height: 0.72;
 
             font-weight: 400;
 
-            letter-spacing: -0.085em;
+            letter-spacing: -0.09em;
 
-            color: #f5f5f5;
+            color: #eeeeee;
 
             transition:
                 color 0.45s ease,
-                transform 0.75s cubic-bezier(.2,.8,.2,1);
+                transform 0.9s cubic-bezier(.16,1,.3,1);
         }
 
+        /*
+            WHITE CARD
 
-        /* =========================
-           WHITE HOVER CARD
-        ========================= */
+            Invisible when not hovering.
+        */
 
         .void-overlay {
             position: absolute;
 
-            left: 0;
+            left: 50%;
             top: 50%;
 
-            width: 100%;
+            width: 88%;
             height: 72%;
 
-            background: #f5f5f5;
+            background: #f4f4f4;
 
             transform:
-                translateY(-50%)
+                translate(-50%, -50%)
                 scaleX(0);
 
-            transform-origin: left center;
+            transform-origin: center;
 
-            z-index: 2;
+            z-index: 4;
 
             pointer-events: none;
 
             transition:
-                transform 0.6s cubic-bezier(.77,0,.18,1);
+                transform 0.75s cubic-bezier(.77,0,.18,1);
         }
 
-        .void-wrap:hover .void-overlay {
-            transform:
-                translateY(-50%)
-                scaleX(1);
-        }
+        /*
+            VOID sits above the white card,
+            turning black when hovered.
+        */
 
         .void-wrap:hover .void {
             color: #080808;
 
             transform:
-                scale(1.015);
+                scale(1.025)
+                translateY(-2px);
         }
 
+        .void-wrap:hover .void-overlay {
+            transform:
+                translate(-50%, -50%)
+                scaleX(1);
+        }
 
         /* =========================
-           AGE BADGE
+           AGE
         ========================= */
 
         .age {
             position: absolute;
 
-            top: 0;
-            right: 12px;
+            top: 18px;
+            right: 20px;
 
-            z-index: 20;
+            padding: 7px 13px;
 
-            padding: 7px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
 
-            border: 1px solid rgba(255,255,255,0.55);
-            border-radius: 20px;
-
-            background: #080808;
+            border-radius: 30px;
 
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 9px;
+
+            font-size: 10px;
 
             letter-spacing: 0.13em;
+
+            color: #fff;
 
             opacity: 0;
 
             transform:
                 translateY(12px)
-                rotate(-3deg);
-
-            pointer-events: none;
+                scale(0.96);
 
             transition:
                 opacity 0.35s ease,
-                transform 0.5s cubic-bezier(.2,.8,.2,1);
+                transform 0.55s cubic-bezier(.2,.8,.2,1);
+
+            z-index: 20;
+
+            pointer-events: none;
         }
 
         .void-wrap:hover .age {
@@ -316,50 +318,17 @@
 
             transform:
                 translateY(0)
-                rotate(-3deg);
+                scale(1);
         }
-
 
         /* =========================
-           HERO SUBTITLE
+           HERO LABEL
         ========================= */
 
-        .hero-subtitle {
-            margin-top: 45px;
-
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 9px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 0.34em;
-
-            color: #444;
-
-            opacity: 0;
-
-            transform: translateY(15px);
-
-            animation: subtitleIn 1.2s 0.4s forwards;
-        }
-
-        @keyframes subtitleIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
-        /* =========================
-           SCROLL INDICATOR
-        ========================= */
-
-        .scroll-indicator {
+        .hero-label {
             position: absolute;
 
-            bottom: 28px;
+            bottom: 38px;
             left: 50%;
 
             transform: translateX(-50%);
@@ -368,44 +337,12 @@
 
             font-size: 8px;
 
-            letter-spacing: 0.25em;
-
-            color: #444;
-
-            animation: scrollFloat 2.5s ease-in-out infinite;
-        }
-
-        @keyframes scrollFloat {
-            0%, 100% {
-                transform: translate(-50%, 0);
-            }
-
-            50% {
-                transform: translate(-50%, 7px);
-            }
-        }
-
-
-        /* =========================
-           GENERAL SECTIONS
-        ========================= */
-
-        section {
-            position: relative;
-        }
-
-        .section-label {
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 9px;
-
-            letter-spacing: 0.28em;
-
             text-transform: uppercase;
 
-            color: #555;
-        }
+            letter-spacing: 0.35em;
 
+            color: #333;
+        }
 
         /* =========================
            ABOUT
@@ -414,97 +351,101 @@
         .about {
             min-height: 100vh;
 
-            padding: 15vh 10vw;
+            padding: 16vh 8vw;
 
             display: grid;
 
-            grid-template-columns: 0.8fr 1fr;
+            grid-template-columns: 1fr 1fr;
 
-            gap: 12vw;
+            gap: 10vw;
 
             align-items: center;
         }
 
-        .about-title {
-            margin-top: 25px;
+        .section-label {
+            font-family: Arial, Helvetica, sans-serif;
 
+            font-size: 9px;
+
+            letter-spacing: 0.3em;
+
+            text-transform: uppercase;
+
+            color: #444;
+
+            margin-bottom: 45px;
+        }
+
+        .about-title {
             font-size: clamp(80px, 11vw, 170px);
 
             font-weight: 400;
 
-            letter-spacing: -0.075em;
-        }
+            letter-spacing: -0.08em;
 
-        .about-content {
-            max-width: 550px;
+            line-height: 0.8;
         }
 
         .about-text {
-            color: #888;
+            max-width: 520px;
 
-            font-size: 18px;
+            color: #777;
 
-            line-height: 1.8;
+            font-size: 17px;
+
+            line-height: 1.85;
         }
 
         .about-text strong {
             color: #eee;
+
             font-weight: 400;
         }
 
         .about-box {
             margin-top: 45px;
 
-            padding: 25px;
+            padding: 22px 25px;
 
-            border: 1px solid rgba(255,255,255,0.07);
+            border: 1px solid rgba(255, 255, 255, 0.07);
 
             font-family: Arial, Helvetica, sans-serif;
 
             font-size: 9px;
 
-            letter-spacing: 0.15em;
+            letter-spacing: 0.16em;
 
             color: #555;
-
-            transition:
-                border-color 0.4s ease,
-                transform 0.4s ease;
         }
-
-        .about-box:hover {
-            border-color: rgba(255,255,255,0.18);
-
-            transform: translateY(-4px);
-        }
-
 
         /* =========================
            WORK + CONTACT
         ========================= */
 
-        .work {
+        .work-contact {
             min-height: 100vh;
 
-            padding: 14vh 7vw 10vh;
+            padding: 15vh 8vw 10vh;
         }
 
-        .work-heading {
+        .work-header {
             display: flex;
 
             align-items: baseline;
 
             justify-content: space-between;
 
-            margin-bottom: 65px;
+            margin-bottom: 70px;
         }
 
         .work-title {
-            font-size: clamp(75px, 11vw, 170px);
+            font-size: clamp(70px, 10vw, 160px);
 
             font-weight: 400;
 
             letter-spacing: -0.08em;
+
+            line-height: 0.8;
         }
 
         .work-count {
@@ -517,12 +458,26 @@
             color: #444;
         }
 
+        .work-content {
+            display: grid;
+
+            grid-template-columns: 1.5fr 0.7fr;
+
+            gap: 9vw;
+
+            align-items: start;
+        }
+
+        /* =========================
+           PROJECT GRID
+        ========================= */
+
         .projects {
             display: grid;
 
             grid-template-columns: repeat(2, 1fr);
 
-            gap: 70px 35px;
+            gap: 45px 30px;
         }
 
         .project {
@@ -536,29 +491,11 @@
 
             background: #111;
 
-            border: 1px solid rgba(255,255,255,0.07);
+            border: 1px solid rgba(255, 255, 255, 0.07);
 
             overflow: hidden;
 
             position: relative;
-        }
-
-        .project-image::after {
-            content: "";
-
-            position: absolute;
-
-            inset: 0;
-
-            background: linear-gradient(
-                135deg,
-                rgba(255,255,255,0.06),
-                transparent 45%
-            );
-
-            opacity: 0;
-
-            transition: opacity 0.6s ease;
         }
 
         .project-image img {
@@ -571,33 +508,32 @@
 
             filter: grayscale(100%);
 
+            opacity: 0.72;
+
             transition:
                 filter 0.7s ease,
+                opacity 0.7s ease,
                 transform 0.9s cubic-bezier(.2,.8,.2,1);
         }
 
         .project:hover .project-image img {
             filter: grayscale(0%);
 
+            opacity: 1;
+
             transform: scale(1.045);
         }
 
-        .project:hover .project-image::after {
-            opacity: 1;
-        }
-
         .project-info {
+            padding-top: 16px;
+
             display: flex;
 
             justify-content: space-between;
-
-            align-items: baseline;
-
-            padding-top: 17px;
         }
 
         .project-name {
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .project-type {
@@ -607,74 +543,83 @@
 
             letter-spacing: 0.16em;
 
-            color: #555;
-
             text-transform: uppercase;
-        }
 
+            color: #444;
+        }
 
         /* =========================
            CONTACT
         ========================= */
 
-        .contact-area {
-            margin-top: 18vh;
+        .contact-side {
+            position: sticky;
 
-            padding-top: 12vh;
-
-            border-top: 1px solid rgba(255,255,255,0.06);
-
-            display: flex;
-
-            align-items: flex-end;
-
-            justify-content: space-between;
+            top: 130px;
         }
 
         .contact-label {
-            margin-bottom: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+
+            font-size: 9px;
+
+            letter-spacing: 0.3em;
+
+            text-transform: uppercase;
+
+            color: #444;
+
+            margin-bottom: 35px;
         }
 
         .contact-title {
-            font-size: clamp(70px, 10vw, 150px);
+            font-size: clamp(50px, 6vw, 95px);
 
             font-weight: 400;
 
-            letter-spacing: -0.075em;
+            letter-spacing: -0.07em;
+
+            line-height: 0.9;
+
+            margin-bottom: 40px;
         }
 
-        .contact-right {
-            text-align: right;
-        }
+        .contact-description {
+            max-width: 360px;
 
-        .contact-text {
             color: #666;
 
-            font-size: 14px;
+            font-size: 15px;
 
-            margin-bottom: 25px;
+            line-height: 1.8;
+
+            margin-bottom: 35px;
         }
 
         .contact-button {
-            display: inline-block;
+            display: inline-flex;
 
-            padding: 15px 26px;
+            align-items: center;
 
-            border: 1px solid rgba(255,255,255,0.18);
+            justify-content: center;
+
+            padding: 15px 24px;
+
+            border: 1px solid rgba(255, 255, 255, 0.16);
 
             font-family: Arial, Helvetica, sans-serif;
 
             font-size: 9px;
 
-            letter-spacing: 0.2em;
+            letter-spacing: 0.18em;
 
             text-transform: uppercase;
 
             transition:
-                background 0.35s ease,
-                color 0.35s ease,
-                border-color 0.35s ease,
-                transform 0.35s ease;
+                background 0.4s ease,
+                color 0.4s ease,
+                border-color 0.4s ease,
+                transform 0.4s ease;
         }
 
         .contact-button:hover {
@@ -687,16 +632,15 @@
             transform: translateY(-3px);
         }
 
-
         /* =========================
-           SHOWCASE
+           VIDEO SHOWCASE
         ========================= */
 
         .showcase {
-            padding: 14vh 7vw 12vh;
+            padding: 12vh 8vw 15vh;
         }
 
-        .showcase-heading {
+        .showcase-header {
             display: flex;
 
             justify-content: space-between;
@@ -706,12 +650,26 @@
             margin-bottom: 60px;
         }
 
-        .showcase-title {
-            font-size: clamp(60px, 8vw, 120px);
+        .showcase-label {
+            font-family: Arial, Helvetica, sans-serif;
 
-            font-weight: 400;
+            font-size: 9px;
 
-            letter-spacing: -0.07em;
+            letter-spacing: 0.3em;
+
+            text-transform: uppercase;
+
+            color: #444;
+        }
+
+        .showcase-count {
+            font-family: Arial, Helvetica, sans-serif;
+
+            font-size: 8px;
+
+            letter-spacing: 0.18em;
+
+            color: #333;
         }
 
         .videos {
@@ -725,11 +683,21 @@
         .video {
             aspect-ratio: 16 / 9;
 
-            background: #111;
+            background: #0d0d0d;
 
-            border: 1px solid rgba(255,255,255,0.07);
+            border: 1px solid rgba(255, 255, 255, 0.07);
 
             overflow: hidden;
+
+            transition:
+                transform 0.6s cubic-bezier(.2,.8,.2,1),
+                border-color 0.5s ease;
+        }
+
+        .video:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(255, 255, 255, 0.18);
         }
 
         .video iframe {
@@ -739,19 +707,18 @@
             border: none;
         }
 
-
         /* =========================
            FOOTER
         ========================= */
 
         footer {
-            padding: 35px 7vw;
+            padding: 35px 8vw;
 
             display: flex;
 
             justify-content: space-between;
 
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
 
             font-family: Arial, Helvetica, sans-serif;
 
@@ -759,9 +726,8 @@
 
             letter-spacing: 0.18em;
 
-            color: #444;
+            color: #333;
         }
-
 
         /* =========================
            REVEAL ANIMATION
@@ -770,7 +736,7 @@
         .reveal {
             opacity: 0;
 
-            transform: translateY(35px);
+            transform: translateY(30px);
 
             transition:
                 opacity 1s ease,
@@ -783,31 +749,11 @@
             transform: translateY(0);
         }
 
-
         /* =========================
            RESPONSIVE
         ========================= */
 
-        @media (max-width: 900px) {
-
-            .nav-links {
-                gap: 17px;
-            }
-
-            .floating-quote {
-                font-size: 12px;
-                max-width: 220px;
-            }
-
-            .q2,
-            .q6 {
-                right: 3%;
-            }
-
-            .q1,
-            .q5 {
-                left: 3%;
-            }
+        @media (max-width: 1000px) {
 
             .about {
                 grid-template-columns: 1fr;
@@ -815,112 +761,114 @@
                 gap: 70px;
             }
 
+            .work-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-side {
+                position: relative;
+
+                top: auto;
+            }
+
             .projects {
-                grid-template-columns: 1fr;
+                order: 2;
             }
 
-            .contact-area {
-                align-items: flex-start;
-
-                flex-direction: column;
-
-                gap: 50px;
+            .contact-side {
+                order: 1;
             }
 
-            .contact-right {
-                text-align: left;
-            }
+            .floating-quote {
+                max-width: 260px;
 
-            .videos {
-                grid-template-columns: 1fr;
+                font-size: 13px;
             }
         }
 
-
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
 
             nav {
                 height: 65px;
 
-                padding: 0 22px;
+                padding: 0 25px;
             }
 
             .nav-links {
-                display: none;
+                gap: 15px;
             }
 
-            .hero {
-                min-height: 600px;
+            .nav-links a {
+                font-size: 8px;
             }
 
             .void-wrap {
-                padding: 25px 35px;
+                padding: 40px 35px;
             }
 
             .void {
-                font-size: 31vw;
+                font-size: 27vw;
             }
 
-            .hero-subtitle {
-                font-size: 7px;
-
-                letter-spacing: 0.22em;
-
-                text-align: center;
+            .void-overlay {
+                width: 100%;
             }
 
             .floating-quote {
-                font-size: 10px;
+                font-size: 11px;
 
-                max-width: 160px;
+                max-width: 190px;
             }
 
-            .q1 {
-                top: 15%;
+            .quote-1 {
+                top: 13%;
+                left: 5%;
             }
 
-            .q2 {
-                top: 22%;
+            .quote-2 {
+                top: 23%;
+                right: 4%;
             }
 
-            .q3 {
-                top: 38%;
+            .quote-3 {
+                bottom: 22%;
+                left: 5%;
             }
 
-            .q4 {
-                top: 31%;
+            .quote-4 {
+                bottom: 27%;
+                right: 4%;
             }
 
-            .q5 {
-                bottom: 29%;
-            }
-
-            .q6 {
-                bottom: 20%;
-            }
-
-            .q7 {
-                bottom: 10%;
+            .quote-5 {
+                bottom: 9%;
                 left: 35%;
             }
 
-            .q8 {
-                display: none;
-            }
-
             .about,
-            .work,
+            .work-contact,
             .showcase {
                 padding-left: 25px;
                 padding-right: 25px;
             }
 
-            .quote {
-                min-height: 260px;
+            .projects,
+            .videos {
+                grid-template-columns: 1fr;
             }
 
-            .contact-area {
-                margin-top: 12vh;
+            .work-header,
+            .showcase-header {
+                margin-bottom: 45px;
+            }
+
+            .work-count,
+            .showcase-count {
+                display: none;
+            }
+
+            footer {
+                padding: 30px 25px;
             }
         }
     </style>
@@ -928,35 +876,19 @@
 
 <body>
 
-
     <!-- =========================
-         NAVIGATION
+         NAV
     ========================= -->
 
     <nav>
-
-        <a href="#home" class="nav-logo">
-            VOID
-        </a>
+        <a href="#home" class="nav-logo">VOID</a>
 
         <div class="nav-links">
-
-            <a href="#about">
-                About
-            </a>
-
-            <a href="#work">
-                Work
-            </a>
-
-            <a href="#contact">
-                Contact
-            </a>
-
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
         </div>
-
     </nav>
-
 
 
     <!-- =========================
@@ -965,60 +897,39 @@
 
     <section class="hero" id="home">
 
-
-        <!-- SCATTERED QUOTES -->
-
-        <div class="floating-quote q1">
-            "We're all evil in someone's story."
-        </div>
-
-        <div class="floating-quote q2">
-            "You can't win without losing.
-            Even Heaven requires death."
-        </div>
-
-        <div class="floating-quote q3">
-            "The eyes are useless
-            when the mind is blind."
-        </div>
-
-        <div class="floating-quote q4">
-            "Why seek validation in a world
-            that crucified a perfect man?"
-        </div>
-
-        <div class="floating-quote q5">
-            "A second of fear can take
-            away millions of memories."
-        </div>
-
-        <div class="floating-quote q6">
-            "Pressure isn't something put on you.
-            It's something you forgot to prepare for."
-        </div>
-
-        <div class="floating-quote q7">
-            "You miss 100% of the
-            shots you don't take."
-        </div>
-
-        <div class="floating-quote q8">
-            "Most men die at 25,
-            but aren't buried until they're 70."
-        </div>
-
-
-
-        <!-- CENTER -->
-
         <div class="hero-content">
+
+            <!-- Scattered quotes -->
+
+            <div class="floating-quote quote-1">
+                “I am inevitable.”
+            </div>
+
+            <div class="floating-quote quote-2">
+                “I had strings, but now I'm free.”
+            </div>
+
+            <div class="floating-quote quote-3">
+                “Doom does not bargain.”
+            </div>
+
+            <div class="floating-quote quote-4">
+                “Dread it. Run from it.”
+            </div>
+
+            <div class="floating-quote quote-5">
+                “There are no strings on me.”
+            </div>
+
+
+            <!-- VOID -->
 
             <div class="void-wrap">
 
                 <div class="void-overlay"></div>
 
                 <div class="age">
-                    15 YEARS
+                    UK 15
                 </div>
 
                 <h1 class="void">
@@ -1027,20 +938,14 @@
 
             </div>
 
-
-            <div class="hero-subtitle">
-                Minecraft Developer · Skript · Creative Development
-            </div>
-
         </div>
 
 
-        <div class="scroll-indicator">
-            SCROLL
+        <div class="hero-label">
+            Minecraft Developer · Skript · Creative Development
         </div>
 
     </section>
-
 
 
     <!-- =========================
@@ -1062,20 +967,21 @@
         </div>
 
 
-        <div class="about-content reveal">
+        <div class="reveal">
 
             <p class="about-text">
 
                 I build
                 <strong>Minecraft experiences</strong>
-                focused on custom mechanics, clean systems,
-                and visuals that actually feel good to use.
+                focused on custom mechanics,
+                clean systems, and visuals that actually
+                feel good to use.
 
                 <br><br>
 
-                From small Skript systems to larger SMP mechanics,
-                I like taking an idea and turning it into something
-                people actually want to play.
+                From small Skript systems to larger SMP
+                mechanics, I like taking an idea and turning
+                it into something people actually want to play.
 
             </p>
 
@@ -1089,14 +995,13 @@
     </section>
 
 
-
     <!-- =========================
-         WORK
+         WORK + CONTACT
     ========================= -->
 
-    <section class="work" id="work">
+    <section class="work-contact" id="work">
 
-        <div class="work-heading reveal">
+        <div class="work-header reveal">
 
             <h2 class="work-title">
                 Work
@@ -1109,136 +1014,115 @@
         </div>
 
 
-        <div class="projects">
+        <div class="work-content">
 
+            <!-- WORK -->
 
-            <!-- PROJECT 1 -->
+            <div class="projects">
 
-            <a href="#" class="project reveal">
+                <a href="#" class="project reveal">
 
-                <div class="project-image">
-
-                    <img
-                        src="images/project1.jpg"
-                        alt="Project One"
-                    >
-
-                </div>
-
-                <div class="project-info">
-
-                    <div class="project-name">
-                        Project One
+                    <div class="project-image">
+                        <img
+                            src="images/project1.jpg"
+                            alt="Project 1"
+                        >
                     </div>
 
-                    <div class="project-type">
-                        Minecraft
+                    <div class="project-info">
+
+                        <div class="project-name">
+                            Project One
+                        </div>
+
+                        <div class="project-type">
+                            Minecraft
+                        </div>
+
                     </div>
 
-                </div>
-
-            </a>
+                </a>
 
 
+                <a href="#" class="project reveal">
 
-            <!-- PROJECT 2 -->
-
-            <a href="#" class="project reveal">
-
-                <div class="project-image">
-
-                    <img
-                        src="images/project2.jpg"
-                        alt="Project Two"
-                    >
-
-                </div>
-
-                <div class="project-info">
-
-                    <div class="project-name">
-                        Project Two
+                    <div class="project-image">
+                        <img
+                            src="images/project2.jpg"
+                            alt="Project 2"
+                        >
                     </div>
 
-                    <div class="project-type">
-                        SMP
+                    <div class="project-info">
+
+                        <div class="project-name">
+                            Project Two
+                        </div>
+
+                        <div class="project-type">
+                            SMP
+                        </div>
+
                     </div>
 
-                </div>
-
-            </a>
+                </a>
 
 
+                <a href="#" class="project reveal">
 
-            <!-- PROJECT 3 -->
-
-            <a href="#" class="project reveal">
-
-                <div class="project-image">
-
-                    <img
-                        src="images/project3.jpg"
-                        alt="Project Three"
-                    >
-
-                </div>
-
-                <div class="project-info">
-
-                    <div class="project-name">
-                        Project Three
+                    <div class="project-image">
+                        <img
+                            src="images/project3.jpg"
+                            alt="Project 3"
+                        >
                     </div>
 
-                    <div class="project-type">
-                        Skript
+                    <div class="project-info">
+
+                        <div class="project-name">
+                            Project Three
+                        </div>
+
+                        <div class="project-type">
+                            Skript
+                        </div>
+
                     </div>
 
-                </div>
-
-            </a>
+                </a>
 
 
+                <a href="#" class="project reveal">
 
-            <!-- PROJECT 4 -->
-
-            <a href="#" class="project reveal">
-
-                <div class="project-image">
-
-                    <img
-                        src="images/project4.jpg"
-                        alt="Project Four"
-                    >
-
-                </div>
-
-                <div class="project-info">
-
-                    <div class="project-name">
-                        Project Four
+                    <div class="project-image">
+                        <img
+                            src="images/project4.jpg"
+                            alt="Project 4"
+                        >
                     </div>
 
-                    <div class="project-type">
-                        Development
+                    <div class="project-info">
+
+                        <div class="project-name">
+                            Project Four
+                        </div>
+
+                        <div class="project-type">
+                            Development
+                        </div>
+
                     </div>
 
-                </div>
+                </a>
 
-            </a>
-
-        </div>
+            </div>
 
 
+            <!-- CONTACT -->
 
-        <!-- =========================
-             CONTACT
-        ========================= -->
+            <div class="contact-side reveal" id="contact">
 
-        <div class="contact-area" id="contact">
-
-            <div class="reveal">
-
-                <div class="section-label contact-label">
+                <div class="contact-label">
                     Contact
                 </div>
 
@@ -1246,13 +1130,10 @@
                     Let's build.
                 </h2>
 
-            </div>
-
-
-            <div class="contact-right reveal">
-
-                <p class="contact-text">
-                    Have a project in mind?
+                <p class="contact-description">
+                    Have an SMP idea, custom mechanic,
+                    plugin, or something completely
+                    ridiculous in mind?
                 </p>
 
                 <a
@@ -1270,30 +1151,23 @@
     </section>
 
 
-
     <!-- =========================
-         SHOWCASE
-         AT THE END
+         VIDEO SHOWCASE
     ========================= -->
 
     <section class="showcase">
 
-        <div class="showcase-heading reveal">
+        <div class="showcase-header reveal">
 
-            <div class="section-label">
+            <div class="showcase-label">
                 Showcase
             </div>
 
-            <div class="work-count">
-                THINGS I'VE BUILT
+            <div class="showcase-count">
+                SELECTED WORK
             </div>
 
         </div>
-
-
-        <h2 class="showcase-title reveal">
-            Things I've built.
-        </h2>
 
 
         <div class="videos">
@@ -1324,7 +1198,6 @@
     </section>
 
 
-
     <!-- =========================
          FOOTER
     ========================= -->
@@ -1342,7 +1215,6 @@
     </footer>
 
 
-
     <!-- =========================
          JAVASCRIPT
     ========================= -->
@@ -1350,11 +1222,10 @@
     <script>
 
         /*
-         * Smooth reveal animations.
-         */
+            Smooth reveal animations
+        */
 
-        const reveals = document.querySelectorAll(".reveal");
-
+        const revealElements = document.querySelectorAll(".reveal");
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -1378,17 +1249,16 @@
         );
 
 
-        reveals.forEach((element) => {
+        revealElements.forEach((element) => {
 
             observer.observe(element);
 
         });
 
 
-
         /*
-         * Make internal links scroll smoothly.
-         */
+            Smooth navigation
+        */
 
         document.querySelectorAll("a[href^='#']").forEach((link) => {
 
@@ -1408,36 +1278,6 @@
                     behavior: "smooth",
                     block: "start"
                 });
-
-            });
-
-        });
-
-
-
-        /*
-         * Subtle parallax on the scattered quotes.
-         * The quotes move very slightly as you scroll,
-         * giving the homepage the same floating feeling.
-         */
-
-        const quotes = document.querySelectorAll(".floating-quote");
-
-
-        window.addEventListener("scroll", () => {
-
-            const scrollY = window.scrollY;
-
-            if (scrollY > window.innerHeight) {
-                return;
-            }
-
-            quotes.forEach((quote, index) => {
-
-                const speed = 0.015 + (index * 0.003);
-
-                quote.style.transform =
-                    `translateY(${scrollY * speed}px)`;
 
             });
 
