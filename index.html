@@ -31,9 +31,9 @@
             cursor: default;
         }
 
-        /* -----------------------------
-           MAIN HORIZONTAL CONTAINER
-        ----------------------------- */
+        /* =============================
+           MAIN HORIZONTAL PAGE
+        ============================= */
 
         .page {
             width: max-content;
@@ -53,9 +53,10 @@
             border-right: 1px solid #171717;
         }
 
-        /* -----------------------------
-           TOP BAR
-        ----------------------------- */
+
+        /* =============================
+           TOP TICKER
+        ============================= */
 
         .topbar {
             position: fixed;
@@ -69,7 +70,7 @@
             overflow: hidden;
             white-space: nowrap;
             z-index: 50;
-            background: rgba(8, 8, 8, 0.85);
+            background: rgba(8, 8, 8, 0.88);
         }
 
         .ticker {
@@ -97,9 +98,10 @@
             }
         }
 
-        /* -----------------------------
+
+        /* =============================
            HERO
-        ----------------------------- */
+        ============================= */
 
         .hero {
             display: flex;
@@ -110,47 +112,73 @@
         .hero-name {
             position: relative;
             z-index: 5;
+
             font-family: "Playfair Display", serif;
             font-size: clamp(110px, 16vw, 260px);
             font-weight: 400;
             letter-spacing: -12px;
+
             color: #f2f2f2;
+
             user-select: none;
+            cursor: pointer;
+
+            transition:
+                transform 0.8s cubic-bezier(0.77, 0, 0.18, 1),
+                opacity 0.8s ease;
+        }
+
+        .hero-name:hover {
+            transform: translate(180px, -130px) rotate(-5deg);
+            opacity: 0.85;
         }
 
         .hero-subtitle {
             position: absolute;
             bottom: 70px;
             left: 50%;
+
             transform: translateX(-50%);
+
             color: #777;
             font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
+
+            white-space: nowrap;
         }
 
         .scroll-hint {
             position: absolute;
             bottom: 25px;
             left: 50%;
+
             transform: translateX(-50%);
+
             color: #444;
             font-size: 10px;
         }
 
-        /* -----------------------------
+
+        /* =============================
            BACKGROUND QUOTES
-        ----------------------------- */
+        ============================= */
 
         .quote {
             position: absolute;
+
             color: #343434;
+
             font-family: "Playfair Display", serif;
             font-style: italic;
+
             font-size: 17px;
-            max-width: 300px;
             line-height: 1.4;
+
+            max-width: 300px;
+
             user-select: none;
+            pointer-events: none;
         }
 
         .q1 {
@@ -178,9 +206,10 @@
             left: 50%;
         }
 
-        /* -----------------------------
+
+        /* =============================
            ABOUT
-        ----------------------------- */
+        ============================= */
 
         .about {
             display: flex;
@@ -197,19 +226,24 @@
             font-family: "Playfair Display", serif;
             font-size: 28px;
             font-weight: 400;
+
             margin-bottom: 30px;
         }
 
         .about-text {
             color: #777;
+
             font-family: "Playfair Display", serif;
             font-size: 15px;
             line-height: 1.8;
+
+            margin-bottom: 10px;
         }
 
         .about-box {
             margin-top: 40px;
             padding: 25px;
+
             border: 1px solid #1c1c1c;
             border-radius: 10px;
         }
@@ -217,35 +251,63 @@
         .about-box-title {
             font-size: 10px;
             letter-spacing: 2px;
+
             margin-bottom: 15px;
+
             color: #aaa;
         }
 
         .about-box-text {
             font-family: "Playfair Display", serif;
             font-size: 14px;
+
             color: #666;
         }
 
-        /* -----------------------------
+
+        /* =============================
            WORK
-        ----------------------------- */
+        ============================= */
 
         .work {
-            padding: 100px 8vw;
+            padding: 110px 8vw 150px;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            scrollbar-width: thin;
+            scrollbar-color: #333 transparent;
+        }
+
+        .work::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .work::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .work::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        .work-content {
+            min-height: 150vh;
         }
 
         .work-title {
             font-family: "Playfair Display", serif;
             font-size: 28px;
             font-weight: 400;
+
             margin-bottom: 35px;
         }
 
         .projects {
             display: grid;
             grid-template-columns: repeat(2, 320px);
-            gap: 45px 40px;
+
+            gap: 55px 40px;
         }
 
         .project {
@@ -255,17 +317,23 @@
         .project-image {
             width: 320px;
             height: 180px;
+
             border-radius: 7px;
             border: 1px solid #202020;
+
             background: #111;
+
             overflow: hidden;
+
             position: relative;
         }
 
         .project-image img {
             width: 100%;
             height: 100%;
+
             object-fit: cover;
+
             transition: transform 0.5s ease;
         }
 
@@ -276,31 +344,38 @@
         .project-placeholder {
             width: 100%;
             height: 100%;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             color: #333;
+
             font-size: 11px;
             letter-spacing: 2px;
         }
 
         .project-name {
             margin-top: 13px;
+
             font-family: "Playfair Display", serif;
             font-size: 17px;
         }
 
         .project-description {
             margin-top: 10px;
+
             color: #666;
+
             font-family: "Playfair Display", serif;
             font-size: 13px;
             line-height: 1.6;
         }
 
-        /* -----------------------------
+
+        /* =============================
            CONTACT
-        ----------------------------- */
+        ============================= */
 
         .contact {
             display: flex;
@@ -316,24 +391,34 @@
             font-family: "Playfair Display", serif;
             font-size: 34px;
             font-weight: 400;
+
             margin-bottom: 25px;
         }
 
         .contact-text {
             font-family: "Playfair Display", serif;
             color: #666;
+
             margin-bottom: 30px;
         }
 
         .contact-button {
             display: inline-block;
+
             padding: 14px 25px;
+
             border: 1px solid #282828;
             border-radius: 30px;
+
             color: #ddd;
+
             text-decoration: none;
+
             font-size: 12px;
-            transition: 0.3s;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease;
         }
 
         .contact-button:hover {
@@ -343,40 +428,55 @@
 
         .contact-credit {
             margin-top: 50px;
+
             font-family: "Playfair Display", serif;
             font-style: italic;
+
             color: #444;
         }
 
-        /* -----------------------------
+
+        /* =============================
            PROGRESS BAR
-        ----------------------------- */
+        ============================= */
 
         .progress {
             position: fixed;
+
             bottom: 15px;
             left: 50%;
+
             transform: translateX(-50%);
+
             width: 180px;
             height: 2px;
+
             background: #181818;
+
             z-index: 100;
         }
 
         .progress-bar {
             width: 0%;
             height: 100%;
+
             background: #777;
         }
 
-        /* -----------------------------
-           RESPONSIVE
-        ----------------------------- */
+
+        /* =============================
+           MOBILE
+        ============================= */
 
         @media (max-width: 800px) {
+
             .hero-name {
                 font-size: 90px;
                 letter-spacing: -5px;
+            }
+
+            .hero-name:hover {
+                transform: translate(80px, -80px) rotate(-5deg);
             }
 
             .projects {
@@ -391,34 +491,115 @@
             .quote {
                 font-size: 14px;
             }
+
+            .hero-subtitle {
+                font-size: 9px;
+            }
         }
     </style>
 </head>
 
+
 <body>
 
-    <!-- TOP TESTIMONIAL TICKER -->
+    <!-- =============================
+         TOP TICKER
+    ============================= -->
 
     <div class="topbar">
-        <div class="ticker">
-            <span>VOID <b class="stars">★★★★★</b> "ABSOLUTE GOAT TO WORK WITH"</span>
-            <span>RIZEN <b class="stars">★★★★★</b> "DID EVERYTHING I ASKED"</span>
-            <span>PROZAC <b class="stars">★★★★★</b> "PARTICLES WERE FIRE"</span>
-            <span>ITZYP <b class="stars">★★★★★</b> "WELL WORTH THE WAIT"</span>
 
-            <span>VOID <b class="stars">★★★★★</b> "ABSOLUTE GOAT TO WORK WITH"</span>
-            <span>RIZEN <b class="stars">★★★★★</b> "DID EVERYTHING I ASKED"</span>
-            <span>PROZAC <b class="stars">★★★★★</b> "PARTICLES WERE FIRE"</span>
-            <span>ITZYP <b class="stars">★★★★★</b> "WELL WORTH THE WAIT"</span>
+        <div class="ticker">
+
+            <span>
+                VOID
+                <b class="stars">★★★★★</b>
+                "ABSOLUTE GOAT TO WORK WITH"
+            </span>
+
+            <span>
+                RIZEN
+                <b class="stars">★★★★★</b>
+                "DID EVERYTHING I ASKED"
+            </span>
+
+            <span>
+                PROZAC
+                <b class="stars">★★★★★</b>
+                "PARTICLES WERE FIRE"
+            </span>
+
+            <span>
+                ITZYP
+                <b class="stars">★★★★★</b>
+                "WELL WORTH THE WAIT"
+            </span>
+
+            <span>
+                DECOY
+                <b class="stars">★★★★★</b>
+                "BEST SKRIPT DEV I'VE SEEN"
+            </span>
+
+            <span>
+                MARYG
+                <b class="stars">★★★★★</b>
+                "ABSOLUTELY COOKED"
+            </span>
+
+
+            <!-- duplicate for seamless ticker -->
+
+            <span>
+                VOID
+                <b class="stars">★★★★★</b>
+                "ABSOLUTE GOAT TO WORK WITH"
+            </span>
+
+            <span>
+                RIZEN
+                <b class="stars">★★★★★</b>
+                "DID EVERYTHING I ASKED"
+            </span>
+
+            <span>
+                PROZAC
+                <b class="stars">★★★★★</b>
+                "PARTICLES WERE FIRE"
+            </span>
+
+            <span>
+                ITZYP
+                <b class="stars">★★★★★</b>
+                "WELL WORTH THE WAIT"
+            </span>
+
+            <span>
+                DECOY
+                <b class="stars">★★★★★</b>
+                "BEST SKRIPT DEV I'VE SEEN"
+            </span>
+
+            <span>
+                MARYG
+                <b class="stars">★★★★★</b>
+                "ABSOLUTELY COOKED"
+            </span>
+
         </div>
+
     </div>
 
 
-    <!-- EVERYTHING INSIDE THIS MOVES HORIZONTALLY -->
+    <!-- =============================
+         HORIZONTAL PAGE
+    ============================= -->
 
     <main class="page" id="page">
 
-        <!-- HERO -->
+
+        <!-- =============================
+             HERO
+        ============================= -->
 
         <section class="section hero">
 
@@ -442,9 +623,13 @@
                 "Why seek validation in a world that crucified a perfect man?"
             </div>
 
-            <div class="hero-name">
+
+            <!-- HOVER THIS -->
+
+            <div class="hero-name" id="voidName">
                 Void
             </div>
+
 
             <div class="hero-subtitle">
                 Minecraft Developer · Skript · Plugins · Systems
@@ -457,7 +642,9 @@
         </section>
 
 
-        <!-- ABOUT -->
+        <!-- =============================
+             ABOUT
+        ============================= -->
 
         <section class="section about">
 
@@ -493,101 +680,192 @@
         </section>
 
 
-        <!-- WORK -->
+        <!-- =============================
+             WORK
+        ============================= -->
 
         <section class="section work">
 
-            <h2 class="work-title">
-                Work
-            </h2>
+            <div class="work-content">
 
-            <div class="projects">
+                <h2 class="work-title">
+                    Work
+                </h2>
 
-                <article class="project">
 
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            PROJECT IMAGE
+                <div class="projects">
+
+
+                    <article class="project">
+
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                PROJECT IMAGE
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-name">
-                        Project One
-                    </div>
-
-                    <div class="project-description">
-                        Custom Minecraft systems, mechanics and server
-                        development.
-                    </div>
-
-                </article>
-
-
-                <article class="project">
-
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            PROJECT IMAGE
+                        <div class="project-name">
+                            Project One
                         </div>
-                    </div>
 
-                    <div class="project-name">
-                        Project Two
-                    </div>
-
-                    <div class="project-description">
-                        Advanced Skript development with custom effects,
-                        interfaces and mechanics.
-                    </div>
-
-                </article>
-
-
-                <article class="project">
-
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            PROJECT IMAGE
+                        <div class="project-description">
+                            Custom Minecraft systems, mechanics and server
+                            development.
                         </div>
-                    </div>
 
-                    <div class="project-name">
-                        Project Three
-                    </div>
-
-                    <div class="project-description">
-                        Server systems designed around performance,
-                        gameplay and clean visuals.
-                    </div>
-
-                </article>
+                    </article>
 
 
-                <article class="project">
+                    <article class="project">
 
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            PROJECT IMAGE
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                PROJECT IMAGE
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-name">
-                        Project Four
-                    </div>
+                        <div class="project-name">
+                            Project Two
+                        </div>
 
-                    <div class="project-description">
-                        Custom mechanics built specifically for
-                        SMP and server projects.
-                    </div>
+                        <div class="project-description">
+                            Advanced Skript development with custom effects,
+                            interfaces and mechanics.
+                        </div>
 
-                </article>
+                    </article>
+
+
+                    <article class="project">
+
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                PROJECT IMAGE
+                            </div>
+                        </div>
+
+                        <div class="project-name">
+                            Project Three
+                        </div>
+
+                        <div class="project-description">
+                            Server systems designed around performance,
+                            gameplay and clean visuals.
+                        </div>
+
+                    </article>
+
+
+                    <article class="project">
+
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                PROJECT IMAGE
+                            </div>
+                        </div>
+
+                        <div class="project-name">
+                            Project Four
+                        </div>
+
+                        <div class="project-description">
+                            Custom mechanics built specifically for SMP
+                            and server projects.
+                        </div>
+
+                    </article>
+
+
+                    <article class="project">
+
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                PROJECT IMAGE
+                            </div>
+                        </div>
+
+                        <div class="project-name">
+                            Project Five
+                        </div>
+
+                        <div class="project-description">
+                            Experimental systems, visuals and gameplay
+                            mechanics.
+                        </div>
+
+                    </article>
+
+
+                    <article class="project">
+
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                PROJECT IMAGE
+                            </div>
+                        </div>
+
+                        <div class="project-name">
+                            Project Six
+                        </div>
+
+                        <div class="project-description">
+                            Custom server development built from the
+                            ground up.
+                        </div>
+
+                    </article>
+
+
+                    <article class="project">
+
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                PROJECT IMAGE
+                            </div>
+                        </div>
+
+                        <div class="project-name">
+                            Project Seven
+                        </div>
+
+                        <div class="project-description">
+                            Unique Minecraft mechanics and polished
+                            server experiences.
+                        </div>
+
+                    </article>
+
+
+                    <article class="project">
+
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                PROJECT IMAGE
+                            </div>
+                        </div>
+
+                        <div class="project-name">
+                            Project Eight
+                        </div>
+
+                        <div class="project-description">
+                            Custom plugins and systems designed for
+                            ambitious servers.
+                        </div>
+
+                    </article>
+
+
+                </div>
 
             </div>
 
         </section>
 
 
-        <!-- CONTACT -->
+        <!-- =============================
+             CONTACT
+        ============================= -->
 
         <section class="section contact">
 
@@ -613,13 +891,21 @@
 
         </section>
 
+
     </main>
 
 
-    <!-- SCROLL PROGRESS -->
+    <!-- =============================
+         HORIZONTAL PROGRESS
+    ============================= -->
 
     <div class="progress">
-        <div class="progress-bar" id="progressBar"></div>
+
+        <div
+            class="progress-bar"
+            id="progressBar">
+        </div>
+
     </div>
 
 
@@ -631,11 +917,39 @@
         let currentX = 0;
         let targetX = 0;
 
+
+        /* =============================
+           HORIZONTAL SCROLL
+        ============================= */
+
         function getMaxScroll() {
+
             return page.scrollWidth - window.innerWidth;
+
         }
 
+
         window.addEventListener("wheel", function(event) {
+
+            /*
+                If the mouse is over Work,
+                let the Work section scroll normally
+                from top to bottom.
+            */
+
+            const workSection = event.target.closest(".work");
+
+            if (workSection) {
+                return;
+            }
+
+
+            /*
+                Everywhere else:
+
+                Mouse wheel DOWN = move right
+                Mouse wheel UP   = move left
+            */
 
             event.preventDefault();
 
@@ -643,9 +957,11 @@
 
             const maxScroll = getMaxScroll();
 
+
             if (targetX < 0) {
                 targetX = 0;
             }
+
 
             if (targetX > maxScroll) {
                 targetX = maxScroll;
@@ -654,24 +970,42 @@
         }, { passive: false });
 
 
+        /* =============================
+           SMOOTH HORIZONTAL MOVEMENT
+        ============================= */
+
         function animate() {
 
             currentX += (targetX - currentX) * 0.08;
 
-            page.style.transform = `translateX(${-currentX}px)`;
+            page.style.transform =
+                `translateX(${-currentX}px)`;
+
 
             const maxScroll = getMaxScroll();
 
+
             if (maxScroll > 0) {
-                const percentage = (currentX / maxScroll) * 100;
-                progressBar.style.width = `${percentage}%`;
+
+                const percentage =
+                    (currentX / maxScroll) * 100;
+
+                progressBar.style.width =
+                    `${percentage}%`;
+
             }
 
+
             requestAnimationFrame(animate);
+
         }
 
         animate();
 
+
+        /* =============================
+           RESIZE
+        ============================= */
 
         window.addEventListener("resize", function() {
 
