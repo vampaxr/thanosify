@@ -524,7 +524,7 @@
 
         .contact {
             min-height: 70vh;
-            padding: 120px 8vw;
+            padding: 120px 8vw 70px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -576,6 +576,27 @@
         body.light .contact-button:hover {
             background: black;
             color: white;
+        }
+
+        .inspiration {
+            padding: 40px 20px 25px;
+            text-align: center;
+            font-family: "DM Mono", monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.25;
+            transition: opacity 0.3s ease;
+        }
+
+        .inspiration span {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .inspiration:hover {
+            opacity: 0.6;
         }
 
         footer {
@@ -710,6 +731,7 @@
                 aria-label="Toggle light mode">
             </button>
         </div>
+
     </div>
 
     <section
@@ -913,7 +935,14 @@
             </a>
 
         </div>
+
     </section>
+
+    <div class="inspiration">
+        website inspired by
+        <span>zin.i</span>
+        on Discord
+    </div>
 
     <footer>
 
