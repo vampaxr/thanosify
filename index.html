@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VOID</title>
+    <title>Void</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -19,361 +21,400 @@
 
         body {
             background: #080808;
-            color: #f5f5f5;
-            font-family: Georgia, "Times New Roman", serif;
+            color: #f4f4f4;
             overflow-x: hidden;
+            transition:
+                background 0.5s ease,
+                color 0.5s ease;
         }
 
-        ::selection {
-            background: #ffffff;
-            color: #000000;
+        body.light {
+            background: #f4f4f4;
+            color: #080808;
         }
+
+        /* =========================
+           GLOBAL
+        ========================= */
 
         a {
             color: inherit;
             text-decoration: none;
         }
 
-
-        /* =========================
-           NAV
-        ========================= */
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 78px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 5vw;
-
-            z-index: 100;
-
-            background: rgba(8, 8, 8, 0.55);
-            backdrop-filter: blur(18px);
-
-            border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+        button {
+            font-family: inherit;
         }
 
-        .nav-logo {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.25em;
+        ::selection {
+            background: #fff;
+            color: #000;
+        }
 
+        body.light ::selection {
+            background: #000;
+            color: #fff;
+        }
+
+        /* =========================
+           MUSIC
+        ========================= */
+
+        #music {
+            display: none;
+        }
+
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .options-button {
+            position: fixed;
+            left: 24px;
+            bottom: 24px;
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            background: rgba(10,10,10,0.8);
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
             transition:
-                opacity 0.25s ease,
+                transform 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .options-button:hover {
+            transform: rotate(20deg);
+            background: rgba(255,255,255,0.1);
+        }
+
+        body.light .options-button {
+            background: rgba(255,255,255,0.8);
+            color: #000;
+            border-color: rgba(0,0,0,0.15);
+        }
+
+        .options-panel {
+            position: fixed;
+            left: 24px;
+            bottom: 84px;
+            width: 260px;
+            padding: 22px;
+            background: rgba(12,12,12,0.94);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+            transition:
+                opacity 0.3s ease,
                 transform 0.3s ease;
         }
 
-        .nav-logo:hover {
-            opacity: 0.5;
-            transform: translateX(4px);
+        .options-panel.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
         }
 
-        .nav-links {
-            display: flex;
-            gap: 34px;
+        body.light .options-panel {
+            background: rgba(245,245,245,0.95);
+            border-color: rgba(0,0,0,0.12);
         }
 
-        .nav-links a {
-            font-family: Arial, Helvetica, sans-serif;
+        .options-title {
+            font-family: "DM Mono", monospace;
             font-size: 10px;
-
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 0.18em;
-
-            color: #555;
-
-            transition:
-                color 0.25s ease,
-                transform 0.25s ease;
+            opacity: 0.45;
+            margin-bottom: 20px;
         }
 
-        .nav-links a:hover {
-            color: #fff;
-            transform: translateY(-2px);
+        .option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
 
+        body.light .option {
+            border-color: rgba(0,0,0,0.08);
+        }
+
+        .option-name {
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        .toggle {
+            width: 42px;
+            height: 23px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: #222;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .toggle::after {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #777;
+            transition: 0.3s ease;
+        }
+
+        .toggle.active {
+            background: #173b20;
+            border-color: #2e9143;
+        }
+
+        .toggle.active::after {
+            left: 22px;
+            background: #4fd66a;
+        }
 
         /* =========================
            HERO
         ========================= */
 
         .hero {
-            min-height: 100vh;
-
             position: relative;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-
-            width: 100%;
             height: 100vh;
-
+            min-height: 700px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            z-index: 5;
         }
 
+        .hero-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-label {
+            position: absolute;
+            top: 34px;
+            left: 5.5vw;
+            font-family: "DM Mono", monospace;
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.35;
+        }
 
         /* =========================
-           SCATTERED QUOTES
+           QUOTES
         ========================= */
 
-        .floating-quote {
+        .quote {
             position: absolute;
-
-            max-width: 330px;
-
-            color: #292929;
-
-            font-size: clamp(13px, 1.15vw, 18px);
-
-            line-height: 1.45;
-
+            max-width: 300px;
+            font-family: "Playfair Display", serif;
             font-style: italic;
-
-            pointer-events: none;
-
-            user-select: none;
-
+            font-size: 16px;
+            line-height: 1.45;
+            color: rgba(255,255,255,0.25);
             transition:
-                color 0.5s ease,
-                opacity 0.5s ease,
-                transform 1s cubic-bezier(.2,.8,.2,1);
+                color 0.4s ease,
+                opacity 0.4s ease;
+            user-select: none;
         }
 
-        .quote-1 {
-            top: 7%;
-            left: 11%;
-            transform: rotate(-2deg);
+        body.light .quote {
+            color: rgba(0,0,0,0.28);
         }
 
-        .quote-2 {
-            top: 15%;
-            right: 8%;
-            transform: rotate(2deg);
+        .quote:hover {
+            color: rgba(255,255,255,0.65);
         }
 
-        .quote-3 {
-            top: 39%;
+        body.light .quote:hover {
+            color: rgba(0,0,0,0.65);
+        }
+
+        .q1 {
+            top: 4%;
+            left: 13%;
+        }
+
+        .q2 {
+            top: 18%;
+            right: 7%;
+        }
+
+        .q3 {
+            top: 30%;
             left: 4%;
-            transform: rotate(-1deg);
         }
 
-        .quote-4 {
-            top: 43%;
-            right: 5%;
-            transform: rotate(2deg);
+        .q4 {
+            top: 42%;
+            right: 15%;
         }
 
-        .quote-5 {
-            bottom: 20%;
+        .q5 {
+            bottom: 17%;
             left: 10%;
-            transform: rotate(-2deg);
         }
 
-        .quote-6 {
-            bottom: 12%;
-            right: 9%;
-            transform: rotate(1deg);
-        }
-
-        .quote-7 {
+        .q6 {
             bottom: 7%;
-            left: 43%;
-            transform: rotate(-1deg);
+            left: 46%;
         }
 
-        .quote-8 {
-            top: 28%;
-            left: 24%;
-            transform: rotate(1deg);
+        .q7 {
+            top: 7%;
+            right: 36%;
         }
 
-        .quote-9 {
-            top: 27%;
-            right: 24%;
-            transform: rotate(-1deg);
+        .q8 {
+            bottom: 27%;
+            right: 4%;
         }
-
 
         /* =========================
            VOID
         ========================= */
 
         .void-wrap {
-            position: relative;
-
-            display: inline-block;
-
-            padding: 55px 70px;
-
-            cursor: pointer;
-
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            cursor: default;
             z-index: 10;
         }
 
-        /*
-            WHITE CARD
+        .void-name {
+            position: relative;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(150px, 18vw, 310px);
+            line-height: 0.75;
+            font-weight: 400;
+            letter-spacing: -15px;
+            color: #f5f5f5;
+            transition:
+                transform 0.45s cubic-bezier(.2,.8,.2,1),
+                color 0.3s ease;
+            z-index: 2;
+        }
 
-            Hidden until hover.
-        */
+        body.light .void-name {
+            color: #080808;
+        }
 
         .void-overlay {
             position: absolute;
-
-            left: 50%;
-            top: 50%;
-
-            width: 88%;
-            height: 72%;
-
-            background: #f4f4f4;
-
-            transform:
-                translate(-50%, -50%)
-                scaleX(0);
-
+            z-index: 1;
+            left: -30px;
+            right: -30px;
+            top: 45%;
+            height: 45%;
+            background: #f5f5f5;
+            transform: scaleX(0);
             transform-origin: center;
-
-            z-index: 4;
-
+            transition:
+                transform 0.32s cubic-bezier(.65,0,.35,1);
             pointer-events: none;
-
-            transition:
-                transform 0.28s cubic-bezier(.77, 0, .18, 1);
         }
 
-
-        /*
-            VOID TEXT
-
-            IMPORTANT:
-            This is ABOVE the white overlay.
-            That's why it turns black correctly.
-        */
-
-        .void {
-            position: relative;
-
-            z-index: 6;
-
-            font-size: clamp(130px, 19vw, 330px);
-
-            line-height: 0.72;
-
-            font-weight: 400;
-
-            letter-spacing: -0.09em;
-
-            color: #eeeeee;
-
-            transition:
-                color 0.2s ease,
-                transform 0.3s cubic-bezier(.2,.8,.2,1);
+        body.light .void-overlay {
+            background: #080808;
         }
 
-        .void-wrap:hover .void {
+        .void-age {
+            position: absolute;
+            z-index: 5;
+            right: -35px;
+            top: -30px;
+            padding: 7px 12px;
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 20px;
+            background: #080808;
+            color: white;
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(8px);
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        body.light .void-age {
+            background: #f4f4f4;
             color: #080808;
-
-            transform: scale(1.025);
+            border-color: rgba(0,0,0,0.4);
         }
 
         .void-wrap:hover .void-overlay {
-            transform:
-                translate(-50%, -50%)
-                scaleX(1);
+            transform: scaleX(1);
         }
 
-
-        /* =========================
-           AGE
-        ========================= */
-
-        .age {
-            position: absolute;
-
-            top: 18px;
-            right: 20px;
-
-            padding: 7px 13px;
-
-            border: 1px solid rgba(255, 255, 255, 0.5);
-
-            border-radius: 30px;
-
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 10px;
-
-            letter-spacing: 0.13em;
-
-            color: #fff;
-
-            opacity: 0;
-
-            transform:
-                translateY(8px)
-                scale(0.96);
-
-            transition:
-                opacity 0.2s ease,
-                transform 0.25s cubic-bezier(.2,.8,.2,1);
-
-            z-index: 8;
-
-            pointer-events: none;
-        }
-
-        .void-wrap:hover .age {
+        .void-wrap:hover .void-age {
             opacity: 1;
-
-            transform:
-                translateY(0)
-                scale(1);
+            transform: translateY(0);
         }
 
+        .void-wrap:hover .void-name {
+            transform: translateY(-4px);
+        }
 
         /* =========================
-           HERO LABEL
+           SCROLL INDICATOR
         ========================= */
 
-        .hero-label {
+        .scroll {
             position: absolute;
-
-            bottom: 38px;
+            bottom: 30px;
             left: 50%;
-
             transform: translateX(-50%);
-
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 8px;
-
+            font-family: "DM Mono", monospace;
+            font-size: 9px;
+            letter-spacing: 3px;
+            opacity: 0.3;
             text-transform: uppercase;
-
-            letter-spacing: 0.35em;
-
-            color: #333;
         }
 
+        .scroll::after {
+            content: "";
+            display: block;
+            width: 1px;
+            height: 35px;
+            background: currentColor;
+            opacity: 0.5;
+            margin: 12px auto 0;
+            animation: scrollLine 1.7s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0%, 100% {
+                transform: scaleY(0.4);
+                transform-origin: top;
+            }
+
+            50% {
+                transform: scaleY(1);
+                transform-origin: top;
+            }
+        }
 
         /* =========================
            ABOUT
@@ -381,120 +422,94 @@
 
         .about {
             min-height: 100vh;
+            padding: 160px 8vw;
+            display: flex;
+            align-items: center;
+        }
 
-            padding: 16vh 8vw;
-
+        .about-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
-            gap: 10vw;
-
+            gap: 100px;
             align-items: center;
         }
 
         .section-label {
-            font-family: Arial, Helvetica, sans-serif;
-
+            font-family: "DM Mono", monospace;
             font-size: 9px;
-
-            letter-spacing: 0.3em;
-
+            letter-spacing: 4px;
+            opacity: 0.4;
             text-transform: uppercase;
-
-            color: #444;
-
-            margin-bottom: 45px;
+            margin-bottom: 25px;
         }
 
         .about-title {
-            font-size: clamp(80px, 11vw, 170px);
-
+            font-family: "Playfair Display", serif;
+            font-size: clamp(45px, 6vw, 80px);
             font-weight: 400;
-
-            letter-spacing: -0.08em;
-
-            line-height: 0.8;
+            line-height: 1;
         }
 
         .about-text {
-            max-width: 520px;
-
-            color: #777;
-
-            font-size: 17px;
-
-            line-height: 1.85;
+            font-family: "DM Mono", monospace;
+            font-size: 12px;
+            line-height: 2;
+            opacity: 0.55;
+            max-width: 480px;
         }
 
-        .about-text strong {
-            color: #eee;
-
-            font-weight: 400;
+        .about-card {
+            margin-top: 35px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+            line-height: 1.8;
+            opacity: 0.75;
         }
 
-        .about-box {
-            margin-top: 45px;
-
-            padding: 22px 25px;
-
-            border: 1px solid rgba(255, 255, 255, 0.07);
-
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 9px;
-
-            letter-spacing: 0.16em;
-
-            color: #555;
+        body.light .about-card {
+            border-color: rgba(0,0,0,0.1);
         }
-
 
         /* =========================
-           WORK + CONTACT
+           WORK
         ========================= */
 
-        .work-contact {
-            min-height: 100vh;
-
-            padding: 15vh 8vw 10vh;
+        .work {
+            padding: 130px 5vw 180px;
         }
 
         .work-header {
-            margin-bottom: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            max-width: 1300px;
+            margin: 0 auto 50px;
         }
 
         .work-title {
-            font-size: clamp(70px, 10vw, 160px);
-
+            font-family: "Playfair Display", serif;
+            font-size: clamp(50px, 7vw, 100px);
             font-weight: 400;
-
-            letter-spacing: -0.08em;
-
-            line-height: 0.8;
         }
 
-        .work-content {
-            display: grid;
-
-            grid-template-columns: 1.5fr 0.7fr;
-
-            gap: 9vw;
-
-            align-items: start;
+        .work-subtitle {
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            opacity: 0.4;
         }
 
-
-        /* =========================
-           PROJECTS
-        ========================= */
-
-        .projects {
+        .work-grid {
+            max-width: 1300px;
+            margin: auto;
             display: grid;
-
             grid-template-columns: repeat(2, 1fr);
-
-            gap: 45px 30px;
+            gap: 70px 30px;
         }
 
         .project {
@@ -503,450 +518,274 @@
 
         .project-image {
             width: 100%;
-
             aspect-ratio: 16 / 9;
-
-            background: #111;
-
-            border: 1px solid rgba(255, 255, 255, 0.07);
-
+            border: 1px solid rgba(255,255,255,0.1);
             overflow: hidden;
-
-            position: relative;
+            background: #050505;
         }
 
-        .project-image img {
+        body.light .project-image {
+            border-color: rgba(0,0,0,0.1);
+            background: #ddd;
+        }
+
+        .project-image iframe {
             width: 100%;
             height: 100%;
-
-            object-fit: cover;
-
-            display: block;
-
-            filter: grayscale(100%);
-
-            opacity: 0.72;
-
-            transition:
-                filter 0.55s ease,
-                opacity 0.55s ease,
-                transform 0.7s cubic-bezier(.2,.8,.2,1);
-        }
-
-        .project:hover .project-image img {
-            filter: grayscale(0%);
-
-            opacity: 1;
-
-            transform: scale(1.045);
-        }
-
-        .project-info {
-            padding-top: 16px;
-
-            display: flex;
-
-            justify-content: space-between;
+            border: 0;
         }
 
         .project-name {
-            font-size: 18px;
+            margin-top: 15px;
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
         }
 
-        .project-type {
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 8px;
-
-            letter-spacing: 0.16em;
-
-            text-transform: uppercase;
-
-            color: #444;
+        .project-description {
+            margin-top: 8px;
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            line-height: 1.7;
+            opacity: 0.4;
         }
-
 
         /* =========================
            CONTACT
         ========================= */
 
-        .contact-side {
-            position: sticky;
-
-            top: 130px;
+        .contact {
+            min-height: 70vh;
+            padding: 120px 8vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
-        .contact-label {
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 9px;
-
-            letter-spacing: 0.3em;
-
-            text-transform: uppercase;
-
-            color: #444;
-
-            margin-bottom: 35px;
+        .contact-inner {
+            max-width: 800px;
         }
 
         .contact-title {
-            font-size: clamp(50px, 6vw, 95px);
-
+            font-family: "Playfair Display", serif;
+            font-size: clamp(60px, 10vw, 150px);
             font-weight: 400;
-
-            letter-spacing: -0.07em;
-
             line-height: 0.9;
-
-            margin-bottom: 40px;
         }
 
-        .contact-description {
-            max-width: 360px;
-
-            color: #666;
-
-            font-size: 15px;
-
-            line-height: 1.8;
-
-            margin-bottom: 35px;
+        .contact-text {
+            margin-top: 35px;
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+            opacity: 0.45;
         }
 
         .contact-button {
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            padding: 15px 24px;
-
-            border: 1px solid rgba(255, 255, 255, 0.16);
-
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 9px;
-
-            letter-spacing: 0.18em;
-
-            text-transform: uppercase;
-
+            display: inline-block;
+            margin-top: 35px;
+            padding: 14px 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 30px;
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
             transition:
                 background 0.3s ease,
                 color 0.3s ease,
-                border-color 0.3s ease,
                 transform 0.3s ease;
         }
 
+        body.light .contact-button {
+            border-color: rgba(0,0,0,0.2);
+        }
+
         .contact-button:hover {
-            background: #fff;
-
-            color: #000;
-
-            border-color: #fff;
-
+            background: white;
+            color: black;
             transform: translateY(-3px);
         }
 
-
-        /* =========================
-           VIDEOS
-           
-           No showcase title.
-           No showcase tab.
-           Just the videos at the end.
-        ========================= */
-
-        .videos {
-            padding: 12vh 8vw 15vh;
-
-            display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 30px;
+        body.light .contact-button:hover {
+            background: black;
+            color: white;
         }
-
-        .video {
-            aspect-ratio: 16 / 9;
-
-            background: #0d0d0d;
-
-            border: 1px solid rgba(255, 255, 255, 0.07);
-
-            overflow: hidden;
-
-            transition:
-                transform 0.45s cubic-bezier(.2,.8,.2,1),
-                border-color 0.35s ease;
-        }
-
-        .video:hover {
-            transform: translateY(-6px);
-
-            border-color: rgba(255, 255, 255, 0.18);
-        }
-
-        .video iframe {
-            width: 100%;
-            height: 100%;
-
-            border: none;
-        }
-
 
         /* =========================
            FOOTER
         ========================= */
 
         footer {
-            padding: 35px 8vw;
-
+            padding: 25px 5vw;
+            border-top: 1px solid rgba(255,255,255,0.08);
             display: flex;
-
             justify-content: space-between;
-
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 8px;
-
-            letter-spacing: 0.18em;
-
-            color: #333;
+            font-family: "DM Mono", monospace;
+            font-size: 9px;
+            opacity: 0.35;
         }
 
+        body.light footer {
+            border-color: rgba(0,0,0,0.08);
+        }
 
         /* =========================
-           REVEAL
+           MOBILE
         ========================= */
 
-        .reveal {
-            opacity: 0;
+        @media (max-width: 800px) {
 
-            transform: translateY(25px);
-
-            transition:
-                opacity 0.7s ease,
-                transform 0.7s cubic-bezier(.2,.8,.2,1);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-
-            transform: translateY(0);
-        }
-
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 1000px) {
-
-            .about {
-                grid-template-columns: 1fr;
-
-                gap: 70px;
-            }
-
-            .work-content {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-side {
-                position: relative;
-
-                top: auto;
-            }
-
-            .projects {
-                order: 2;
-            }
-
-            .contact-side {
-                order: 1;
-            }
-
-            .floating-quote {
-                max-width: 250px;
-
-                font-size: 13px;
-            }
-        }
-
-
-        @media (max-width: 700px) {
-
-            nav {
-                height: 65px;
-
-                padding: 0 25px;
-            }
-
-            .nav-links {
-                gap: 15px;
-            }
-
-            .nav-links a {
-                font-size: 8px;
-            }
-
-            .void-wrap {
-                padding: 40px 35px;
-            }
-
-            .void {
-                font-size: 27vw;
-            }
-
-            .void-overlay {
-                width: 100%;
-            }
-
-            .floating-quote {
-                font-size: 10px;
-
+            .quote {
+                font-size: 12px;
                 max-width: 180px;
             }
 
-            .quote-1 {
-                top: 12%;
+            .q1 {
                 left: 5%;
             }
 
-            .quote-2 {
-                top: 20%;
-                right: 4%;
-            }
-
-            .quote-3 {
-                top: 37%;
-                left: 2%;
-            }
-
-            .quote-4 {
-                top: 43%;
-                right: 2%;
-            }
-
-            .quote-5 {
-                bottom: 22%;
-                left: 5%;
-            }
-
-            .quote-6 {
-                bottom: 28%;
+            .q2 {
                 right: 3%;
             }
 
-            .quote-7 {
-                bottom: 8%;
-                left: 35%;
+            .q3 {
+                left: 2%;
             }
 
-            .quote-8,
-            .quote-9 {
-                display: none;
+            .q4 {
+                right: 4%;
             }
 
-            .about,
-            .work-contact,
-            .videos {
-                padding-left: 25px;
-                padding-right: 25px;
+            .q5 {
+                left: 5%;
             }
 
-            .projects,
-            .videos {
+            .q8 {
+                right: 2%;
+            }
+
+            .void-name {
+                font-size: 29vw;
+                letter-spacing: -7px;
+            }
+
+            .void-overlay {
+                left: -15px;
+                right: -15px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .work-grid {
                 grid-template-columns: 1fr;
             }
 
-            footer {
-                padding: 30px 25px;
+            .work-header {
+                display: block;
+            }
+
+            .work-subtitle {
+                margin-top: 15px;
+            }
+
+            .options-panel {
+                left: 15px;
+                bottom: 75px;
             }
         }
     </style>
 </head>
 
-
 <body>
 
     <!-- =========================
-         NAV
+         BACKGROUND MUSIC
     ========================= -->
 
-    <nav>
-
-        <a href="#home" class="nav-logo">
-            VOID
-        </a>
-
-        <div class="nav-links">
-
-            <a href="#about">
-                About
-            </a>
-
-            <a href="#work">
-                Work
-            </a>
-
-            <a href="#contact">
-                Contact
-            </a>
-
-        </div>
-
-    </nav>
+    <audio id="music" loop preload="auto">
+        <source src="background.mp3" type="audio/mpeg">
+    </audio>
 
 
     <!-- =========================
-         HOME
+         OPTIONS
+    ========================= -->
+
+    <button class="options-button" id="optionsButton">
+        ⚙
+    </button>
+
+    <div class="options-panel" id="optionsPanel">
+
+        <div class="options-title">
+            Options
+        </div>
+
+        <div class="option">
+            <span class="option-name">
+                Background music
+            </span>
+
+            <button class="toggle" id="musicToggle"></button>
+        </div>
+
+        <div class="option">
+            <span class="option-name">
+                Light mode
+            </span>
+
+            <button class="toggle" id="themeToggle"></button>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         HERO
     ========================= -->
 
     <section class="hero" id="home">
 
-        <div class="hero-content">
+        <div class="hero-inner">
 
-            <!-- Scattered quotes -->
-
-            <div class="floating-quote quote-1">
-                “I am inevitable.”
+            <div class="hero-label">
+                Words worth remembering
             </div>
 
-            <div class="floating-quote quote-2">
-                “I had strings, but now I'm free.”
+
+            <!-- QUOTES -->
+
+            <div class="quote q1">
+                "I am inevitable."
             </div>
 
-            <div class="floating-quote quote-3">
-                “Doom does not bargain.”
+            <div class="quote q2">
+                "I had strings, but now I'm free."
             </div>
 
-            <div class="floating-quote quote-4">
-                “There are no strings on me.”
+            <div class="quote q3">
+                "Doom does not bargain."
             </div>
 
-            <div class="floating-quote quote-5">
-                “Dread it. Run from it.”
+            <div class="quote q4">
+                "The hardest choices require the strongest wills."
             </div>
 
-            <div class="floating-quote quote-6">
-                “I am Doom.”
+            <div class="quote q5">
+                "Peace in our time."
             </div>
 
-            <div class="floating-quote quote-7">
-                “Reality can be whatever I want.”
+            <div class="quote q6">
+                "You were made to obey."
             </div>
 
-            <div class="floating-quote quote-8">
-                “The hardest choices require the strongest wills.”
+            <div class="quote q7">
+                "Reality is often disappointing."
             </div>
 
-            <div class="floating-quote quote-9">
-                “You will know I was right.”
+            <div class="quote q8">
+                "Doom is not a man to be trifled with."
             </div>
 
 
@@ -956,21 +795,21 @@
 
                 <div class="void-overlay"></div>
 
-                <div class="age">
-                    UK 15
+                <div class="void-age">
+                    15 years old
                 </div>
 
-                <h1 class="void">
+                <div class="void-name">
                     Void
-                </h1>
+                </div>
 
             </div>
 
-        </div>
 
+            <div class="scroll">
+                Scroll
+            </div>
 
-        <div class="hero-label">
-            Minecraft Developer · Skript · Creative Development
         </div>
 
     </section>
@@ -982,40 +821,35 @@
 
     <section class="about" id="about">
 
-        <div class="reveal">
+        <div class="about-container">
 
-            <div class="section-label">
-                About
+            <div>
+
+                <div class="section-label">
+                    About
+                </div>
+
+                <h2 class="about-title">
+                    Building things<br>
+                    that shouldn't exist.
+                </h2>
+
             </div>
 
-            <h2 class="about-title">
-                Void
-            </h2>
+            <div>
 
-        </div>
+                <p class="about-text">
+                    Minecraft Skript developer focused on custom mechanics,
+                    systems, visual effects and experiences that feel different
+                    from the usual.
+                </p>
 
+                <div class="about-card">
+                    Skript · Minecraft · Systems · Mechanics · Visuals
+                    <br><br>
+                    Turning ideas into something players actually remember.
+                </div>
 
-        <div class="reveal">
-
-            <p class="about-text">
-
-                I build
-                <strong>Minecraft experiences</strong>
-                focused on custom mechanics,
-                clean systems, and visuals that actually
-                feel good to use.
-
-                <br><br>
-
-                From small Skript systems to larger SMP
-                mechanics, I like taking an idea and turning
-                it into something people actually want to play.
-
-            </p>
-
-
-            <div class="about-box">
-                SKRIPT · MINECRAFT · PLUGINS · SYSTEMS · VISUALS
             </div>
 
         </div>
@@ -1024,151 +858,76 @@
 
 
     <!-- =========================
-         WORK + CONTACT
+         WORK
     ========================= -->
 
-    <section class="work-contact" id="work">
+    <section class="work" id="work">
 
-        <div class="work-header reveal">
+        <div class="work-header">
 
             <h2 class="work-title">
                 Work
             </h2>
 
+            <div class="work-subtitle">
+                Built with intent.
+            </div>
+
         </div>
 
 
-        <div class="work-content">
+        <div class="work-grid">
 
-            <!-- WORK -->
+            <!-- PROJECT 1 -->
 
-            <div class="projects">
+            <a class="project" href="#" target="_blank">
 
-                <a href="#" class="project reveal">
+                <div class="project-image">
 
-                    <div class="project-image">
-                        <img
-                            src="images/project1.jpg"
-                            alt="Project 1"
-                        >
-                    </div>
+                    <!-- Replace this iframe with your video -->
+                    <iframe
+                        src="https://www.youtube.com/embed/"
+                        title="Project 1"
+                        allowfullscreen>
+                    </iframe>
 
-                    <div class="project-info">
-
-                        <div class="project-name">
-                            Project One
-                        </div>
-
-                        <div class="project-type">
-                            Minecraft
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <a href="#" class="project reveal">
-
-                    <div class="project-image">
-                        <img
-                            src="images/project2.jpg"
-                            alt="Project 2"
-                        >
-                    </div>
-
-                    <div class="project-info">
-
-                        <div class="project-name">
-                            Project Two
-                        </div>
-
-                        <div class="project-type">
-                            SMP
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <a href="#" class="project reveal">
-
-                    <div class="project-image">
-                        <img
-                            src="images/project3.jpg"
-                            alt="Project 3"
-                        >
-                    </div>
-
-                    <div class="project-info">
-
-                        <div class="project-name">
-                            Project Three
-                        </div>
-
-                        <div class="project-type">
-                            Skript
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <a href="#" class="project reveal">
-
-                    <div class="project-image">
-                        <img
-                            src="images/project4.jpg"
-                            alt="Project 4"
-                        >
-                    </div>
-
-                    <div class="project-info">
-
-                        <div class="project-name">
-                            Project Four
-                        </div>
-
-                        <div class="project-type">
-                            Development
-                        </div>
-
-                    </div>
-
-                </a>
-
-            </div>
-
-
-            <!-- CONTACT -->
-
-            <div class="contact-side reveal" id="contact">
-
-                <div class="contact-label">
-                    Contact
                 </div>
 
-                <h2 class="contact-title">
-                    Let's build.
-                </h2>
+                <div class="project-name">
+                    Project One
+                </div>
 
-                <p class="contact-description">
-                    Have an SMP idea, custom mechanic,
-                    plugin, or something completely
-                    ridiculous in mind?
-                </p>
+                <div class="project-description">
+                    Custom Minecraft mechanics and systems.
+                </div>
 
-                <a
-                    href="https://discord.com/"
-                    target="_blank"
-                    class="contact-button"
-                >
-                    Discord
-                </a>
+            </a>
 
-            </div>
+
+            <!-- PROJECT 2 -->
+
+            <a class="project" href="#" target="_blank">
+
+                <div class="project-image">
+
+                    <!-- Replace this iframe with your video -->
+                    <iframe
+                        src="https://www.youtube.com/embed/"
+                        title="Project 2"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+                <div class="project-name">
+                    Project Two
+                </div>
+
+                <div class="project-description">
+                    Advanced Skript development and visuals.
+                </div>
+
+            </a>
 
         </div>
 
@@ -1176,33 +935,34 @@
 
 
     <!-- =========================
-         VIDEOS
-         
-         No Showcase title.
-         No Showcase tab.
-         Videos simply sit at the bottom.
+         CONTACT
     ========================= -->
 
-    <section class="videos">
+    <section class="contact" id="contact">
 
-        <div class="video reveal">
+        <div class="contact-inner">
 
-            <iframe
-                src="https://www.youtube.com/embed/VIDEO_ID_1"
-                title="Project Showcase 1"
-                allowfullscreen>
-            </iframe>
+            <div class="section-label">
+                Contact
+            </div>
 
-        </div>
+            <h2 class="contact-title">
+                Let's build
+                something.
+            </h2>
 
+            <p class="contact-text">
+                Have an idea for an SMP, plugin or custom system?
+            </p>
 
-        <div class="video reveal">
+            <a
+                class="contact-button"
+                href="https://discord.com/"
+                target="_blank">
 
-            <iframe
-                src="https://www.youtube.com/embed/VIDEO_ID_2"
-                title="Project Showcase 2"
-                allowfullscreen>
-            </iframe>
+                Contact me
+
+            </a>
 
         </div>
 
@@ -1220,7 +980,7 @@
         </span>
 
         <span>
-            © 2026
+            2026
         </span>
 
     </footer>
@@ -1232,48 +992,130 @@
 
     <script>
 
-        const revealElements =
-            document.querySelectorAll(".reveal");
+        const music = document.getElementById("music");
+
+        const musicToggle = document.getElementById("musicToggle");
+
+        const themeToggle = document.getElementById("themeToggle");
+
+        const optionsButton = document.getElementById("optionsButton");
+
+        const optionsPanel = document.getElementById("optionsPanel");
 
 
-        const observer =
-            new IntersectionObserver(
-                (entries) => {
+        /* =========================
+           OPTIONS PANEL
+        ========================= */
 
-                    entries.forEach((entry) => {
+        optionsButton.addEventListener("click", () => {
 
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add("visible");
-
-                            observer.unobserve(entry.target);
-
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: 0.12
-                }
-            );
-
-
-        revealElements.forEach((element) => {
-
-            observer.observe(element);
+            optionsPanel.classList.toggle("open");
 
         });
 
 
-        document.querySelectorAll("a[href^='#']").forEach((link) => {
+        /* =========================
+           MUSIC
+        ========================= */
 
-            link.addEventListener("click", (event) => {
+        let musicEnabled = false;
 
-                const target =
-                    document.querySelector(
-                        link.getAttribute("href")
-                    );
+        function enableMusic() {
+
+            if (!musicEnabled) {
+                return;
+            }
+
+            music.volume = 0.35;
+
+            music.play().catch(() => {});
+
+        }
+
+
+        musicToggle.addEventListener("click", () => {
+
+            musicEnabled = !musicEnabled;
+
+            musicToggle.classList.toggle(
+                "active",
+                musicEnabled
+            );
+
+            if (musicEnabled) {
+
+                music.volume = 0.35;
+
+                music.play().catch(() => {});
+
+            } else {
+
+                music.pause();
+
+            }
+
+        });
+
+
+        /*
+         * Browsers block autoplay.
+         * This gives the music permission after
+         * the user interacts with the website.
+         */
+
+        document.addEventListener(
+            "click",
+            enableMusic,
+            { once: true }
+        );
+
+
+        /* =========================
+           LIGHT MODE
+        ========================= */
+
+        themeToggle.addEventListener("click", () => {
+
+            document.body.classList.toggle("light");
+
+            themeToggle.classList.toggle(
+                "active",
+                document.body.classList.contains("light")
+            );
+
+        });
+
+
+        /* =========================
+           CLOSE OPTIONS
+           WHEN CLICKING OUTSIDE
+        ========================= */
+
+        document.addEventListener("click", (event) => {
+
+            if (
+                !optionsPanel.contains(event.target) &&
+                !optionsButton.contains(event.target)
+            ) {
+
+                optionsPanel.classList.remove("open");
+
+            }
+
+        });
+
+
+        /* =========================
+           SMOOTH SCROLL
+        ========================= */
+
+        document.querySelectorAll("a[href^='#']").forEach(link => {
+
+            link.addEventListener("click", function(event) {
+
+                const target = document.querySelector(
+                    this.getAttribute("href")
+                );
 
                 if (!target) {
                     return;
@@ -1282,8 +1124,7 @@
                 event.preventDefault();
 
                 target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
+                    behavior: "smooth"
                 });
 
             });
