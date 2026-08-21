@@ -50,43 +50,24 @@
             color: #fff;
         }
 
-
-        /* =========================
-           MUSIC
-        ========================= */
-
         #music {
             display: none;
         }
-
-
-        /* =========================
-           OPTIONS
-        ========================= */
 
         .options-button {
             position: fixed;
             left: 24px;
             bottom: 24px;
-
             width: 48px;
             height: 48px;
-
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 50%;
-
             background: rgba(10,10,10,0.8);
             color: white;
-
             cursor: pointer;
-
             z-index: 1000;
-
             backdrop-filter: blur(12px);
-
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
         .options-button:hover {
@@ -100,34 +81,21 @@
             border-color: rgba(0,0,0,0.15);
         }
 
-
         .options-panel {
             position: fixed;
-
             left: 24px;
             bottom: 84px;
-
             width: 260px;
-
             padding: 22px;
-
             background: rgba(12,12,12,0.94);
-
             border: 1px solid rgba(255,255,255,0.12);
             border-radius: 14px;
-
             backdrop-filter: blur(20px);
-
             z-index: 999;
-
             opacity: 0;
             pointer-events: none;
-
             transform: translateY(12px);
-
-            transition:
-                opacity 0.3s ease,
-                transform 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .options-panel.open {
@@ -141,28 +109,20 @@
             border-color: rgba(0,0,0,0.12);
         }
 
-
         .options-title {
             font-family: "DM Mono", monospace;
-
             font-size: 10px;
             letter-spacing: 3px;
-
             text-transform: uppercase;
-
             opacity: 0.45;
-
             margin-bottom: 20px;
         }
-
 
         .option {
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             padding: 14px 0;
-
             border-top: 1px solid rgba(255,255,255,0.08);
         }
 
@@ -170,48 +130,32 @@
             border-color: rgba(0,0,0,0.08);
         }
 
-
         .option-name {
             font-family: "DM Mono", monospace;
-
             font-size: 11px;
-
             letter-spacing: 0.5px;
         }
-
 
         .toggle {
             width: 42px;
             height: 23px;
-
             border-radius: 30px;
-
             border: 1px solid rgba(255,255,255,0.2);
-
             background: #222;
-
             position: relative;
-
             cursor: pointer;
-
             transition: 0.3s ease;
         }
 
         .toggle::after {
             content: "";
-
             position: absolute;
-
             top: 3px;
             left: 3px;
-
             width: 15px;
             height: 15px;
-
             border-radius: 50%;
-
             background: #777;
-
             transition: 0.3s ease;
         }
 
@@ -225,19 +169,11 @@
             background: #4fd66a;
         }
 
-
-        /* =========================
-           HERO
-        ========================= */
-
         .hero {
             position: relative;
-
             height: 100vh;
             min-height: 700px;
-
             overflow: hidden;
-
             display: flex;
             align-items: center;
             justify-content: center;
@@ -245,57 +181,33 @@
 
         .hero-inner {
             position: relative;
-
             width: 100%;
             height: 100%;
         }
 
-
         .hero-label {
             position: absolute;
-
             top: 34px;
             left: 5.5vw;
-
             font-family: "DM Mono", monospace;
-
             font-size: 9px;
             letter-spacing: 4px;
-
             text-transform: uppercase;
-
             opacity: 0.35;
         }
 
-
-        /* =========================
-           QUOTES
-        ========================= */
-
         .quote {
             position: absolute;
-
             max-width: 280px;
-
             font-family: "Playfair Display", serif;
-
             font-style: italic;
-
             font-size: 16px;
-
             line-height: 1.45;
-
             color: rgba(255,255,255,0.25);
-
             user-select: none;
-
             z-index: 1;
-
             animation: quoteFloat 6s ease-in-out infinite;
-
-            transition:
-                color 0.4s ease,
-                opacity 0.4s ease;
+            transition: color 0.4s ease, opacity 0.4s ease;
         }
 
         body.light .quote {
@@ -309,12 +221,6 @@
         body.light .quote:hover {
             color: rgba(0,0,0,0.65);
         }
-
-
-        /*
-            Each quote starts at a different point
-            in the animation so they don't move together.
-        */
 
         .q1 {
             top: 7%;
@@ -364,131 +270,80 @@
             animation-delay: -3.5s;
         }
 
-
         @keyframes quoteFloat {
-
             0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
+                transform: translate3d(0, 0, 0) rotate(0deg);
             }
 
             25% {
-                transform: translate(12px, -10px) rotate(0.5deg);
+                transform: translate3d(12px, -10px, 0) rotate(0.5deg);
             }
 
             50% {
-                transform: translate(-8px, 8px) rotate(-0.5deg);
+                transform: translate3d(-8px, 8px, 0) rotate(-0.5deg);
             }
 
             75% {
-                transform: translate(10px, 5px) rotate(0.3deg);
+                transform: translate3d(10px, 5px, 0) rotate(0.3deg);
             }
-
         }
-
-
-        /* =========================
-           VOID
-        ========================= */
 
         .void-wrap {
             position: absolute;
-
             left: 50%;
             top: 50%;
-
             transform: translate(-50%, -50%);
-
             cursor: pointer;
-
             z-index: 10;
-
-            padding: 30px 45px;
+            padding: 40px 55px;
         }
-
 
         .void-name {
             position: relative;
-
             z-index: 3;
-
             font-family: "Playfair Display", serif;
-
             font-size: clamp(150px, 18vw, 310px);
-
             line-height: 0.75;
-
             font-weight: 400;
-
             letter-spacing: -15px;
-
             color: #f5f5f5;
-
+            transform: translate3d(0, 0, 0) scale(1);
             transition:
-                color 0.14s ease,
-                transform 0.16s cubic-bezier(.2,.8,.2,1);
+                color 0.18s cubic-bezier(.22, 1, .36, 1),
+                transform 0.22s cubic-bezier(.22, 1, .36, 1);
         }
-
-
-        /* =========================
-           VOID HOVER OVERLAY
-        ========================= */
 
         .void-overlay {
             position: absolute;
-
             z-index: 2;
-
-            left: 0;
-            right: 0;
-
-            top: 0;
-            bottom: 0;
-
+            inset: 0;
             background: #f5f5f5;
-
             transform: scaleX(0);
-
             transform-origin: left center;
-
             transition:
-                transform 0.16s cubic-bezier(.65,0,.35,1);
-
+                transform 0.22s cubic-bezier(.22, 1, .36, 1);
             pointer-events: none;
         }
 
-
         .void-age {
             position: absolute;
-
             z-index: 5;
-
-            top: 0;
-            right: 10px;
-
+            top: 5px;
+            right: 15px;
             padding: 7px 12px;
-
             border: 1px solid rgba(255,255,255,0.5);
-
             border-radius: 20px;
-
             background: #080808;
             color: #fff;
-
             font-family: "DM Mono", monospace;
-
             font-size: 10px;
-
             white-space: nowrap;
-
             opacity: 0;
-
-            transform: translateY(6px);
-
+            transform: translate3d(0, 10px, 0) scale(0.94);
             transition:
-                opacity 0.14s ease,
-                transform 0.14s ease;
+                opacity 0.16s ease,
+                transform 0.22s cubic-bezier(.22, 1, .36, 1);
         }
-
 
         .void-wrap:hover .void-overlay {
             transform: scaleX(1);
@@ -496,64 +351,41 @@
 
         .void-wrap:hover .void-name {
             color: #080808;
-            transform: translateY(-2px);
+            transform: translate3d(0, -5px, 0) scale(1.015);
         }
 
         .void-wrap:hover .void-age {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate3d(0, 0, 0) scale(1);
         }
-
-
-        /* =========================
-           SCROLL
-        ========================= */
 
         .scroll {
             position: absolute;
-
             bottom: 30px;
             left: 50%;
-
             transform: translateX(-50%);
-
             z-index: 20;
-
             font-family: "DM Mono", monospace;
-
             font-size: 9px;
-
             letter-spacing: 3px;
-
             opacity: 0.3;
-
             text-transform: uppercase;
-
             text-align: center;
-
             pointer-events: none;
         }
 
         .scroll::after {
             content: "";
-
             display: block;
-
             width: 1px;
             height: 35px;
-
             background: currentColor;
-
             opacity: 0.5;
-
             margin: 12px auto 0;
-
-            animation:
-                scrollLine 1.7s ease-in-out infinite;
+            animation: scrollLine 1.7s ease-in-out infinite;
         }
 
         @keyframes scrollLine {
-
             0%, 100% {
                 transform: scaleY(0.4);
                 transform-origin: top;
@@ -563,95 +395,57 @@
                 transform: scaleY(1);
                 transform-origin: top;
             }
-
         }
-
-
-        /* =========================
-           ABOUT
-        ========================= */
 
         .about {
             min-height: 100vh;
-
             padding: 160px 8vw;
-
             display: flex;
             align-items: center;
         }
 
-
         .about-container {
             width: 100%;
-
             max-width: 1100px;
-
             margin: auto;
-
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
             gap: 100px;
-
             align-items: center;
         }
 
-
         .section-label {
             font-family: "DM Mono", monospace;
-
             font-size: 9px;
-
             letter-spacing: 4px;
-
             opacity: 0.4;
-
             text-transform: uppercase;
-
             margin-bottom: 25px;
         }
 
-
         .about-title {
             font-family: "Playfair Display", serif;
-
             font-size: clamp(45px, 6vw, 80px);
-
             font-weight: 400;
-
             line-height: 1;
         }
 
-
         .about-text {
             font-family: "DM Mono", monospace;
-
             font-size: 12px;
-
             line-height: 2;
-
             opacity: 0.55;
-
             max-width: 480px;
         }
 
-
         .about-card {
             margin-top: 35px;
-
             padding: 25px;
-
             border: 1px solid rgba(255,255,255,0.1);
-
             border-radius: 10px;
-
             font-family: "DM Mono", monospace;
-
             font-size: 11px;
-
             line-height: 1.8;
-
             opacity: 0.75;
         }
 
@@ -659,175 +453,110 @@
             border-color: rgba(0,0,0,0.1);
         }
 
-
-        /* =========================
-           WORK
-        ========================= */
-
         .work {
             padding: 130px 5vw 180px;
         }
 
-
         .work-header {
             display: flex;
-
             justify-content: space-between;
-
             align-items: end;
-
             max-width: 1300px;
-
             margin: 0 auto 50px;
         }
 
-
         .work-title {
             font-family: "Playfair Display", serif;
-
             font-size: clamp(50px, 7vw, 100px);
-
             font-weight: 400;
         }
 
-
         .work-subtitle {
             font-family: "DM Mono", monospace;
-
             font-size: 10px;
-
             opacity: 0.4;
         }
 
-
         .work-grid {
             max-width: 1300px;
-
             margin: auto;
-
             display: grid;
-
             grid-template-columns: repeat(2, 1fr);
-
             gap: 70px 30px;
         }
-
 
         .project {
             display: block;
         }
 
-
         .project-image {
             width: 100%;
-
             aspect-ratio: 16 / 9;
-
             border: 1px solid rgba(255,255,255,0.1);
-
             overflow: hidden;
-
             background: #050505;
         }
 
         body.light .project-image {
             border-color: rgba(0,0,0,0.1);
-
             background: #ddd;
         }
-
 
         .project-image iframe {
             width: 100%;
             height: 100%;
-
             border: 0;
         }
 
-
         .project-name {
             margin-top: 15px;
-
             font-family: "Playfair Display", serif;
-
             font-size: 20px;
         }
 
-
         .project-description {
             margin-top: 8px;
-
             font-family: "DM Mono", monospace;
-
             font-size: 10px;
-
             line-height: 1.7;
-
             opacity: 0.4;
         }
 
-
-        /* =========================
-           CONTACT
-        ========================= */
-
         .contact {
             min-height: 70vh;
-
             padding: 120px 8vw;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             text-align: center;
         }
-
 
         .contact-inner {
             max-width: 800px;
         }
 
-
         .contact-title {
             font-family: "Playfair Display", serif;
-
             font-size: clamp(60px, 10vw, 150px);
-
             font-weight: 400;
-
             line-height: 0.9;
         }
 
-
         .contact-text {
             margin-top: 35px;
-
             font-family: "DM Mono", monospace;
-
             font-size: 11px;
-
             opacity: 0.45;
         }
 
-
         .contact-button {
             display: inline-block;
-
             margin-top: 35px;
-
             padding: 14px 24px;
-
             border: 1px solid rgba(255,255,255,0.2);
-
             border-radius: 30px;
-
             font-family: "DM Mono", monospace;
-
             font-size: 11px;
-
             transition:
                 background 0.3s ease,
                 color 0.3s ease,
@@ -838,39 +567,24 @@
             border-color: rgba(0,0,0,0.2);
         }
 
-
         .contact-button:hover {
             background: white;
-
             color: black;
-
             transform: translateY(-3px);
         }
 
         body.light .contact-button:hover {
             background: black;
-
             color: white;
         }
 
-
-        /* =========================
-           FOOTER
-        ========================= */
-
         footer {
             padding: 25px 5vw;
-
             border-top: 1px solid rgba(255,255,255,0.08);
-
             display: flex;
-
             justify-content: space-between;
-
             font-family: "DM Mono", monospace;
-
             font-size: 9px;
-
             opacity: 0.35;
         }
 
@@ -878,13 +592,7 @@
             border-color: rgba(0,0,0,0.08);
         }
 
-
-        /* =========================
-           MOBILE
-        ========================= */
-
         @media (max-width: 800px) {
-
             .quote {
                 font-size: 12px;
                 max-width: 180px;
@@ -923,76 +631,53 @@
                 right: 2%;
             }
 
-
             .void-name {
                 font-size: 29vw;
                 letter-spacing: -7px;
             }
-
 
             .void-overlay {
                 left: 0;
                 right: 0;
             }
 
-
             .about-container {
                 grid-template-columns: 1fr;
                 gap: 50px;
             }
 
-
             .work-grid {
                 grid-template-columns: 1fr;
             }
-
 
             .work-header {
                 display: block;
             }
 
-
             .work-subtitle {
                 margin-top: 15px;
             }
-
 
             .options-panel {
                 left: 15px;
                 bottom: 75px;
             }
-
         }
-
     </style>
 </head>
 
-
 <body>
-
-
-    <!-- =========================
-         BACKGROUND MUSIC
-    ========================= -->
 
     <audio id="music" loop preload="auto">
         <source src="background.mp3" type="audio/mpeg">
     </audio>
 
-
-    <!-- =========================
-         OPTIONS
-    ========================= -->
-
     <button
         class="options-button"
         id="optionsButton"
         aria-label="Open options">
-
         ⚙
-
     </button>
-
 
     <div
         class="options-panel"
@@ -1002,9 +687,7 @@
             Options
         </div>
 
-
         <div class="option">
-
             <span class="option-name">
                 Background music
             </span>
@@ -1014,12 +697,9 @@
                 id="musicToggle"
                 aria-label="Toggle background music">
             </button>
-
         </div>
 
-
         <div class="option">
-
             <span class="option-name">
                 Light mode
             </span>
@@ -1029,15 +709,8 @@
                 id="themeToggle"
                 aria-label="Toggle light mode">
             </button>
-
         </div>
-
     </div>
-
-
-    <!-- =========================
-         HERO
-    ========================= -->
 
     <section
         class="hero"
@@ -1045,55 +718,41 @@
 
         <div class="hero-inner">
 
-
             <div class="hero-label">
                 Words worth remembering
             </div>
-
-
-            <!-- QUOTES -->
 
             <div class="quote q1">
                 "I am inevitable."
             </div>
 
-
             <div class="quote q2">
                 "I had strings, but now I'm free."
             </div>
-
 
             <div class="quote q3">
                 "Doom does not bargain."
             </div>
 
-
             <div class="quote q4">
                 "The hardest choices require the strongest wills."
             </div>
-
 
             <div class="quote q5">
                 "Peace in our time."
             </div>
 
-
             <div class="quote q6">
                 "You were made to obey."
             </div>
-
 
             <div class="quote q7">
                 "Reality is often disappointing."
             </div>
 
-
             <div class="quote q8">
                 "Doom is not a man to be trifled with."
             </div>
-
-
-            <!-- VOID -->
 
             <div class="void-wrap">
 
@@ -1109,28 +768,18 @@
 
             </div>
 
-
-            <!-- SCROLL -->
-
             <div class="scroll">
                 Scroll
             </div>
 
         </div>
-
     </section>
-
-
-    <!-- =========================
-         ABOUT
-    ========================= -->
 
     <section
         class="about"
         id="about">
 
         <div class="about-container">
-
 
             <div>
 
@@ -1145,7 +794,6 @@
 
             </div>
 
-
             <div>
 
                 <p class="about-text">
@@ -1153,7 +801,6 @@
                     systems, visual effects and experiences that feel different
                     from the usual.
                 </p>
-
 
                 <div class="about-card">
                     Skript · Minecraft · Systems · Mechanics · Visuals
@@ -1164,18 +811,11 @@
             </div>
 
         </div>
-
     </section>
-
-
-    <!-- =========================
-         WORK
-    ========================= -->
 
     <section
         class="work"
         id="work">
-
 
         <div class="work-header">
 
@@ -1189,9 +829,7 @@
 
         </div>
 
-
         <div class="work-grid">
-
 
             <a
                 class="project"
@@ -1208,18 +846,15 @@
 
                 </div>
 
-
                 <div class="project-name">
                     Project One
                 </div>
-
 
                 <div class="project-description">
                     Custom Minecraft mechanics and systems.
                 </div>
 
             </a>
-
 
             <a
                 class="project"
@@ -1236,11 +871,9 @@
 
                 </div>
 
-
                 <div class="project-name">
                     Project Two
                 </div>
-
 
                 <div class="project-description">
                     Advanced Skript development and visuals.
@@ -1248,20 +881,12 @@
 
             </a>
 
-
         </div>
-
     </section>
-
-
-    <!-- =========================
-         CONTACT
-    ========================= -->
 
     <section
         class="contact"
         id="contact">
-
 
         <div class="contact-inner">
 
@@ -1269,17 +894,14 @@
                 Contact
             </div>
 
-
             <h2 class="contact-title">
                 Let's build
                 something.
             </h2>
 
-
             <p class="contact-text">
                 Have an idea for an SMP, plugin or custom system?
             </p>
-
 
             <a
                 class="contact-button"
@@ -1291,13 +913,7 @@
             </a>
 
         </div>
-
     </section>
-
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
 
     <footer>
 
@@ -1311,163 +927,81 @@
 
     </footer>
 
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
     <script>
+        const music = document.getElementById("music");
+        const musicToggle = document.getElementById("musicToggle");
+        const themeToggle = document.getElementById("themeToggle");
+        const optionsButton = document.getElementById("optionsButton");
+        const optionsPanel = document.getElementById("optionsPanel");
 
-        const music =
-            document.getElementById("music");
-
-        const musicToggle =
-            document.getElementById("musicToggle");
-
-        const themeToggle =
-            document.getElementById("themeToggle");
-
-        const optionsButton =
-            document.getElementById("optionsButton");
-
-        const optionsPanel =
-            document.getElementById("optionsPanel");
-
-
-        /* =========================
-           OPTIONS PANEL
-        ========================= */
-
-        optionsButton.addEventListener(
-            "click",
-            (event) => {
-
-                event.stopPropagation();
-
-                optionsPanel.classList.toggle("open");
-
-            }
-        );
-
-
-        /* =========================
-           MUSIC
-        ========================= */
+        optionsButton.addEventListener("click", event => {
+            event.stopPropagation();
+            optionsPanel.classList.toggle("open");
+        });
 
         let musicEnabled = false;
 
+        musicToggle.addEventListener("click", event => {
+            event.stopPropagation();
 
-        musicToggle.addEventListener(
-            "click",
-            (event) => {
+            musicEnabled = !musicEnabled;
 
-                event.stopPropagation();
+            musicToggle.classList.toggle(
+                "active",
+                musicEnabled
+            );
 
-                musicEnabled = !musicEnabled;
-
-
-                musicToggle.classList.toggle(
-                    "active",
-                    musicEnabled
-                );
-
-
-                if (musicEnabled) {
-
-                    music.volume = 0.35;
-
-                    music.play().catch(() => {});
-
-                } else {
-
-                    music.pause();
-
-                }
-
+            if (musicEnabled) {
+                music.volume = 0.35;
+                music.play().catch(() => {});
+            } else {
+                music.pause();
             }
-        );
+        });
 
+        themeToggle.addEventListener("click", event => {
+            event.stopPropagation();
 
-        /* =========================
-           LIGHT MODE
-        ========================= */
+            document.body.classList.toggle("light");
 
-        themeToggle.addEventListener(
-            "click",
-            (event) => {
+            themeToggle.classList.toggle(
+                "active",
+                document.body.classList.contains("light")
+            );
+        });
 
-                event.stopPropagation();
-
-                document.body.classList.toggle(
-                    "light"
-                );
-
-
-                themeToggle.classList.toggle(
-                    "active",
-                    document.body.classList.contains("light")
-                );
-
+        document.addEventListener("click", event => {
+            if (
+                !optionsPanel.contains(event.target) &&
+                !optionsButton.contains(event.target)
+            ) {
+                optionsPanel.classList.remove("open");
             }
-        );
-
-
-        /* =========================
-           CLOSE OPTIONS
-        ========================= */
-
-        document.addEventListener(
-            "click",
-            (event) => {
-
-                if (
-                    !optionsPanel.contains(event.target) &&
-                    !optionsButton.contains(event.target)
-                ) {
-
-                    optionsPanel.classList.remove("open");
-
-                }
-
-            }
-        );
-
-
-        /* =========================
-           SMOOTH SCROLL
-        ========================= */
+        });
 
         document
             .querySelectorAll("a[href^='#']")
             .forEach(link => {
 
-                link.addEventListener(
-                    "click",
-                    function(event) {
+                link.addEventListener("click", function(event) {
 
-                        const target =
-                            document.querySelector(
-                                this.getAttribute("href")
-                            );
+                    const target = document.querySelector(
+                        this.getAttribute("href")
+                    );
 
-
-                        if (!target) {
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-
-                        target.scrollIntoView({
-                            behavior: "smooth"
-                        });
-
+                    if (!target) {
+                        return;
                     }
-                );
+
+                    event.preventDefault();
+
+                    target.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                });
 
             });
-
     </script>
 
 </body>
