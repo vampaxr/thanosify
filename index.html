@@ -7,6 +7,8 @@
     <link rel="icon" type="image/png" href="title.png">
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
         * {
             box-sizing: border-box;
         }
@@ -17,104 +19,22 @@
 
         body {
             margin: 0;
-            background: #050505;
-            color: #f5f5f5;
-            font-family: Georgia, "Times New Roman", serif;
+            background: #080808;
+            color: #f4f4f4;
+            font-family: "DM Mono", monospace;
             overflow-x: hidden;
             transition: background 0.5s ease, color 0.5s ease;
         }
 
         body.light {
-            background: #f5f5f5;
+            background: #f4f4f4;
             color: #080808;
         }
 
         .page {
-            position: relative;
             min-height: 100vh;
-        }
-
-        .noise {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0.035;
-            z-index: 50;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-        }
-
-        .quotes {
-            position: absolute;
-            inset: 0;
+            position: relative;
             overflow: hidden;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .quote {
-            position: absolute;
-            max-width: 330px;
-            color: rgba(255, 255, 255, 0.24);
-            font-size: 18px;
-            font-style: italic;
-            line-height: 1.35;
-            transition: color 0.5s ease;
-            animation: drift 8s ease-in-out infinite alternate;
-        }
-
-        body.light .quote {
-            color: rgba(0, 0, 0, 0.22);
-        }
-
-        .q1 {
-            top: 4%;
-            left: 12%;
-        }
-
-        .q2 {
-            top: 14%;
-            right: 7%;
-            animation-delay: -2s;
-        }
-
-        .q3 {
-            top: 25%;
-            left: 73%;
-            animation-delay: -4s;
-        }
-
-        .q4 {
-            top: 54%;
-            left: 9%;
-            animation-delay: -1s;
-        }
-
-        .q5 {
-            top: 64%;
-            right: 8%;
-            animation-delay: -5s;
-        }
-
-        .q6 {
-            bottom: 9%;
-            left: 45%;
-            animation-delay: -3s;
-        }
-
-        .q7 {
-            top: 38%;
-            left: 26%;
-            animation-delay: -6s;
-        }
-
-        @keyframes drift {
-            from {
-                transform: translate3d(0, 0, 0);
-            }
-
-            to {
-                transform: translate3d(18px, -12px, 0);
-            }
         }
 
         .hero {
@@ -126,539 +46,525 @@
             overflow: hidden;
         }
 
-        .hero-center {
+        .void-wrap {
             position: relative;
-            z-index: 5;
-            text-align: center;
-        }
-
-        .void-hover {
-            position: relative;
-            display: inline-block;
+            z-index: 20;
             cursor: pointer;
-            padding: 22px 38px;
+            padding: 45px 65px;
         }
 
-        .void-text {
+        .void-name {
             position: relative;
-            z-index: 3;
-            margin: 0;
-            font-size: clamp(100px, 18vw, 270px);
+            font-family: "Playfair Display", serif;
+            font-size: clamp(7rem, 17vw, 17rem);
             line-height: 0.75;
-            font-weight: 400;
-            letter-spacing: -0.09em;
-            color: #fff;
+            font-weight: 500;
+            letter-spacing: -0.08em;
+            color: #080808;
+            z-index: 3;
             transition:
-                color 0.28s cubic-bezier(.22, 1, .36, 1),
-                transform 0.5s cubic-bezier(.22, 1, .36, 1);
+                color 0.32s cubic-bezier(.22,1,.36,1),
+                transform 0.45s cubic-bezier(.22,1,.36,1);
         }
 
         .void-overlay {
             position: absolute;
-            z-index: 2;
             left: 0;
-            right: 0;
             top: 50%;
+            width: 0;
             height: 0;
-            background: #fff;
-            transform: translateY(-50%) scaleX(0);
-            transform-origin: center;
+            background: #f4f4f4;
+            transform: translateY(-50%) rotate(-2deg);
+            z-index: 2;
             transition:
-                height 0.45s cubic-bezier(.22, 1, .36, 1),
-                transform 0.55s cubic-bezier(.22, 1, .36, 1);
+                width 0.42s cubic-bezier(.22,1,.36,1),
+                height 0.42s cubic-bezier(.22,1,.36,1),
+                transform 0.42s cubic-bezier(.22,1,.36,1);
         }
 
         .age {
             position: absolute;
-            z-index: 4;
-            top: -10px;
-            right: 8px;
+            top: 0;
+            right: 5px;
             padding: 7px 13px;
-            border: 1px solid rgba(255, 255, 255, 0.65);
+            border: 1px solid #777;
             border-radius: 20px;
-            background: #050505;
-            color: #fff;
-            font-family: Arial, sans-serif;
             font-size: 11px;
-            letter-spacing: 0.08em;
+            letter-spacing: 1px;
             opacity: 0;
-            transform: translateY(10px) scale(0.9);
+            transform: translateY(12px);
             transition:
-                opacity 0.3s ease,
-                transform 0.4s cubic-bezier(.22, 1, .36, 1);
+                opacity 0.25s ease,
+                transform 0.4s cubic-bezier(.22,1,.36,1);
+            z-index: 30;
+            background: #080808;
+            color: #f4f4f4;
         }
 
-        .void-hover:hover .void-overlay {
-            height: 72%;
-            transform: translateY(-50%) scaleX(1);
+        .void-wrap:hover .void-overlay {
+            width: 100%;
+            height: 75%;
+            transform: translateY(-50%) rotate(-2deg);
         }
 
-        .void-hover:hover .void-text {
-            color: #000;
-            transform: scale(1.015);
+        .void-wrap:hover .void-name {
+            color: #080808;
+            transform: scale(1.025);
         }
 
-        .void-hover:hover .age {
+        .void-wrap:hover .age {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
 
-        .scroll-indicator {
+        .quote {
             position: absolute;
-            z-index: 6;
-            bottom: 35px;
+            z-index: 5;
+            color: rgba(255,255,255,0.27);
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            font-size: clamp(13px, 1.2vw, 20px);
+            max-width: 280px;
+            line-height: 1.45;
+            pointer-events: none;
+            animation: float 8s ease-in-out infinite alternate;
+        }
+
+        .light .quote {
+            color: rgba(0,0,0,0.3);
+        }
+
+        .q1 {
+            top: 7%;
+            left: 12%;
+            animation-delay: -1s;
+        }
+
+        .q2 {
+            top: 12%;
+            right: 7%;
+            animation-delay: -4s;
+        }
+
+        .q3 {
+            top: 29%;
+            left: 6%;
+            animation-delay: -2s;
+        }
+
+        .q4 {
+            top: 25%;
+            right: 18%;
+            animation-delay: -6s;
+        }
+
+        .q5 {
+            bottom: 34%;
+            left: 10%;
+            animation-delay: -3s;
+        }
+
+        .q6 {
+            bottom: 30%;
+            right: 8%;
+            animation-delay: -5s;
+        }
+
+        .q7 {
+            bottom: 10%;
+            left: 44%;
+            animation-delay: -7s;
+        }
+
+        .q8 {
+            top: 47%;
+            left: 25%;
+            animation-delay: -1.5s;
+        }
+
+        .q9 {
+            top: 55%;
+            right: 28%;
+            animation-delay: -4.5s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate3d(0, 0, 0) rotate(-1deg);
+            }
+
+            50% {
+                transform: translate3d(18px, -14px, 0) rotate(1deg);
+            }
+
+            100% {
+                transform: translate3d(-14px, 15px, 0) rotate(-1deg);
+            }
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 28px;
             left: 50%;
             transform: translateX(-50%);
-            font-family: Arial, sans-serif;
+            z-index: 20;
+            text-align: center;
             font-size: 10px;
-            letter-spacing: 0.25em;
-            color: rgba(255,255,255,0.45);
-            animation: pulse 2s ease-in-out infinite;
+            letter-spacing: 3px;
+            opacity: 0.45;
         }
 
-        @keyframes pulse {
+        .scroll-line {
+            width: 1px;
+            height: 35px;
+            background: currentColor;
+            margin: 9px auto 0;
+            animation: scrollPulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
             0%, 100% {
-                opacity: 0.35;
-                transform: translateX(-50%) translateY(0);
+                opacity: 0.2;
+                transform: scaleY(0.6);
             }
 
             50% {
                 opacity: 1;
-                transform: translateX(-50%) translateY(6px);
+                transform: scaleY(1);
             }
         }
 
-        .section {
-            position: relative;
-            min-height: 100vh;
-            padding: 120px 7vw;
-            overflow: hidden;
+        .options {
+            position: fixed;
+            top: 22px;
+            left: 22px;
+            z-index: 100;
         }
 
-        .section-title {
-            position: relative;
-            z-index: 4;
-            margin: 0 0 65px;
-            font-size: 13px;
-            font-family: Arial, sans-serif;
-            font-weight: 400;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.42);
+        .options-toggle {
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            background: rgba(10,10,10,0.8);
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
-        body.light .section-title {
-            color: rgba(0,0,0,0.42);
+        .options-toggle:hover {
+            transform: rotate(45deg);
         }
 
-        .about {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10vw;
-            align-items: center;
+        .options-panel {
+            position: absolute;
+            top: 52px;
+            left: 0;
+            width: 230px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.13);
+            background: rgba(10,10,10,0.92);
+            backdrop-filter: blur(15px);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
         }
 
-        .about-text {
-            position: relative;
-            z-index: 4;
-            max-width: 650px;
+        .options:hover .options-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
-        .about-text h2 {
-            margin: 0 0 25px;
-            font-size: clamp(45px, 7vw, 90px);
-            font-weight: 400;
-            letter-spacing: -0.05em;
+        .option-title {
+            font-size: 9px;
+            letter-spacing: 3px;
+            opacity: 0.45;
+            margin-bottom: 16px;
         }
 
-        .about-text p {
-            color: rgba(255,255,255,0.55);
-            font-size: 18px;
-            line-height: 1.8;
-        }
-
-        body.light .about-text p {
-            color: rgba(0,0,0,0.55);
-        }
-
-        .about-box {
-            position: relative;
-            z-index: 4;
-            border: 1px solid rgba(255,255,255,0.12);
-            padding: 45px;
-            min-height: 240px;
+        .option {
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: space-between;
-            transition: transform 0.5s ease, border-color 0.5s ease;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 11px;
         }
 
-        body.light .about-box {
+        .option:last-child {
+            border-bottom: 0;
+        }
+
+        .option button {
+            border: 0;
+            min-width: 48px;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #252525;
+            color: white;
+            font-family: inherit;
+            font-size: 9px;
+            cursor: pointer;
+        }
+
+        .option button.active {
+            background: #48a868;
+        }
+
+        .light .options-toggle {
+            background: rgba(245,245,245,0.9);
+            color: #080808;
+            border-color: rgba(0,0,0,0.15);
+        }
+
+        .light .options-panel {
+            background: rgba(245,245,245,0.94);
             border-color: rgba(0,0,0,0.12);
         }
 
-        .about-box:hover {
+        .light .option {
+            border-color: rgba(0,0,0,0.08);
+        }
+
+        .light .option button {
+            background: #ddd;
+            color: #111;
+        }
+
+        .light .option button.active {
+            background: #48a868;
+            color: white;
+        }
+
+        .content {
+            position: relative;
+            min-height: 100vh;
+            padding: 150px 7vw 180px;
+        }
+
+        .section-label {
+            font-size: 9px;
+            letter-spacing: 5px;
+            opacity: 0.4;
+            margin-bottom: 80px;
+        }
+
+        .about {
+            max-width: 700px;
+            margin: 0 auto 180px;
+            text-align: center;
+        }
+
+        .about h2,
+        .work h2,
+        .contact h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(40px, 6vw, 75px);
+            font-weight: 400;
+            margin: 0 0 35px;
+        }
+
+        .about p {
+            font-family: "Playfair Display", serif;
+            font-size: 19px;
+            line-height: 1.8;
+            opacity: 0.7;
+        }
+
+        .work {
+            max-width: 1100px;
+            margin: 0 auto 180px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        .project {
+            display: block;
+            min-height: 320px;
+            border: 1px solid rgba(255,255,255,0.12);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            background: #050505;
+            transition:
+                transform 0.45s cubic-bezier(.22,1,.36,1),
+                border-color 0.3s ease;
+        }
+
+        .project:hover {
             transform: translateY(-8px);
             border-color: rgba(255,255,255,0.35);
         }
 
-        .about-box span {
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            letter-spacing: 0.25em;
-            color: rgba(255,255,255,0.4);
-        }
-
-        body.light .about-box span {
-            color: rgba(0,0,0,0.4);
-        }
-
-        .about-box strong {
-            font-size: 28px;
-            font-weight: 400;
-        }
-
-        .work {
-            position: relative;
-        }
-
-        .projects {
-            position: relative;
-            z-index: 4;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 70px 35px;
-        }
-
-        .project {
-            position: relative;
-        }
-
         .project-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at center, #222 0%, #090909 60%, #050505 100%);
             position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
             overflow: hidden;
-            background: #080808;
-            border: 1px solid rgba(255,255,255,0.12);
         }
 
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.7s cubic-bezier(.22, 1, .36, 1), filter 0.7s ease;
+        .project-image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                transparent 35%,
+                rgba(255,255,255,0.05),
+                transparent 65%
+            );
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
         }
 
-        .project:hover .project-image img {
-            transform: scale(1.045);
-            filter: brightness(1.08);
+        .project:hover .project-image::after {
+            transform: translateX(100%);
         }
 
-        .project-name {
-            margin-top: 18px;
-            font-size: 25px;
+        .play {
+            width: 62px;
+            height: 44px;
+            border-radius: 13px;
+            background: #ff0033;
+            position: relative;
+            transition: transform 0.35s ease;
+        }
+
+        .play::after {
+            content: "";
+            position: absolute;
+            left: 25px;
+            top: 12px;
+            border-left: 16px solid white;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+        .project:hover .play {
+            transform: scale(1.12);
+        }
+
+        .project-info {
+            padding: 22px;
+        }
+
+        .project-title {
+            font-family: "Playfair Display", serif;
+            font-size: 24px;
+            margin-bottom: 9px;
         }
 
         .project-description {
-            margin-top: 10px;
-            max-width: 500px;
-            color: rgba(255,255,255,0.42);
-            font-size: 15px;
+            font-size: 11px;
+            opacity: 0.45;
             line-height: 1.7;
         }
 
-        body.light .project-description {
-            color: rgba(0,0,0,0.42);
-        }
-
         .contact {
-            position: relative;
-            z-index: 4;
-            min-height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            max-width: 700px;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .contact h2 {
-            margin: 0;
-            font-size: clamp(60px, 12vw, 170px);
-            font-weight: 400;
-            letter-spacing: -0.07em;
-        }
-
-        .contact p {
-            margin: 25px 0 35px;
-            color: rgba(255,255,255,0.45);
-        }
-
-        body.light .contact p {
-            color: rgba(0,0,0,0.45);
-        }
-
-        .contact-button {
+        .contact-link {
             display: inline-block;
-            padding: 14px 25px;
-            border: 1px solid rgba(255,255,255,0.25);
+            margin-top: 15px;
+            padding: 13px 22px;
+            border: 1px solid rgba(255,255,255,0.18);
             border-radius: 30px;
             color: inherit;
             text-decoration: none;
-            transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
-        }
-
-        .contact-button:hover {
-            background: #fff;
-            color: #000;
-            transform: translateY(-4px);
-        }
-
-        .settings {
-            position: fixed;
-            z-index: 100;
-            right: 22px;
-            bottom: 22px;
-            width: 235px;
-            padding: 18px;
-            background: rgba(10,10,10,0.94);
-            border: 1px solid rgba(255,255,255,0.12);
-            backdrop-filter: blur(15px);
-            transform: translateX(calc(100% - 44px));
-            transition: transform 0.45s cubic-bezier(.22, 1, .36, 1);
-        }
-
-        .settings:hover {
-            transform: translateX(0);
-        }
-
-        .settings-title {
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.45);
-            margin-bottom: 18px;
-        }
-
-        .setting {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 13px 0;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            font-family: Arial, sans-serif;
             font-size: 12px;
+            transition: all 0.3s ease;
         }
 
-        .setting button {
-            border: 1px solid rgba(255,255,255,0.2);
-            background: transparent;
-            color: #fff;
-            padding: 6px 10px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 10px;
+        .contact-link:hover {
+            background: #f4f4f4;
+            color: #080808;
+            transform: translateY(-3px);
         }
 
-        .setting button.active {
-            background: #fff;
-            color: #000;
+        .light .project {
+            background: #f7f7f7;
+            border-color: rgba(0,0,0,0.13);
         }
 
-        body.light .settings {
-            background: rgba(245,245,245,0.94);
-            border-color: rgba(0,0,0,0.12);
+        .light .project-image {
+            background:
+                radial-gradient(circle at center, #ddd 0%, #eee 60%, #f7f7f7 100%);
         }
 
-        body.light .settings-title {
-            color: rgba(0,0,0,0.45);
+        .light .contact-link:hover {
+            background: #080808;
+            color: #f4f4f4;
         }
 
-        body.light .setting {
-            border-color: rgba(0,0,0,0.08);
+        .footer {
+            text-align: center;
+            opacity: 0.35;
+            font-size: 9px;
+            letter-spacing: 3px;
+            padding-bottom: 40px;
         }
 
-        body.light .setting button {
-            color: #000;
-            border-color: rgba(0,0,0,0.2);
-        }
+        @media (max-width: 700px) {
+            .void-wrap {
+                padding: 35px;
+            }
 
-        body.light .setting button.active {
-            background: #000;
-            color: #fff;
-        }
+            .quote {
+                font-size: 11px;
+                max-width: 170px;
+            }
 
-        .settings-tab {
-            position: absolute;
-            right: calc(100% - 44px);
-            top: 0;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,255,255,0.12);
-            border-right: 0;
-            background: rgba(10,10,10,0.94);
-            font-family: Arial, sans-serif;
-            font-size: 15px;
-        }
+            .q8,
+            .q9 {
+                display: none;
+            }
 
-        body.light .settings-tab {
-            background: rgba(245,245,245,0.94);
-            border-color: rgba(0,0,0,0.12);
-        }
+            .content {
+                padding: 100px 25px 120px;
+            }
 
-        @media (max-width: 800px) {
-            .about,
             .projects {
                 grid-template-columns: 1fr;
             }
 
-            .section {
-                padding: 90px 6vw;
-            }
-
-            .quote {
-                font-size: 14px;
-                max-width: 230px;
-            }
-
-            .q2,
-            .q3,
-            .q5 {
-                right: 3%;
-            }
-
-            .settings {
-                right: 10px;
-                bottom: 10px;
+            .project {
+                min-height: 290px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="noise"></div>
+    <div class="options">
+        <button class="options-toggle">☼</button>
 
-    <main class="page">
-        <section class="hero" id="home">
-            <div class="quotes">
-                <div class="quote q1">"The hardest choices require the strongest wills." — Thanos</div>
-                <div class="quote q2">"I had strings, but now I'm free." — Ultron</div>
-                <div class="quote q3">"Doom does not bargain." — Doctor Doom</div>
-                <div class="quote q4">"Reality is often disappointing." — Thanos</div>
-                <div class="quote q5">"There are no heroes. No villains. Just what I want and how I'll get it." — Ultron</div>
-                <div class="quote q6">"The world will be remade in my image." — Doctor Doom</div>
-                <div class="quote q7">"You should have gone for the head." — Thanos</div>
+        <div class="options-panel">
+            <div class="option-title">OPTIONS</div>
+
+            <div class="option">
+                <span>Background music</span>
+                <button id="musicButton">OFF</button>
             </div>
 
-            <div class="hero-center">
-                <div class="void-hover">
-                    <div class="void-overlay"></div>
-                    <div class="age">15 years old</div>
-                    <h1 class="void-text">Void</h1>
-                </div>
+            <div class="option">
+                <span>Light mode</span>
+                <button id="themeButton">OFF</button>
             </div>
-
-            <div class="scroll-indicator">SCROLL</div>
-        </section>
-
-        <section class="section">
-            <div class="section-title">About</div>
-
-            <div class="about">
-                <div class="about-text">
-                    <h2>Void.</h2>
-                    <p>
-                        Minecraft Skript developer focused on custom mechanics,
-                        clean code, immersive systems and polished visuals.
-                    </p>
-                    <p>
-                        Building unique experiences through Skript, Minecraft
-                        plugins and whatever else the project demands.
-                    </p>
-                </div>
-
-                <div class="about-box">
-                    <span>NOW</span>
-                    <strong>Skript. Fullstack. Whatever.</strong>
-                    <span>Always building something.</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="section work" id="work">
-            <div class="section-title">Work</div>
-
-            <div class="projects">
-                <div class="project">
-                    <div class="project-image">
-                        <img src="project1.jpg" alt="Project One">
-                    </div>
-                    <div class="project-name">Project One</div>
-                    <div class="project-description">
-                        Custom Minecraft systems, mechanics and visuals built from scratch.
-                    </div>
-                </div>
-
-                <div class="project">
-                    <div class="project-image">
-                        <img src="project2.jpg" alt="Project Two">
-                    </div>
-                    <div class="project-name">Project Two</div>
-                    <div class="project-description">
-                        Advanced gameplay systems designed around smooth interactions and clean execution.
-                    </div>
-                </div>
-
-                <div class="project">
-                    <div class="project-image">
-                        <img src="project3.jpg" alt="Project Three">
-                    </div>
-                    <div class="project-name">Project Three</div>
-                    <div class="project-description">
-                        Custom effects, animations and mechanics made for unique server experiences.
-                    </div>
-                </div>
-
-                <div class="project">
-                    <div class="project-image">
-                        <img src="project4.jpg" alt="Project Four">
-                    </div>
-                    <div class="project-name">Project Four</div>
-                    <div class="project-description">
-                        A collection of systems focused on presentation, performance and detail.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="contact">
-            <div class="contact">
-                <h2>Contact.</h2>
-                <p>Have something worth building?</p>
-                <a class="contact-button" href="mailto:your@email.com">Get in touch</a>
-            </div>
-        </section>
-    </main>
-
-    <div class="settings">
-        <div class="settings-tab">⚙</div>
-
-        <div class="settings-title">Options</div>
-
-        <div class="setting">
-            <span>Background music</span>
-            <button id="musicButton" onclick="toggleMusic()">OFF</button>
-        </div>
-
-        <div class="setting">
-            <span>Light mode</span>
-            <button id="themeButton" onclick="toggleTheme()">BLACK</button>
         </div>
     </div>
 
@@ -666,40 +572,126 @@
         <source src="background.mp3" type="audio/mpeg">
     </audio>
 
+    <main class="page">
+        <section class="hero">
+            <div class="quote q1">"I am inevitable."</div>
+            <div class="quote q2">"Peace in our time."</div>
+            <div class="quote q3">"Doom does not bargain."</div>
+            <div class="quote q4">"I had strings, but now I'm free."</div>
+            <div class="quote q5">"The universe required correction."</div>
+            <div class="quote q6">"There are things far worse than death."</div>
+            <div class="quote q7">"Perfection is the only path forward."</div>
+            <div class="quote q8">"Kneel before greatness."</div>
+            <div class="quote q9">"The world will know my name."</div>
+
+            <div class="void-wrap">
+                <div class="void-overlay"></div>
+                <div class="age">15 years old</div>
+                <div class="void-name">Void</div>
+            </div>
+
+            <div class="scroll-hint">
+                SCROLL
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="about">
+                <div class="section-label">ABOUT</div>
+                <h2>Void</h2>
+                <p>
+                    Minecraft Skript developer focused on unique mechanics,
+                    clean code, custom systems and smooth visuals.
+                </p>
+            </div>
+
+            <section class="work">
+                <div class="section-label">WORK</div>
+
+                <div class="projects">
+                    <a
+                        class="project"
+                        href="https://www.youtube.com/watch?v=-n_-S01rpMI"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <div class="project-image">
+                            <div class="play"></div>
+                        </div>
+
+                        <div class="project-info">
+                            <div class="project-title">Storm Ability</div>
+                            <div class="project-description">
+                                Minecraft Skript ability showcase.
+                            </div>
+                        </div>
+                    </a>
+
+                    <a
+                        class="project"
+                        href="https://www.youtube.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <div class="project-image">
+                            <div class="play"></div>
+                        </div>
+
+                        <div class="project-info">
+                            <div class="project-title">Project Two</div>
+                            <div class="project-description">
+                                More work coming soon.
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="contact">
+                <div class="section-label">CONTACT</div>
+                <h2>Let's work.</h2>
+                <a class="contact-link" href="https://discord.com/" target="_blank" rel="noopener noreferrer">
+                    Discord
+                </a>
+            </section>
+
+            <div class="footer">
+                WEBSITE INSPIRED BY ZIN.I
+            </div>
+        </section>
+    </main>
+
     <script>
         const music = document.getElementById("backgroundMusic");
         const musicButton = document.getElementById("musicButton");
         const themeButton = document.getElementById("themeButton");
 
-        let musicEnabled = false;
+        let musicOn = false;
+        let lightMode = false;
 
-        function toggleMusic() {
-            if (musicEnabled) {
+        musicButton.addEventListener("click", () => {
+            musicOn = !musicOn;
+
+            if (musicOn) {
+                music.volume = 0.35;
+                music.play().catch(() => {});
+                musicButton.textContent = "ON";
+                musicButton.classList.add("active");
+            } else {
                 music.pause();
-                musicEnabled = false;
                 musicButton.textContent = "OFF";
                 musicButton.classList.remove("active");
-            } else {
-                music.volume = 0.25;
-                music.play().then(() => {
-                    musicEnabled = true;
-                    musicButton.textContent = "ON";
-                    musicButton.classList.add("active");
-                }).catch(() => {});
             }
-        }
+        });
 
-        function toggleTheme() {
-            document.body.classList.toggle("light");
+        themeButton.addEventListener("click", () => {
+            lightMode = !lightMode;
+            document.body.classList.toggle("light", lightMode);
 
-            if (document.body.classList.contains("light")) {
-                themeButton.textContent = "WHITE";
-                themeButton.classList.add("active");
-            } else {
-                themeButton.textContent = "BLACK";
-                themeButton.classList.remove("active");
-            }
-        }
+            themeButton.textContent = lightMode ? "ON" : "OFF";
+            themeButton.classList.toggle("active", lightMode);
+        });
     </script>
 </body>
 </html>
