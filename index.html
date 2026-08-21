@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Void</title>
+    <link rel="icon" type="image/png" href="title.png">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
-
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
@@ -20,1018 +16,690 @@
         }
 
         body {
-            background: #080808;
-            color: #f4f4f4;
+            margin: 0;
+            background: #050505;
+            color: #f5f5f5;
+            font-family: Georgia, "Times New Roman", serif;
             overflow-x: hidden;
             transition: background 0.5s ease, color 0.5s ease;
         }
 
         body.light {
-            background: #f4f4f4;
+            background: #f5f5f5;
             color: #080808;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
+        .page {
+            position: relative;
+            min-height: 100vh;
         }
 
-        button {
-            font-family: inherit;
-        }
-
-        ::selection {
-            background: #fff;
-            color: #000;
-        }
-
-        body.light ::selection {
-            background: #000;
-            color: #fff;
-        }
-
-        #music {
-            display: none;
-        }
-
-        .options-button {
+        .noise {
             position: fixed;
-            left: 24px;
-            bottom: 24px;
-            width: 48px;
-            height: 48px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 50%;
-            background: rgba(10,10,10,0.8);
-            color: white;
-            cursor: pointer;
-            z-index: 1000;
-            backdrop-filter: blur(12px);
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .options-button:hover {
-            transform: rotate(20deg);
-            background: rgba(255,255,255,0.1);
-        }
-
-        body.light .options-button {
-            background: rgba(255,255,255,0.8);
-            color: #000;
-            border-color: rgba(0,0,0,0.15);
-        }
-
-        .options-panel {
-            position: fixed;
-            left: 24px;
-            bottom: 84px;
-            width: 260px;
-            padding: 22px;
-            background: rgba(12,12,12,0.94);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 14px;
-            backdrop-filter: blur(20px);
-            z-index: 999;
-            opacity: 0;
+            inset: 0;
             pointer-events: none;
-            transform: translateY(12px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0.035;
+            z-index: 50;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
         }
 
-        .options-panel.open {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        body.light .options-panel {
-            background: rgba(245,245,245,0.95);
-            border-color: rgba(0,0,0,0.12);
-        }
-
-        .options-title {
-            font-family: "DM Mono", monospace;
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0.45;
-            margin-bottom: 20px;
-        }
-
-        .option {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-top: 1px solid rgba(255,255,255,0.08);
-        }
-
-        body.light .option {
-            border-color: rgba(0,0,0,0.08);
-        }
-
-        .option-name {
-            font-family: "DM Mono", monospace;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-
-        .toggle {
-            width: 42px;
-            height: 23px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: #222;
-            position: relative;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        .toggle::after {
-            content: "";
+        .quotes {
             position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: #777;
-            transition: 0.3s ease;
-        }
-
-        .toggle.active {
-            background: #173b20;
-            border-color: #2e9143;
-        }
-
-        .toggle.active::after {
-            left: 22px;
-            background: #4fd66a;
-        }
-
-        .hero {
-            position: relative;
-            height: 100vh;
-            min-height: 700px;
+            inset: 0;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .hero-label {
-            position: absolute;
-            top: 34px;
-            left: 5.5vw;
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            opacity: 0.35;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .quote {
             position: absolute;
-            max-width: 280px;
-            font-family: "Playfair Display", serif;
+            max-width: 330px;
+            color: rgba(255, 255, 255, 0.24);
+            font-size: 18px;
             font-style: italic;
-            font-size: 16px;
-            line-height: 1.45;
-            color: rgba(255,255,255,0.25);
-            user-select: none;
-            z-index: 1;
-            animation: quoteFloat 6s ease-in-out infinite;
-            transition: color 0.4s ease, opacity 0.4s ease;
+            line-height: 1.35;
+            transition: color 0.5s ease;
+            animation: drift 8s ease-in-out infinite alternate;
         }
 
         body.light .quote {
-            color: rgba(0,0,0,0.28);
-        }
-
-        .quote:hover {
-            color: rgba(255,255,255,0.65);
-        }
-
-        body.light .quote:hover {
-            color: rgba(0,0,0,0.65);
+            color: rgba(0, 0, 0, 0.22);
         }
 
         .q1 {
-            top: 7%;
-            left: 11%;
-            animation-delay: 0s;
+            top: 4%;
+            left: 12%;
         }
 
         .q2 {
-            top: 15%;
-            right: 8%;
-            animation-delay: -1s;
-        }
-
-        .q3 {
-            top: 31%;
-            left: 5%;
+            top: 14%;
+            right: 7%;
             animation-delay: -2s;
         }
 
-        .q4 {
-            top: 42%;
-            right: 12%;
-            animation-delay: -3s;
-        }
-
-        .q5 {
-            bottom: 22%;
-            left: 9%;
+        .q3 {
+            top: 25%;
+            left: 73%;
             animation-delay: -4s;
         }
 
-        .q6 {
-            bottom: 10%;
-            left: 43%;
+        .q4 {
+            top: 54%;
+            left: 9%;
+            animation-delay: -1s;
+        }
+
+        .q5 {
+            top: 64%;
+            right: 8%;
             animation-delay: -5s;
         }
 
+        .q6 {
+            bottom: 9%;
+            left: 45%;
+            animation-delay: -3s;
+        }
+
         .q7 {
-            top: 8%;
-            right: 36%;
-            animation-delay: -1.5s;
+            top: 38%;
+            left: 26%;
+            animation-delay: -6s;
         }
 
-        .q8 {
-            bottom: 30%;
-            right: 5%;
-            animation-delay: -3.5s;
-        }
-
-        @keyframes quoteFloat {
-            0%, 100% {
-                transform: translate3d(0, 0, 0) rotate(0deg);
+        @keyframes drift {
+            from {
+                transform: translate3d(0, 0, 0);
             }
 
-            25% {
-                transform: translate3d(12px, -10px, 0) rotate(0.5deg);
-            }
-
-            50% {
-                transform: translate3d(-8px, 8px, 0) rotate(-0.5deg);
-            }
-
-            75% {
-                transform: translate3d(10px, 5px, 0) rotate(0.3deg);
+            to {
+                transform: translate3d(18px, -12px, 0);
             }
         }
 
-        .void-wrap {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-center {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+        }
+
+        .void-hover {
+            position: relative;
+            display: inline-block;
             cursor: pointer;
-            z-index: 10;
-            padding: 40px 55px;
+            padding: 22px 38px;
         }
 
-        .void-name {
+        .void-text {
             position: relative;
             z-index: 3;
-            font-family: "Playfair Display", serif;
-            font-size: clamp(150px, 18vw, 310px);
+            margin: 0;
+            font-size: clamp(100px, 18vw, 270px);
             line-height: 0.75;
             font-weight: 400;
-            letter-spacing: -15px;
-            color: #f5f5f5;
-            transform: translate3d(0, 0, 0) scale(1);
+            letter-spacing: -0.09em;
+            color: #fff;
             transition:
-                color 0.18s cubic-bezier(.22, 1, .36, 1),
-                transform 0.22s cubic-bezier(.22, 1, .36, 1);
+                color 0.28s cubic-bezier(.22, 1, .36, 1),
+                transform 0.5s cubic-bezier(.22, 1, .36, 1);
         }
 
         .void-overlay {
             position: absolute;
             z-index: 2;
-            inset: 0;
-            background: #f5f5f5;
-            transform: scaleX(0);
-            transform-origin: left center;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 0;
+            background: #fff;
+            transform: translateY(-50%) scaleX(0);
+            transform-origin: center;
             transition:
-                transform 0.22s cubic-bezier(.22, 1, .36, 1);
-            pointer-events: none;
+                height 0.45s cubic-bezier(.22, 1, .36, 1),
+                transform 0.55s cubic-bezier(.22, 1, .36, 1);
         }
 
-        .void-age {
+        .age {
             position: absolute;
-            z-index: 5;
-            top: 5px;
-            right: 15px;
-            padding: 7px 12px;
-            border: 1px solid rgba(255,255,255,0.5);
+            z-index: 4;
+            top: -10px;
+            right: 8px;
+            padding: 7px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
             border-radius: 20px;
-            background: #080808;
+            background: #050505;
             color: #fff;
-            font-family: "DM Mono", monospace;
-            font-size: 10px;
-            white-space: nowrap;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.08em;
             opacity: 0;
-            transform: translate3d(0, 10px, 0) scale(0.94);
+            transform: translateY(10px) scale(0.9);
             transition:
-                opacity 0.16s ease,
-                transform 0.22s cubic-bezier(.22, 1, .36, 1);
+                opacity 0.3s ease,
+                transform 0.4s cubic-bezier(.22, 1, .36, 1);
         }
 
-        .void-wrap:hover .void-overlay {
-            transform: scaleX(1);
+        .void-hover:hover .void-overlay {
+            height: 72%;
+            transform: translateY(-50%) scaleX(1);
         }
 
-        .void-wrap:hover .void-name {
-            color: #080808;
-            transform: translate3d(0, -5px, 0) scale(1.015);
+        .void-hover:hover .void-text {
+            color: #000;
+            transform: scale(1.015);
         }
 
-        .void-wrap:hover .void-age {
+        .void-hover:hover .age {
             opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
+            transform: translateY(0) scale(1);
         }
 
-        .scroll {
+        .scroll-indicator {
             position: absolute;
-            bottom: 30px;
+            z-index: 6;
+            bottom: 35px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 20;
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
-            letter-spacing: 3px;
-            opacity: 0.3;
-            text-transform: uppercase;
-            text-align: center;
-            pointer-events: none;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            color: rgba(255,255,255,0.45);
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .scroll::after {
-            content: "";
-            display: block;
-            width: 1px;
-            height: 35px;
-            background: currentColor;
-            opacity: 0.5;
-            margin: 12px auto 0;
-            animation: scrollLine 1.7s ease-in-out infinite;
-        }
-
-        @keyframes scrollLine {
+        @keyframes pulse {
             0%, 100% {
-                transform: scaleY(0.4);
-                transform-origin: top;
+                opacity: 0.35;
+                transform: translateX(-50%) translateY(0);
             }
 
             50% {
-                transform: scaleY(1);
-                transform-origin: top;
+                opacity: 1;
+                transform: translateX(-50%) translateY(6px);
             }
         }
 
-        .about {
+        .section {
+            position: relative;
             min-height: 100vh;
-            padding: 160px 8vw;
-            display: flex;
-            align-items: center;
+            padding: 120px 7vw;
+            overflow: hidden;
         }
 
-        .about-container {
-            width: 100%;
-            max-width: 1100px;
-            margin: auto;
+        .section-title {
+            position: relative;
+            z-index: 4;
+            margin: 0 0 65px;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.42);
+        }
+
+        body.light .section-title {
+            color: rgba(0,0,0,0.42);
+        }
+
+        .about {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 100px;
+            gap: 10vw;
             align-items: center;
-        }
-
-        .section-label {
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
-            letter-spacing: 4px;
-            opacity: 0.4;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-        }
-
-        .about-title {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(45px, 6vw, 80px);
-            font-weight: 400;
-            line-height: 1;
         }
 
         .about-text {
-            font-family: "DM Mono", monospace;
-            font-size: 12px;
-            line-height: 2;
-            opacity: 0.55;
-            max-width: 480px;
+            position: relative;
+            z-index: 4;
+            max-width: 650px;
         }
 
-        .about-card {
-            margin-top: 35px;
-            padding: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            font-family: "DM Mono", monospace;
-            font-size: 11px;
+        .about-text h2 {
+            margin: 0 0 25px;
+            font-size: clamp(45px, 7vw, 90px);
+            font-weight: 400;
+            letter-spacing: -0.05em;
+        }
+
+        .about-text p {
+            color: rgba(255,255,255,0.55);
+            font-size: 18px;
             line-height: 1.8;
-            opacity: 0.75;
         }
 
-        body.light .about-card {
-            border-color: rgba(0,0,0,0.1);
+        body.light .about-text p {
+            color: rgba(0,0,0,0.55);
+        }
+
+        .about-box {
+            position: relative;
+            z-index: 4;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 45px;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.5s ease, border-color 0.5s ease;
+        }
+
+        body.light .about-box {
+            border-color: rgba(0,0,0,0.12);
+        }
+
+        .about-box:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.35);
+        }
+
+        .about-box span {
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            color: rgba(255,255,255,0.4);
+        }
+
+        body.light .about-box span {
+            color: rgba(0,0,0,0.4);
+        }
+
+        .about-box strong {
+            font-size: 28px;
+            font-weight: 400;
         }
 
         .work {
-            padding: 130px 5vw 180px;
+            position: relative;
         }
 
-        .work-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
-            max-width: 1300px;
-            margin: 0 auto 50px;
-        }
-
-        .work-title {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(50px, 7vw, 100px);
-            font-weight: 400;
-        }
-
-        .work-subtitle {
-            font-family: "DM Mono", monospace;
-            font-size: 10px;
-            opacity: 0.4;
-        }
-
-        .work-grid {
-            max-width: 1300px;
-            margin: auto;
+        .projects {
+            position: relative;
+            z-index: 4;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 70px 30px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 70px 35px;
         }
 
         .project {
-            display: block;
+            position: relative;
         }
 
         .project-image {
+            position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
-            border: 1px solid rgba(255,255,255,0.1);
             overflow: hidden;
-            background: #050505;
+            background: #080808;
+            border: 1px solid rgba(255,255,255,0.12);
         }
 
-        body.light .project-image {
-            border-color: rgba(0,0,0,0.1);
-            background: #ddd;
-        }
-
-        .project-image iframe {
+        .project-image img {
             width: 100%;
             height: 100%;
-            border: 0;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s cubic-bezier(.22, 1, .36, 1), filter 0.7s ease;
+        }
+
+        .project:hover .project-image img {
+            transform: scale(1.045);
+            filter: brightness(1.08);
         }
 
         .project-name {
-            margin-top: 15px;
-            font-family: "Playfair Display", serif;
-            font-size: 20px;
+            margin-top: 18px;
+            font-size: 25px;
         }
 
         .project-description {
-            margin-top: 8px;
-            font-family: "DM Mono", monospace;
-            font-size: 10px;
+            margin-top: 10px;
+            max-width: 500px;
+            color: rgba(255,255,255,0.42);
+            font-size: 15px;
             line-height: 1.7;
-            opacity: 0.4;
+        }
+
+        body.light .project-description {
+            color: rgba(0,0,0,0.42);
         }
 
         .contact {
+            position: relative;
+            z-index: 4;
             min-height: 70vh;
-            padding: 120px 8vw 70px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
-        .contact-inner {
-            max-width: 800px;
-        }
-
-        .contact-title {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(60px, 10vw, 150px);
+        .contact h2 {
+            margin: 0;
+            font-size: clamp(60px, 12vw, 170px);
             font-weight: 400;
-            line-height: 0.9;
+            letter-spacing: -0.07em;
         }
 
-        .contact-text {
-            margin-top: 35px;
-            font-family: "DM Mono", monospace;
-            font-size: 11px;
-            opacity: 0.45;
+        .contact p {
+            margin: 25px 0 35px;
+            color: rgba(255,255,255,0.45);
+        }
+
+        body.light .contact p {
+            color: rgba(0,0,0,0.45);
         }
 
         .contact-button {
             display: inline-block;
-            margin-top: 35px;
-            padding: 14px 24px;
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 14px 25px;
+            border: 1px solid rgba(255,255,255,0.25);
             border-radius: 30px;
-            font-family: "DM Mono", monospace;
-            font-size: 11px;
-            transition:
-                background 0.3s ease,
-                color 0.3s ease,
-                transform 0.3s ease;
-        }
-
-        body.light .contact-button {
-            border-color: rgba(0,0,0,0.2);
+            color: inherit;
+            text-decoration: none;
+            transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
         }
 
         .contact-button:hover {
-            background: white;
-            color: black;
-            transform: translateY(-3px);
+            background: #fff;
+            color: #000;
+            transform: translateY(-4px);
         }
 
-        body.light .contact-button:hover {
-            background: black;
-            color: white;
+        .settings {
+            position: fixed;
+            z-index: 100;
+            right: 22px;
+            bottom: 22px;
+            width: 235px;
+            padding: 18px;
+            background: rgba(10,10,10,0.94);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(15px);
+            transform: translateX(calc(100% - 44px));
+            transition: transform 0.45s cubic-bezier(.22, 1, .36, 1);
         }
 
-        .inspiration {
-            padding: 40px 20px 25px;
-            text-align: center;
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
-            letter-spacing: 2px;
+        .settings:hover {
+            transform: translateX(0);
+        }
+
+        .settings-title {
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
-            opacity: 0.25;
-            transition: opacity 0.3s ease;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 18px;
         }
 
-        .inspiration span {
-            color: inherit;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        .inspiration:hover {
-            opacity: 0.6;
-        }
-
-        footer {
-            padding: 25px 5vw;
-            border-top: 1px solid rgba(255,255,255,0.08);
+        .setting {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
-            opacity: 0.35;
+            padding: 13px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-family: Arial, sans-serif;
+            font-size: 12px;
         }
 
-        body.light footer {
+        .setting button {
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .setting button.active {
+            background: #fff;
+            color: #000;
+        }
+
+        body.light .settings {
+            background: rgba(245,245,245,0.94);
+            border-color: rgba(0,0,0,0.12);
+        }
+
+        body.light .settings-title {
+            color: rgba(0,0,0,0.45);
+        }
+
+        body.light .setting {
             border-color: rgba(0,0,0,0.08);
         }
 
+        body.light .setting button {
+            color: #000;
+            border-color: rgba(0,0,0,0.2);
+        }
+
+        body.light .setting button.active {
+            background: #000;
+            color: #fff;
+        }
+
+        .settings-tab {
+            position: absolute;
+            right: calc(100% - 44px);
+            top: 0;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-right: 0;
+            background: rgba(10,10,10,0.94);
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+        }
+
+        body.light .settings-tab {
+            background: rgba(245,245,245,0.94);
+            border-color: rgba(0,0,0,0.12);
+        }
+
         @media (max-width: 800px) {
+            .about,
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 90px 6vw;
+            }
+
             .quote {
-                font-size: 12px;
-                max-width: 180px;
+                font-size: 14px;
+                max-width: 230px;
             }
 
-            .q1 {
-                left: 5%;
-            }
-
-            .q2 {
+            .q2,
+            .q3,
+            .q5 {
                 right: 3%;
             }
 
-            .q3 {
-                left: 2%;
-            }
-
-            .q4 {
-                right: 4%;
-            }
-
-            .q5 {
-                left: 5%;
-            }
-
-            .q6 {
-                bottom: 9%;
-                left: 35%;
-            }
-
-            .q7 {
-                right: 25%;
-            }
-
-            .q8 {
-                right: 2%;
-            }
-
-            .void-name {
-                font-size: 29vw;
-                letter-spacing: -7px;
-            }
-
-            .void-overlay {
-                left: 0;
-                right: 0;
-            }
-
-            .about-container {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .work-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .work-header {
-                display: block;
-            }
-
-            .work-subtitle {
-                margin-top: 15px;
-            }
-
-            .options-panel {
-                left: 15px;
-                bottom: 75px;
+            .settings {
+                right: 10px;
+                bottom: 10px;
             }
         }
     </style>
 </head>
 
 <body>
+    <div class="noise"></div>
 
-    <audio id="music" loop preload="auto">
+    <main class="page">
+        <section class="hero" id="home">
+            <div class="quotes">
+                <div class="quote q1">"The hardest choices require the strongest wills." — Thanos</div>
+                <div class="quote q2">"I had strings, but now I'm free." — Ultron</div>
+                <div class="quote q3">"Doom does not bargain." — Doctor Doom</div>
+                <div class="quote q4">"Reality is often disappointing." — Thanos</div>
+                <div class="quote q5">"There are no heroes. No villains. Just what I want and how I'll get it." — Ultron</div>
+                <div class="quote q6">"The world will be remade in my image." — Doctor Doom</div>
+                <div class="quote q7">"You should have gone for the head." — Thanos</div>
+            </div>
+
+            <div class="hero-center">
+                <div class="void-hover">
+                    <div class="void-overlay"></div>
+                    <div class="age">15 years old</div>
+                    <h1 class="void-text">Void</h1>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">SCROLL</div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">About</div>
+
+            <div class="about">
+                <div class="about-text">
+                    <h2>Void.</h2>
+                    <p>
+                        Minecraft Skript developer focused on custom mechanics,
+                        clean code, immersive systems and polished visuals.
+                    </p>
+                    <p>
+                        Building unique experiences through Skript, Minecraft
+                        plugins and whatever else the project demands.
+                    </p>
+                </div>
+
+                <div class="about-box">
+                    <span>NOW</span>
+                    <strong>Skript. Fullstack. Whatever.</strong>
+                    <span>Always building something.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section work" id="work">
+            <div class="section-title">Work</div>
+
+            <div class="projects">
+                <div class="project">
+                    <div class="project-image">
+                        <img src="project1.jpg" alt="Project One">
+                    </div>
+                    <div class="project-name">Project One</div>
+                    <div class="project-description">
+                        Custom Minecraft systems, mechanics and visuals built from scratch.
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-image">
+                        <img src="project2.jpg" alt="Project Two">
+                    </div>
+                    <div class="project-name">Project Two</div>
+                    <div class="project-description">
+                        Advanced gameplay systems designed around smooth interactions and clean execution.
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-image">
+                        <img src="project3.jpg" alt="Project Three">
+                    </div>
+                    <div class="project-name">Project Three</div>
+                    <div class="project-description">
+                        Custom effects, animations and mechanics made for unique server experiences.
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-image">
+                        <img src="project4.jpg" alt="Project Four">
+                    </div>
+                    <div class="project-name">Project Four</div>
+                    <div class="project-description">
+                        A collection of systems focused on presentation, performance and detail.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="contact">
+                <h2>Contact.</h2>
+                <p>Have something worth building?</p>
+                <a class="contact-button" href="mailto:your@email.com">Get in touch</a>
+            </div>
+        </section>
+    </main>
+
+    <div class="settings">
+        <div class="settings-tab">⚙</div>
+
+        <div class="settings-title">Options</div>
+
+        <div class="setting">
+            <span>Background music</span>
+            <button id="musicButton" onclick="toggleMusic()">OFF</button>
+        </div>
+
+        <div class="setting">
+            <span>Light mode</span>
+            <button id="themeButton" onclick="toggleTheme()">BLACK</button>
+        </div>
+    </div>
+
+    <audio id="backgroundMusic" loop>
         <source src="background.mp3" type="audio/mpeg">
     </audio>
 
-    <button
-        class="options-button"
-        id="optionsButton"
-        aria-label="Open options">
-        ⚙
-    </button>
-
-    <div
-        class="options-panel"
-        id="optionsPanel">
-
-        <div class="options-title">
-            Options
-        </div>
-
-        <div class="option">
-            <span class="option-name">
-                Background music
-            </span>
-
-            <button
-                class="toggle"
-                id="musicToggle"
-                aria-label="Toggle background music">
-            </button>
-        </div>
-
-        <div class="option">
-            <span class="option-name">
-                Light mode
-            </span>
-
-            <button
-                class="toggle"
-                id="themeToggle"
-                aria-label="Toggle light mode">
-            </button>
-        </div>
-
-    </div>
-
-    <section
-        class="hero"
-        id="home">
-
-        <div class="hero-inner">
-
-            <div class="hero-label">
-                Words worth remembering
-            </div>
-
-            <div class="quote q1">
-                "I am inevitable."
-            </div>
-
-            <div class="quote q2">
-                "I had strings, but now I'm free."
-            </div>
-
-            <div class="quote q3">
-                "Doom does not bargain."
-            </div>
-
-            <div class="quote q4">
-                "The hardest choices require the strongest wills."
-            </div>
-
-            <div class="quote q5">
-                "Peace in our time."
-            </div>
-
-            <div class="quote q6">
-                "You were made to obey."
-            </div>
-
-            <div class="quote q7">
-                "Reality is often disappointing."
-            </div>
-
-            <div class="quote q8">
-                "Doom is not a man to be trifled with."
-            </div>
-
-            <div class="void-wrap">
-
-                <div class="void-overlay"></div>
-
-                <div class="void-age">
-                    15 years old
-                </div>
-
-                <div class="void-name">
-                    Void
-                </div>
-
-            </div>
-
-            <div class="scroll">
-                Scroll
-            </div>
-
-        </div>
-    </section>
-
-    <section
-        class="about"
-        id="about">
-
-        <div class="about-container">
-
-            <div>
-
-                <div class="section-label">
-                    About
-                </div>
-
-                <h2 class="about-title">
-                    Building things<br>
-                    that shouldn't exist.
-                </h2>
-
-            </div>
-
-            <div>
-
-                <p class="about-text">
-                    Minecraft Skript developer focused on custom mechanics,
-                    systems, visual effects and experiences that feel different
-                    from the usual.
-                </p>
-
-                <div class="about-card">
-                    Skript · Minecraft · Systems · Mechanics · Visuals
-                    <br><br>
-                    Turning ideas into something players actually remember.
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <section
-        class="work"
-        id="work">
-
-        <div class="work-header">
-
-            <h2 class="work-title">
-                Work
-            </h2>
-
-            <div class="work-subtitle">
-                Built with intent.
-            </div>
-
-        </div>
-
-        <div class="work-grid">
-
-            <a
-                class="project"
-                href="#"
-                target="_blank">
-
-                <div class="project-image">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/"
-                        title="Project 1"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-                <div class="project-name">
-                    Project One
-                </div>
-
-                <div class="project-description">
-                    Custom Minecraft mechanics and systems.
-                </div>
-
-            </a>
-
-            <a
-                class="project"
-                href="#"
-                target="_blank">
-
-                <div class="project-image">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/"
-                        title="Project 2"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-                <div class="project-name">
-                    Project Two
-                </div>
-
-                <div class="project-description">
-                    Advanced Skript development and visuals.
-                </div>
-
-            </a>
-
-        </div>
-    </section>
-
-    <section
-        class="contact"
-        id="contact">
-
-        <div class="contact-inner">
-
-            <div class="section-label">
-                Contact
-            </div>
-
-            <h2 class="contact-title">
-                Let's build
-                something.
-            </h2>
-
-            <p class="contact-text">
-                Have an idea for an SMP, plugin or custom system?
-            </p>
-
-            <a
-                class="contact-button"
-                href="https://discord.com/"
-                target="_blank">
-
-                Contact me
-
-            </a>
-
-        </div>
-
-    </section>
-
-    <div class="inspiration">
-        website inspired by
-        <span>zin.i</span>
-        on Discord
-    </div>
-
-    <footer>
-
-        <span>
-            VOID
-        </span>
-
-        <span>
-            2026
-        </span>
-
-    </footer>
-
     <script>
-        const music = document.getElementById("music");
-        const musicToggle = document.getElementById("musicToggle");
-        const themeToggle = document.getElementById("themeToggle");
-        const optionsButton = document.getElementById("optionsButton");
-        const optionsPanel = document.getElementById("optionsPanel");
-
-        optionsButton.addEventListener("click", event => {
-            event.stopPropagation();
-            optionsPanel.classList.toggle("open");
-        });
+        const music = document.getElementById("backgroundMusic");
+        const musicButton = document.getElementById("musicButton");
+        const themeButton = document.getElementById("themeButton");
 
         let musicEnabled = false;
 
-        musicToggle.addEventListener("click", event => {
-            event.stopPropagation();
-
-            musicEnabled = !musicEnabled;
-
-            musicToggle.classList.toggle(
-                "active",
-                musicEnabled
-            );
-
+        function toggleMusic() {
             if (musicEnabled) {
-                music.volume = 0.35;
-                music.play().catch(() => {});
-            } else {
                 music.pause();
+                musicEnabled = false;
+                musicButton.textContent = "OFF";
+                musicButton.classList.remove("active");
+            } else {
+                music.volume = 0.25;
+                music.play().then(() => {
+                    musicEnabled = true;
+                    musicButton.textContent = "ON";
+                    musicButton.classList.add("active");
+                }).catch(() => {});
             }
-        });
+        }
 
-        themeToggle.addEventListener("click", event => {
-            event.stopPropagation();
-
+        function toggleTheme() {
             document.body.classList.toggle("light");
 
-            themeToggle.classList.toggle(
-                "active",
-                document.body.classList.contains("light")
-            );
-        });
-
-        document.addEventListener("click", event => {
-            if (
-                !optionsPanel.contains(event.target) &&
-                !optionsButton.contains(event.target)
-            ) {
-                optionsPanel.classList.remove("open");
+            if (document.body.classList.contains("light")) {
+                themeButton.textContent = "WHITE";
+                themeButton.classList.add("active");
+            } else {
+                themeButton.textContent = "BLACK";
+                themeButton.classList.remove("active");
             }
-        });
-
-        document
-            .querySelectorAll("a[href^='#']")
-            .forEach(link => {
-
-                link.addEventListener("click", function(event) {
-
-                    const target = document.querySelector(
-                        this.getAttribute("href")
-                    );
-
-                    if (!target) {
-                        return;
-                    }
-
-                    event.preventDefault();
-
-                    target.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-                });
-
-            });
+        }
     </script>
-
 </body>
 </html>
