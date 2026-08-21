@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VOID — Minecraft Developer</title>
+    <title>VOID</title>
 
     <style>
         * {
@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        body::selection {
+        ::selection {
             background: #ffffff;
             color: #000000;
         }
@@ -33,6 +33,7 @@
             color: inherit;
             text-decoration: none;
         }
+
 
         /* =========================
            NAV
@@ -67,12 +68,12 @@
             letter-spacing: 0.25em;
 
             transition:
-                opacity 0.35s ease,
-                transform 0.5s cubic-bezier(.2,.8,.2,1);
+                opacity 0.25s ease,
+                transform 0.3s ease;
         }
 
         .nav-logo:hover {
-            opacity: 0.55;
+            opacity: 0.5;
             transform: translateX(4px);
         }
 
@@ -84,20 +85,22 @@
         .nav-links a {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 10px;
+
             text-transform: uppercase;
             letter-spacing: 0.18em;
 
             color: #555;
 
             transition:
-                color 0.35s ease,
-                transform 0.35s ease;
+                color 0.25s ease,
+                transform 0.25s ease;
         }
 
         .nav-links a:hover {
             color: #fff;
             transform: translateY(-2px);
         }
+
 
         /* =========================
            HERO
@@ -117,7 +120,6 @@
 
         .hero-content {
             position: relative;
-            z-index: 5;
 
             width: 100%;
             height: 100vh;
@@ -125,7 +127,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
+            z-index: 5;
         }
+
 
         /* =========================
            SCATTERED QUOTES
@@ -134,60 +139,80 @@
         .floating-quote {
             position: absolute;
 
-            max-width: 360px;
+            max-width: 330px;
 
-            color: #2d2d2d;
+            color: #292929;
 
-            font-size: clamp(14px, 1.3vw, 20px);
+            font-size: clamp(13px, 1.15vw, 18px);
+
             line-height: 1.45;
 
             font-style: italic;
 
             pointer-events: none;
 
-            transition:
-                color 1s ease,
-                transform 1.2s cubic-bezier(.2,.8,.2,1);
-        }
+            user-select: none;
 
-        .floating-quote:hover {
-            color: #444;
+            transition:
+                color 0.5s ease,
+                opacity 0.5s ease,
+                transform 1s cubic-bezier(.2,.8,.2,1);
         }
 
         .quote-1 {
-            top: 8%;
+            top: 7%;
             left: 11%;
-
             transform: rotate(-2deg);
         }
 
         .quote-2 {
-            top: 18%;
+            top: 15%;
             right: 8%;
-
             transform: rotate(2deg);
         }
 
         .quote-3 {
-            bottom: 17%;
-            left: 10%;
-
+            top: 39%;
+            left: 4%;
             transform: rotate(-1deg);
         }
 
         .quote-4 {
-            bottom: 20%;
-            right: 8%;
-
+            top: 43%;
+            right: 5%;
             transform: rotate(2deg);
         }
 
         .quote-5 {
-            bottom: 7%;
-            left: 47%;
+            bottom: 20%;
+            left: 10%;
+            transform: rotate(-2deg);
+        }
 
+        .quote-6 {
+            bottom: 12%;
+            right: 9%;
+            transform: rotate(1deg);
+        }
+
+        .quote-7 {
+            bottom: 7%;
+            left: 43%;
             transform: rotate(-1deg);
         }
+
+        .quote-8 {
+            top: 28%;
+            left: 24%;
+            transform: rotate(1deg);
+        }
+
+        .quote-9 {
+            top: 27%;
+            right: 24%;
+            transform: rotate(-1deg);
+        }
+
 
         /* =========================
            VOID
@@ -205,29 +230,10 @@
             z-index: 10;
         }
 
-        .void {
-            position: relative;
-            z-index: 3;
-
-            font-size: clamp(130px, 19vw, 330px);
-
-            line-height: 0.72;
-
-            font-weight: 400;
-
-            letter-spacing: -0.09em;
-
-            color: #eeeeee;
-
-            transition:
-                color 0.45s ease,
-                transform 0.9s cubic-bezier(.16,1,.3,1);
-        }
-
         /*
             WHITE CARD
 
-            Invisible when not hovering.
+            Hidden until hover.
         */
 
         .void-overlay {
@@ -252,20 +258,42 @@
             pointer-events: none;
 
             transition:
-                transform 0.75s cubic-bezier(.77,0,.18,1);
+                transform 0.28s cubic-bezier(.77, 0, .18, 1);
         }
 
+
         /*
-            VOID sits above the white card,
-            turning black when hovered.
+            VOID TEXT
+
+            IMPORTANT:
+            This is ABOVE the white overlay.
+            That's why it turns black correctly.
         */
+
+        .void {
+            position: relative;
+
+            z-index: 6;
+
+            font-size: clamp(130px, 19vw, 330px);
+
+            line-height: 0.72;
+
+            font-weight: 400;
+
+            letter-spacing: -0.09em;
+
+            color: #eeeeee;
+
+            transition:
+                color 0.2s ease,
+                transform 0.3s cubic-bezier(.2,.8,.2,1);
+        }
 
         .void-wrap:hover .void {
             color: #080808;
 
-            transform:
-                scale(1.025)
-                translateY(-2px);
+            transform: scale(1.025);
         }
 
         .void-wrap:hover .void-overlay {
@@ -273,6 +301,7 @@
                 translate(-50%, -50%)
                 scaleX(1);
         }
+
 
         /* =========================
            AGE
@@ -301,14 +330,14 @@
             opacity: 0;
 
             transform:
-                translateY(12px)
+                translateY(8px)
                 scale(0.96);
 
             transition:
-                opacity 0.35s ease,
-                transform 0.55s cubic-bezier(.2,.8,.2,1);
+                opacity 0.2s ease,
+                transform 0.25s cubic-bezier(.2,.8,.2,1);
 
-            z-index: 20;
+            z-index: 8;
 
             pointer-events: none;
         }
@@ -320,6 +349,7 @@
                 translateY(0)
                 scale(1);
         }
+
 
         /* =========================
            HERO LABEL
@@ -343,6 +373,7 @@
 
             color: #333;
         }
+
 
         /* =========================
            ABOUT
@@ -418,6 +449,7 @@
             color: #555;
         }
 
+
         /* =========================
            WORK + CONTACT
         ========================= */
@@ -429,12 +461,6 @@
         }
 
         .work-header {
-            display: flex;
-
-            align-items: baseline;
-
-            justify-content: space-between;
-
             margin-bottom: 70px;
         }
 
@@ -448,16 +474,6 @@
             line-height: 0.8;
         }
 
-        .work-count {
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 9px;
-
-            letter-spacing: 0.2em;
-
-            color: #444;
-        }
-
         .work-content {
             display: grid;
 
@@ -468,8 +484,9 @@
             align-items: start;
         }
 
+
         /* =========================
-           PROJECT GRID
+           PROJECTS
         ========================= */
 
         .projects {
@@ -511,9 +528,9 @@
             opacity: 0.72;
 
             transition:
-                filter 0.7s ease,
-                opacity 0.7s ease,
-                transform 0.9s cubic-bezier(.2,.8,.2,1);
+                filter 0.55s ease,
+                opacity 0.55s ease,
+                transform 0.7s cubic-bezier(.2,.8,.2,1);
         }
 
         .project:hover .project-image img {
@@ -547,6 +564,7 @@
 
             color: #444;
         }
+
 
         /* =========================
            CONTACT
@@ -600,7 +618,6 @@
             display: inline-flex;
 
             align-items: center;
-
             justify-content: center;
 
             padding: 15px 24px;
@@ -616,10 +633,10 @@
             text-transform: uppercase;
 
             transition:
-                background 0.4s ease,
-                color 0.4s ease,
-                border-color 0.4s ease,
-                transform 0.4s ease;
+                background 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                transform 0.3s ease;
         }
 
         .contact-button:hover {
@@ -632,47 +649,18 @@
             transform: translateY(-3px);
         }
 
+
         /* =========================
-           VIDEO SHOWCASE
+           VIDEOS
+           
+           No showcase title.
+           No showcase tab.
+           Just the videos at the end.
         ========================= */
 
-        .showcase {
-            padding: 12vh 8vw 15vh;
-        }
-
-        .showcase-header {
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: baseline;
-
-            margin-bottom: 60px;
-        }
-
-        .showcase-label {
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 9px;
-
-            letter-spacing: 0.3em;
-
-            text-transform: uppercase;
-
-            color: #444;
-        }
-
-        .showcase-count {
-            font-family: Arial, Helvetica, sans-serif;
-
-            font-size: 8px;
-
-            letter-spacing: 0.18em;
-
-            color: #333;
-        }
-
         .videos {
+            padding: 12vh 8vw 15vh;
+
             display: grid;
 
             grid-template-columns: repeat(2, 1fr);
@@ -690,12 +678,12 @@
             overflow: hidden;
 
             transition:
-                transform 0.6s cubic-bezier(.2,.8,.2,1),
-                border-color 0.5s ease;
+                transform 0.45s cubic-bezier(.2,.8,.2,1),
+                border-color 0.35s ease;
         }
 
         .video:hover {
-            transform: translateY(-7px);
+            transform: translateY(-6px);
 
             border-color: rgba(255, 255, 255, 0.18);
         }
@@ -706,6 +694,7 @@
 
             border: none;
         }
+
 
         /* =========================
            FOOTER
@@ -729,18 +718,19 @@
             color: #333;
         }
 
+
         /* =========================
-           REVEAL ANIMATION
+           REVEAL
         ========================= */
 
         .reveal {
             opacity: 0;
 
-            transform: translateY(30px);
+            transform: translateY(25px);
 
             transition:
-                opacity 1s ease,
-                transform 1s cubic-bezier(.2,.8,.2,1);
+                opacity 0.7s ease,
+                transform 0.7s cubic-bezier(.2,.8,.2,1);
         }
 
         .reveal.visible {
@@ -748,6 +738,7 @@
 
             transform: translateY(0);
         }
+
 
         /* =========================
            RESPONSIVE
@@ -780,11 +771,12 @@
             }
 
             .floating-quote {
-                max-width: 260px;
+                max-width: 250px;
 
                 font-size: 13px;
             }
         }
+
 
         @media (max-width: 700px) {
 
@@ -815,39 +807,54 @@
             }
 
             .floating-quote {
-                font-size: 11px;
+                font-size: 10px;
 
-                max-width: 190px;
+                max-width: 180px;
             }
 
             .quote-1 {
-                top: 13%;
+                top: 12%;
                 left: 5%;
             }
 
             .quote-2 {
-                top: 23%;
+                top: 20%;
                 right: 4%;
             }
 
             .quote-3 {
+                top: 37%;
+                left: 2%;
+            }
+
+            .quote-4 {
+                top: 43%;
+                right: 2%;
+            }
+
+            .quote-5 {
                 bottom: 22%;
                 left: 5%;
             }
 
-            .quote-4 {
-                bottom: 27%;
-                right: 4%;
+            .quote-6 {
+                bottom: 28%;
+                right: 3%;
             }
 
-            .quote-5 {
-                bottom: 9%;
+            .quote-7 {
+                bottom: 8%;
                 left: 35%;
+            }
+
+            .quote-8,
+            .quote-9 {
+                display: none;
             }
 
             .about,
             .work-contact,
-            .showcase {
+            .videos {
                 padding-left: 25px;
                 padding-right: 25px;
             }
@@ -857,22 +864,13 @@
                 grid-template-columns: 1fr;
             }
 
-            .work-header,
-            .showcase-header {
-                margin-bottom: 45px;
-            }
-
-            .work-count,
-            .showcase-count {
-                display: none;
-            }
-
             footer {
                 padding: 30px 25px;
             }
         }
     </style>
 </head>
+
 
 <body>
 
@@ -881,13 +879,27 @@
     ========================= -->
 
     <nav>
-        <a href="#home" class="nav-logo">VOID</a>
+
+        <a href="#home" class="nav-logo">
+            VOID
+        </a>
 
         <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#work">Work</a>
-            <a href="#contact">Contact</a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#work">
+                Work
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
         </div>
+
     </nav>
 
 
@@ -914,11 +926,27 @@
             </div>
 
             <div class="floating-quote quote-4">
-                “Dread it. Run from it.”
+                “There are no strings on me.”
             </div>
 
             <div class="floating-quote quote-5">
-                “There are no strings on me.”
+                “Dread it. Run from it.”
+            </div>
+
+            <div class="floating-quote quote-6">
+                “I am Doom.”
+            </div>
+
+            <div class="floating-quote quote-7">
+                “Reality can be whatever I want.”
+            </div>
+
+            <div class="floating-quote quote-8">
+                “The hardest choices require the strongest wills.”
+            </div>
+
+            <div class="floating-quote quote-9">
+                “You will know I was right.”
             </div>
 
 
@@ -1006,10 +1034,6 @@
             <h2 class="work-title">
                 Work
             </h2>
-
-            <div class="work-count">
-                SELECTED PROJECTS
-            </div>
 
         </div>
 
@@ -1152,46 +1176,33 @@
 
 
     <!-- =========================
-         VIDEO SHOWCASE
+         VIDEOS
+         
+         No Showcase title.
+         No Showcase tab.
+         Videos simply sit at the bottom.
     ========================= -->
 
-    <section class="showcase">
+    <section class="videos">
 
-        <div class="showcase-header reveal">
+        <div class="video reveal">
 
-            <div class="showcase-label">
-                Showcase
-            </div>
-
-            <div class="showcase-count">
-                SELECTED WORK
-            </div>
+            <iframe
+                src="https://www.youtube.com/embed/VIDEO_ID_1"
+                title="Project Showcase 1"
+                allowfullscreen>
+            </iframe>
 
         </div>
 
 
-        <div class="videos">
+        <div class="video reveal">
 
-            <div class="video reveal">
-
-                <iframe
-                    src="https://www.youtube.com/embed/VIDEO_ID_1"
-                    title="Project Showcase 1"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-
-            <div class="video reveal">
-
-                <iframe
-                    src="https://www.youtube.com/embed/VIDEO_ID_2"
-                    title="Project Showcase 2"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
+            <iframe
+                src="https://www.youtube.com/embed/VIDEO_ID_2"
+                title="Project Showcase 2"
+                allowfullscreen>
+            </iframe>
 
         </div>
 
@@ -1221,32 +1232,31 @@
 
     <script>
 
-        /*
-            Smooth reveal animations
-        */
+        const revealElements =
+            document.querySelectorAll(".reveal");
 
-        const revealElements = document.querySelectorAll(".reveal");
 
-        const observer = new IntersectionObserver(
-            (entries) => {
+        const observer =
+            new IntersectionObserver(
+                (entries) => {
 
-                entries.forEach((entry) => {
+                    entries.forEach((entry) => {
 
-                    if (entry.isIntersecting) {
+                        if (entry.isIntersecting) {
 
-                        entry.target.classList.add("visible");
+                            entry.target.classList.add("visible");
 
-                        observer.unobserve(entry.target);
+                            observer.unobserve(entry.target);
 
-                    }
+                        }
 
-                });
+                    });
 
-            },
-            {
-                threshold: 0.12
-            }
-        );
+                },
+                {
+                    threshold: 0.12
+                }
+            );
 
 
         revealElements.forEach((element) => {
@@ -1256,17 +1266,14 @@
         });
 
 
-        /*
-            Smooth navigation
-        */
-
         document.querySelectorAll("a[href^='#']").forEach((link) => {
 
             link.addEventListener("click", (event) => {
 
-                const target = document.querySelector(
-                    link.getAttribute("href")
-                );
+                const target =
+                    document.querySelector(
+                        link.getAttribute("href")
+                    );
 
                 if (!target) {
                     return;
