@@ -3,350 +3,519 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Void</title>
+
+    <title>VOID — Minecraft Developer</title>
 
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        html,
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
             background: #080808;
             color: #f5f5f5;
-        }
-
-        body {
             font-family: Georgia, "Times New Roman", serif;
+            overflow-x: hidden;
         }
 
-        .site {
-            width: 500vw;
-            height: 100vh;
-            display: flex;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        .page {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            flex-shrink: 0;
-            overflow: hidden;
+        ::selection {
+            background: #ffffff;
+            color: #000000;
         }
-
 
         /* =========================
-           TOP TICKER
+           NAVIGATION
         ========================= */
 
-        .ticker {
+        nav {
             position: fixed;
-            z-index: 100;
             top: 0;
             left: 0;
             width: 100%;
-            height: 25px;
-            overflow: hidden;
-            white-space: nowrap;
-            border-bottom: 1px solid #151515;
-            background: #080808;
-            color: #666;
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            letter-spacing: 1px;
-            line-height: 25px;
+            height: 80px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5vw;
+
+            z-index: 100;
+
+            background: rgba(8, 8, 8, 0.7);
+            backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .ticker-inner {
-            display: inline-block;
-            animation: ticker 35s linear infinite;
+        .nav-logo {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
         }
 
-        .ticker span {
-            margin-right: 35px;
+        .nav-links {
+            display: flex;
+            gap: 35px;
         }
 
-        @keyframes ticker {
-            from {
-                transform: translateX(0);
-            }
+        .nav-links a {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #888;
 
-            to {
-                transform: translateX(-50%);
-            }
+            transition:
+                color 0.3s ease,
+                transform 0.3s ease;
         }
 
+        .nav-links a:hover {
+            color: #fff;
+            transform: translateY(-2px);
+        }
 
         /* =========================
-           HOME / VOID
+           HERO
         ========================= */
 
-        .name-page {
+        .hero {
+            min-height: 100vh;
+            position: relative;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            overflow: hidden;
         }
 
-        .void-wrapper {
+        .hero-content {
             position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 25px 35px;
+            z-index: 5;
+            text-align: center;
+        }
+
+        .void-wrap {
+            position: relative;
+            display: inline-block;
+
             cursor: pointer;
+
+            padding: 20px 35px;
         }
 
-        .void-name {
+        .void {
             position: relative;
-            z-index: 2;
-            font-size: clamp(100px, 16vw, 260px);
-            font-weight: 400;
+            z-index: 3;
+
+            font-size: clamp(110px, 18vw, 300px);
             line-height: 0.8;
-            letter-spacing: -12px;
+
+            font-weight: 400;
+            letter-spacing: -0.08em;
+
             color: #f5f5f5;
+
             transition:
                 color 0.45s ease,
-                transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+                transform 0.7s cubic-bezier(.2,.8,.2,1);
         }
+
+        /*
+            WHITE OVERLAY
+
+            Hidden normally.
+            Appears only while hovering VOID.
+        */
 
         .void-overlay {
             position: absolute;
-            z-index: 1;
-            top: 50%;
-            left: 50%;
 
-            width: calc(100% - 10px);
-            height: 78%;
+            left: 0;
+            top: 50%;
+
+            width: 100%;
+            height: 72%;
 
             background: #f5f5f5;
 
-            transform: translate(-50%, -50%) rotate(-2deg);
+            transform:
+                translateY(-50%)
+                scaleX(0);
+
+            transform-origin: left center;
+
+            z-index: 4;
+
+            pointer-events: none;
 
             transition:
-                width 0.55s cubic-bezier(0.77, 0, 0.175, 1),
-                height 0.55s cubic-bezier(0.77, 0, 0.175, 1),
-                transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+                transform 0.55s cubic-bezier(.77,0,.18,1);
         }
 
-        .void-wrapper:hover .void-overlay {
-            width: calc(100% + 25px);
-            height: 86%;
-            transform: translate(-50%, -50%) rotate(-2deg);
-        }
+        /*
+            Make the VOID text black while the
+            white overlay is visible.
+        */
 
-        .void-wrapper:hover .void-name {
+        .void-wrap:hover .void {
             color: #080808;
-            transform: translateY(-3px);
+
+            transform: scale(1.015);
         }
+
+        .void-wrap:hover .void-overlay {
+            transform:
+                translateY(-50%)
+                scaleX(1);
+        }
+
+        /*
+            AGE BADGE
+        */
 
         .age {
             position: absolute;
-            z-index: 4;
-            top: 2px;
+
+            top: -10px;
             right: 0;
 
-            padding: 7px 13px;
+            padding: 8px 14px;
 
-            border-radius: 20px;
-            border: 1px solid #444;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 30px;
 
-            background: #080808;
-            color: #eee;
-
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            letter-spacing: 1px;
-
-            transition:
-                background 0.4s ease,
-                color 0.4s ease,
-                border-color 0.4s ease;
-        }
-
-        .void-wrapper:hover .age {
-            background: #080808;
-            color: #fff;
-            border-color: #111;
-        }
-
-        .age::after {
-            content: "15 YEARS OLD";
-            position: absolute;
-
-            top: 50%;
-            left: 50%;
-
-            width: max-content;
-
-            transform:
-                translate(-50%, -50%)
-                scale(0);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.12em;
 
             opacity: 0;
+            transform: translateY(10px);
 
             transition:
-                transform 0.45s cubic-bezier(0.77, 0, 0.175, 1),
-                opacity 0.3s ease;
+                opacity 0.35s ease,
+                transform 0.45s ease;
+
+            z-index: 10;
+
+            pointer-events: none;
         }
 
-        .void-wrapper:hover .age::after {
-            transform:
-                translate(-50%, -50%)
-                scale(1);
-
+        .void-wrap:hover .age {
             opacity: 1;
+            transform: translateY(0);
         }
 
-        .void-wrapper:hover .age {
-            color: transparent;
+        .hero-subtitle {
+            margin-top: 45px;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+
+            color: #555;
         }
 
+        .scroll-indicator {
+            position: absolute;
+            bottom: 35px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+
+            color: #555;
+
+            animation: float 2.5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, 8px);
+            }
+        }
 
         /* =========================
            QUOTES
         ========================= */
 
+        .quotes {
+            min-height: 100vh;
+            padding: 15vh 8vw;
+
+            position: relative;
+        }
+
+        .section-label {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #555;
+
+            margin-bottom: 80px;
+        }
+
+        .quote-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 70px;
+
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
         .quote {
-            position: absolute;
-            max-width: 350px;
+            min-height: 330px;
 
-            color: #4d4d4d;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
-            font-size: 19px;
-            font-style: italic;
-            line-height: 1.45;
+            padding: 35px;
 
-            transition: color 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            transition:
+                border-color 0.35s ease,
+                transform 0.45s ease;
         }
 
         .quote:hover {
-            color: #999;
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-8px);
         }
 
-        .quote-1 {
-            top: 12%;
-            left: 12%;
+        .quote-character {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #666;
         }
 
-        .quote-2 {
-            top: 25%;
-            right: 12%;
+        .quote-text {
+            font-size: clamp(22px, 2vw, 32px);
+            line-height: 1.25;
+            font-style: italic;
         }
 
-        .quote-3 {
-            bottom: 28%;
-            left: 10%;
+        .quote-number {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            color: #444;
         }
-
-        .quote-4 {
-            bottom: 15%;
-            right: 15%;
-        }
-
-        .quote-5 {
-            top: 53%;
-            left: 43%;
-        }
-
-        .quote-6 {
-            top: 8%;
-            right: 35%;
-        }
-
 
         /* =========================
            ABOUT
         ========================= */
 
-        .about-page {
-            display: flex;
+        .about {
+            min-height: 85vh;
+
+            padding: 15vh 8vw;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10vw;
+
             align-items: center;
-            justify-content: center;
         }
 
-        .about-content {
-            width: 430px;
-            text-align: center;
-        }
-
-        .section-title {
-            margin-bottom: 35px;
-
-            font-size: 29px;
+        .about-title {
+            font-size: clamp(70px, 9vw, 150px);
             font-weight: 400;
+            letter-spacing: -0.06em;
         }
 
         .about-text {
-            margin-bottom: 12px;
+            max-width: 520px;
 
-            color: #777;
+            color: #999;
 
-            font-size: 17px;
+            font-size: 18px;
             line-height: 1.8;
         }
 
+        .about-text strong {
+            color: #fff;
+            font-weight: 400;
+        }
+
         .about-box {
-            margin-top: 40px;
+            margin-top: 45px;
 
-            padding: 30px;
+            padding: 25px;
 
-            border: 1px solid #222;
-            border-radius: 12px;
-        }
+            border: 1px solid rgba(255, 255, 255, 0.08);
 
-        .about-box-title {
-            margin-bottom: 20px;
-
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             font-size: 11px;
-            letter-spacing: 3px;
+            letter-spacing: 0.12em;
+            color: #777;
         }
 
-        .about-box p {
-            color: #666;
-            font-size: 15px;
+        /* =========================
+           WORK
+        ========================= */
+
+        .work {
+            padding: 15vh 8vw;
         }
 
+        .work-heading {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+
+            margin-bottom: 70px;
+        }
+
+        .work-title {
+            font-size: clamp(60px, 9vw, 140px);
+            font-weight: 400;
+            letter-spacing: -0.07em;
+        }
+
+        .work-count {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            color: #555;
+            letter-spacing: 0.15em;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px 35px;
+        }
+
+        .project {
+            display: block;
+        }
+
+        .project-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+
+            background: #111;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            filter: grayscale(100%);
+
+            transition:
+                filter 0.6s ease,
+                transform 0.7s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .project:hover .project-image img {
+            filter: grayscale(0%);
+            transform: scale(1.04);
+        }
+
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+
+            padding-top: 18px;
+        }
+
+        .project-name {
+            font-size: 21px;
+        }
+
+        .project-type {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            color: #555;
+            text-transform: uppercase;
+        }
 
         /* =========================
            CONTACT
         ========================= */
 
-        .contact-page {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .contact {
+            min-height: 75vh;
 
-        .contact-content {
+            padding: 15vh 8vw;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
             text-align: center;
         }
 
-        .contact-title {
-            margin-bottom: 35px;
+        .contact-label {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            color: #555;
+            text-transform: uppercase;
 
-            font-size: 30px;
+            margin-bottom: 40px;
+        }
+
+        .contact-title {
+            font-size: clamp(70px, 11vw, 180px);
             font-weight: 400;
+
+            letter-spacing: -0.08em;
+
+            margin-bottom: 50px;
         }
 
         .contact-button {
             display: inline-block;
 
-            padding: 14px 28px;
+            padding: 17px 30px;
 
-            border: 1px solid #333;
-            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
 
-            color: #eee;
-            text-decoration: none;
-
-            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
 
             transition:
                 background 0.3s ease,
@@ -355,628 +524,561 @@
         }
 
         .contact-button:hover {
-            background: #f5f5f5;
-            color: #080808;
-            border-color: #f5f5f5;
+            background: #fff;
+            color: #000;
+            border-color: #fff;
         }
-
-        .contact-subtitle {
-            margin-top: 35px;
-
-            color: #555;
-
-            font-size: 17px;
-            font-style: italic;
-        }
-
 
         /* =========================
-           WORK / SHOWCASE
+           SHOWCASE
         ========================= */
 
-        .work-page {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .showcase {
+            padding: 15vh 8vw 8vh;
         }
 
-        .work-container {
-            width: 900px;
-            max-width: 90vw;
-        }
-
-        .work-title {
-            margin-bottom: 35px;
-
-            font-size: 30px;
+        .showcase-title {
+            font-size: clamp(50px, 7vw, 100px);
             font-weight: 400;
+
+            letter-spacing: -0.06em;
+
+            margin-bottom: 70px;
         }
 
-        .work-grid {
+        .videos {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 45px 35px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
         }
 
-        .project {
-            display: block;
-            color: #eee;
-            text-decoration: none;
-        }
-
-        .project-video {
-            position: relative;
-
-            width: 100%;
+        .video {
             aspect-ratio: 16 / 9;
 
+            background: #111;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
             overflow: hidden;
-
-            border-radius: 8px;
-            background: #151515;
-
-            border: 1px solid #1d1d1d;
         }
 
-        .project-video iframe {
+        .video iframe {
             width: 100%;
             height: 100%;
 
-            border: 0;
+            border: none;
         }
 
-        .project-placeholder {
-            width: 100%;
-            height: 100%;
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 40px 8vw;
 
             display: flex;
-            align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 9px;
+
+            letter-spacing: 0.15em;
 
             color: #444;
-
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            letter-spacing: 2px;
         }
-
-        .project-name {
-            margin-top: 15px;
-
-            font-size: 18px;
-        }
-
-        .project-description {
-            margin-top: 8px;
-
-            color: #666;
-
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .dev-diary {
-            display: block;
-
-            width: fit-content;
-
-            margin: 45px auto 0;
-            padding: 10px 35px;
-
-            border: 1px solid #222;
-            border-radius: 20px;
-
-            color: #666;
-            text-decoration: none;
-
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-
-            transition:
-                color 0.3s ease,
-                border-color 0.3s ease;
-        }
-
-        .dev-diary:hover {
-            color: #eee;
-            border-color: #555;
-        }
-
 
         /* =========================
-           PAGE INDICATOR
+           RESPONSIVE
         ========================= */
 
-        .indicator {
-            position: fixed;
-            z-index: 100;
+        @media (max-width: 900px) {
 
-            bottom: 25px;
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            display: flex;
-            gap: 8px;
-        }
-
-        .dot {
-            width: 5px;
-            height: 5px;
-
-            border-radius: 50%;
-
-            background: #333;
-
-            transition: background 0.3s ease;
-        }
-
-        .dot.active {
-            background: #eee;
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 700px) {
-
-            .void-name {
-                font-size: 90px;
-                letter-spacing: -7px;
+            .nav-links {
+                gap: 15px;
             }
 
-            .void-wrapper {
-                padding: 20px 25px;
+            .quote-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .videos {
+                grid-template-columns: 1fr;
+            }
+
+            .void {
+                font-size: 25vw;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                height: 65px;
+                padding: 0 25px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-subtitle {
+                font-size: 8px;
+            }
+
+            .quotes,
+            .about,
+            .work,
+            .contact,
+            .showcase {
+                padding-left: 25px;
+                padding-right: 25px;
             }
 
             .quote {
-                max-width: 230px;
-                font-size: 15px;
-            }
-
-            .about-content {
-                width: 80%;
-            }
-
-            .work-grid {
-                grid-template-columns: 1fr;
-                max-height: 75vh;
-                overflow-y: auto;
-            }
-
-            .work-container {
-                max-height: 85vh;
-                overflow-y: auto;
+                min-height: 280px;
             }
         }
     </style>
 </head>
 
-
 <body>
 
-    <!-- TOP REVIEWS -->
+    <!-- =========================
+         NAV
+    ========================= -->
 
-    <div class="ticker">
-        <div class="ticker-inner">
+    <nav>
+        <a href="#home" class="nav-logo">VOID</a>
 
-            <span>★★★★★ PROZAC "ABSOLUTELY COOKED"</span>
-            <span>★★★★★ RIZEN "GOAT TO WORK WITH"</span>
-            <span>★★★★★ DECOY "BEST DEVELOPER I'VE SEEN"</span>
-            <span>★★★★★ MARYG "ABSOLUTE GOAT"</span>
-            <span>★★★★★ SADSIM "DID EVERYTHING I ASKED"</span>
-
-            <span>★★★★★ PROZAC "ABSOLUTELY COOKED"</span>
-            <span>★★★★★ RIZEN "GOAT TO WORK WITH"</span>
-            <span>★★★★★ DECOY "BEST DEVELOPER I'VE SEEN"</span>
-            <span>★★★★★ MARYG "ABSOLUTE GOAT"</span>
-            <span>★★★★★ SADSIM "DID EVERYTHING I ASKED"</span>
-
+        <div class="nav-links">
+            <a href="#quotes">Quotes</a>
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
         </div>
-    </div>
+    </nav>
 
 
-    <main class="site" id="site">
+    <!-- =========================
+         HERO
+    ========================= -->
 
+    <section class="hero" id="home">
 
-        <!-- =========================
-             1. VOID
-        ========================= -->
+        <div class="hero-content">
 
-        <section class="page name-page">
-
-            <div class="void-wrapper">
+            <div class="void-wrap">
 
                 <div class="void-overlay"></div>
 
-                <div class="void-name">
-                    Void
-                </div>
-
                 <div class="age">
-                    UK 15
+                    15 YEARS
                 </div>
 
+                <h1 class="void">
+                    Void
+                </h1>
+
             </div>
 
-        </section>
-
-
-        <!-- =========================
-             2. QUOTES
-        ========================= -->
-
-        <section class="page quotes-page">
-
-            <div class="quote quote-1">
-                "We're all evil in someone's story."
+            <div class="hero-subtitle">
+                Minecraft Developer · Skript · Creative Development
             </div>
 
-            <div class="quote quote-2">
-                "You can't win without losing."
+        </div>
+
+        <div class="scroll-indicator">
+            SCROLL
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUOTES
+    ========================= -->
+
+    <section class="quotes" id="quotes">
+
+        <div class="section-label">
+            Words worth remembering
+        </div>
+
+        <div class="quote-grid">
+
+            <article class="quote">
+
+                <div class="quote-character">
+                    Thanos
+                </div>
+
+                <div class="quote-text">
+                    “I am inevitable.”
+                </div>
+
+                <div class="quote-number">
+                    01
+                </div>
+
+            </article>
+
+
+            <article class="quote">
+
+                <div class="quote-character">
+                    Ultron
+                </div>
+
+                <div class="quote-text">
+                    “I had strings, but now I'm free.”
+                </div>
+
+                <div class="quote-number">
+                    02
+                </div>
+
+            </article>
+
+
+            <article class="quote">
+
+                <div class="quote-character">
+                    Doctor Doom
+                </div>
+
+                <div class="quote-text">
+                    “Doom does not bargain.”
+                </div>
+
+                <div class="quote-number">
+                    03
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
+
+    <section class="about" id="about">
+
+        <div>
+
+            <div class="section-label">
+                About
             </div>
 
-            <div class="quote quote-3">
-                "The eyes are useless when the mind is blind."
+            <h2 class="about-title">
+                Void
+            </h2>
+
+        </div>
+
+        <div>
+
+            <p class="about-text">
+                I build <strong>Minecraft experiences</strong> focused on
+                custom mechanics, clean systems, and visuals that actually
+                feel good to use.
+                <br><br>
+                From small Skript systems to larger SMP mechanics,
+                I like taking an idea and turning it into something
+                people actually want to play.
+            </p>
+
+            <div class="about-box">
+                SKRIPT · MINECRAFT · PLUGINS · SYSTEMS · VISUALS
             </div>
 
-            <div class="quote quote-4">
-                "Pressure isn't something put on you. It's something you forgot to prepare for."
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         WORK
+    ========================= -->
+
+    <section class="work" id="work">
+
+        <div class="work-heading">
+
+            <h2 class="work-title">
+                Work
+            </h2>
+
+            <div class="work-count">
+                SELECTED PROJECTS
             </div>
 
-            <div class="quote quote-5">
-                "A single line can rewrite the truth."
-            </div>
-
-            <div class="quote quote-6">
-                "Why seek validation in a world that crucified a perfect man?"
-            </div>
-
-        </section>
+        </div>
 
 
-        <!-- =========================
-             3. ABOUT
-        ========================= -->
+        <div class="projects">
 
-        <section class="page about-page">
+            <!-- PROJECT 1 -->
 
-            <div class="about-content">
+            <a href="#" class="project">
 
-                <h2 class="section-title">
-                    About
-                </h2>
+                <div class="project-image">
+                    <img src="images/project1.jpg" alt="Project 1">
+                </div>
 
-                <p class="about-text">
-                    Minecraft Skript developer focused on
-                    unique mechanics, clean code, and smooth
-                    visuals.
-                </p>
+                <div class="project-info">
 
-                <p class="about-text">
-                    Building things that actually feel different.
-                </p>
-
-                <div class="about-box">
-
-                    <div class="about-box-title">
-                        NOW
+                    <div class="project-name">
+                        Project One
                     </div>
 
-                    <p>
-                        Skript. Fullstack. Whatever.
-                    </p>
+                    <div class="project-type">
+                        Minecraft
+                    </div>
 
                 </div>
 
-            </div>
-
-        </section>
+            </a>
 
 
-        <!-- =========================
-             4. CONTACT
-        ========================= -->
+            <!-- PROJECT 2 -->
 
-        <section class="page contact-page">
+            <a href="#" class="project">
 
-            <div class="contact-content">
+                <div class="project-image">
+                    <img src="images/project2.jpg" alt="Project 2">
+                </div>
 
-                <h2 class="contact-title">
-                    Contact
-                </h2>
+                <div class="project-info">
 
-                <a
-                    class="contact-button"
-                    href="https://discord.com/"
-                    target="_blank"
-                >
-                    @void
-                </a>
+                    <div class="project-name">
+                        Project Two
+                    </div>
 
-                <p class="contact-subtitle">
-                    made with spite and curiosity.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             5. WORK
-        ========================= -->
-
-        <section class="page work-page">
-
-            <div class="work-container">
-
-                <h2 class="work-title">
-                    Work
-                </h2>
-
-                <div class="work-grid">
-
-
-                    <!-- PROJECT 1 -->
-
-                    <a
-                        class="project"
-                        href="#"
-                    >
-
-                        <div class="project-video">
-
-                            <!-- Replace VIDEO_ID_1 with your YouTube video ID -->
-
-                            <iframe
-                                src="https://www.youtube.com/embed/VIDEO_ID_1"
-                                title="Project 1"
-                                allowfullscreen>
-                            </iframe>
-
-                        </div>
-
-                        <div class="project-name">
-                            'Spell SMP' 2
-                        </div>
-
-                        <div class="project-description">
-                            Advanced spells, wands, models,
-                            particles and custom mechanics.
-                        </div>
-
-                    </a>
-
-
-                    <!-- PROJECT 2 -->
-
-                    <a
-                        class="project"
-                        href="#"
-                    >
-
-                        <div class="project-video">
-
-                            <!-- Replace VIDEO_ID_2 with your YouTube video ID -->
-
-                            <iframe
-                                src="https://www.youtube.com/embed/VIDEO_ID_2"
-                                title="Project 2"
-                                allowfullscreen>
-                            </iframe>
-
-                        </div>
-
-                        <div class="project-name">
-                            Outliers Blessing
-                        </div>
-
-                        <div class="project-description">
-                            Simple ideas with advanced
-                            internals and clean pacing.
-                        </div>
-
-                    </a>
-
-
-                    <!-- PROJECT 3 -->
-
-                    <a
-                        class="project"
-                        href="#"
-                    >
-
-                        <div class="project-video">
-
-                            <!-- Replace VIDEO_ID_3 with your YouTube video ID -->
-
-                            <iframe
-                                src="https://www.youtube.com/embed/VIDEO_ID_3"
-                                title="Project 3"
-                                allowfullscreen>
-                            </iframe>
-
-                        </div>
-
-                        <div class="project-name">
-                            Enchant SMP
-                        </div>
-
-                        <div class="project-description">
-                            Custom Minecraft mechanics,
-                            visuals and gameplay systems.
-                        </div>
-
-                    </a>
-
-
-                    <!-- PROJECT 4 -->
-
-                    <a
-                        class="project"
-                        href="#"
-                    >
-
-                        <div class="project-video">
-
-                            <!-- Replace VIDEO_ID_4 with your YouTube video ID -->
-
-                            <iframe
-                                src="https://www.youtube.com/embed/VIDEO_ID_4"
-                                title="Project 4"
-                                allowfullscreen>
-                            </iframe>
-
-                        </div>
-
-                        <div class="project-name">
-                            'Spell SMP' 1
-                        </div>
-
-                        <div class="project-description">
-                            Custom abilities, effects and
-                            scripted gameplay.
-                        </div>
-
-                    </a>
+                    <div class="project-type">
+                        SMP
+                    </div>
 
                 </div>
 
+            </a>
 
-                <a
-                    class="dev-diary"
-                    href="#"
-                >
-                    dev diary
-                </a>
 
+            <!-- PROJECT 3 -->
+
+            <a href="#" class="project">
+
+                <div class="project-image">
+                    <img src="images/project3.jpg" alt="Project 3">
+                </div>
+
+                <div class="project-info">
+
+                    <div class="project-name">
+                        Project Three
+                    </div>
+
+                    <div class="project-type">
+                        Skript
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- PROJECT 4 -->
+
+            <a href="#" class="project">
+
+                <div class="project-image">
+                    <img src="images/project4.jpg" alt="Project 4">
+                </div>
+
+                <div class="project-info">
+
+                    <div class="project-name">
+                        Project Four
+                    </div>
+
+                    <div class="project-type">
+                        Development
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================= -->
+
+    <section class="contact" id="contact">
+
+        <div class="contact-label">
+            Contact
+        </div>
+
+        <h2 class="contact-title">
+            Let's build.
+        </h2>
+
+        <a
+            href="https://discord.com/"
+            target="_blank"
+            class="contact-button"
+        >
+            Discord
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         SHOWCASE
+    ========================= -->
+
+    <section class="showcase">
+
+        <div class="section-label">
+            Showcase
+        </div>
+
+        <h2 class="showcase-title">
+            Things I've built.
+        </h2>
+
+        <div class="videos">
+
+            <div class="video">
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_1"
+                    title="Project Showcase"
+                    allowfullscreen>
+                </iframe>
             </div>
 
-        </section>
+            <div class="video">
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_2"
+                    title="Project Showcase"
+                    allowfullscreen>
+                </iframe>
+            </div>
 
-    </main>
+        </div>
+
+    </section>
 
 
-    <!-- PAGE DOTS -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
-    <div class="indicator">
+    <footer>
 
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <span>
+            VOID
+        </span>
 
-    </div>
+        <span>
+            © 2026
+        </span>
 
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
     <script>
 
-        const site = document.getElementById("site");
-        const dots = document.querySelectorAll(".dot");
+        /*
+            Small smooth-reveal effect for sections.
+        */
 
-        let currentPage = 0;
-        let scrolling = false;
+        const sections = document.querySelectorAll(
+            ".quote, .project, .about-text, .about-box, .showcase-title"
+        );
 
+        const observer = new IntersectionObserver(
+            (entries) => {
 
-        function moveToPage(page) {
+                entries.forEach((entry) => {
 
-            page = Math.max(0, Math.min(4, page));
+                    if (entry.isIntersecting) {
 
-            currentPage = page;
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
 
-            site.style.transform =
-                `translateX(-${page * 100}vw)`;
+                    }
 
-
-            dots.forEach((dot, index) => {
-
-                dot.classList.toggle(
-                    "active",
-                    index === page
-                );
-
-            });
-
-        }
-
-
-        window.addEventListener(
-            "wheel",
-            function(event) {
-
-                if (scrolling) {
-                    return;
-                }
-
-                if (Math.abs(event.deltaY) < 5) {
-                    return;
-                }
-
-                scrolling = true;
-
-
-                if (event.deltaY > 0) {
-
-                    moveToPage(
-                        currentPage + 1
-                    );
-
-                } else {
-
-                    moveToPage(
-                        currentPage - 1
-                    );
-
-                }
-
-
-                setTimeout(
-                    () => {
-                        scrolling = false;
-                    },
-                    900
-                );
+                });
 
             },
             {
-                passive: true
+                threshold: 0.12
             }
         );
 
 
-        window.addEventListener(
-            "keydown",
-            function(event) {
+        sections.forEach((section) => {
 
-                if (
-                    event.key === "ArrowRight" ||
-                    event.key === "ArrowDown"
-                ) {
+            section.style.opacity = "0";
 
-                    moveToPage(
-                        currentPage + 1
-                    );
+            section.style.transform = "translateY(25px)";
 
-                }
+            section.style.transition =
+                "opacity 0.8s ease, transform 0.8s cubic-bezier(.2,.8,.2,1)";
+
+            observer.observe(section);
+
+        });
 
 
-                if (
-                    event.key === "ArrowLeft" ||
-                    event.key === "ArrowUp"
-                ) {
+        /*
+            Slightly nicer navigation scrolling.
+        */
 
-                    moveToPage(
-                        currentPage - 1
-                    );
+        document.querySelectorAll("a[href^='#']").forEach((link) => {
 
-                }
+            link.addEventListener("click", (event) => {
 
-            }
-        );
+                const target = document.querySelector(
+                    link.getAttribute("href")
+                );
+
+                if (!target) return;
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            });
+
+        });
 
     </script>
 
