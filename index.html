@@ -7,7 +7,7 @@
     <title>Void</title>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
 
         * {
             margin: 0;
@@ -68,6 +68,7 @@
             position: fixed;
             left: 24px;
             bottom: 24px;
+
             width: 48px;
             height: 48px;
 
@@ -78,6 +79,7 @@
             color: white;
 
             cursor: pointer;
+
             z-index: 1000;
 
             backdrop-filter: blur(12px);
@@ -171,7 +173,9 @@
 
         .option-name {
             font-family: "DM Mono", monospace;
+
             font-size: 11px;
+
             letter-spacing: 0.5px;
         }
 
@@ -283,13 +287,15 @@
 
             color: rgba(255,255,255,0.25);
 
-            transition:
-                color 0.4s ease,
-                opacity 0.4s ease;
-
             user-select: none;
 
             z-index: 1;
+
+            animation: quoteFloat 6s ease-in-out infinite;
+
+            transition:
+                color 0.4s ease,
+                opacity 0.4s ease;
         }
 
         body.light .quote {
@@ -305,44 +311,78 @@
         }
 
 
+        /*
+            Each quote starts at a different point
+            in the animation so they don't move together.
+        */
+
         .q1 {
             top: 7%;
             left: 11%;
+            animation-delay: 0s;
         }
 
         .q2 {
             top: 15%;
             right: 8%;
+            animation-delay: -1s;
         }
 
         .q3 {
             top: 31%;
             left: 5%;
+            animation-delay: -2s;
         }
 
         .q4 {
             top: 42%;
             right: 12%;
+            animation-delay: -3s;
         }
 
         .q5 {
             bottom: 22%;
             left: 9%;
+            animation-delay: -4s;
         }
 
         .q6 {
             bottom: 10%;
             left: 43%;
+            animation-delay: -5s;
         }
 
         .q7 {
             top: 8%;
             right: 36%;
+            animation-delay: -1.5s;
         }
 
         .q8 {
             bottom: 30%;
             right: 5%;
+            animation-delay: -3.5s;
+        }
+
+
+        @keyframes quoteFloat {
+
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(12px, -10px) rotate(0.5deg);
+            }
+
+            50% {
+                transform: translate(-8px, 8px) rotate(-0.5deg);
+            }
+
+            75% {
+                transform: translate(10px, 5px) rotate(0.3deg);
+            }
+
         }
 
 
@@ -384,24 +424,14 @@
             color: #f5f5f5;
 
             transition:
-                color 0.2s ease,
-                transform 0.25s cubic-bezier(.2,.8,.2,1);
+                color 0.14s ease,
+                transform 0.16s cubic-bezier(.2,.8,.2,1);
         }
 
 
-        /*
-            FULL HEIGHT WHITE OVERLAY
-
-            This used to be:
-
-            top: 50%;
-            bottom: 0;
-
-            which made the hover effect cover
-            only half of VOID.
-
-            Now it covers the entire area.
-        */
+        /* =========================
+           VOID HOVER OVERLAY
+        ========================= */
 
         .void-overlay {
             position: absolute;
@@ -421,7 +451,7 @@
             transform-origin: left center;
 
             transition:
-                transform 0.25s cubic-bezier(.65,0,.35,1);
+                transform 0.16s cubic-bezier(.65,0,.35,1);
 
             pointer-events: none;
         }
@@ -455,8 +485,8 @@
             transform: translateY(6px);
 
             transition:
-                opacity 0.18s ease,
-                transform 0.18s ease;
+                opacity 0.14s ease,
+                transform 0.14s ease;
         }
 
 
