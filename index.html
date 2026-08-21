@@ -19,7 +19,7 @@
 
         body {
             background: #080808;
-            color: #f5f5f5;
+            color: #f4f4f4;
             font-family: Georgia, "Times New Roman", serif;
             overflow-x: hidden;
         }
@@ -30,9 +30,10 @@
         }
 
         ::selection {
-            background: #ffffff;
-            color: #000000;
+            background: #fff;
+            color: #000;
         }
+
 
         /* =========================
            NAVIGATION
@@ -42,45 +43,54 @@
             position: fixed;
             top: 0;
             left: 0;
+
             width: 100%;
-            height: 80px;
+            height: 75px;
+
+            padding: 0 5vw;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            padding: 0 5vw;
-
             z-index: 100;
 
-            background: rgba(8, 8, 8, 0.7);
-            backdrop-filter: blur(14px);
+            background: rgba(8, 8, 8, 0.55);
+            backdrop-filter: blur(18px);
 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.045);
         }
 
         .nav-logo {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.22em;
+
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            opacity: 0.55;
         }
 
         .nav-links {
             display: flex;
-            gap: 35px;
+            gap: 32px;
         }
 
         .nav-links a {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 12px;
+            font-size: 10px;
+
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #888;
+            letter-spacing: 0.18em;
+
+            color: #666;
 
             transition:
-                color 0.3s ease,
-                transform 0.3s ease;
+                color 0.35s ease,
+                transform 0.35s ease;
         }
 
         .nav-links a:hover {
@@ -88,12 +98,15 @@
             transform: translateY(-2px);
         }
 
+
         /* =========================
-           HERO
+           HOME
         ========================= */
 
         .hero {
-            min-height: 100vh;
+            height: 100vh;
+            min-height: 650px;
+
             position: relative;
 
             display: flex;
@@ -103,44 +116,124 @@
             overflow: hidden;
         }
 
+
+        /* =========================
+           SCATTERED QUOTES
+        ========================= */
+
+        .floating-quote {
+            position: absolute;
+
+            max-width: 330px;
+
+            color: rgba(255,255,255,0.22);
+
+            font-size: clamp(14px, 1.25vw, 20px);
+            line-height: 1.35;
+
+            font-style: italic;
+
+            pointer-events: none;
+
+            user-select: none;
+
+            transition:
+                opacity 0.8s ease,
+                transform 1s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .floating-quote span {
+            display: block;
+        }
+
+        .q1 {
+            top: 10%;
+            left: 10%;
+        }
+
+        .q2 {
+            top: 19%;
+            right: 7%;
+        }
+
+        .q3 {
+            top: 35%;
+            left: 7%;
+        }
+
+        .q4 {
+            top: 28%;
+            right: 18%;
+        }
+
+        .q5 {
+            bottom: 28%;
+            left: 10%;
+        }
+
+        .q6 {
+            bottom: 24%;
+            right: 8%;
+        }
+
+        .q7 {
+            bottom: 10%;
+            left: 45%;
+        }
+
+        .q8 {
+            top: 7%;
+            right: 42%;
+        }
+
+
+        /* =========================
+           HERO CENTER
+        ========================= */
+
         .hero-content {
             position: relative;
-            z-index: 5;
-            text-align: center;
+            z-index: 10;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .void-wrap {
             position: relative;
+
             display: inline-block;
 
-            cursor: pointer;
+            padding: 35px 55px;
 
-            padding: 20px 35px;
+            cursor: default;
+
+            isolation: isolate;
         }
 
         .void {
             position: relative;
             z-index: 3;
 
-            font-size: clamp(110px, 18vw, 300px);
-            line-height: 0.8;
+            font-size: clamp(130px, 20vw, 330px);
+            line-height: 0.72;
 
             font-weight: 400;
-            letter-spacing: -0.08em;
+
+            letter-spacing: -0.085em;
 
             color: #f5f5f5;
 
             transition:
                 color 0.45s ease,
-                transform 0.7s cubic-bezier(.2,.8,.2,1);
+                transform 0.75s cubic-bezier(.2,.8,.2,1);
         }
 
-        /*
-            WHITE OVERLAY
 
-            Hidden normally.
-            Appears only while hovering VOID.
-        */
+        /* =========================
+           WHITE HOVER CARD
+        ========================= */
 
         .void-overlay {
             position: absolute;
@@ -159,23 +252,12 @@
 
             transform-origin: left center;
 
-            z-index: 4;
+            z-index: 2;
 
             pointer-events: none;
 
             transition:
-                transform 0.55s cubic-bezier(.77,0,.18,1);
-        }
-
-        /*
-            Make the VOID text black while the
-            white overlay is visible.
-        */
-
-        .void-wrap:hover .void {
-            color: #080808;
-
-            transform: scale(1.015);
+                transform 0.6s cubic-bezier(.77,0,.18,1);
         }
 
         .void-wrap:hover .void-overlay {
@@ -184,184 +266,189 @@
                 scaleX(1);
         }
 
-        /*
-            AGE BADGE
-        */
+        .void-wrap:hover .void {
+            color: #080808;
+
+            transform:
+                scale(1.015);
+        }
+
+
+        /* =========================
+           AGE BADGE
+        ========================= */
 
         .age {
             position: absolute;
 
-            top: -10px;
-            right: 0;
+            top: 0;
+            right: 12px;
 
-            padding: 8px 14px;
+            z-index: 20;
 
-            border: 1px solid rgba(255, 255, 255, 0.45);
-            border-radius: 30px;
+            padding: 7px 12px;
+
+            border: 1px solid rgba(255,255,255,0.55);
+            border-radius: 20px;
+
+            background: #080808;
 
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 11px;
-            letter-spacing: 0.12em;
+            font-size: 9px;
+
+            letter-spacing: 0.13em;
 
             opacity: 0;
-            transform: translateY(10px);
+
+            transform:
+                translateY(12px)
+                rotate(-3deg);
+
+            pointer-events: none;
 
             transition:
                 opacity 0.35s ease,
-                transform 0.45s ease;
-
-            z-index: 10;
-
-            pointer-events: none;
+                transform 0.5s cubic-bezier(.2,.8,.2,1);
         }
 
         .void-wrap:hover .age {
             opacity: 1;
-            transform: translateY(0);
+
+            transform:
+                translateY(0)
+                rotate(-3deg);
         }
+
+
+        /* =========================
+           HERO SUBTITLE
+        ========================= */
 
         .hero-subtitle {
             margin-top: 45px;
 
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 11px;
+
+            font-size: 9px;
 
             text-transform: uppercase;
-            letter-spacing: 0.3em;
 
-            color: #555;
+            letter-spacing: 0.34em;
+
+            color: #444;
+
+            opacity: 0;
+
+            transform: translateY(15px);
+
+            animation: subtitleIn 1.2s 0.4s forwards;
         }
+
+        @keyframes subtitleIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================
+           SCROLL INDICATOR
+        ========================= */
 
         .scroll-indicator {
             position: absolute;
-            bottom: 35px;
+
+            bottom: 28px;
             left: 50%;
 
             transform: translateX(-50%);
 
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 9px;
-            letter-spacing: 0.2em;
 
-            color: #555;
+            font-size: 8px;
 
-            animation: float 2.5s ease-in-out infinite;
+            letter-spacing: 0.25em;
+
+            color: #444;
+
+            animation: scrollFloat 2.5s ease-in-out infinite;
         }
 
-        @keyframes float {
+        @keyframes scrollFloat {
             0%, 100% {
                 transform: translate(-50%, 0);
             }
 
             50% {
-                transform: translate(-50%, 8px);
+                transform: translate(-50%, 7px);
             }
         }
 
+
         /* =========================
-           QUOTES
+           GENERAL SECTIONS
         ========================= */
 
-        .quotes {
-            min-height: 100vh;
-            padding: 15vh 8vw;
-
+        section {
             position: relative;
         }
 
         .section-label {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            letter-spacing: 0.25em;
+
+            font-size: 9px;
+
+            letter-spacing: 0.28em;
+
             text-transform: uppercase;
+
             color: #555;
-
-            margin-bottom: 80px;
         }
 
-        .quote-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 70px;
-
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .quote {
-            min-height: 330px;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            padding: 35px;
-
-            border: 1px solid rgba(255, 255, 255, 0.08);
-
-            transition:
-                border-color 0.35s ease,
-                transform 0.45s ease;
-        }
-
-        .quote:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            transform: translateY(-8px);
-        }
-
-        .quote-character {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #666;
-        }
-
-        .quote-text {
-            font-size: clamp(22px, 2vw, 32px);
-            line-height: 1.25;
-            font-style: italic;
-        }
-
-        .quote-number {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            color: #444;
-        }
 
         /* =========================
            ABOUT
         ========================= */
 
         .about {
-            min-height: 85vh;
+            min-height: 100vh;
 
-            padding: 15vh 8vw;
+            padding: 15vh 10vw;
 
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10vw;
+
+            grid-template-columns: 0.8fr 1fr;
+
+            gap: 12vw;
 
             align-items: center;
         }
 
         .about-title {
-            font-size: clamp(70px, 9vw, 150px);
+            margin-top: 25px;
+
+            font-size: clamp(80px, 11vw, 170px);
+
             font-weight: 400;
-            letter-spacing: -0.06em;
+
+            letter-spacing: -0.075em;
+        }
+
+        .about-content {
+            max-width: 550px;
         }
 
         .about-text {
-            max-width: 520px;
-
-            color: #999;
+            color: #888;
 
             font-size: 18px;
+
             line-height: 1.8;
         }
 
         .about-text strong {
-            color: #fff;
+            color: #eee;
             font-weight: 400;
         }
 
@@ -370,47 +457,72 @@
 
             padding: 25px;
 
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.07);
 
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 11px;
-            letter-spacing: 0.12em;
-            color: #777;
+
+            font-size: 9px;
+
+            letter-spacing: 0.15em;
+
+            color: #555;
+
+            transition:
+                border-color 0.4s ease,
+                transform 0.4s ease;
         }
 
+        .about-box:hover {
+            border-color: rgba(255,255,255,0.18);
+
+            transform: translateY(-4px);
+        }
+
+
         /* =========================
-           WORK
+           WORK + CONTACT
         ========================= */
 
         .work {
-            padding: 15vh 8vw;
+            min-height: 100vh;
+
+            padding: 14vh 7vw 10vh;
         }
 
         .work-heading {
             display: flex;
+
             align-items: baseline;
+
             justify-content: space-between;
 
-            margin-bottom: 70px;
+            margin-bottom: 65px;
         }
 
         .work-title {
-            font-size: clamp(60px, 9vw, 140px);
+            font-size: clamp(75px, 11vw, 170px);
+
             font-weight: 400;
-            letter-spacing: -0.07em;
+
+            letter-spacing: -0.08em;
         }
 
         .work-count {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            color: #555;
-            letter-spacing: 0.15em;
+
+            font-size: 9px;
+
+            letter-spacing: 0.2em;
+
+            color: #444;
         }
 
         .projects {
             display: grid;
+
             grid-template-columns: repeat(2, 1fr);
-            gap: 60px 35px;
+
+            gap: 70px 35px;
         }
 
         .project {
@@ -419,15 +531,34 @@
 
         .project-image {
             width: 100%;
+
             aspect-ratio: 16 / 9;
 
             background: #111;
 
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.07);
 
             overflow: hidden;
 
             position: relative;
+        }
+
+        .project-image::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,0.06),
+                transparent 45%
+            );
+
+            opacity: 0;
+
+            transition: opacity 0.6s ease;
         }
 
         .project-image img {
@@ -441,114 +572,153 @@
             filter: grayscale(100%);
 
             transition:
-                filter 0.6s ease,
-                transform 0.7s cubic-bezier(.2,.8,.2,1);
+                filter 0.7s ease,
+                transform 0.9s cubic-bezier(.2,.8,.2,1);
         }
 
         .project:hover .project-image img {
             filter: grayscale(0%);
-            transform: scale(1.04);
+
+            transform: scale(1.045);
+        }
+
+        .project:hover .project-image::after {
+            opacity: 1;
         }
 
         .project-info {
             display: flex;
+
             justify-content: space-between;
 
-            padding-top: 18px;
+            align-items: baseline;
+
+            padding-top: 17px;
         }
 
         .project-name {
-            font-size: 21px;
+            font-size: 20px;
         }
 
         .project-type {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 9px;
-            letter-spacing: 0.15em;
+
+            font-size: 8px;
+
+            letter-spacing: 0.16em;
+
             color: #555;
+
             text-transform: uppercase;
         }
+
 
         /* =========================
            CONTACT
         ========================= */
 
-        .contact {
-            min-height: 75vh;
+        .contact-area {
+            margin-top: 18vh;
 
-            padding: 15vh 8vw;
+            padding-top: 12vh;
+
+            border-top: 1px solid rgba(255,255,255,0.06);
 
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
 
-            text-align: center;
+            align-items: flex-end;
+
+            justify-content: space-between;
         }
 
         .contact-label {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            letter-spacing: 0.3em;
-            color: #555;
-            text-transform: uppercase;
-
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .contact-title {
-            font-size: clamp(70px, 11vw, 180px);
+            font-size: clamp(70px, 10vw, 150px);
+
             font-weight: 400;
 
-            letter-spacing: -0.08em;
+            letter-spacing: -0.075em;
+        }
 
-            margin-bottom: 50px;
+        .contact-right {
+            text-align: right;
+        }
+
+        .contact-text {
+            color: #666;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
         }
 
         .contact-button {
             display: inline-block;
 
-            padding: 17px 30px;
+            padding: 15px 26px;
 
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255,255,255,0.18);
 
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
+
+            font-size: 9px;
+
             letter-spacing: 0.2em;
+
             text-transform: uppercase;
 
             transition:
-                background 0.3s ease,
-                color 0.3s ease,
-                border-color 0.3s ease;
+                background 0.35s ease,
+                color 0.35s ease,
+                border-color 0.35s ease,
+                transform 0.35s ease;
         }
 
         .contact-button:hover {
             background: #fff;
+
             color: #000;
+
             border-color: #fff;
+
+            transform: translateY(-3px);
         }
+
 
         /* =========================
            SHOWCASE
         ========================= */
 
         .showcase {
-            padding: 15vh 8vw 8vh;
+            padding: 14vh 7vw 12vh;
+        }
+
+        .showcase-heading {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: baseline;
+
+            margin-bottom: 60px;
         }
 
         .showcase-title {
-            font-size: clamp(50px, 7vw, 100px);
+            font-size: clamp(60px, 8vw, 120px);
+
             font-weight: 400;
 
-            letter-spacing: -0.06em;
-
-            margin-bottom: 70px;
+            letter-spacing: -0.07em;
         }
 
         .videos {
             display: grid;
+
             grid-template-columns: repeat(2, 1fr);
+
             gap: 30px;
         }
 
@@ -557,7 +727,7 @@
 
             background: #111;
 
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.07);
 
             overflow: hidden;
         }
@@ -569,25 +739,50 @@
             border: none;
         }
 
+
         /* =========================
            FOOTER
         ========================= */
 
         footer {
-            padding: 40px 8vw;
+            padding: 35px 7vw;
 
             display: flex;
+
             justify-content: space-between;
 
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255,255,255,0.05);
 
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 9px;
 
-            letter-spacing: 0.15em;
+            font-size: 8px;
+
+            letter-spacing: 0.18em;
 
             color: #444;
         }
+
+
+        /* =========================
+           REVEAL ANIMATION
+        ========================= */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(35px);
+
+            transition:
+                opacity 1s ease,
+                transform 1s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
 
         /* =========================
            RESPONSIVE
@@ -596,56 +791,136 @@
         @media (max-width: 900px) {
 
             .nav-links {
-                gap: 15px;
+                gap: 17px;
             }
 
-            .quote-grid {
-                grid-template-columns: 1fr;
+            .floating-quote {
+                font-size: 12px;
+                max-width: 220px;
+            }
+
+            .q2,
+            .q6 {
+                right: 3%;
+            }
+
+            .q1,
+            .q5 {
+                left: 3%;
             }
 
             .about {
                 grid-template-columns: 1fr;
+
+                gap: 70px;
             }
 
             .projects {
                 grid-template-columns: 1fr;
             }
 
+            .contact-area {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 50px;
+            }
+
+            .contact-right {
+                text-align: left;
+            }
+
             .videos {
                 grid-template-columns: 1fr;
             }
-
-            .void {
-                font-size: 25vw;
-            }
         }
+
 
         @media (max-width: 600px) {
 
             nav {
                 height: 65px;
-                padding: 0 25px;
+
+                padding: 0 22px;
             }
 
             .nav-links {
                 display: none;
             }
 
-            .hero-subtitle {
-                font-size: 8px;
+            .hero {
+                min-height: 600px;
             }
 
-            .quotes,
+            .void-wrap {
+                padding: 25px 35px;
+            }
+
+            .void {
+                font-size: 31vw;
+            }
+
+            .hero-subtitle {
+                font-size: 7px;
+
+                letter-spacing: 0.22em;
+
+                text-align: center;
+            }
+
+            .floating-quote {
+                font-size: 10px;
+
+                max-width: 160px;
+            }
+
+            .q1 {
+                top: 15%;
+            }
+
+            .q2 {
+                top: 22%;
+            }
+
+            .q3 {
+                top: 38%;
+            }
+
+            .q4 {
+                top: 31%;
+            }
+
+            .q5 {
+                bottom: 29%;
+            }
+
+            .q6 {
+                bottom: 20%;
+            }
+
+            .q7 {
+                bottom: 10%;
+                left: 35%;
+            }
+
+            .q8 {
+                display: none;
+            }
+
             .about,
             .work,
-            .contact,
             .showcase {
                 padding-left: 25px;
                 padding-right: 25px;
             }
 
             .quote {
-                min-height: 280px;
+                min-height: 260px;
+            }
+
+            .contact-area {
+                margin-top: 12vh;
             }
         }
     </style>
@@ -653,27 +928,88 @@
 
 <body>
 
+
     <!-- =========================
-         NAV
+         NAVIGATION
     ========================= -->
 
     <nav>
-        <a href="#home" class="nav-logo">VOID</a>
+
+        <a href="#home" class="nav-logo">
+            VOID
+        </a>
 
         <div class="nav-links">
-            <a href="#quotes">Quotes</a>
-            <a href="#about">About</a>
-            <a href="#work">Work</a>
-            <a href="#contact">Contact</a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#work">
+                Work
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
         </div>
+
     </nav>
 
 
+
     <!-- =========================
-         HERO
+         HOME
     ========================= -->
 
     <section class="hero" id="home">
+
+
+        <!-- SCATTERED QUOTES -->
+
+        <div class="floating-quote q1">
+            "We're all evil in someone's story."
+        </div>
+
+        <div class="floating-quote q2">
+            "You can't win without losing.
+            Even Heaven requires death."
+        </div>
+
+        <div class="floating-quote q3">
+            "The eyes are useless
+            when the mind is blind."
+        </div>
+
+        <div class="floating-quote q4">
+            "Why seek validation in a world
+            that crucified a perfect man?"
+        </div>
+
+        <div class="floating-quote q5">
+            "A second of fear can take
+            away millions of memories."
+        </div>
+
+        <div class="floating-quote q6">
+            "Pressure isn't something put on you.
+            It's something you forgot to prepare for."
+        </div>
+
+        <div class="floating-quote q7">
+            "You miss 100% of the
+            shots you don't take."
+        </div>
+
+        <div class="floating-quote q8">
+            "Most men die at 25,
+            but aren't buried until they're 70."
+        </div>
+
+
+
+        <!-- CENTER -->
 
         <div class="hero-content">
 
@@ -691,11 +1027,13 @@
 
             </div>
 
+
             <div class="hero-subtitle">
                 Minecraft Developer · Skript · Creative Development
             </div>
 
         </div>
+
 
         <div class="scroll-indicator">
             SCROLL
@@ -704,72 +1042,6 @@
     </section>
 
 
-    <!-- =========================
-         QUOTES
-    ========================= -->
-
-    <section class="quotes" id="quotes">
-
-        <div class="section-label">
-            Words worth remembering
-        </div>
-
-        <div class="quote-grid">
-
-            <article class="quote">
-
-                <div class="quote-character">
-                    Thanos
-                </div>
-
-                <div class="quote-text">
-                    “I am inevitable.”
-                </div>
-
-                <div class="quote-number">
-                    01
-                </div>
-
-            </article>
-
-
-            <article class="quote">
-
-                <div class="quote-character">
-                    Ultron
-                </div>
-
-                <div class="quote-text">
-                    “I had strings, but now I'm free.”
-                </div>
-
-                <div class="quote-number">
-                    02
-                </div>
-
-            </article>
-
-
-            <article class="quote">
-
-                <div class="quote-character">
-                    Doctor Doom
-                </div>
-
-                <div class="quote-text">
-                    “Doom does not bargain.”
-                </div>
-
-                <div class="quote-number">
-                    03
-                </div>
-
-            </article>
-
-        </div>
-
-    </section>
-
 
     <!-- =========================
          ABOUT
@@ -777,7 +1049,7 @@
 
     <section class="about" id="about">
 
-        <div>
+        <div class="reveal">
 
             <div class="section-label">
                 About
@@ -789,17 +1061,24 @@
 
         </div>
 
-        <div>
+
+        <div class="about-content reveal">
 
             <p class="about-text">
-                I build <strong>Minecraft experiences</strong> focused on
-                custom mechanics, clean systems, and visuals that actually
-                feel good to use.
+
+                I build
+                <strong>Minecraft experiences</strong>
+                focused on custom mechanics, clean systems,
+                and visuals that actually feel good to use.
+
                 <br><br>
+
                 From small Skript systems to larger SMP mechanics,
                 I like taking an idea and turning it into something
                 people actually want to play.
+
             </p>
+
 
             <div class="about-box">
                 SKRIPT · MINECRAFT · PLUGINS · SYSTEMS · VISUALS
@@ -810,13 +1089,14 @@
     </section>
 
 
+
     <!-- =========================
          WORK
     ========================= -->
 
     <section class="work" id="work">
 
-        <div class="work-heading">
+        <div class="work-heading reveal">
 
             <h2 class="work-title">
                 Work
@@ -831,12 +1111,18 @@
 
         <div class="projects">
 
+
             <!-- PROJECT 1 -->
 
-            <a href="#" class="project">
+            <a href="#" class="project reveal">
 
                 <div class="project-image">
-                    <img src="images/project1.jpg" alt="Project 1">
+
+                    <img
+                        src="images/project1.jpg"
+                        alt="Project One"
+                    >
+
                 </div>
 
                 <div class="project-info">
@@ -854,12 +1140,18 @@
             </a>
 
 
+
             <!-- PROJECT 2 -->
 
-            <a href="#" class="project">
+            <a href="#" class="project reveal">
 
                 <div class="project-image">
-                    <img src="images/project2.jpg" alt="Project 2">
+
+                    <img
+                        src="images/project2.jpg"
+                        alt="Project Two"
+                    >
+
                 </div>
 
                 <div class="project-info">
@@ -877,12 +1169,18 @@
             </a>
 
 
+
             <!-- PROJECT 3 -->
 
-            <a href="#" class="project">
+            <a href="#" class="project reveal">
 
                 <div class="project-image">
-                    <img src="images/project3.jpg" alt="Project 3">
+
+                    <img
+                        src="images/project3.jpg"
+                        alt="Project Three"
+                    >
+
                 </div>
 
                 <div class="project-info">
@@ -900,12 +1198,18 @@
             </a>
 
 
+
             <!-- PROJECT 4 -->
 
-            <a href="#" class="project">
+            <a href="#" class="project reveal">
 
                 <div class="project-image">
-                    <img src="images/project4.jpg" alt="Project 4">
+
+                    <img
+                        src="images/project4.jpg"
+                        alt="Project Four"
+                    >
+
                 </div>
 
                 <div class="project-info">
@@ -924,69 +1228,101 @@
 
         </div>
 
-    </section>
 
 
-    <!-- =========================
-         CONTACT
-    ========================= -->
+        <!-- =========================
+             CONTACT
+        ========================= -->
 
-    <section class="contact" id="contact">
+        <div class="contact-area" id="contact">
 
-        <div class="contact-label">
-            Contact
+            <div class="reveal">
+
+                <div class="section-label contact-label">
+                    Contact
+                </div>
+
+                <h2 class="contact-title">
+                    Let's build.
+                </h2>
+
+            </div>
+
+
+            <div class="contact-right reveal">
+
+                <p class="contact-text">
+                    Have a project in mind?
+                </p>
+
+                <a
+                    href="https://discord.com/"
+                    target="_blank"
+                    class="contact-button"
+                >
+                    Discord
+                </a>
+
+            </div>
+
         </div>
 
-        <h2 class="contact-title">
-            Let's build.
-        </h2>
-
-        <a
-            href="https://discord.com/"
-            target="_blank"
-            class="contact-button"
-        >
-            Discord
-        </a>
-
     </section>
+
 
 
     <!-- =========================
          SHOWCASE
+         AT THE END
     ========================= -->
 
     <section class="showcase">
 
-        <div class="section-label">
-            Showcase
+        <div class="showcase-heading reveal">
+
+            <div class="section-label">
+                Showcase
+            </div>
+
+            <div class="work-count">
+                THINGS I'VE BUILT
+            </div>
+
         </div>
 
-        <h2 class="showcase-title">
+
+        <h2 class="showcase-title reveal">
             Things I've built.
         </h2>
 
+
         <div class="videos">
 
-            <div class="video">
+            <div class="video reveal">
+
                 <iframe
                     src="https://www.youtube.com/embed/VIDEO_ID_1"
-                    title="Project Showcase"
+                    title="Project Showcase 1"
                     allowfullscreen>
                 </iframe>
+
             </div>
 
-            <div class="video">
+
+            <div class="video reveal">
+
                 <iframe
                     src="https://www.youtube.com/embed/VIDEO_ID_2"
-                    title="Project Showcase"
+                    title="Project Showcase 2"
                     allowfullscreen>
                 </iframe>
+
             </div>
 
         </div>
 
     </section>
+
 
 
     <!-- =========================
@@ -1006,6 +1342,7 @@
     </footer>
 
 
+
     <!-- =========================
          JAVASCRIPT
     ========================= -->
@@ -1013,12 +1350,11 @@
     <script>
 
         /*
-            Small smooth-reveal effect for sections.
-        */
+         * Smooth reveal animations.
+         */
 
-        const sections = document.querySelectorAll(
-            ".quote, .project, .about-text, .about-box, .showcase-title"
-        );
+        const reveals = document.querySelectorAll(".reveal");
+
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -1027,8 +1363,9 @@
 
                     if (entry.isIntersecting) {
 
-                        entry.target.style.opacity = "1";
-                        entry.target.style.transform = "translateY(0)";
+                        entry.target.classList.add("visible");
+
+                        observer.unobserve(entry.target);
 
                     }
 
@@ -1041,23 +1378,17 @@
         );
 
 
-        sections.forEach((section) => {
+        reveals.forEach((element) => {
 
-            section.style.opacity = "0";
-
-            section.style.transform = "translateY(25px)";
-
-            section.style.transition =
-                "opacity 0.8s ease, transform 0.8s cubic-bezier(.2,.8,.2,1)";
-
-            observer.observe(section);
+            observer.observe(element);
 
         });
 
 
+
         /*
-            Slightly nicer navigation scrolling.
-        */
+         * Make internal links scroll smoothly.
+         */
 
         document.querySelectorAll("a[href^='#']").forEach((link) => {
 
@@ -1067,7 +1398,9 @@
                     link.getAttribute("href")
                 );
 
-                if (!target) return;
+                if (!target) {
+                    return;
+                }
 
                 event.preventDefault();
 
@@ -1075,6 +1408,36 @@
                     behavior: "smooth",
                     block: "start"
                 });
+
+            });
+
+        });
+
+
+
+        /*
+         * Subtle parallax on the scattered quotes.
+         * The quotes move very slightly as you scroll,
+         * giving the homepage the same floating feeling.
+         */
+
+        const quotes = document.querySelectorAll(".floating-quote");
+
+
+        window.addEventListener("scroll", () => {
+
+            const scrollY = window.scrollY;
+
+            if (scrollY > window.innerHeight) {
+                return;
+            }
+
+            quotes.forEach((quote, index) => {
+
+                const speed = 0.015 + (index * 0.003);
+
+                quote.style.transform =
+                    `translateY(${scrollY * speed}px)`;
 
             });
 
