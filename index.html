@@ -23,9 +23,7 @@
             background: #080808;
             color: #f4f4f4;
             overflow-x: hidden;
-            transition:
-                background 0.5s ease,
-                color 0.5s ease;
+            transition: background 0.5s ease, color 0.5s ease;
         }
 
         body.light {
@@ -70,7 +68,6 @@
             position: fixed;
             left: 24px;
             bottom: 24px;
-
             width: 48px;
             height: 48px;
 
@@ -81,7 +78,6 @@
             color: white;
 
             cursor: pointer;
-
             z-index: 1000;
 
             backdrop-filter: blur(12px);
@@ -175,9 +171,7 @@
 
         .option-name {
             font-family: "DM Mono", monospace;
-
             font-size: 11px;
-
             letter-spacing: 0.5px;
         }
 
@@ -311,8 +305,6 @@
         }
 
 
-        /* TOP */
-
         .q1 {
             top: 7%;
             left: 11%;
@@ -322,14 +314,6 @@
             top: 15%;
             right: 8%;
         }
-
-        .q7 {
-            top: 8%;
-            right: 36%;
-        }
-
-
-        /* MIDDLE */
 
         .q3 {
             top: 31%;
@@ -341,22 +325,24 @@
             right: 12%;
         }
 
-
-        /* BOTTOM */
-
         .q5 {
             bottom: 22%;
             left: 9%;
         }
 
-        .q8 {
-            bottom: 30%;
-            right: 5%;
-        }
-
         .q6 {
             bottom: 10%;
             left: 43%;
+        }
+
+        .q7 {
+            top: 8%;
+            right: 36%;
+        }
+
+        .q8 {
+            bottom: 30%;
+            right: 5%;
         }
 
 
@@ -403,6 +389,20 @@
         }
 
 
+        /*
+            FULL HEIGHT WHITE OVERLAY
+
+            This used to be:
+
+            top: 50%;
+            bottom: 0;
+
+            which made the hover effect cover
+            only half of VOID.
+
+            Now it covers the entire area.
+        */
+
         .void-overlay {
             position: absolute;
 
@@ -411,7 +411,7 @@
             left: 0;
             right: 0;
 
-            top: 50%;
+            top: 0;
             bottom: 0;
 
             background: #f5f5f5;
@@ -466,13 +466,11 @@
 
         .void-wrap:hover .void-name {
             color: #080808;
-
             transform: translateY(-2px);
         }
 
         .void-wrap:hover .void-age {
             opacity: 1;
-
             transform: translateY(0);
         }
 
@@ -859,7 +857,6 @@
 
             .quote {
                 font-size: 12px;
-
                 max-width: 180px;
             }
 
@@ -899,7 +896,6 @@
 
             .void-name {
                 font-size: 29vw;
-
                 letter-spacing: -7px;
             }
 
@@ -912,7 +908,6 @@
 
             .about-container {
                 grid-template-columns: 1fr;
-
                 gap: 50px;
             }
 
@@ -934,7 +929,6 @@
 
             .options-panel {
                 left: 15px;
-
                 bottom: 75px;
             }
 
