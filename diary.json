@@ -1,22 +1,20 @@
 [
     {
-        "title": "Storm Ability",
+        "title": "building the storm ability",
+        "date": "august 22, 2026",
         "video": "https://www.youtube.com/watch?v=-n_-S01rpMI",
-        "description": "Skript · ability"
+        "description": "Working on the visuals, movement, and overall feel of the Storm ability."
     },
     {
-        "title": "Eternal SMP",
+        "title": "eternal smp",
+        "date": "august 21, 2026",
         "video": "https://youtu.be/VAAT7-hOHY8",
-        "description": "Trim a Totem. Get a different ability depending on the trim."
+        "description": "Working on the trim system and different abilities that come from each trim."
     },
     {
-        "title": "Project Three",
-        "video": "https://www.youtube.com/",
-        "description": "Skript · project"
-    },
-    {
-        "title": "Project Four",
-        "video": "https://www.youtube.com/",
-        "description": "Skript · project"
+        "title": "new particle system",
+        "date": "august 19, 2026",
+        "video": "",
+        "description": "Experimenting with new particle effects and visual systems."
     }
 ]
