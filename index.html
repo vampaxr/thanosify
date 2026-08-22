@@ -448,162 +448,127 @@ body.cursor-hover .cursor-ring {
 
 .work-section {
     min-height: auto;
+    padding-top: 130px;
+    padding-bottom: 130px;
 }
 
 .work-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 18px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+    row-gap: 70px;
+    max-width: 1200px;
 }
 
 .project {
-    min-height: 360px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    overflow: hidden;
-    transition: transform .45s cubic-bezier(.16,1,.3,1), border-color .4s ease;
+    min-height: 0;
+    background: transparent;
+    border: 0;
+    overflow: visible;
+    transition: none;
 }
 
 .project:hover {
-    transform: translateY(-6px);
-    border-color: rgba(255,255,255,.2);
-}
-
-.project-info {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.project-name {
-    font-family: "Gambarino", serif;
-    font-size: 23px;
-}
-
-.project-type {
-    margin-top: 5px;
-    color: var(--muted);
-    font-size: 8px;
-    letter-spacing: 1px;
+    transform: none;
+    border-color: transparent;
 }
 
 .project-preview {
-    height: 245px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
     position: relative;
     display: block;
-    background: #080808;
     overflow: hidden;
+    background: #080808;
     cursor: pointer;
+    border-radius: 7px;
 }
 
 .project-preview::before {
     content: "";
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,.08), transparent 35%),
-        linear-gradient(135deg, #151515, #080808);
-    transition: transform .7s cubic-bezier(.16,1,.3,1), opacity .4s ease;
-}
-
-.project-preview.has-thumb {
-    background: #080808;
-}
-
-.project-preview.has-thumb::before {
+    background: #111;
     background-image: var(--thumb-image);
     background-size: cover;
     background-position: center;
-    opacity: .72;
-    filter: grayscale(100%);
-    transform: scale(1.01);
+    opacity: 1;
+    filter: none;
+    transform: scale(1);
+    transition:
+        transform .6s cubic-bezier(.16,1,.3,1),
+        opacity .4s ease;
 }
 
-.project:hover .project-preview.has-thumb::before {
-    opacity: .9;
-    transform: scale(1.06);
+.project:hover .project-preview::before {
+    transform: scale(1.035);
 }
 
 .project-preview::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.5));
+    background: transparent;
     pointer-events: none;
-}
-
-.project-play {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 3;
-    width: 58px;
-    height: 58px;
-    display: grid;
-    place-items: center;
-    transform: translate(-50%, -50%);
-    border: 1px solid rgba(255,255,255,.4);
-    border-radius: 50%;
-    background: rgba(0,0,0,.28);
-    color: white;
-    font-size: 12px;
-    backdrop-filter: blur(8px);
-    transition: transform .4s cubic-bezier(.16,1,.3,1), background .3s ease;
-}
-
-.project:hover .project-play {
-    transform: translate(-50%, -50%) scale(1.12);
-    background: rgba(255,255,255,.1);
-}
-
-.project-preview iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    z-index: 4;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .35s ease;
-}
-
-.project-preview.video-active iframe {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.project-preview.video-active .project-play {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.project-preview.video-active::before,
-.project-preview.video-active::after {
-    opacity: 0;
 }
 
 .project-preview.no-video {
     cursor: default;
 }
 
-.project-preview.no-video .project-play {
+.project-preview.no-video::before {
+    background-image: none;
+}
+
+.project-info {
+    padding: 15px 0 0;
+    display: block;
+}
+
+.project-name {
+    font-family: "Gambarino", serif;
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.project-type {
+    margin-top: 8px;
+    color: var(--muted);
+    font-family: "Switzer", sans-serif;
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.project-number {
     display: none;
 }
 
-.project-preview.no-video::before {
-    opacity: .5;
-}
-
 @media (max-width: 768px) {
-    .project-preview {
-        height: 220px;
+    .work-section {
+        padding-top: 105px;
+        padding-bottom: 90px;
     }
 
-    .project-play {
-        width: 52px;
-        height: 52px;
+    .work-grid {
+        grid-template-columns: 1fr;
+        gap: 55px;
+    }
+
+    .project-preview {
+        aspect-ratio: 16 / 9;
+        border-radius: 6px;
+    }
+
+    .project-name {
+        font-size: 19px;
+    }
+
+    .project-type {
+        font-size: 10px;
     }
 }
 
@@ -977,66 +942,80 @@ body.cursor-hover .cursor-ring {
 </section>
 
 <section class="section work-section" id="work">
+
     <div class="section-header">
         <div class="eyebrow">02 / work</div>
         <h2 class="section-title">stuff i made</h2>
     </div>
 
     <div class="work-grid">
-        <div class="project" data-video="https://www.youtube.com/watch?v=-n_-S01rpMI">
-            <div class="project-preview" data-video="https://www.youtube.com/watch?v=-n_-S01rpMI">
-                <div class="project-play">▶</div>
-                <iframe title="Storm Ability" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        <div class="project">
+
+            <div
+                class="project-preview"
+                data-video="https://www.youtube.com/watch?v=-n_-S01rpMI">
             </div>
+
             <div class="project-info">
-                <div>
-                    <div class="project-name">Storm Ability</div>
-                    <div class="project-type">Skript · ability</div>
+                <div class="project-name">Storm Ability</div>
+                <div class="project-type">
+                    Skript · ability
                 </div>
-                <div class="project-type">01</div>
             </div>
+
         </div>
-        <div class="project" data-video="https://youtu.be/VAAT7-hOHY8/">
-            <div class="project-preview" data-video="https://youtu.be/VAAT7-hOHY8">
-                <div class="project-play">▶</div>
-                <iframe title="Eternal SMP" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        <div class="project">
+
+            <div
+                class="project-preview"
+                data-video="https://youtu.be/VAAT7-hOHY8">
             </div>
+
             <div class="project-info">
-                <div>
-                    <div class="project-name">Eternal SMP"</div>
-                    <div class="project-type">Skript · project</div>
+                <div class="project-name">Eternal SMP</div>
+                <div class="project-type">
+                    Skript · project
                 </div>
-                <div class="project-type">02</div>
             </div>
+
         </div>
-        <div class="project" data-video="https://www.youtube.com/">
-            <div class="project-preview" data-video="https://www.youtube.com/">
-                <div class="project-play">▶</div>
-                <iframe title="Project Three" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        <div class="project">
+
+            <div
+                class="project-preview"
+                data-video="https://www.youtube.com/">
             </div>
+
             <div class="project-info">
-                <div>
-                    <div class="project-name">Project Three</div>
-                    <div class="project-type">Skript · project</div>
+                <div class="project-name">Project Three</div>
+                <div class="project-type">
+                    Skript · project
                 </div>
-                <div class="project-type">03</div>
             </div>
+
         </div>
-        <div class="project" data-video="https://www.youtube.com/">
-            <div class="project-preview" data-video="https://www.youtube.com/">
-                <div class="project-play">▶</div>
-                <iframe title="Project Four" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        <div class="project">
+
+            <div
+                class="project-preview"
+                data-video="https://www.youtube.com/">
             </div>
+
             <div class="project-info">
-                <div>
-                    <div class="project-name">Project Four</div>
-                    <div class="project-type">Skript · project</div>
+                <div class="project-name">Project Four</div>
+                <div class="project-type">
+                    Skript · project
                 </div>
-                <div class="project-type">04</div>
             </div>
+
         </div>
 
     </div>
+
 </section>
 
 <section class="section contact-section" id="contact">
@@ -1153,40 +1132,40 @@ moveCursorRing();
 
 function getYouTubeId(url) {
     if (!url) return null;
-    const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+
+    const match = url.match(
+        /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+    );
+
     return match ? match[1] : null;
 }
 
 function setupProjectVideos() {
     document.querySelectorAll(".project-preview[data-video]").forEach(preview => {
+
         const url = preview.dataset.video;
         const id = getYouTubeId(url);
-        const iframe = preview.querySelector("iframe");
 
-        if (!id || !iframe) {
+        if (!id) {
             preview.classList.add("no-video");
             return;
         }
 
         preview.classList.add("has-thumb");
-        preview.style.setProperty("--thumb-image", `url("https://i.ytimg.com/vi/${id}/hqdefault.jpg")`);
 
-        preview.addEventListener("click", e => {
-            e.preventDefault();
-            e.stopPropagation();
+        preview.style.setProperty(
+            "--thumb-image",
+            `url("https://i.ytimg.com/vi/${id}/hqdefault.jpg")`
+        );
 
-            document.querySelectorAll(".project-preview.video-active").forEach(other => {
-                if (other === preview) return;
-                const otherFrame = other.querySelector("iframe");
-                if (otherFrame) otherFrame.src = "";
-                other.classList.remove("video-active");
-            });
-
-            if (!preview.classList.contains("video-active")) {
-                iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-                preview.classList.add("video-active");
-            }
+        preview.addEventListener("click", () => {
+            window.open(
+                `https://www.youtube.com/watch?v=${id}`,
+                "_blank",
+                "noopener,noreferrer"
+            );
         });
+
     });
 }
 
@@ -1302,7 +1281,3 @@ quotes.forEach(quote => {
 
 </body>
 </html>
-
-
-
-on the work section make the video box longer because its shit rn and smaller too actually and get rid of the play shit just make it a thumbnail no play just youtube thuimbnail
