@@ -573,6 +573,16 @@ body.cursor-hover .cursor-ring {
     background-image: none;
 }
 
+.project-preview iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    z-index: 5;
+    display: block;
+}
+
 .project-info {
     padding: 15px 0 0;
     display: block;
@@ -1262,7 +1272,7 @@ function moveCursorRing() {
 moveCursorRing();
 
 
-/* YOUTUBE */
+/* YOUTUBE ID */
 
 function getYouTubeId(url) {
 
@@ -1273,46 +1283,6 @@ function getYouTubeId(url) {
     );
 
     return match ? match[1] : null;
-
-}
-
-
-function setupProjectVideos() {
-
-    document
-        .querySelectorAll(".project-preview[data-video]")
-        .forEach(preview => {
-
-            const url = preview.dataset.video;
-
-            const id = getYouTubeId(url);
-
-            if (!id) {
-
-                preview.classList.add("no-video");
-
-                return;
-
-            }
-
-            preview.classList.add("has-thumb");
-
-            preview.style.setProperty(
-                "--thumb-image",
-                `url("https://i.ytimg.com/vi/${id}/hqdefault.jpg")`
-            );
-
-            preview.addEventListener("click", () => {
-
-                window.open(
-                    `https://www.youtube.com/watch?v=${id}`,
-                    "_blank",
-                    "noopener,noreferrer"
-                );
-
-            });
-
-        });
 
 }
 
@@ -1350,9 +1320,15 @@ function renderProjectGrid(projects, isDiary = false) {
 
         card.className = "project";
 
+
         const preview = document.createElement("div");
 
         preview.className = "project-preview";
+
+
+        /*
+         * YOUTUBE VIDEO
+         */
 
         if (project.video) {
 
@@ -1367,13 +1343,49 @@ function renderProjectGrid(projects, isDiary = false) {
 
                 preview.dataset.video = project.video;
 
+
                 preview.addEventListener("click", () => {
 
-                    window.open(
-                        `https://www.youtube.com/watch?v=${id}`,
-                        "_blank",
-                        "noopener,noreferrer"
+                    if (preview.querySelector("iframe")) {
+                        return;
+                    }
+
+
+                    preview.innerHTML = "";
+
+                    preview.style.setProperty(
+                        "--thumb-image",
+                        "none"
                     );
+
+
+                    const iframe =
+                        document.createElement("iframe");
+
+
+                    iframe.src =
+                        `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+
+
+                    iframe.title =
+                        project.title || "YouTube video";
+
+
+                    iframe.allow =
+                        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+
+                    iframe.allowFullscreen = true;
+
+
+                    iframe.loading = "lazy";
+
+
+                    iframe.referrerPolicy =
+                        "strict-origin-when-cross-origin";
+
+
+                    preview.appendChild(iframe);
 
                 });
 
@@ -1410,21 +1422,27 @@ function renderProjectGrid(projects, isDiary = false) {
 
             if (project.date) {
 
-                const date = document.createElement("div");
+                const date =
+                    document.createElement("div");
 
-                date.className = "diary-date";
+                date.className =
+                    "diary-date";
 
-                date.textContent = project.date;
+                date.textContent =
+                    project.date;
 
                 info.appendChild(date);
 
             }
 
+
             if (project.description) {
 
-                const description = document.createElement("div");
+                const description =
+                    document.createElement("div");
 
-                description.className = "project-type";
+                description.className =
+                    "project-type";
 
                 description.textContent =
                     project.description;
@@ -1435,9 +1453,11 @@ function renderProjectGrid(projects, isDiary = false) {
 
         } else {
 
-            const description = document.createElement("div");
+            const description =
+                document.createElement("div");
 
-            description.className = "project-type";
+            description.className =
+                "project-type";
 
             description.textContent =
                 project.description || "";
@@ -1448,6 +1468,7 @@ function renderProjectGrid(projects, isDiary = false) {
 
 
         card.appendChild(preview);
+
         card.appendChild(info);
 
         projectGrid.appendChild(card);
@@ -1459,13 +1480,19 @@ function renderProjectGrid(projects, isDiary = false) {
         .querySelectorAll(".project, .project-preview")
         .forEach(element => {
 
-            element.addEventListener("mouseenter", () => {
-                body.classList.add("cursor-hover");
-            });
+            element.addEventListener(
+                "mouseenter",
+                () => {
+                    body.classList.add("cursor-hover");
+                }
+            );
 
-            element.addEventListener("mouseleave", () => {
-                body.classList.remove("cursor-hover");
-            });
+            element.addEventListener(
+                "mouseleave",
+                () => {
+                    body.classList.remove("cursor-hover");
+                }
+            );
 
         });
 
@@ -1479,14 +1506,25 @@ function animateGridSwap(projects, isDiary = false) {
     if (!projectGrid) return;
 
     projectGrid.classList.remove("swapping-in");
+
     projectGrid.classList.add("swapping-out");
+
 
     setTimeout(() => {
 
-        renderProjectGrid(projects, isDiary);
+        renderProjectGrid(
+            projects,
+            isDiary
+        );
 
-        projectGrid.classList.remove("swapping-out");
-        projectGrid.classList.add("swapping-in");
+        projectGrid.classList.remove(
+            "swapping-out"
+        );
+
+        projectGrid.classList.add(
+            "swapping-in"
+        );
+
 
         requestAnimationFrame(() => {
 
@@ -1516,18 +1554,26 @@ async function loadWork() {
         const res =
             await fetch("work.json");
 
+
         if (!res.ok) {
+
             throw new Error(
                 "Failed to load work.json"
             );
+
         }
+
 
         workProjects =
             await res.json();
 
+
         if (!Array.isArray(workProjects)) {
+
             workProjects = [];
+
         }
+
 
         renderProjectGrid(
             workProjects,
@@ -1537,6 +1583,7 @@ async function loadWork() {
     } catch (err) {
 
         console.error(err);
+
 
         projectGrid.innerHTML = `
             <div class="project">
@@ -1565,17 +1612,24 @@ async function loadDiary() {
         const res =
             await fetch("diary.json");
 
+
         if (!res.ok) {
+
             throw new Error(
                 "Failed to load diary.json"
             );
+
         }
+
 
         diaryProjects =
             await res.json();
 
+
         if (!Array.isArray(diaryProjects)) {
+
             diaryProjects = [];
+
         }
 
     } catch (err) {
@@ -1595,15 +1649,18 @@ function syncDiaryToggleUi() {
 
     if (!diaryToggle) return;
 
+
     diaryToggle.classList.toggle(
         "active",
         showingDiary
     );
 
+
     diaryToggle.setAttribute(
         "aria-pressed",
         String(showingDiary)
     );
+
 
     diaryToggle.textContent =
         showingDiary
@@ -1617,7 +1674,9 @@ function toggleDiaryView() {
 
     showingDiary = !showingDiary;
 
+
     syncDiaryToggleUi();
+
 
     animateGridSwap(
         showingDiary
@@ -1625,6 +1684,7 @@ function toggleDiaryView() {
             : workProjects,
         showingDiary
     );
+
 
     if (workTitle) {
 
@@ -1634,6 +1694,7 @@ function toggleDiaryView() {
                 : "my work";
 
     }
+
 
     if (workEyebrow) {
 
@@ -1662,7 +1723,11 @@ if (diaryToggle) {
 settingsButton.addEventListener(
     "click",
     () => {
-        settingsPanel.classList.add("open");
+
+        settingsPanel.classList.add(
+            "open"
+        );
+
     }
 );
 
@@ -1670,10 +1735,16 @@ settingsButton.addEventListener(
 closeSettings.addEventListener(
     "click",
     () => {
-        settingsPanel.classList.remove("open");
+
+        settingsPanel.classList.remove(
+            "open"
+        );
+
     }
 );
 
+
+/* THEME */
 
 themeToggle.addEventListener(
     "click",
@@ -1681,7 +1752,9 @@ themeToggle.addEventListener(
 
         const isLight =
             document.documentElement
-                .getAttribute("data-theme") === "light";
+                .getAttribute("data-theme")
+            === "light";
+
 
         if (isLight) {
 
@@ -1690,6 +1763,7 @@ themeToggle.addEventListener(
                     "data-theme",
                     "dark"
                 );
+
 
             themeToggle.classList.remove(
                 "active"
@@ -1703,6 +1777,7 @@ themeToggle.addEventListener(
                     "light"
                 );
 
+
             themeToggle.classList.add(
                 "active"
             );
@@ -1712,6 +1787,8 @@ themeToggle.addEventListener(
     }
 );
 
+
+/* MUSIC */
 
 musicToggle.addEventListener(
     "click",
@@ -1730,6 +1807,7 @@ musicToggle.addEventListener(
             return;
 
         }
+
 
         try {
 
@@ -1755,6 +1833,8 @@ musicToggle.addEventListener(
 );
 
 
+/* MOTION */
+
 motionToggle.addEventListener(
     "click",
     () => {
@@ -1763,6 +1843,7 @@ motionToggle.addEventListener(
             body.classList.toggle(
                 "reduced-motion"
             );
+
 
         motionToggle.classList.toggle(
             "active",
@@ -1773,6 +1854,8 @@ motionToggle.addEventListener(
 );
 
 
+/* QUOTES */
+
 quoteToggle.addEventListener(
     "click",
     () => {
@@ -1781,6 +1864,7 @@ quoteToggle.addEventListener(
             quoteToggle.classList.toggle(
                 "active"
             );
+
 
         quotes.forEach(quote => {
 
@@ -1827,23 +1911,28 @@ nameHitbox.addEventListener(
 );
 
 
-/* QUOTES */
+/* QUOTE HOVER */
 
 quotes.forEach(quote => {
 
     quote.addEventListener(
         "mouseenter",
         () => {
+
             quote.style.animationPlayState =
                 "paused";
+
         }
     );
+
 
     quote.addEventListener(
         "mouseleave",
         () => {
+
             quote.style.animationPlayState =
                 "running";
+
         }
     );
 
